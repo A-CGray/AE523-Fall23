@@ -16,5 +16,5 @@ repos:
         name: Check X
         entry: convertNotebooks.sh
         language: script
-        files: ^Content/
+        files: ^Examples/
         types: [file, "jupyter"]

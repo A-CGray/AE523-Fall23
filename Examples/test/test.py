@@ -28,4 +28,3 @@ ax.set_yticks([-1, 0, 1])
 niceplots.label_line_ends(ax)
 niceplots.adjust_spines(ax)
 plt.show()
-
