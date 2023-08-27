@@ -7,4 +7,4 @@ chapters:
 - file: markdown
 - file: notebooks
 - file: markdown-notebooks
-- file: Content/test.ipynb
+- file: Content/test/test.ipynb

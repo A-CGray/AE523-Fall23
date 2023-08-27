@@ -1,5 +1,6 @@
 jupyter-book
 jupytext>=0.16
+nbconvert
 matplotlib>=3.4.0
 niceplots>=2.0.0
 numpy

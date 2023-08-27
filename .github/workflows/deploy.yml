@@ -30,6 +30,17 @@ jobs:
         cache: 'pip' # caching pip dependencies
     - run: pip install -r requirements.txt
 
+    # Make .py versions of all notebooks
+    - name: Convert notebooks to .py
+      run: |
+        find Content -type f -name "*.ipynb" -print0 | xargs -0 jupyter nbconvert --to python
+
+    # Push the new .py files
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Add converted notebooks
+        file_pattern: 'Content/**/*.py'
+
     # Build the book
     - name: Build the book
       run: |
