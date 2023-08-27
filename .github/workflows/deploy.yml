@@ -39,7 +39,8 @@ jobs:
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Add converted notebooks
-        file_pattern: 'Content/*/*.py'
+        file_pattern: 'Content/**/*.py'
+        add_options: '--force'
 
     # Build the book
     - name: Build the book
