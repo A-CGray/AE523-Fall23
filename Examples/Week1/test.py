@@ -3,7 +3,9 @@
 
 # # Testing jupyter notebooks
 
-# In[13]:
+# ## Import the necessary packages
+
+# In[1]:
 
 
 import numpy as np
@@ -13,7 +15,11 @@ import niceplots
 plt.style.use(niceplots.get_style())
 
 
-# In[14]:
+# ## Make a really cool plot
+#
+# Let's plot $\sin(2\pi x)$ and $\cos(2\pi x)$
+
+# In[3]:
 
 
 fig, ax = plt.subplots()
@@ -27,4 +33,3 @@ ax.set_xticklabels(["0", r"$\frac{1}{4}$", r"$\frac{1}{2}$", r"$\frac{3}{4}$", "
 ax.set_yticks([-1, 0, 1])
 niceplots.label_line_ends(ax)
 niceplots.adjust_spines(ax)
-plt.show()

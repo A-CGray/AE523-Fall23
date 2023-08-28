@@ -6,7 +6,8 @@ do
     echo "$var" >&2
     if [[ $var == *.ipynb ]]; then
         # if there is no corresponding .py, or the corresponding .py file is out of date then convert the notebook
-        if [[ ! -f "${var%.ipynb}.py" ]] || [[ "${var%.ipynb}.py" -ot "$var" ]]; then
+        pyFile="${var%.ipynb}.py"
+        if [[ ! -f $pyFile ]] || [[ $pyFile -ot "$var" ]]; then
             echo "Converting $var to python" >&2
             jupyter nbconvert --to python "$var"
             filesChanged=true
