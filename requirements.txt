@@ -4,4 +4,6 @@ nbconvert
 matplotlib>=3.4.0
 niceplots>=2.0.0
 numpy
+jaxlib
+jax[cpu]
 ghp-import
