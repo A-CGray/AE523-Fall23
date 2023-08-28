@@ -10,12 +10,14 @@ do
         if [[ ! -f $pyFile ]] || [[ $pyFile -ot "$var" ]]; then
             echo "Converting $var to python" >&2
             jupyter nbconvert --to python "$var"
+            black -l 120 "$pyFile"
             filesChanged=true
         fi
     fi
 done
 
 if [[ $filesChanged == true ]]; then
+
     echo "Files changed, exiting" >&2
     exit 1
 fi
