@@ -1,0 +1,745 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Root finding methods &#8212; AEROSP 523 Computational Fluid Dynamics: Code Examples</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week1/RootFinding';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Week 1" href="Week1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/scramjet.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/scramjet.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    AEROSP 523 Computational Fluid Dynamics: Code Examples
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Week1.html">Week 1</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Root finding methods</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/A-CGray/AE523-Fall23/main?urlpath=lab/tree/Examples/Week1/RootFinding.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/A-CGray/AE523-Fall23" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/A-CGray/AE523-Fall23/issues/new?title=Issue%20on%20page%20%2FExamples/Week1/RootFinding.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Examples/Week1/RootFinding.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Root finding methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bisection">Bisection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-raphson-method">Newton-Raphson method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multidimensional-newton-raphson">Multidimensional Newton-Raphson</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="root-finding-methods">
+<h1>Root finding methods<a class="headerlink" href="#root-finding-methods" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import stuff from JAX for math stuff and automatic differentiation</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="c1"># Import matplotlib and niceplots for plotting</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">niceplots</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Root finding methods are used to find the roots of a function, that is they find the value(s) of <span class="math notranslate nohighlight">\(x\)</span> that make <span class="math notranslate nohighlight">\(f(x)=0\)</span>. This notebook contains some simple code that implements two simple 1D root finding methods for scalar functions.</p>
+<section id="bisection">
+<h2>Bisection<a class="headerlink" href="#bisection" title="Permalink to this heading">#</a></h2>
+<p>In the bisection method, we start with two points, <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> such that <span class="math notranslate nohighlight">\(f(a)\)</span> and <span class="math notranslate nohighlight">\(f(b)\)</span> have opposite signs. If this is the case (and we know <span class="math notranslate nohighlight">\(f\)</span> is continuous) then we know there must be a root between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>.
+We start the bisection method by setting <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> as our lower and upper bounds <span class="math notranslate nohighlight">\(x_L, x_U\)</span> of our search space. Then, each iteration, we evaluate <span class="math notranslate nohighlight">\(f\)</span> at the midpoint of the space <span class="math notranslate nohighlight">\(x_M = 1/2(x_L + x_U)\)</span>. Depending on the sign of <span class="math notranslate nohighlight">\(f(x_M)\)</span>, we set either <span class="math notranslate nohighlight">\(x_L\)</span> or <span class="math notranslate nohighlight">\(x_U\)</span> to <span class="math notranslate nohighlight">\(x_M\)</span> to half the size of our search space. This is repeated until <span class="math notranslate nohighlight">\(f(x_M)\)</span> is as close to zero as we need.</p>
+<p>The code below contains a function that implements the bisection method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">max_iterations</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="c1"># First, check that a and b do actually bracket a root</span>
+    <span class="n">fa</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">f_history</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">fa</span> <span class="o">*</span> <span class="n">fb</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Initial interval does not bracket a root.&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iterations</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">fc</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">f_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">fc</span><span class="p">)))</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteration </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">: x = </span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2"> 7.3e</span><span class="si">}</span><span class="s2">, f(x) = </span><span class="si">{</span><span class="n">fc</span><span class="si">:</span><span class="s2"> 7.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">f_history</span>
+
+        <span class="k">if</span> <span class="n">fa</span> <span class="o">*</span> <span class="n">fc</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">c</span>
+            <span class="n">fb</span> <span class="o">=</span> <span class="n">fc</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">c</span>
+            <span class="n">fa</span> <span class="o">=</span> <span class="n">fc</span>
+
+    <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">f_history</span>  <span class="c1"># Return None as the root if the root was not found within max_iterations</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s try it out on a simple function, <span class="math notranslate nohighlight">\(f(x) = e^x - 1\)</span>, which has a root at <span class="math notranslate nohighlight">\(x=0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the function to find the root of f = e^x - 1,</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+
+<span class="c1"># Initial interval</span>
+<span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">root</span><span class="p">,</span> <span class="n">bisect_history</span> <span class="o">=</span> <span class="n">bisection</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Root found:&quot;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Root not found within max_iterations&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 00: x =  5.000e-01, f(x) =  6.487e-01
+Iteration 01: x = -2.500e-01, f(x) = -2.212e-01
+Iteration 02: x =  1.250e-01, f(x) =  1.331e-01
+Iteration 03: x = -6.250e-02, f(x) = -6.059e-02
+Iteration 04: x =  3.125e-02, f(x) =  3.174e-02
+Iteration 05: x = -1.562e-02, f(x) = -1.550e-02
+Iteration 06: x =  7.812e-03, f(x) =  7.843e-03
+Iteration 07: x = -3.906e-03, f(x) = -3.899e-03
+Iteration 08: x =  1.953e-03, f(x) =  1.955e-03
+Iteration 09: x = -9.766e-04, f(x) = -9.761e-04
+Iteration 10: x =  4.883e-04, f(x) =  4.884e-04
+Iteration 11: x = -2.441e-04, f(x) = -2.441e-04
+Iteration 12: x =  1.221e-04, f(x) =  1.221e-04
+Iteration 13: x = -6.104e-05, f(x) = -6.104e-05
+Iteration 14: x =  3.052e-05, f(x) =  3.052e-05
+Iteration 15: x = -1.526e-05, f(x) = -1.526e-05
+Iteration 16: x =  7.629e-06, f(x) =  7.629e-06
+Iteration 17: x = -3.815e-06, f(x) = -3.815e-06
+Iteration 18: x =  1.907e-06, f(x) =  1.907e-06
+Iteration 19: x = -9.537e-07, f(x) = -9.537e-07
+Root found: -9.5367431640625e-07
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="newton-raphson-method">
+<h2>Newton-Raphson method<a class="headerlink" href="#newton-raphson-method" title="Permalink to this heading">#</a></h2>
+<p>The Newton-Raphson (or even <a class="reference external" href="https://en.wikipedia.org/wiki/Newton%27s_method#History">Newton-Raphson-Simpson</a>) method can accelerate the root finding process by not just using <span class="math notranslate nohighlight">\(f(x)\)</span> but also it’s derivative <span class="math notranslate nohighlight">\(\frac{df}{dx}\)</span>.</p>
+<p>The method starts with an initial guess <span class="math notranslate nohighlight">\(x = x_0\)</span>, where <span class="math notranslate nohighlight">\(f(x_0) \neq 0\)</span>. Using the derivative, we can write a linear approximation of <span class="math notranslate nohighlight">\(f\)</span> that is accurate near <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[f(x) \approx f(x_0) + (x - x_0) \frac{df}{dx}\]</div>
+<p>As long as <span class="math notranslate nohighlight">\(df/dx \neq 0\)</span>, this linear approximation of <span class="math notranslate nohighlight">\(f\)</span> is guaranteed to have a root, which we can use as our next guess <span class="math notranslate nohighlight">\(x_1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[x_1 = x_0 - \frac{f(x_0)}{df/dx}\]</div>
+<p>Again, this process is repeated until <span class="math notranslate nohighlight">\(f(x_n)\)</span> is as close to zero as we need.</p>
+<p>The code below implements the Newton-Raphson method and then uses it to find the same root we did above. Note that in this example we use JAX to automatically calculate <span class="math notranslate nohighlight">\(df/dx\)</span> for us so we don’t have to do any manual differentiation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">newton_raphson</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">max_iterations</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="n">f_history</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iterations</span><span class="p">):</span>
+        <span class="n">f_val</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">f_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">f_val</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteration </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">: x = </span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2"> 7.3e</span><span class="si">}</span><span class="s2">, f(x) = </span><span class="si">{</span><span class="n">f_val</span><span class="si">:</span><span class="s2"> 7.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># If f(x) is close enough to zero, we are done</span>
+        <span class="k">if</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f_val</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x_new</span><span class="p">,</span> <span class="n">f_history</span>
+        <span class="n">f_prime_val</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="c1"># Otherwise, take a Newton-Raphson step</span>
+        <span class="n">x_new</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">f_val</span> <span class="o">/</span> <span class="n">f_prime_val</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x_new</span>
+
+    <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">f_history</span>  <span class="c1"># Return None if the root was not found within max_iterations</span>
+
+
+<span class="c1"># Initial guess</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">root</span><span class="p">,</span> <span class="n">newton_history</span> <span class="o">=</span> <span class="n">newton_raphson</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Root found:&quot;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Root not found within max_iterations&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 00: x =  1.000e+00, f(x) =  1.718e+00
+Iteration 01: x =  3.679e-01, f(x) =  4.447e-01
+Iteration 02: x =  6.008e-02, f(x) =  6.192e-02
+Iteration 03: x =  1.769e-03, f(x) =  1.771e-03
+Iteration 04: x =  1.614e-06, f(x) =  1.669e-06
+Iteration 05: x = -5.518e-08, f(x) = -5.960e-08
+Root found: -5.5178134e-08
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s plot the value of <span class="math notranslate nohighlight">\(f(x)\)</span> from the iterations of each method to see how quickly they converge to the root.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">niceplots</span><span class="o">.</span><span class="n">get_style</span><span class="p">())</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Iteration&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;abs(f(x))&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+
+<span class="c1"># Convergence plots like this look better when the y-axis is logarithmic</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bisect_history</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Bisection&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">newton_history</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Newton-Raphson&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Plot a horizontal line at the tolerance</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tolerance&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
+<span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/02213502a641d7aa24e0bd2aab4d30b1726c58b44c4aa8cfbd999735a0eb36c7.png" src="../../_images/02213502a641d7aa24e0bd2aab4d30b1726c58b44c4aa8cfbd999735a0eb36c7.png" />
+</div>
+</div>
+<p>The Newton-Raphson method found the root in far fewer iterations than the Bisection method, even though it’s first guess was further from the root. Additionally, we didn’t have to find the initial bounds for the search space, which can be difficult in general. Some of the disadvantages of the Newton-Raphson method are</p>
+<ul class="simple">
+<li><p>It requires the derivative of <span class="math notranslate nohighlight">\(f\)</span> to be known, which can be difficult to calculate.</p></li>
+<li><p>It’ not guaranteed to converge, depending on the initial guess and the behaviour of <span class="math notranslate nohighlight">\(f\)</span> it can even diverge! See the “What can go wrong” section on <a class="reference external" href="https://amsi.org.au/ESA_Senior_Years/SeniorTopic3/3j/3j_2content_2.html">this page</a> for some examples.</p></li>
+</ul>
+</section>
+<section id="multidimensional-newton-raphson">
+<h2>Multidimensional Newton-Raphson<a class="headerlink" href="#multidimensional-newton-raphson" title="Permalink to this heading">#</a></h2>
+<p>Another advantage of Newton-Raphson is that it can be extended to multidimensional root finding problems. In this case, a few small changes are made:</p>
+<ol class="arabic simple">
+<li><p>We typically replace <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(f\)</span> with the state vector <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> and the residual vector <span class="math notranslate nohighlight">\(\mathbf{r}\)</span>. Both are vectors of length <span class="math notranslate nohighlight">\(N\)</span> (or in math-speak <span class="math notranslate nohighlight">\(\mathbf{u}, \mathbf{r} \in \mathbb{R}^N\)</span>) and we are looking for the values of <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> that make all the entries in <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> zero. A good example might be a CFD solver, where the state is the vector of the velocities/pressures/temperatures in all the cells, and the residual is a measure of the error in the discretised flow equations in each cell.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{dr/du}\)</span> is now an <span class="math notranslate nohighlight">\(N \times N\)</span> matrix (<span class="math notranslate nohighlight">\(\mathbf{dr/du} \in \mathbb{R}^{N \times N}\)</span>) and we can’t divide by a matrix. So the equation for updating the state becomes <span class="math notranslate nohighlight">\(\mathbf{u_{i+1}} = \mathbf{u_i} - \mathbf{dr/du}^{-1}\mathbf{r(u_i)}\)</span> <a class="footnote-reference brackets" href="#ref" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p></li>
+<li><p>Since we are now dealing with multiple values that we want all to be (close to) zero, we need a way to measure how close we are to the root. We can do this using the norm of the residual vector, different types of vector norms are covered in section 1.3 of the course notes</p></li>
+</ol>
+<p>More details on the multi-dimensional Newton-Raphson method can be found in section 1.7 of the course notes.</p>
+<hr class="footnotes docutils" />
+<aside class="footnote brackets" id="ref" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Whenever you see an equation in the form <span class="math notranslate nohighlight">\(\mathbf{x} = \mathbf{A}^{-1}\mathbf{b}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is a big matrix, you should know that in practice you shouldn’t actually compute the inverse of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>! Instead, you should use a linear solution method (some of which are covered in this course) to solve the equation <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x} = \mathbf{b}\)</span> for the <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> vector.</p>
+</aside>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "A-CGray/AE523-Fall23",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Examples/Week1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 1</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bisection">Bisection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-raphson-method">Newton-Raphson method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multidimensional-newton-raphson">Multidimensional Newton-Raphson</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alasdair Christison Gray
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
