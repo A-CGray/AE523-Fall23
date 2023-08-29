@@ -6,7 +6,7 @@
 # In[49]:
 
 
-# Import stuff from JAX for math stuff and automatic differentiation
+# Import JAX for math stuff and automatic differentiation
 import jax
 import jax.numpy as jnp
 
