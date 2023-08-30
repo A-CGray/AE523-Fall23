@@ -491,7 +491,7 @@ pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> 
 </section>
 <section id="numpy">
 <h3><a class="reference external" href="https://numpy.org/doc/stable/">NumPy</a><a class="headerlink" href="#numpy" title="Permalink to this heading">#</a></h3>
-<p>NumPy is <strong>THE</strong>  standard for dealing with vectors, matrices, and multidimensional arrays in python.</p>
+<p>NumPy is <strong>THE</strong>  standard package for doing math in python, especially things involving vectors, matrices, and multidimensional arrays.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -507,23 +507,23 @@ pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Check that the solution is correct</span>
-<span class="n">diff</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span>  <span class="c1"># @ is the matrix multiplication operator</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span>  <span class="c1"># @ is the matrix multiplication operator, A @ x is equivalent to np.dot(A, x)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Linear system solution error norm = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.2162405 , 0.99230364, 0.48506423, 0.71041303, 0.55418274],
-       [0.7968462 , 0.63837223, 0.61926851, 0.01956404, 0.9399907 ],
-       [0.30720701, 0.21400594, 0.33849433, 0.65299722, 0.71716478],
-       [0.46621202, 0.31184055, 0.73166856, 0.96753624, 0.48513402],
-       [0.82445035, 0.84241085, 0.61794462, 0.70314235, 0.96864098]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.62085663, 0.81118312, 0.18496035, 0.27369289, 0.30161516],
+       [0.27923833, 0.18636572, 0.62035793, 0.64121306, 0.96369954],
+       [0.34377409, 0.39230188, 0.44455677, 0.46196077, 0.53891195],
+       [0.62049835, 0.88938731, 0.08233269, 0.66505388, 0.67598837],
+       [0.18558652, 0.26512504, 0.58578214, 0.27488117, 0.36396642]])
 
-b=array([0.56861736, 0.2679187 , 0.4813057 , 0.04803918, 0.29951252])
+b=array([0.70674908, 0.61009063, 0.88641198, 0.90391404, 0.59553354])
 
-x=array([-1.15193839,  0.21637627, -0.01209295, -0.01893858,  1.12295486])
+x=array([ 2.54095106, -1.48603043,  0.91639773,  3.93788918, -3.0258557 ])
 
-Linear system solution error norm = 1.0031442548020353e-16
+Linear system solution error norm = 6.661338147750939e-16
 </pre></div>
 </div>
 </div>
@@ -533,7 +533,9 @@ Linear system solution error norm = 1.0031442548020353e-16
 <h3><a class="reference external" href="https://jax.readthedocs.io/en/latest/index.html">JAX</a><a class="headerlink" href="#jax" title="Permalink to this heading">#</a></h3>
 <p>JAX is a library that does many things useful for machine learning.
 Most importantly for this course, it has a module that allows you to compute derivatives through NumPy-like code.
-<a class="reference external" href="https://github.com/google/jax#pip-installation-cpu">here</a></p>
+In theory, this means you can take code written using numpy, replace <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code> with <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">jax.numpy</span> <span class="pre">as</span> <span class="pre">np</span></code>, and then differentiate through the code using jax.grad.</p>
+<p>Support for JAX on windows is apparently “experimental”, but it should still be installable through pip, see the instructions <a class="reference external" href="https://github.com/google/jax#pip-installation-cpu">here</a>.
+If you run into problems, please let us know on Piazza.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
@@ -544,12 +546,13 @@ Most importantly for this course, it has a module that allows you to compute der
 <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)))</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
+<span class="c1"># Create another function that computes the gradient of the first function using JAX&#39;s AD</span>
+<span class="n">funcGradient</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
 
-<span class="n">func_gradient</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-
+<span class="c1"># Evaluate the function and it&#39;s gradient</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">dydx</span> <span class="o">=</span> <span class="n">func_gradient</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">dydx</span> <span class="o">=</span> <span class="n">funcGradient</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">y</span><span class="si">=}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -576,6 +579,50 @@ dydx=Array([ 0.01439827, -0.01306541, -0.02845956,  0.07103436,  0.1409933 ,
 <section id="scipy">
 <h3><a class="reference external" href="https://docs.scipy.org/doc/scipy/">SciPy</a><a class="headerlink" href="#scipy" title="Permalink to this heading">#</a></h3>
 <p>SciPy contains a bunch of more complex scientific computing algorithms for things like root finding, optimization, solving ODE’s, and sparse linear algebra.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root_scalar</span>
+
+<span class="c1"># Use scipy to find the root of e^x - 1</span>
+<span class="k">def</span> <span class="nf">anotherFunc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="s2">, f(x) = </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">anotherFunc</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bisect&quot;</span><span class="p">,</span> <span class="n">bracket</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x=-2.0, f(x) = -0.8646647167633873
+x=4.0, f(x) = 53.598150033144236
+x=1.0, f(x) = 1.718281828459045
+x=-0.5, f(x) = -0.3934693402873666
+x=0.25, f(x) = 0.2840254166877414
+x=-0.125, f(x) = -0.11750309741540466
+x=0.0625, f(x) = 0.06449445891785932
+x=-0.03125, f(x) = -0.03076676552365587
+x=0.015625, f(x) = 0.015747708586685727
+x=-0.0078125, f(x) = -0.007782061739756374
+x=0.00390625, f(x) = 0.003913889338347687
+x=-0.001953125, f(x) = -0.0019512188925244756
+x=0.0009765625, f(x) = 0.0009770394924164538
+x=-0.00048828125, f(x) = -0.0004881620601105974
+x=0.000244140625, f(x) = 0.0002441704297477809
+x=-0.0001220703125, f(x) = -0.00012206286222249396
+x=6.103515625e-05, f(x) = 6.103701893311886e-05
+x=-3.0517578125e-05, f(x) = -3.051711246837563e-05
+x=1.52587890625e-05, f(x) = 1.525890547848796e-05
+x=-7.62939453125e-06, f(x) = -7.629365427419543e-06
+x=3.814697265625e-06, f(x) = 3.814704541582614e-06
+x=-1.9073486328125e-06, f(x) = -1.9073468138230965e-06
+x=9.5367431640625e-07, f(x) = 9.536747711536009e-07
+x=-4.76837158203125e-07, f(x) = -4.768370445162873e-07
+x=2.384185791015625e-07, f(x) = 2.3841860752327193e-07
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="matplotlib">
 <h3><a class="reference external" href="https://matplotlib.org/">Matplotlib</a><a class="headerlink" href="#matplotlib" title="Permalink to this heading">#</a></h3>
@@ -587,16 +634,89 @@ It has a lot of functionality and excellent documentation.</p>
 It is possible to use a similar approach in Matplotlib, but I’d recommend that you instead use the approach used in the <a class="reference external" href="https://matplotlib.org/stable/users/getting_started/">matplotlib examples</a> where you first create figure and axis objects and then call the plot methods of the axis.
 This makes it much clearer in your code which data is being plotted on which figure.</p>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Create a figure with two subplots on top of each other</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Set the axis labels and tick marks</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$y_1$&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$y_2$&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t (s)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Experimental data&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create some data to plot</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y1_experiment</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">y1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y2_experiment</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">y2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># Plot the smooth function as a line and the &quot;experimental data&quot; as points</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1_experiment</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fit&quot;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2_experiment</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fit&quot;</span><span class="p">)</span>
+
+<span class="c1"># Loop through the subplots and add legends to each using the labels we set above</span>
+<span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e28864deb7d51105a655444e08a0b62d3a4b256c4caac2f38c39716303dcf388.png" src="../_images/e28864deb7d51105a655444e08a0b62d3a4b256c4caac2f38c39716303dcf388.png" />
+</div>
+</div>
 </section>
 <section id="niceplots">
 <h3>NicePlots<a class="headerlink" href="#niceplots" title="Permalink to this heading">#</a></h3>
 <p>NicePlots is a little package I helped write with my labmates that we use to make our Matplotlib plots look nicer.
 It is not at all necessary for the course, but if you do want to use it you can pip install it just like all the other packages mentioned already.
 You can also check out some example uses of it <a class="reference external" href="https://mdolab-niceplots.readthedocs-hosted.com/en/latest/auto_examples/index.html">here</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">niceplots</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">niceplots</span><span class="o">.</span><span class="n">get_style</span><span class="p">())</span>
+
+<span class="c1"># Repeat the same plot as above, but now with the niceplots style</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Set the axis labels and tick marks</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$y_1$&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$y_2$&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t (s)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Experimental data&quot;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1_experiment</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fit&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2_experiment</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fit&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
+    <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/784e7216d360ab85d71b10d478fa55a8e22819d6cc941618e713a3c1e676e35b.png" src="../_images/784e7216d360ab85d71b10d478fa55a8e22819d6cc941618e713a3c1e676e35b.png" />
+</div>
+</div>
 </section>
 </section>
 <section id="learning-python">
 <h2>Learning python<a class="headerlink" href="#learning-python" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.py4e.com/lessons">Python for everybody</a> is a very extensive and popular course for learning python for complete beginners, it was even developed by a professor at the University of Michigan.
+The most important basic concepts you’ll probably need for this course are covered in sections 3-11.</p>
+<p>Below are some more resources on learning to use NumPy, especially for people used to programming in Matlab:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/user/basics.html">NumPy fundamentals</a></p></li>
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/user/numpy-for-matlab-users.html">NumPy guide for Matlab users</a></p></li>
