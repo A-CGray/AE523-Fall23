@@ -208,6 +208,55 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/A-CGray/AE523-Fall23/main?urlpath=lab/tree/Content/PythonSetup.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -263,7 +312,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/Content/PythonSetup.md" target="_blank"
+      <li><a href="../_sources/Content/PythonSetup.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -273,7 +322,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -443,12 +492,86 @@ pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> 
 <section id="numpy">
 <h3><a class="reference external" href="https://numpy.org/doc/stable/">NumPy</a><a class="headerlink" href="#numpy" title="Permalink to this heading">#</a></h3>
 <p>NumPy is <strong>THE</strong>  standard for dealing with vectors, matrices, and multidimensional arrays in python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Create a random linear system (Ax=b) and solve it</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">A</span><span class="si">=}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">b</span><span class="si">=}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check that the solution is correct</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span>  <span class="c1"># @ is the matrix multiplication operator</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Linear system solution error norm = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.79430562, 0.34874431, 0.16721588, 0.55554343, 0.12548427],
+       [0.0918895 , 0.57790844, 0.34159289, 0.70552339, 0.75778317],
+       [0.7019054 , 0.06524908, 0.78081811, 0.57749088, 0.30338684],
+       [0.31549109, 0.03309629, 0.22526794, 0.64278232, 0.0674043 ],
+       [0.66859328, 0.27177104, 0.491874  , 0.77300682, 0.88957724]])
+
+b=array([0.83629346, 0.94552702, 0.49056289, 0.69672765, 0.23836775])
+
+x=array([-0.35382443,  1.59352066,  0.42264172,  1.15196264, -1.18764485])
+
+Linear system solution error norm = 2.0014830212433605e-16
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="jax">
 <h3><a class="reference external" href="https://jax.readthedocs.io/en/latest/index.html">JAX</a><a class="headerlink" href="#jax" title="Permalink to this heading">#</a></h3>
 <p>JAX is a library that does many things useful for machine learning.
 Most importantly for this course, it has a module that allows you to compute derivatives through NumPy-like code.
 <a class="reference external" href="https://github.com/google/jax#pip-installation-cpu">here</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">grad</span>
+
+
+<span class="c1"># Define a function that does some stuff with arrays</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)))</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="n">func_gradient</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">dydx</span> <span class="o">=</span> <span class="n">func_gradient</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">y</span><span class="si">=}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dydx</span><span class="si">=}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x=Array([0.        , 0.69813174, 1.3962635 , 2.0943952 , 2.792527  ,
+       3.4906588 , 4.1887903 , 4.8869224 , 5.585054  , 6.2831855 ],      dtype=float32)
+
+y=Array(0.742495, dtype=float32)
+
+dydx=Array([ 0.01439827, -0.01306541, -0.02845956,  0.07103436,  0.1409933 ,
+       -0.46274623, -1.7529042 , -1.070204  ,  4.2873783 ,  7.642982  ],      dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="scipy">
 <h3><a class="reference external" href="https://docs.scipy.org/doc/scipy/">SciPy</a><a class="headerlink" href="#scipy" title="Permalink to this heading">#</a></h3>
