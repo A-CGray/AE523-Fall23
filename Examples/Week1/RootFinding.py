@@ -3,7 +3,7 @@
 
 # # Root finding methods
 
-# In[ ]:
+# In[1]:
 
 
 # Import JAX for math stuff and automatic differentiation
@@ -13,7 +13,7 @@ from jax import config
 
 config.update(
     "jax_enable_x64", True
-)  # JAX uses single precision numbrs by default, here we change that to double precision
+)  # JAX uses single precision numbers by default, here we change that to double precision
 
 # Import matplotlib and niceplots for plotting
 import matplotlib.pyplot as plt
@@ -29,7 +29,7 @@ import niceplots
 #
 # The code below contains a function that implements the bisection method.
 
-# In[ ]:
+# In[2]:
 
 
 def bisection(f, a, b, tol=1e-6, max_iterations=100):
@@ -63,7 +63,7 @@ def bisection(f, a, b, tol=1e-6, max_iterations=100):
 
 # Now let's try it out on a simple function, $f(x) = e^x - 1$, which has a root at $x=0$.
 
-# In[ ]:
+# In[3]:
 
 
 # Define the function to find the root of f = e^x - 1,
@@ -98,7 +98,7 @@ else:
 #
 # The code below implements the Newton-Raphson method and then uses it to find the same root we did above. Note that in this example we use JAX to automatically calculate $df/dx$ for us so we don't have to do any manual differentiation.
 
-# In[ ]:
+# In[4]:
 
 
 def newton_raphson(f, x0, tol=1e-6, max_iterations=100):
@@ -133,7 +133,7 @@ else:
 
 # Now let's plot the value of $f(x)$ from the iterations of each method to see how quickly they converge to the root.
 
-# In[ ]:
+# In[5]:
 
 
 plt.style.use(niceplots.get_style())
