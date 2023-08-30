@@ -4,6 +4,7 @@
 format: jb-book
 root: intro
 chapters:
+- file: Content/PythonSetup.md
 - file: Examples/Week1/Week1
   sections:
   - file: Examples/Week1/RootFinding.ipynb
