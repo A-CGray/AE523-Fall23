@@ -426,6 +426,8 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import JAX for math stuff and automatic differentiation</span>
 <span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_enable_x64&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># JAX uses single precision numbrs by default, here we change that to double precision</span>
 
 <span class="c1"># Import matplotlib and niceplots for plotting</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -510,7 +512,7 @@ Iteration 09: x = -9.766e-04, f(x) = -9.761e-04
 Iteration 10: x =  4.883e-04, f(x) =  4.884e-04
 Iteration 11: x = -2.441e-04, f(x) = -2.441e-04
 Iteration 12: x =  1.221e-04, f(x) =  1.221e-04
-Iteration 13: x = -6.104e-05, f(x) = -6.104e-05
+Iteration 13: x = -6.104e-05, f(x) = -6.103e-05
 Iteration 14: x =  3.052e-05, f(x) =  3.052e-05
 Iteration 15: x = -1.526e-05, f(x) = -1.526e-05
 Iteration 16: x =  7.629e-06, f(x) =  7.629e-06
@@ -572,9 +574,9 @@ Root found: -9.5367431640625e-07
 Iteration 01: x =  3.679e-01, f(x) =  4.447e-01
 Iteration 02: x =  6.008e-02, f(x) =  6.192e-02
 Iteration 03: x =  1.769e-03, f(x) =  1.771e-03
-Iteration 04: x =  1.614e-06, f(x) =  1.669e-06
-Iteration 05: x = -5.518e-08, f(x) = -5.960e-08
-Root found: -5.5178134e-08
+Iteration 04: x =  1.564e-06, f(x) =  1.564e-06
+Iteration 05: x =  1.223e-12, f(x) =  1.223e-12
+Root found: 1.2233215659894107e-12
 </pre></div>
 </div>
 </div>
@@ -603,7 +605,7 @@ Root found: -5.5178134e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/02213502a641d7aa24e0bd2aab4d30b1726c58b44c4aa8cfbd999735a0eb36c7.png" src="../../_images/02213502a641d7aa24e0bd2aab4d30b1726c58b44c4aa8cfbd999735a0eb36c7.png" />
+<img alt="../../_images/260f6c071b284a299557761d8d46b038f1c3f634a29bef2415e115d6f56bd502.png" src="../../_images/260f6c071b284a299557761d8d46b038f1c3f634a29bef2415e115d6f56bd502.png" />
 </div>
 </div>
 <p>The Newton-Raphson method found the root in far fewer iterations than the Bisection method, even though it’s first guess was further from the root. Additionally, we didn’t have to find the initial bounds for the search space, which can be difficult in general. Some of the disadvantages of the Newton-Raphson method are</p>
