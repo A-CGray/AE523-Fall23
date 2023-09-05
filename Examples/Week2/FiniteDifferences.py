@@ -35,7 +35,7 @@ colors = niceplots.get_colors_list()
 #
 # In the code below we experimentally validate the order of accuracy of the forward, backward, and central-difference approximations of the first derivative.
 
-# In[10]:
+# In[6]:
 
 
 # Define the analytic function (e.g., sin(x))
@@ -71,6 +71,7 @@ true_derivative = jax.grad(analytic_function)(x_point)
 FD_functions = {"forward": forward_difference, "backward": backward_difference, "central": central_difference}
 FD_errors = {"forward": [], "backward": [], "central": []}
 FD_convergence_orders = {"forward": [], "backward": [], "central": []}
+FD_colors = {"forward": colors[0], "backward": colors[1], "central": colors[2]}
 
 # Create a figure and axis to plot on
 fig, ax = plt.subplots()
@@ -89,38 +90,32 @@ for FD_name, FD_function in FD_functions.items():
     # Plot the errors
     ax.plot(step_sizes, FD_errors[FD_name], marker="o", linestyle="-", clip_on=False, label=FD_name)
 
-    # Calculate the convergence order by measuring the slope of the log-log plot
+    # Calculate the convergence order by measuring the slope of the log-log plot and annotate it on the plot
     for i in range(1, len(FD_errors[FD_name])):
-        FD_convergence_orders[FD_name].append(
-            jnp.log(FD_errors[FD_name][i - 1] / FD_errors[FD_name][i]) / jnp.log(step_sizes[i - 1] / step_sizes[i])
+        slope = jnp.log(FD_errors[FD_name][i - 1] / FD_errors[FD_name][i]) / jnp.log(step_sizes[i - 1] / step_sizes[i])
+        ax.annotate(
+            f"order = {slope:.2f}",
+            xy=(step_sizes[i], FD_errors[FD_name][i]),
+            fontsize=10,
+            ha="left",
+            va="top",
+            color=FD_colors[FD_name],
         )
 
 niceplots.adjust_spines(ax)
 ax.legend(labelcolor="linecolor")
-# Plot error vs. step size on a log-log scale
-# plt.figure()
-# plt.loglog(step_sizes, errors_f, marker='o', linestyle='-')
-# plt.loglog(step_sizes, errors_b, marker='o', linestyle='-')
-# plt.loglog(step_sizes, errors_c, marker='o', linestyle='-')
-
-# # Add slope information to the legend
-# for i in range(len(order_f)):
-#     plt.text(step_sizes[i], errors_f[i], f"Order {order_f[i]:.2f}", fontsize=10, ha='left', va='top')
-#     plt.text(step_sizes[i], errors_b[i], f"Order {order_b[i]:.2f}", fontsize=10, ha='left', va='top')
-#     plt.text(step_sizes[i], errors_c[i], f"Order {order_c[i]:.2f}", fontsize=10, ha='left', va='top')
-
-# # Label the plot
-# plt.xlabel('Step Size (h)')
-# plt.ylabel('Error')
-# plt.title('Error vs. Step Size (Log-Log Scale)')
-
-# # Show the plot
-# plt.grid()
-# plt.legend(["Forward","Backward","Central"])
-# plt.show()
+plt.show()
 
 
-# Lagrange Interpolating Polynomial
+# From this plot we can draw a few observations:
+# - For the smallest step sizes, the rate of convergence of all three schemes matches the theoretical rate.
+# - The rate of convergence of the schemes doesn't always match the theoretical value, only when $\Delta x$ becomes small enough.
+# - The second-order accurate scheme is not always more accurate than the first order scheme, at the largest step size the first-order backward difference scheme is more accurate.
+#
+
+# ## Deriving Finite Difference Schemes using Lagrange Polynomials
+
+# The finite difference schemes we used in the previous section were very simple to derive, but this is not always the case.
 
 # In[3]:
 
