@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# # Examples from office hours: Week 2
+
 # In python, it is easy to create a alternative version of a function where some of the input values are fixed.
 
 # In[1]:
