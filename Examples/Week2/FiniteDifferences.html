@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week2/FiniteDifferences';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="OfficeHours.html" />
     <link rel="prev" title="Week 2" href="Week2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -435,20 +436,14 @@ document.write(`
 <span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_enable_x64&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">set_matplotlib_formats</span>
+<span class="kn">import</span> <span class="nn">matplotlib_inline</span>
 
-<span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s2">&quot;svg&quot;</span><span class="p">,</span> <span class="s2">&quot;pdf&quot;</span><span class="p">)</span>
+<span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s2">&quot;pdf&quot;</span><span class="p">,</span> <span class="s2">&quot;svg&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">niceplots</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">niceplots</span><span class="o">.</span><span class="n">get_style</span><span class="p">())</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="n">niceplots</span><span class="o">.</span><span class="n">get_colors_list</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2067/3582598999.py:11: DeprecationWarning: `set_matplotlib_formats` is deprecated since IPython 7.23, directly use `matplotlib_inline.backend_inline.set_matplotlib_formats()`
-  set_matplotlib_formats(&quot;svg&quot;, &quot;pdf&quot;)
 </pre></div>
 </div>
 </div>
@@ -552,7 +547,7 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
-<img alt="../../_images/fc9685b2c07eb956753a976fc2df7401386cce57deb8a67b7dec7bd63ce47100.svg" src="../../_images/fc9685b2c07eb956753a976fc2df7401386cce57deb8a67b7dec7bd63ce47100.svg" /></div>
+<img alt="../../_images/e544e72f1bb699795cb4ef0d571a7d9748ea59a4172f4b60fa8c0db60fe729a6.svg" src="../../_images/e544e72f1bb699795cb4ef0d571a7d9748ea59a4172f4b60fa8c0db60fe729a6.svg" /></div>
 </div>
 <p>From this plot we can draw a few observations:</p>
 <ul class="simple">
@@ -633,7 +628,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1d66f6122068f712ddadc6f19f5224cafd0060a1e1fe0053227cda263c15c477.svg" src="../../_images/1d66f6122068f712ddadc6f19f5224cafd0060a1e1fe0053227cda263c15c477.svg" /></div>
+<img alt="../../_images/12c43462dcb427c4843abeff24f26ef4ff80fa8fdf60dc84a6c72b1a9b5fda23.svg" src="../../_images/12c43462dcb427c4843abeff24f26ef4ff80fa8fdf60dc84a6c72b1a9b5fda23.svg" /></div>
 </div>
 <p>We can take advantage of this special property to construct a polynomial function that passes through a set of points.
 Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} = [x_0, x_1, ..., x_{N-1}]\)</span> and a set of function values <span class="math notranslate nohighlight">\(\mathbf{f} = [f_0, f_1, ..., f_{N-1}]\)</span> at those points, we can construct a polynomial function <span class="math notranslate nohighlight">\(p(x)\)</span> that passes through all of the points by summing the Lagrange polynomials multiplied by the function values:</p>
@@ -709,14 +704,12 @@ Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} 
 
 <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f68308a2390&gt;
-</pre></div>
-</div>
-<img alt="../../_images/77732cd0eae0595bf2b469fcef609e25af94aae25977183688891807dc23f9f2.svg" src="../../_images/77732cd0eae0595bf2b469fcef609e25af94aae25977183688891807dc23f9f2.svg" /></div>
+<img alt="../../_images/18a7b4f03753b15e05c68d61e2dfbf8757a566868794dae35a645731ffe56c69.svg" src="../../_images/18a7b4f03753b15e05c68d61e2dfbf8757a566868794dae35a645731ffe56c69.svg" /></div>
 </div>
 <p>Try playing around with the number of datapoints (<code class="docutils literal notranslate"><span class="pre">numDataPoints</span></code>) and the random seed to see in which scenarios the interpolation works well and in which it doesn’t.</p>
 <p>To obtain a finite difference scheme from the interpolating polynomial, we can simply take the derivative of the polynomial and evaluate it at the point of interest. e.g. for the first derivative:</p>
@@ -767,6 +760,15 @@ Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} 
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Week 2</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="OfficeHours.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   

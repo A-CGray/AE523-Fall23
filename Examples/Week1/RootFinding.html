@@ -615,7 +615,7 @@ Root found: 1.2233215659894107e-12
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">newton_history</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Newton-Raphson&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Plot a horizontal line at the tolerance</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tolerance&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tolerance&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
 <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -623,7 +623,7 @@ Root found: 1.2233215659894107e-12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/343e931f61670c0546ad1be467f05f40d2f684ca9b4664984b991977f9d1d884.svg" src="../../_images/343e931f61670c0546ad1be467f05f40d2f684ca9b4664984b991977f9d1d884.svg" /></div>
+<img alt="../../_images/4cf09d4ca0726479d0d10a4bc746e9b5c3bd9cc7aaa6b3564cb63a1a32da929d.svg" src="../../_images/4cf09d4ca0726479d0d10a4bc746e9b5c3bd9cc7aaa6b3564cb63a1a32da929d.svg" /></div>
 </div>
 <p>The Newton-Raphson method found the root in far fewer iterations than the Bisection method, even though it’s first guess was further from the root. Additionally, we didn’t have to find the initial bounds for the search space, which can be difficult in general. Some of the disadvantages of the Newton-Raphson method are</p>
 <ul class="simple">
