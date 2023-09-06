@@ -9,6 +9,7 @@ title                       : "AEROSP 523 Computational Fluid Dynamics: Code Exa
 author                      : Alasdair Christison Gray  # The author of the book
 copyright                   : "2023"  # Copyright year to be placed in the footer
 logo                        : images/scramjet.png  # A path to the book logo
+only_build_toc_files        : false  # Only build the table of contents from the files listed in _toc.yml
 
 exclude_patterns: [README.md, CONDUCT.md, CONTRIBUTING.md]
 

@@ -143,7 +143,7 @@ else:
 
 # Now let's plot the value of $f(x)$ from the iterations of each method to see how quickly they converge to the root.
 
-# In[5]:
+# In[6]:
 
 
 plt.style.use(niceplots.get_style())
@@ -159,7 +159,7 @@ ax.plot(bisect_history, "-o", label="Bisection", clip_on=False)
 ax.plot(newton_history, "-o", label="Newton-Raphson", clip_on=False)
 
 # Plot a horizontal line at the tolerance
-ax.axhline(1e-6, color="k", linestyle="--", label="Tolerance")
+ax.axhline(1e-6, color="gray", linestyle="--", label="Tolerance")
 ax.legend(labelcolor="linecolor")
 niceplots.adjust_spines(ax)
 plt.show()
