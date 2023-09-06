@@ -17,6 +17,10 @@ config.update(
 
 # Import matplotlib and niceplots for plotting
 import matplotlib.pyplot as plt
+import matplotlib_inline
+
+matplotlib_inline.backend_inline.set_matplotlib_formats("pdf", "svg")
+
 import niceplots
 
 
@@ -58,7 +62,10 @@ def bisection(f, a, b, tol=1e-6, max_iterations=100):
             a = c
             fa = fc
 
-    return None, f_history  # Return None as the root if the root was not found within max_iterations
+    return (
+        None,
+        f_history,
+    )  # Return None as the root if the root was not found within max_iterations
 
 
 # Now let's try it out on a simple function, $f(x) = e^x - 1$, which has a root at $x=0$.
@@ -118,7 +125,10 @@ def newton_raphson(f, x0, tol=1e-6, max_iterations=100):
         x_new = x - f_val / f_prime_val
         x = x_new
 
-    return None, f_history  # Return None if the root was not found within max_iterations
+    return (
+        None,
+        f_history,
+    )  # Return None if the root was not found within max_iterations
 
 
 # Initial guess

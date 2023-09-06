@@ -8,3 +8,6 @@ chapters:
 - file: Examples/Week1/Week1
   sections:
   - file: Examples/Week1/RootFinding.ipynb
+- file: Examples/Week2/Week2
+  sections:
+  - file: Examples/Week2/FiniteDifferences.ipynb

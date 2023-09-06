@@ -68,7 +68,11 @@ x_point = 0.5
 true_derivative = jax.grad(analytic_function)(x_point)
 
 # Use a dictionary to store the functions and the errors for each finite difference scheme
-FD_functions = {"forward": forward_difference, "backward": backward_difference, "central": central_difference}
+FD_functions = {
+    "forward": forward_difference,
+    "backward": backward_difference,
+    "central": central_difference,
+}
 FD_errors = {"forward": [], "backward": [], "central": []}
 FD_convergence_orders = {"forward": [], "backward": [], "central": []}
 FD_colors = {"forward": colors[0], "backward": colors[1], "central": colors[2]}
@@ -88,7 +92,14 @@ for FD_name, FD_function in FD_functions.items():
         FD_errors[FD_name].append(error)
 
     # Plot the errors
-    ax.plot(step_sizes, FD_errors[FD_name], marker="o", linestyle="-", clip_on=False, label=FD_name)
+    ax.plot(
+        step_sizes,
+        FD_errors[FD_name],
+        marker="o",
+        linestyle="-",
+        clip_on=False,
+        label=FD_name,
+    )
 
     # Calculate the convergence order by measuring the slope of the log-log plot and annotate it on the plot
     for i in range(1, len(FD_errors[FD_name])):

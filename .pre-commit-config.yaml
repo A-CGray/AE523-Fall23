@@ -18,8 +18,8 @@ repos:
         args: ["-l", "120", "--target-version", "py311"]
 -   repo: local
     hooks:
-    -   id: check-x
-        name: Check X
+    -   id: Convert notebooks
+        name: Convert notebooks
         entry: convertNotebooks.sh
         language: script
         files: ^Examples/
