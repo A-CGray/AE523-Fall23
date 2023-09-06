@@ -162,6 +162,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Examples/Week1/RootFinding.html">Root finding methods</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Examples/Week2/Week2.html">Week 2</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Week2/FiniteDifferences.html">Finite Difference Approximations</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -508,23 +512,25 @@ pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Check that the solution is correct</span>
-<span class="n">diff</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span>  <span class="c1"># @ is the matrix multiplication operator, A @ x is equivalent to np.dot(A, x)</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span>
+<span class="p">)</span>  <span class="c1"># @ is the matrix multiplication operator, A @ x is equivalent to np.dot(A, x)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Linear system solution error norm = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.72494893, 0.08665464, 0.53186079, 0.96744079, 0.34159875],
-       [0.80650667, 0.85921827, 0.37745856, 0.35349777, 0.2185912 ],
-       [0.07078737, 0.89919027, 0.66132533, 0.686605  , 0.10188084],
-       [0.10520166, 0.17306649, 0.40864676, 0.51544045, 0.80903562],
-       [0.62627747, 0.49798911, 0.34353753, 0.82589773, 0.61559983]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.17545263, 0.73836814, 0.20103912, 0.09960357, 0.19133139],
+       [0.45387007, 0.7745811 , 0.95969593, 0.96088837, 0.17423133],
+       [0.51632027, 0.79643006, 0.31818882, 0.81315373, 0.67512766],
+       [0.15215531, 0.31672541, 0.45334771, 0.36512352, 0.76969335],
+       [0.95684348, 0.39577137, 0.82703574, 0.78727479, 0.87737381]])
 
-b=array([0.38849965, 0.47094263, 0.33335967, 0.00954472, 0.21961479])
+b=array([0.02214926, 0.48317042, 0.59118391, 0.76017604, 0.54413486])
 
-x=array([ 0.38921443,  0.05784912,  0.5145038 , -0.08810075, -0.25493641])
+x=array([-0.78497634, -0.12585009,  0.2119815 ,  0.62296204,  0.77422373])
 
-Linear system solution error norm = 2.2888491377299405e-16
+Linear system solution error norm = 1.6243534171511178e-16
 </pre></div>
 </div>
 </div>
@@ -546,6 +552,7 @@ If you run into problems, please let us know on Piazza.</p>
 <span class="c1"># Define a function that does some stuff with arrays</span>
 <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)))</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
 
 <span class="c1"># Create another function that computes the gradient of the first function using JAX&#39;s AD</span>
 <span class="n">funcGradient</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
@@ -584,13 +591,15 @@ dydx=Array([ 0.01439827, -0.01306541, -0.02845956,  0.07103436,  0.1409933 ,
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root_scalar</span>
 
+
 <span class="c1"># Use scipy to find the root of e^x - 1</span>
 <span class="k">def</span> <span class="nf">anotherFunc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="s2">, f(x) = </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">f</span>
 
-<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">anotherFunc</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bisect&quot;</span><span class="p">,</span> <span class="n">bracket</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">anotherFunc</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bisect&quot;</span><span class="p">,</span> <span class="n">bracket</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -600,21 +609,21 @@ x=4.0, f(x) = 53.598150033144236
 x=1.0, f(x) = 1.718281828459045
 x=-0.5, f(x) = -0.3934693402873666
 x=0.25, f(x) = 0.2840254166877414
-x=-0.125, f(x) = -0.11750309741540454
+x=-0.125, f(x) = -0.11750309741540466
 x=0.0625, f(x) = 0.06449445891785932
 x=-0.03125, f(x) = -0.03076676552365587
 x=0.015625, f(x) = 0.015747708586685727
-x=-0.0078125, f(x) = -0.007782061739756485
-x=0.00390625, f(x) = 0.003913889338347465
+x=-0.0078125, f(x) = -0.007782061739756374
+x=0.00390625, f(x) = 0.003913889338347687
 x=-0.001953125, f(x) = -0.0019512188925244756
 x=0.0009765625, f(x) = 0.0009770394924164538
 x=-0.00048828125, f(x) = -0.0004881620601105974
 x=0.000244140625, f(x) = 0.0002441704297477809
-x=-0.0001220703125, f(x) = -0.00012206286222260498
+x=-0.0001220703125, f(x) = -0.00012206286222249396
 x=6.103515625e-05, f(x) = 6.103701893311886e-05
-x=-3.0517578125e-05, f(x) = -3.051711246848665e-05
+x=-3.0517578125e-05, f(x) = -3.051711246837563e-05
 x=1.52587890625e-05, f(x) = 1.525890547848796e-05
-x=-7.62939453125e-06, f(x) = -7.6293654275305656e-06
+x=-7.62939453125e-06, f(x) = -7.629365427419543e-06
 x=3.814697265625e-06, f(x) = 3.814704541582614e-06
 x=-1.9073486328125e-06, f(x) = -1.9073468138230965e-06
 x=9.5367431640625e-07, f(x) = 9.536747711536009e-07
@@ -649,12 +658,12 @@ This makes it much clearer in your code which data is being plotted on which fig
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Experimental data&quot;</span><span class="p">)</span>
 
 <span class="c1"># Create some data to plot</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
-<span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">/</span> <span class="mi">8</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">y1_experiment</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">y1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-<span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">/</span> <span class="mi">8</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">y2_experiment</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">y2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
 <span class="c1"># Plot the smooth function as a line and the &quot;experimental data&quot; as points</span>
@@ -671,7 +680,7 @@ This makes it much clearer in your code which data is being plotted on which fig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7614205c382b29063c8f0649a6eb1e10c29d5278f7a3bfb17044315e6f75bdc1.png" src="../_images/7614205c382b29063c8f0649a6eb1e10c29d5278f7a3bfb17044315e6f75bdc1.png" />
+<img alt="../_images/9d2060580e9e21fe4eff0a6c6ba31f0563ae1a86126ad2ac02997eaafbaf6fb7.png" src="../_images/9d2060580e9e21fe4eff0a6c6ba31f0563ae1a86126ad2ac02997eaafbaf6fb7.png" />
 </div>
 </div>
 </section>
@@ -708,7 +717,7 @@ You can also check out some example uses of it <a class="reference external" hre
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/238df519563ce01ae42f339508039bff61d38d3e5da493b52509734626ad2fc5.png" src="../_images/238df519563ce01ae42f339508039bff61d38d3e5da493b52509734626ad2fc5.png" />
+<img alt="../_images/3cfb39d295925226c6cf576dd9c072af54ec8e824b6cd7010b8446c7a23d9202.png" src="../_images/3cfb39d295925226c6cf576dd9c072af54ec8e824b6cd7010b8446c7a23d9202.png" />
 </div>
 </div>
 </section>

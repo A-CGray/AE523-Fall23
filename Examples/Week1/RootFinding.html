@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week1/RootFinding';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Week 2" href="../Week2/Week2.html" />
     <link rel="prev" title="Week 1" href="Week1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -161,6 +162,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Content/PythonSetup.html">Getting Started with Python</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Week1.html">Week 1</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Root finding methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week2/Week2.html">Week 2</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/FiniteDifferences.html">Finite Difference Approximations</a></li>
 </ul>
 </li>
 </ul>
@@ -434,6 +439,10 @@ document.write(`
 
 <span class="c1"># Import matplotlib and niceplots for plotting</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib_inline</span>
+
+<span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s2">&quot;pdf&quot;</span><span class="p">,</span> <span class="s2">&quot;svg&quot;</span><span class="p">)</span>
+
 <span class="kn">import</span> <span class="nn">niceplots</span>
 </pre></div>
 </div>
@@ -473,7 +482,10 @@ We start the bisection method by setting <span class="math notranslate nohighlig
             <span class="n">a</span> <span class="o">=</span> <span class="n">c</span>
             <span class="n">fa</span> <span class="o">=</span> <span class="n">fc</span>
 
-    <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">f_history</span>  <span class="c1"># Return None as the root if the root was not found within max_iterations</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">f_history</span><span class="p">,</span>
+    <span class="p">)</span>  <span class="c1"># Return None as the root if the root was not found within max_iterations</span>
 </pre></div>
 </div>
 </div>
@@ -558,7 +570,10 @@ Root found: -9.5367431640625e-07
         <span class="n">x_new</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">f_val</span> <span class="o">/</span> <span class="n">f_prime_val</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">x_new</span>
 
-    <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">f_history</span>  <span class="c1"># Return None if the root was not found within max_iterations</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">f_history</span><span class="p">,</span>
+    <span class="p">)</span>  <span class="c1"># Return None if the root was not found within max_iterations</span>
 
 
 <span class="c1"># Initial guess</span>
@@ -608,8 +623,7 @@ Root found: 1.2233215659894107e-12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/260f6c071b284a299557761d8d46b038f1c3f634a29bef2415e115d6f56bd502.png" src="../../_images/260f6c071b284a299557761d8d46b038f1c3f634a29bef2415e115d6f56bd502.png" />
-</div>
+<img alt="../../_images/343e931f61670c0546ad1be467f05f40d2f684ca9b4664984b991977f9d1d884.svg" src="../../_images/343e931f61670c0546ad1be467f05f40d2f684ca9b4664984b991977f9d1d884.svg" /></div>
 </div>
 <p>The Newton-Raphson method found the root in far fewer iterations than the Bisection method, even though it’s first guess was further from the root. Additionally, we didn’t have to find the initial bounds for the search space, which can be difficult in general. Some of the disadvantages of the Newton-Raphson method are</p>
 <ul class="simple">
@@ -673,6 +687,15 @@ Root found: 1.2233215659894107e-12
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Week 1</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../Week2/Week2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 2</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   

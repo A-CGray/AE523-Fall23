@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week2/FiniteDifferences';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Week 2" href="Week2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,10 +157,14 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../Content/PythonSetup.html">Getting Started with Python</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week1/Week1.html">Week 1</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week1/RootFinding.html">Root finding methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Week2.html">Week 2</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Finite Difference Approximations</a></li>
 </ul>
 </li>
 </ul>
@@ -422,16 +427,28 @@ document.write(`
 <p>These examples are based on code originally written by Krzysztof Fidkowski and adapted by Venkat Viswanathan.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">config</span>
+
 <span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_enable_x64&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">set_matplotlib_formats</span>
+
+<span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s2">&quot;svg&quot;</span><span class="p">,</span> <span class="s2">&quot;pdf&quot;</span><span class="p">)</span>
+
 <span class="kn">import</span> <span class="nn">niceplots</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">niceplots</span><span class="o">.</span><span class="n">get_style</span><span class="p">())</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="n">niceplots</span><span class="o">.</span><span class="n">get_colors_list</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2067/3582598999.py:11: DeprecationWarning: `set_matplotlib_formats` is deprecated since IPython 7.23, directly use `matplotlib_inline.backend_inline.set_matplotlib_formats()`
+  set_matplotlib_formats(&quot;svg&quot;, &quot;pdf&quot;)
 </pre></div>
 </div>
 </div>
@@ -450,22 +467,26 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the analytic function (e.g., sin(x))</span>
 <span class="k">def</span> <span class="nf">analytic_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span>
+
 
 <span class="c1"># Define the forward difference approximation for the first derivative</span>
 <span class="k">def</span> <span class="nf">forward_difference</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>
 
+
 <span class="c1"># Define the forward difference approximation for the first derivative</span>
 <span class="k">def</span> <span class="nf">backward_difference</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>
+
 
 <span class="c1"># Define the forward difference approximation for the first derivative</span>
 <span class="k">def</span> <span class="nf">central_difference</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
 
+
 <span class="c1"># Define a range of step sizes from 10^-1 to 10^-4</span>
-<span class="n">step_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>
+<span class="n">step_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span>
 
 <span class="c1"># Define the point at which to evaluate the derivative (e.g., 0.5)</span>
 <span class="n">x_point</span> <span class="o">=</span> <span class="mf">0.5</span>
@@ -474,15 +495,19 @@ document.write(`
 <span class="n">true_derivative</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">analytic_function</span><span class="p">)(</span><span class="n">x_point</span><span class="p">)</span>
 
 <span class="c1"># Use a dictionary to store the functions and the errors for each finite difference scheme</span>
-<span class="n">FD_functions</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;forward&quot;</span><span class="p">:</span><span class="n">forward_difference</span><span class="p">,</span> <span class="s2">&quot;backward&quot;</span><span class="p">:</span><span class="n">backward_difference</span><span class="p">,</span> <span class="s2">&quot;central&quot;</span><span class="p">:</span><span class="n">central_difference</span><span class="p">}</span>
-<span class="n">FD_errors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;forward&quot;</span><span class="p">:[],</span> <span class="s2">&quot;backward&quot;</span><span class="p">:[],</span> <span class="s2">&quot;central&quot;</span><span class="p">:[]}</span>
-<span class="n">FD_convergence_orders</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;forward&quot;</span><span class="p">:[],</span> <span class="s2">&quot;backward&quot;</span><span class="p">:[],</span> <span class="s2">&quot;central&quot;</span><span class="p">:[]}</span>
-<span class="n">FD_colors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;forward&quot;</span><span class="p">:</span><span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;backward&quot;</span><span class="p">:</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;central&quot;</span><span class="p">:</span><span class="n">colors</span><span class="p">[</span><span class="mi">2</span><span class="p">]}</span>
+<span class="n">FD_functions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;forward&quot;</span><span class="p">:</span> <span class="n">forward_difference</span><span class="p">,</span>
+    <span class="s2">&quot;backward&quot;</span><span class="p">:</span> <span class="n">backward_difference</span><span class="p">,</span>
+    <span class="s2">&quot;central&quot;</span><span class="p">:</span> <span class="n">central_difference</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">FD_errors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;forward&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;backward&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;central&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+<span class="n">FD_convergence_orders</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;forward&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;backward&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;central&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+<span class="n">FD_colors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;forward&quot;</span><span class="p">:</span> <span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;backward&quot;</span><span class="p">:</span> <span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;central&quot;</span><span class="p">:</span> <span class="n">colors</span><span class="p">[</span><span class="mi">2</span><span class="p">]}</span>
 
 <span class="c1"># Create a figure and axis to plot on</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\Delta x$&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
 
@@ -494,12 +519,28 @@ document.write(`
         <span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 
     <span class="c1"># Plot the errors</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">step_sizes</span><span class="p">,</span> <span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">FD_name</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">step_sizes</span><span class="p">,</span>
+        <span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">],</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+        <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span>
+        <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="n">FD_name</span><span class="p">,</span>
+    <span class="p">)</span>
 
     <span class="c1"># Calculate the convergence order by measuring the slope of the log-log plot and annotate it on the plot</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">])):</span>
-        <span class="n">slope</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">step_sizes</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">step_sizes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;order = </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">step_sizes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">][</span><span class="n">i</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">FD_colors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">])</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">][</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">step_sizes</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">step_sizes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;order = </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">step_sizes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">][</span><span class="n">i</span><span class="p">]),</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+            <span class="n">va</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">FD_colors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">],</span>
+        <span class="p">)</span>
 
 <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
@@ -511,8 +552,7 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
-<img alt="../../_images/c9ca040864a9d0829b60041e34874f0cf841a8ffd51d5dbdf47e5664ef55dcdb.png" src="../../_images/c9ca040864a9d0829b60041e34874f0cf841a8ffd51d5dbdf47e5664ef55dcdb.png" />
-</div>
+<img alt="../../_images/fc9685b2c07eb956753a976fc2df7401386cce57deb8a67b7dec7bd63ce47100.svg" src="../../_images/fc9685b2c07eb956753a976fc2df7401386cce57deb8a67b7dec7bd63ce47100.svg" /></div>
 </div>
 <p>From this plot we can draw a few observations:</p>
 <ul class="simple">
@@ -523,88 +563,168 @@ document.write(`
 </section>
 <section id="deriving-finite-difference-schemes-using-lagrange-polynomials">
 <h2>Deriving Finite Difference Schemes using Lagrange Polynomials<a class="headerlink" href="#deriving-finite-difference-schemes-using-lagrange-polynomials" title="Permalink to this heading">#</a></h2>
-<p>The finite difference schemes we used in the previous section were very simple to derive, but this is not always the case.</p>
+<p>The finite difference schemes we used in the previous section were very simple to derive, but this is not always the case. Sometimes we may have a more complicated stencil with many points that are not evenly spaced. In these cases, Lagrange polynomials can be a useful tool for deriving finite difference schemes.</p>
+<p>The idea behind this approach is to fit a polynomial function to the points in the stencil, and then compute the derivative of the polynomial at the point of interest.</p>
+<p>Lagrange polynomials are a special kind of polynomial that are very useful for interpolation due to a special property. Given a set of <span class="math notranslate nohighlight">\(N\)</span> points <span class="math notranslate nohighlight">\(\mathbf{x} = [x_0, x_1, ..., x_{N-1}]\)</span>, we can define a set of <span class="math notranslate nohighlight">\(N\)</span> Lagrange polynomials <span class="math notranslate nohighlight">\(L_i(x)\)</span> using the following equation:</p>
+<div class="math notranslate nohighlight">
+\[L_i(x) = \prod_{j=1, j \neq i}^N \frac{x - x_j}{x_i - x_j}\]</div>
+<p>e.g for 3 points <span class="math notranslate nohighlight">\(\mathbf{x} = [x_0, x_1, x_2]\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[L_0(x) = \frac{x - x_1}{x_0 - x_1} \frac{x - x_2}{x_0 - x_2}\]</div>
+<div class="math notranslate nohighlight">
+\[L_1(x) = \frac{x - x_0}{x_1 - x_0} \frac{x - x_2}{x_1 - x_2}\]</div>
+<div class="math notranslate nohighlight">
+\[L_2(x) = \frac{x - x_0}{x_2 - x_0} \frac{x - x_1}{x_2 - x_1}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
-<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_lagrange_func</span><span class="p">(</span><span class="n">xPoints</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a function that computes the ith Lagrange polynomial for a given set of points.</span>
 
-<span class="k">def</span> <span class="nf">lagrange_interpolation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate the Lagrange interpolating polynomial.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xPoints : list/array of floats</span>
+<span class="sd">        X coordinate values of the points to be interpolated</span>
+<span class="sd">    i : int</span>
+<span class="sd">        The index of the lagrange polynomial to create (must be between 0 and len(x)-1)</span>
 
-<span class="sd">    Parameters:</span>
-<span class="sd">    x (jax.numpy.ndarray): Array of x-values.</span>
-<span class="sd">    y (jax.numpy.ndarray): Array of corresponding y-values.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">    callable: The Lagrange interpolating polynomial as a callable function.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    function</span>
+<span class="sd">        A function that computes the ith Lagrange polynomial for a given x value, e.g. L_i(x)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">L</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">xx</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lagrange basis polynomial L_k(x).&quot;&quot;&quot;</span>
-        <span class="n">numerator</span> <span class="o">=</span> <span class="mf">1.0</span>
-        <span class="n">denominator</span> <span class="o">=</span> <span class="mf">1.0</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">k</span><span class="p">:</span>
-                <span class="n">numerator</span> <span class="o">*=</span> <span class="n">xx</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                <span class="n">denominator</span> <span class="o">*=</span> <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
 
-    <span class="k">def</span> <span class="nf">lagrange_polynomial</span><span class="p">(</span><span class="n">xx</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lagrange interpolating polynomial P(x).&quot;&quot;&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
-            <span class="n">result</span> <span class="o">+=</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">L</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">xx</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">lagrange_poly</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xPoints</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">*=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xPoints</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">xPoints</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">xPoints</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">result</span>
 
-
-    <span class="k">return</span> <span class="n">lagrange_polynomial</span>
+    <span class="k">return</span> <span class="n">lagrange_poly</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Plotting Lagrange functions</p>
+<p>The special property of the Lagrange polynomials is that <span class="math notranslate nohighlight">\(L_i\)</span> is equal to 1 at <span class="math notranslate nohighlight">\(x_i\)</span> and 0 at all other points. As you can see in the plot below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the Lagrange polynomials for a set of un evenly spaced points</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
 
-<span class="n">L</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">x_data</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span><span class="o">/</span><span class="mi">3</span>
-<span class="n">y0</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
-<span class="n">y1</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
-<span class="n">y2</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
-<span class="n">y3</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">get_lagrange_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">L</span><span class="p">(</span><span class="n">x_plot</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;i = </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">Np</span><span class="o">=</span><span class="mi">200</span>
-<span class="n">xp</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">Np</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;$L_0(x)$&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;$L_1(x)$&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">1.35</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;$L_2(x)$&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
-<span class="c1"># Generating the Lagrange Interpolating Polynomials</span>
-<span class="n">L0</span> <span class="o">=</span> <span class="n">lagrange_interpolation</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y0</span><span class="p">)</span>
-<span class="n">L1</span> <span class="o">=</span> <span class="n">lagrange_interpolation</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
-<span class="n">L2</span> <span class="o">=</span> <span class="n">lagrange_interpolation</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
-<span class="n">L3</span> <span class="o">=</span> <span class="n">lagrange_interpolation</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="n">L0</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span><span class="n">xp</span><span class="p">,</span><span class="n">L1</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span><span class="n">xp</span><span class="p">,</span><span class="n">L2</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span><span class="n">xp</span><span class="p">,</span><span class="n">L3</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="c1"># Mark the Node points</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">],</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">],</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f88d7ee84d0&gt;]
+<img alt="../../_images/1d66f6122068f712ddadc6f19f5224cafd0060a1e1fe0053227cda263c15c477.svg" src="../../_images/1d66f6122068f712ddadc6f19f5224cafd0060a1e1fe0053227cda263c15c477.svg" /></div>
+</div>
+<p>We can take advantage of this special property to construct a polynomial function that passes through a set of points.
+Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} = [x_0, x_1, ..., x_{N-1}]\)</span> and a set of function values <span class="math notranslate nohighlight">\(\mathbf{f} = [f_0, f_1, ..., f_{N-1}]\)</span> at those points, we can construct a polynomial function <span class="math notranslate nohighlight">\(p(x)\)</span> that passes through all of the points by summing the Lagrange polynomials multiplied by the function values:</p>
+<div class="math notranslate nohighlight">
+\[p(x) = \sum_{i=0}^{N-1} f_i L_i(x)\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_interpolating_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a function that computes the Lagrange interpolating polynomial for a given set of points.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : list/array of floats</span>
+<span class="sd">        point x coordinates</span>
+<span class="sd">    y : list/array of floats</span>
+<span class="sd">        point y values</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    callable</span>
+<span class="sd">        Function that computes the Lagrange interpolating polynomial for a given x value, e.g. P(x)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Define the Lagrange basis polynomials</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+        <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_lagrange_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">interpolating_func</span><span class="p">(</span><span class="n">xx</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lagrange interpolating polynomial P(x).&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">L</span><span class="p">[</span><span class="n">k</span><span class="p">](</span><span class="n">xx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">return</span> <span class="n">interpolating_func</span>
 </pre></div>
 </div>
-<img alt="../../_images/d7397ae0724224106eed62a56234e46850a1c9ab1fd369ded25d07dd60f47dfa.png" src="../../_images/d7397ae0724224106eed62a56234e46850a1c9ab1fd369ded25d07dd60f47dfa.png" />
 </div>
 </div>
+<p>This curve is guaranteed to pass through all of our points, because at each one, all of the terms in the sum are zero except for one, e.g. at <span class="math notranslate nohighlight">\(x_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[p(x_0) = \sum_{i=0}^{N-1} f_i L_i(x_0) = f_0 L_0(x_0) + f_1 L_1(x_0) + f_2 L_2(x_0) + ... = f_0 + 0 + 0 + ... = f_0\]</div>
+<p>The code below demonstrates this by fitting a polynomial to a random set of points before plotting both the polynomial and the points:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seed the random number generator for consistency</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">numDataPoints</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">numPlotPoints</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># Create a set of randomly spaced points between 0 and 1</span>
+<span class="n">xData</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">numDataPoints</span><span class="p">)</span>
+<span class="n">xData</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="n">xData</span> <span class="o">=</span> <span class="p">(</span><span class="n">xData</span> <span class="o">-</span> <span class="n">xData</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">xData</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xData</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Assign random y values between 0 and 1</span>
+<span class="n">yData</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">numDataPoints</span><span class="p">)</span>
+
+<span class="c1"># Create the interpolating polynomial</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">get_interpolating_func</span><span class="p">(</span><span class="n">xData</span><span class="p">,</span> <span class="n">yData</span><span class="p">)</span>
+
+<span class="c1"># Plot the interpolating polynomial and the data points</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$y$&quot;</span><span class="p">)</span>
+
+<span class="n">xPlot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">numPlotPoints</span><span class="p">)</span>
+<span class="n">yPlot</span> <span class="o">=</span> <span class="n">P</span><span class="p">(</span><span class="n">xPlot</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xPlot</span><span class="p">,</span> <span class="n">yPlot</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;P(x)&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xData</span><span class="p">,</span> <span class="n">yData</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Datapoints&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f68308a2390&gt;
+</pre></div>
+</div>
+<img alt="../../_images/77732cd0eae0595bf2b469fcef609e25af94aae25977183688891807dc23f9f2.svg" src="../../_images/77732cd0eae0595bf2b469fcef609e25af94aae25977183688891807dc23f9f2.svg" /></div>
+</div>
+<p>Try playing around with the number of datapoints (<code class="docutils literal notranslate"><span class="pre">numDataPoints</span></code>) and the random seed to see in which scenarios the interpolation works well and in which it doesn’t.</p>
+<p>To obtain a finite difference scheme from the interpolating polynomial, we can simply take the derivative of the polynomial and evaluate it at the point of interest. e.g. for the first derivative:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dp}{dx} = \sum_{i=0}^{N-1} f_i \frac{dL_i}{dx}\]</div>
+<div class="math notranslate nohighlight">
+\[\left.\frac{df}{dx}\right|_{x^*} \approx \left.\frac{dp}{dx}\right|_{x^*} = \left.\frac{dL_0}{dx}\right|_{x^*} f_0 + \left.\frac{dL_1}{dx}\right|_{x^*} f_1 +...\]</div>
+<p>So the weights for the finite difference scheme are just the derivatives of the Lagrange polynomials evaluated at the point of interest.</p>
 </section>
 </section>
 
@@ -639,6 +759,15 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Week2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 2</p>
+      </div>
+    </a>
 </div></div>
   
 </div>
