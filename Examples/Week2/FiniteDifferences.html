@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week2/FiniteDifferences';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="OfficeHours.html" />
+    <link rel="next" title="Examples from office hours: Week 2" href="OfficeHours.html" />
     <link rel="prev" title="Week 2" href="Week2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -166,6 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Week2.html">Week 2</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Finite Difference Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OfficeHours.html">Examples from office hours: Week 2</a></li>
 </ul>
 </li>
 </ul>
@@ -547,7 +548,7 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
-<img alt="../../_images/e544e72f1bb699795cb4ef0d571a7d9748ea59a4172f4b60fa8c0db60fe729a6.svg" src="../../_images/e544e72f1bb699795cb4ef0d571a7d9748ea59a4172f4b60fa8c0db60fe729a6.svg" /></div>
+<img alt="../../_images/11819247380f1ceb88cd2c962031b158677c9c320ff119ba6227315a30810a83.svg" src="../../_images/11819247380f1ceb88cd2c962031b158677c9c320ff119ba6227315a30810a83.svg" /></div>
 </div>
 <p>From this plot we can draw a few observations:</p>
 <ul class="simple">
@@ -628,7 +629,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/12c43462dcb427c4843abeff24f26ef4ff80fa8fdf60dc84a6c72b1a9b5fda23.svg" src="../../_images/12c43462dcb427c4843abeff24f26ef4ff80fa8fdf60dc84a6c72b1a9b5fda23.svg" /></div>
+<img alt="../../_images/714193f8fdc72009c45ebcde8428cc2ab8cb7cbb5bcb516dca72bad4723c531e.svg" src="../../_images/714193f8fdc72009c45ebcde8428cc2ab8cb7cbb5bcb516dca72bad4723c531e.svg" /></div>
 </div>
 <p>We can take advantage of this special property to construct a polynomial function that passes through a set of points.
 Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} = [x_0, x_1, ..., x_{N-1}]\)</span> and a set of function values <span class="math notranslate nohighlight">\(\mathbf{f} = [f_0, f_1, ..., f_{N-1}]\)</span> at those points, we can construct a polynomial function <span class="math notranslate nohighlight">\(p(x)\)</span> that passes through all of the points by summing the Lagrange polynomials multiplied by the function values:</p>
@@ -709,7 +710,7 @@ Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/18a7b4f03753b15e05c68d61e2dfbf8757a566868794dae35a645731ffe56c69.svg" src="../../_images/18a7b4f03753b15e05c68d61e2dfbf8757a566868794dae35a645731ffe56c69.svg" /></div>
+<img alt="../../_images/10a5f317b7697d51ef8dd1c37ce47e8d63a48b4bb0a2ad6ba1ed7784ea97b6aa.svg" src="../../_images/10a5f317b7697d51ef8dd1c37ce47e8d63a48b4bb0a2ad6ba1ed7784ea97b6aa.svg" /></div>
 </div>
 <p>Try playing around with the number of datapoints (<code class="docutils literal notranslate"><span class="pre">numDataPoints</span></code>) and the random seed to see in which scenarios the interpolation works well and in which it doesn’t.</p>
 <p>To obtain a finite difference scheme from the interpolating polynomial, we can simply take the derivative of the polynomial and evaluate it at the point of interest. e.g. for the first derivative:</p>
@@ -766,7 +767,7 @@ Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} 
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Examples from office hours: Week 2</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
