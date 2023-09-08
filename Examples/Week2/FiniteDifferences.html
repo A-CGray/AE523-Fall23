@@ -471,12 +471,12 @@ document.write(`
     <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>
 
 
-<span class="c1"># Define the forward difference approximation for the first derivative</span>
+<span class="c1"># Define the backward difference approximation for the first derivative</span>
 <span class="k">def</span> <span class="nf">backward_difference</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>
 
 
-<span class="c1"># Define the forward difference approximation for the first derivative</span>
+<span class="c1"># Define the central difference approximation for the first derivative</span>
 <span class="k">def</span> <span class="nf">central_difference</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
 
@@ -548,7 +548,7 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
-<img alt="../../_images/11819247380f1ceb88cd2c962031b158677c9c320ff119ba6227315a30810a83.svg" src="../../_images/11819247380f1ceb88cd2c962031b158677c9c320ff119ba6227315a30810a83.svg" /></div>
+<img alt="../../_images/5a4ab8e538f764acc6f9de9d9235c89ae900038288cfaa1c07d8868328591347.svg" src="../../_images/5a4ab8e538f764acc6f9de9d9235c89ae900038288cfaa1c07d8868328591347.svg" /></div>
 </div>
 <p>From this plot we can draw a few observations:</p>
 <ul class="simple">
@@ -629,7 +629,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/714193f8fdc72009c45ebcde8428cc2ab8cb7cbb5bcb516dca72bad4723c531e.svg" src="../../_images/714193f8fdc72009c45ebcde8428cc2ab8cb7cbb5bcb516dca72bad4723c531e.svg" /></div>
+<img alt="../../_images/95b54a642a85898407f1d713713fdd575d1da638a3fe18710dd64797116b65cd.svg" src="../../_images/95b54a642a85898407f1d713713fdd575d1da638a3fe18710dd64797116b65cd.svg" /></div>
 </div>
 <p>We can take advantage of this special property to construct a polynomial function that passes through a set of points.
 Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} = [x_0, x_1, ..., x_{N-1}]\)</span> and a set of function values <span class="math notranslate nohighlight">\(\mathbf{f} = [f_0, f_1, ..., f_{N-1}]\)</span> at those points, we can construct a polynomial function <span class="math notranslate nohighlight">\(p(x)\)</span> that passes through all of the points by summing the Lagrange polynomials multiplied by the function values:</p>
@@ -710,7 +710,7 @@ Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/10a5f317b7697d51ef8dd1c37ce47e8d63a48b4bb0a2ad6ba1ed7784ea97b6aa.svg" src="../../_images/10a5f317b7697d51ef8dd1c37ce47e8d63a48b4bb0a2ad6ba1ed7784ea97b6aa.svg" /></div>
+<img alt="../../_images/aa187c66ae22a320768837c1f1859caf5cdfcc2130f070ddd20cff1170e6aba9.svg" src="../../_images/aa187c66ae22a320768837c1f1859caf5cdfcc2130f070ddd20cff1170e6aba9.svg" /></div>
 </div>
 <p>Try playing around with the number of datapoints (<code class="docutils literal notranslate"><span class="pre">numDataPoints</span></code>) and the random seed to see in which scenarios the interpolation works well and in which it doesn’t.</p>
 <p>To obtain a finite difference scheme from the interpolating polynomial, we can simply take the derivative of the polynomial and evaluate it at the point of interest. e.g. for the first derivative:</p>
