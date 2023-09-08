@@ -53,12 +53,12 @@ def forward_difference(f, x, h):
     return (f(x + h) - f(x)) / h
 
 
-# Define the forward difference approximation for the first derivative
+# Define the backward difference approximation for the first derivative
 def backward_difference(f, x, h):
     return (f(x) - f(x - h)) / h
 
 
-# Define the forward difference approximation for the first derivative
+# Define the central difference approximation for the first derivative
 def central_difference(f, x, h):
     return (f(x + h) - f(x - h)) / (2 * h)
 
