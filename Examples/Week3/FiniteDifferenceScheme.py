@@ -269,7 +269,7 @@ obj_grad = grad(obj_function)
 sol = minimize(obj_function, 2.349822365, jac=obj_grad, method="SLSQP", tol=1e-6)
 
 if sol.success:
-    print(f"\nSUCCEsS: My best guess at kappa is {sol.x[0]:.7e}")
+    print(f"\nSUCCESS: My best guess at kappa is {sol.x[0]:.7e}")
 else:
     print("\nFAILURE: Optimization did not converge")
 
