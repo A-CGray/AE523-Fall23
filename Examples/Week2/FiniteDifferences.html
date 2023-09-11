@@ -169,6 +169,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="OfficeHours.html">Examples from office hours: Week 2</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week3/Week3.html">Week 2</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/FiniteDifferenceScheme.html">The Finite Difference Method: 1D steady state heat transfer</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -526,9 +530,7 @@ document.write(`
 
     <span class="c1"># Calculate the convergence order by measuring the slope of the log-log plot and annotate it on the plot</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">])):</span>
-        <span class="n">slope</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">][</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
-            <span class="n">step_sizes</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">step_sizes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="p">)</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">][</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">step_sizes</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">step_sizes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;order = </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">step_sizes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">FD_errors</span><span class="p">[</span><span class="n">FD_name</span><span class="p">][</span><span class="n">i</span><span class="p">]),</span>
@@ -548,7 +550,7 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
-<img alt="../../_images/5a4ab8e538f764acc6f9de9d9235c89ae900038288cfaa1c07d8868328591347.svg" src="../../_images/5a4ab8e538f764acc6f9de9d9235c89ae900038288cfaa1c07d8868328591347.svg" /></div>
+<img alt="../../_images/2fce33ee719f191bb282d2f7eb97fdc45618c45bc42a14974b1af8afea16fae4.svg" src="../../_images/2fce33ee719f191bb282d2f7eb97fdc45618c45bc42a14974b1af8afea16fae4.svg" /></div>
 </div>
 <p>From this plot we can draw a few observations:</p>
 <ul class="simple">
@@ -629,7 +631,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/95b54a642a85898407f1d713713fdd575d1da638a3fe18710dd64797116b65cd.svg" src="../../_images/95b54a642a85898407f1d713713fdd575d1da638a3fe18710dd64797116b65cd.svg" /></div>
+<img alt="../../_images/184fa3ef74323f40a76ff8958b06770e78afd9d60de542e31a5a477e8315c965.svg" src="../../_images/184fa3ef74323f40a76ff8958b06770e78afd9d60de542e31a5a477e8315c965.svg" /></div>
 </div>
 <p>We can take advantage of this special property to construct a polynomial function that passes through a set of points.
 Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} = [x_0, x_1, ..., x_{N-1}]\)</span> and a set of function values <span class="math notranslate nohighlight">\(\mathbf{f} = [f_0, f_1, ..., f_{N-1}]\)</span> at those points, we can construct a polynomial function <span class="math notranslate nohighlight">\(p(x)\)</span> that passes through all of the points by summing the Lagrange polynomials multiplied by the function values:</p>
@@ -710,7 +712,7 @@ Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/aa187c66ae22a320768837c1f1859caf5cdfcc2130f070ddd20cff1170e6aba9.svg" src="../../_images/aa187c66ae22a320768837c1f1859caf5cdfcc2130f070ddd20cff1170e6aba9.svg" /></div>
+<img alt="../../_images/65830aefd20f7de66bf145f23eb0b2768664bcddead19fcd51538462638b6906.svg" src="../../_images/65830aefd20f7de66bf145f23eb0b2768664bcddead19fcd51538462638b6906.svg" /></div>
 </div>
 <p>Try playing around with the number of datapoints (<code class="docutils literal notranslate"><span class="pre">numDataPoints</span></code>) and the random seed to see in which scenarios the interpolation works well and in which it doesn’t.</p>
 <p>To obtain a finite difference scheme from the interpolating polynomial, we can simply take the derivative of the polynomial and evaluate it at the point of interest. e.g. for the first derivative:</p>

@@ -167,6 +167,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Examples/Week2/OfficeHours.html">Examples from office hours: Week 2</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Examples/Week3/Week3.html">Week 2</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Week3/FiniteDifferenceScheme.html">The Finite Difference Method: 1D steady state heat transfer</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -513,25 +517,23 @@ pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Check that the solution is correct</span>
-<span class="n">diff</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span>
-<span class="p">)</span>  <span class="c1"># @ is the matrix multiplication operator, A @ x is equivalent to np.dot(A, x)</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span>  <span class="c1"># @ is the matrix multiplication operator, A @ x is equivalent to np.dot(A, x)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Linear system solution error norm = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.48099604, 0.028219  , 0.03097743, 0.08858817, 0.33683454],
-       [0.56508278, 0.14714214, 0.40657196, 0.55934257, 0.31172526],
-       [0.62940919, 0.08991667, 0.78745526, 0.85548908, 0.28991458],
-       [0.8960757 , 0.01330014, 0.3404182 , 0.23645028, 0.1462826 ],
-       [0.28930824, 0.27272692, 0.86590077, 0.49286185, 0.27859067]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.08484567, 0.17727224, 0.51592595, 0.68697408, 0.93332856],
+       [0.6949326 , 0.64689099, 0.20513742, 0.37231342, 0.15871881],
+       [0.070971  , 0.56448935, 0.33933294, 0.10419237, 0.92616191],
+       [0.15266817, 0.81888698, 0.83477593, 0.34479169, 0.58471439],
+       [0.02603694, 0.00934984, 0.66614008, 0.43998331, 0.89925878]])
 
-b=array([0.56954854, 0.71808213, 0.0198213 , 0.01526223, 0.5757712 ])
+b=array([0.60835882, 0.98696805, 0.58540106, 0.21926167, 0.5634486 ])
 
-x=array([ 0.21095056,  4.53031746, -1.31055987,  0.23601683,  1.06856794])
+x=array([ 1.73909801, -0.36838506, -0.17888703, -0.20255157,  0.81166322])
 
-Linear system solution error norm = 2.231868554647719e-16
+Linear system solution error norm = 2.3714374201337736e-16
 </pre></div>
 </div>
 </div>
@@ -681,7 +683,7 @@ This makes it much clearer in your code which data is being plotted on which fig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0eb16ba4b6c2d9748077f37e903b827a48bddb106d5ce5a73bded79ab5e4a209.png" src="../_images/0eb16ba4b6c2d9748077f37e903b827a48bddb106d5ce5a73bded79ab5e4a209.png" />
+<img alt="../_images/2c1e5b03095dafe4e1223d90d97d89c2aecfff9f32ba4c6a973701d2003d5695.png" src="../_images/2c1e5b03095dafe4e1223d90d97d89c2aecfff9f32ba4c6a973701d2003d5695.png" />
 </div>
 </div>
 </section>
@@ -718,7 +720,7 @@ You can also check out some example uses of it <a class="reference external" hre
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/63fe9c676e3f7d7e45f7410953f3604dd569c2561fe44b847a2a593dfd67285b.png" src="../_images/63fe9c676e3f7d7e45f7410953f3604dd569c2561fe44b847a2a593dfd67285b.png" />
+<img alt="../_images/1f110a70bd8da94ba13a34593dd47f8446f00f7d9301da5b76ce9d484fc7e9e3.png" src="../_images/1f110a70bd8da94ba13a34593dd47f8446f00f7d9301da5b76ce9d484fc7e9e3.png" />
 </div>
 </div>
 </section>
