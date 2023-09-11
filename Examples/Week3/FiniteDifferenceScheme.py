@@ -3,6 +3,7 @@
 
 # # The Finite Difference Method: 1D steady state heat transfer
 #
+# These examples are based on code originally written by Krzysztof Fidkowski and adapted by Venkat Viswanathan.
 
 # In[134]:
 
