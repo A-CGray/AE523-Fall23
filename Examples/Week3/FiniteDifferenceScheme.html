@@ -688,7 +688,7 @@ T_0 \\ q(x_1)\Delta x^2 / \kappa \\ q(x_2)\Delta x^2 / \kappa \\ \vdots \\ q(x_{
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sol</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">obj_function</span><span class="p">,</span> <span class="mf">2.349822365</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">obj_grad</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">sol</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">SUCCEsS: My best guess at kappa is </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.7e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">SUCCESS: My best guess at kappa is </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.7e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">FAILURE: Optimization did not converge&quot;</span><span class="p">)</span>
 </pre></div>
@@ -728,7 +728,7 @@ kappa =  5.0000040e-01, error =  1.4473893e-06
 kappa =  4.9999965e-01, error =  1.2811645e-06
 kappa =  5.0000000e-01, error =  5.3908355e-09
 
-SUCCEsS: My best guess at kappa is 5.0000000e-01
+SUCCESS: My best guess at kappa is 5.0000000e-01
 </pre></div>
 </div>
 </div>
