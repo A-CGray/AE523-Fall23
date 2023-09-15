@@ -5,7 +5,7 @@
 #
 # These examples are based on code originally written by Krzysztof Fidkowski and adapted by Venkat Viswanathan.
 
-# In[2]:
+# In[1]:
 
 
 import jax
@@ -38,7 +38,7 @@ matplotlib_inline.backend_inline.set_matplotlib_formats("pdf", "svg")
 # where $\kappa$ is the thermal conductivity, $T$ is the temperature, $x$ is the position, and $q(x)$ is a heat source term, which in this case is $\sin\left(\pi x /L\right)$.
 #
 
-# In[3]:
+# In[2]:
 
 
 # Define the symbolic function q(x)
@@ -100,7 +100,7 @@ def q(x, L):
 #
 # The code below implements the second approach, and solves the matrix equation using a direct sparse linear solver.
 
-# In[4]:
+# In[3]:
 
 
 def heat_conduction(T_left=1.0, T_right=4.0, L=2.0, kappa=0.5, Nx=10):
@@ -163,7 +163,7 @@ def heat_conduction(T_left=1.0, T_right=4.0, L=2.0, kappa=0.5, Nx=10):
 #
 # $$T_\text{exact} (x) = \frac{L^2}{\kappa \pi^2}\sin\left(\frac{\pi x}{L}\right) + T_0 + \frac{x}{L}\left(T_N - T_0\right)$$
 
-# In[5]:
+# In[4]:
 
 
 # Define the true solution
@@ -207,7 +207,7 @@ plt.show()
 #
 # This is not equivalent to the typical $L_2$ computed by numpy/JAX, which do not normalize by the number of elements, and would therefore give the wrong order of convergence.
 
-# In[6]:
+# In[5]:
 
 
 Nsweep = 2 ** jnp.arange(1, 8)
@@ -240,7 +240,7 @@ niceplots.adjust_spines(ax)
 #
 # In this case, we will generate our "experimental data" by running the FD code with a given value of $\kappa$, this way we can tell if our learning process has been successful.
 
-# In[7]:
+# In[6]:
 
 
 Nx = 10
@@ -249,7 +249,7 @@ measured_temps, measurement_locations = heat_conduction(T0, TN, L, 0.5, Nx)
 
 # Next we define our "loss" or "objective" function, this is the function that we will try to minimize. In this case, we will use the $L_2$ norm of the difference between the measured temperatures and the temperatures computed by the FD code. We will also use JAX to create a function that computes $\frac{df}{d\kappa}$.
 
-# In[8]:
+# In[7]:
 
 
 def obj_function(kappa):
@@ -268,7 +268,7 @@ obj_grad = grad(obj_function)
 
 # Now we will use an algorithm called an optimizer to find the value of $\kappa$ that minimizes the objective function. For problems where we expect the objective function to be smooth, gradient-based optimizers are the most efficient methods. Here we use an optimizer provided by JAX which will use the gradient information computed by JAX's AD to find the minimum.
 
-# In[9]:
+# In[8]:
 
 
 sol = minimize(obj_function, 2.349822365, jac=obj_grad, method="SLSQP", tol=1e-6, options={"disp": True})
@@ -283,10 +283,10 @@ else:
 #
 # $$x_{i+1} = x_i - \lambda \frac{df}{dx}$$
 
-# In[27]:
+# In[10]:
 
 
-def gradient_descent(f, grad_f, x0, step_size=0.01, max_iter=1000, tol=1e-6):
+def gradient_descent(f, grad_f, x0, step_size=0.01, max_iter=500, tol=1e-6):
     x = x0
     converged = False
     for ii in range(max_iter):
@@ -306,4 +306,4 @@ def gradient_descent(f, grad_f, x0, step_size=0.01, max_iter=1000, tol=1e-6):
 kappa_grad_descent, error_grad_descent = gradient_descent(obj_function, obj_grad, jnp.array([2.349822365]))
 
 
-# As you can see, gradient descent is not a very good algorithm, even with 1000 function evaluations, it fails to get as close to the true answer as SLSQP did in only 26 evaluations. This performance can be improved by tuning the learning rate, but this process is very tedious and requires a lot of trial and error.
+# As you can see, gradient descent is not a very good algorithm, even with 500 function evaluations, it fails to get as close to the true answer as SLSQP did in only 26 evaluations. This performance can be improved by tuning the learning rate, but this process is very tedious and requires a lot of trial and error.
