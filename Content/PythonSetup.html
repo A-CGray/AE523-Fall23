@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -76,6 +77,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -169,6 +179,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Examples/Week3/Week3.html">Week 3</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Examples/Week3/FiniteDifferenceScheme.html">The Finite Difference Method: 1D steady state heat transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Week3/HW1_solutions.html">Homework 1 example code solutions</a></li>
 </ul>
 </li>
 </ul>
@@ -375,10 +386,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -386,7 +397,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -523,18 +534,18 @@ pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.01453224, 0.87162162, 0.2695026 , 0.41304006, 0.72539712],
-       [0.02191222, 0.0576124 , 0.91190979, 0.9437317 , 0.67716483],
-       [0.86873509, 0.81662293, 0.24665456, 0.84041847, 0.43579904],
-       [0.02551525, 0.09002872, 0.07074644, 0.8948321 , 0.55765878],
-       [0.1245739 , 0.58348931, 0.89367641, 0.56549836, 0.69911163]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.00590414, 0.0112135 , 0.34662892, 0.39971273, 0.67639588],
+       [0.03150874, 0.3877005 , 0.87424729, 0.44988098, 0.02216466],
+       [0.48831674, 0.58973808, 0.61934887, 0.21445644, 0.47899777],
+       [0.18256089, 0.49633724, 0.74346486, 0.2439517 , 0.93845279],
+       [0.86885599, 0.8847676 , 0.68362318, 0.08933104, 0.99980747]])
 
-b=array([0.31703161, 0.4882302 , 0.29780384, 0.55807455, 0.76539118])
+b=array([0.16287057, 0.21081349, 0.63835804, 0.83908482, 0.52191868])
 
-x=array([ 11.56474142, -10.57523408,  -2.66663192, -10.99846248,
-        20.16556469])
+x=array([-10.54381733,  20.02783608, -14.05305059,  11.22854087,
+         0.56704006])
 
-Linear system solution error norm = 4.264615064790437e-15
+Linear system solution error norm = 2.8045494990956162e-15
 </pre></div>
 </div>
 </div>
@@ -684,7 +695,7 @@ This makes it much clearer in your code which data is being plotted on which fig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e9955547a9ccd83bea59481aadb6d2e2e7852f7d5f54ef3b3c8b57d1f6d4ace3.png" src="../_images/e9955547a9ccd83bea59481aadb6d2e2e7852f7d5f54ef3b3c8b57d1f6d4ace3.png" />
+<img alt="../_images/b5a4a2e161183d64d9beefd5c4f25024f8418fdaa66db7693f05596dcfc48b39.png" src="../_images/b5a4a2e161183d64d9beefd5c4f25024f8418fdaa66db7693f05596dcfc48b39.png" />
 </div>
 </div>
 </section>
@@ -721,7 +732,7 @@ You can also check out some example uses of it <a class="reference external" hre
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8698f34ec48dbab840cf0697c59df890bacadec312aaf270831cdbacfcbbed7b.png" src="../_images/8698f34ec48dbab840cf0697c59df890bacadec312aaf270831cdbacfcbbed7b.png" />
+<img alt="../_images/7b7bf8dfda0a956b4a2ce9560ea35f62435d6fe2fd180bd5f53590da1cbf6428.png" src="../_images/7b7bf8dfda0a956b4a2ce9560ea35f62435d6fe2fd180bd5f53590da1cbf6428.png" />
 </div>
 </div>
 </section>
@@ -765,11 +776,10 @@ The most important basic concepts you’ll probably need for this course are cov
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../intro.html"
@@ -789,10 +799,7 @@ The most important basic concepts you’ll probably need for this course are cov
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -872,8 +879,8 @@ By Alasdair Christison Gray
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
 
   <footer class="bd-footer">
   </footer>
