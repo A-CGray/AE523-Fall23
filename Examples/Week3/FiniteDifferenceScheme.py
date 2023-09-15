@@ -22,6 +22,11 @@ import niceplots
 
 plt.style.use(niceplots.get_style())
 
+# Force the jupyter notebook to use vector graphics
+import matplotlib_inline
+
+matplotlib_inline.backend_inline.set_matplotlib_formats("pdf", "svg")
+
 
 #
 # This code implements the example case from section 3.1.1 of the course notes.
