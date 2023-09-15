@@ -66,7 +66,7 @@ def q(x, L):
 # 2 & -1 & 0 & 0 & \cdots & 0 \\
 # -1 & 2 & -1 & 0 & \cdots & 0 \\
 # 0 & -1 & 2 & -1 & \cdots & 0 \\
-# \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\
+# \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
 # 0 & \cdots & 0 & -1 & 2 & -1 \\
 # 0 & \cdots & 0 & 0 & -1 & 2
 # \end{bmatrix}
