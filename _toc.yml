@@ -16,3 +16,4 @@ chapters:
   sections:
   - file: Examples/Week3/FiniteDifferenceScheme.ipynb
   - file: Examples/Week3/HW1_solutions.ipynb
+- file: Examples/Week4/Week4
