@@ -3,15 +3,11 @@
 
 # # Iterative linear solvers
 
-# In[1]:
+# In[255]:
 
 
+import time
 import numpy as np
-import jax
-import jax.numpy as jnp
-from jax import config
-
-config.update("jax_enable_x64", True)
 
 import matplotlib.pyplot as plt
 import niceplots
@@ -25,12 +21,12 @@ import matplotlib_inline
 matplotlib_inline.backend_inline.set_matplotlib_formats("pdf", "svg")
 
 
-# In[2]:
+# In[256]:
 
 
 # Define the symbolic function q(x)
 def q(x, L):
-    return jnp.sin(jnp.pi * x / L)
+    return np.sin(np.pi * x / L)
 
 
 # ## Problem definition
@@ -41,18 +37,35 @@ def q(x, L):
 #
 # ![The finite-difference grid](../../images/FDDomain.svg)
 
+# In[257]:
+
+
+# Define the parameters
+L = 2.0  # Length of domain
+kappa = 0.5  # Thermal conductivity
+Nx = 100  # Number of intervals
+T0 = 1.0  # Left boundary condition
+TN = 4.0  # Right boundary condition
+
+
 # Using the central difference approximation for the second derivative, we wrote the finite difference equation at each node as:
 #
 # $$ -\kappa\frac{T_{i-1} - 2T_i + T_{i+1}}{\Delta x^2} = q(x_i) \Rightarrow -T_{i-1} + 2T_i - T_{i+1} = \frac{1}{\kappa} \Delta x^2 q(x_i)$$
-#
-# From this equation we can derive the residual at each node as:
-#
-# $$ r_i = \kappa\left(-T_{i-1} + 2T_i - T_{i+1}\right) - \Delta x^2 q(x_i)$$
+
+# ## The residual
 #
 # The residual is the quantity that must be zero at the solution, so we can use it as a measure of the error in our solution.
 # Note that this is a different kind of error than we have discussed previously, it is not the error relative to the true solution of the PDE, but the error relative to the solution of the discretized system of equations we have created with our finite difference approximation.
+#
+# From the above finite difference equation we can derive the residual at each node as:
+#
+# $$ r_i = \kappa\left(-T_{i-1} + 2T_i - T_{i+1}\right) - \Delta x^2 q(x_i)$$
+#
+# And the residual norm, that we will use to measure the error in our solution, is:
+#
+# $$ ||r||_2 = \sqrt{\sum_{i=1}^{N-1} \frac{1}{N+1}r_i^2} $$
 
-# In[5]:
+# In[258]:
 
 
 def computeResidual(u, q, kappa, dx):
@@ -77,9 +90,8 @@ def computeResidual(u, q, kappa, dx):
         Residual vector
     """
     dx2 = dx**2
-    r = jnp.zeros_like(u)
-    for ii in range(1, len(x) - 1):
-        r = r.at[ii].set(kappa * (u[ii - 1] - 2 * u[ii] + u[ii + 1]) - dx2 * q[ii])
+    r = np.zeros_like(u)
+    r[1:-1] = -kappa * (u[:-2] - 2 * u[1:-1] + u[2:]) - dx2 * q[1:-1]
 
     return r
 
@@ -92,41 +104,36 @@ def computeNorm(r):
     r : jax.numpy.ndarray
         Vector to compute the norm of
     """
-    return jnp.linalg.norm(r) / jnp.sqrt(len(r))
+    return np.linalg.norm(r) / np.sqrt(len(r))
 
 
-# Let's compute the residual for an initial guess at the solution, we'll generate the initial guess by linearly interpolating between the boundary conditions:
+# Let's compute the residual for an initial guess at the solution, we'll generate a really bad initial guess by just setting all the non-boundary nodes' temperatures to zero:
 
-# In[6]:
+# In[259]:
 
 
-# Define the parameters
-L = 2.0  # Length of domain
-kappa = 0.5  # Thermal conductivity
-Nx = 10  # Number of intervals
-T0 = 1.0  # Left boundary condition
-TN = 4.0  # Right boundary condition
+u = np.zeros(Nx + 1)  # Initial guess
+u[0] = T0  # Left boundary condition
+u[-1] = TN  # Right boundary condition
 
-u = jnp.linspace(T0, TN, Nx + 1)  # Initial guess (linearly interpolating between the boundary conditions)
-
-x = jnp.linspace(0, L, Nx + 1)  # Grid points
+x = np.linspace(0, L, Nx + 1)  # Grid points
 dx = x[1] - x[0]  # Grid spacing
 qVec = q(x, L)  # Source term
 
 r = computeResidual(u, qVec, kappa, dx)  # Compute the residual
-print(f"Residual norm: {jnp.linalg.norm(r):.2e}")
+print(f"Residual norm: {np.linalg.norm(r):.2e}")
 
 
 # Surprisingly enough, it's not zero, so we need to solve the equations.
 #
 # The first method we will use is the Jacobi iteration. In a Jacobi iteration, we update each node in the grid by rearranging the finite difference equation to solve for $T_i$:
 #
-# $$T_{i,new} = $$
+# $$T_{i,new} = \frac{1}{2}\left(T_{i-1} + T_{i+1} + q(x_i) \frac{dx^2}{\kappa}\right)$$
 
-# In[ ]:
+# In[260]:
 
 
-def jacobiStep(u, q, kappa, dx):
+def jacobiIteration(u, q, kappa, dx):
     """Perform one Jacobi step
 
     Parameters
@@ -145,9 +152,205 @@ def jacobiStep(u, q, kappa, dx):
     jax.numpy.ndarray
         Updated state vector
     """
-    dx2 = dx**2
-    uNew = jnp.zeros_like(u)
-    for ii in range(1, len(x) - 1):
-        uNew = uNew.at[ii].set(0.5 * (u[ii - 1] + u[ii + 1] + dx2 * q[ii]) / kappa)
-
+    dx2k = dx**2 / kappa
+    uNew = u.copy()
+    uNew[1:-1] = 0.5 * (u[:-2] + u[2:] + q[1:-1] * dx2k)
     return uNew
+
+
+# An alternative smoothing method is the Gauss-Seidel iteration, it looks almost identical to the Jacobi iteration, except that we always use the most up to date state value at each node:
+#
+# $$T_{i} = \frac{1}{2}\left(T_{i-1} + T_{i+1} + q(x_i) \frac{dx^2}{\kappa}\right)$$
+#
+# Note how we no longer need to keep track of the old state values, we can just overwrite them with the new values as we go along.
+# Depending on the order that we iterate through the nodes, we can get different convergence properties because different states in the update equation will have been updated, this is called the *ordering* of the Gauss-Seidel iteration.
+
+# In[262]:
+
+
+def gaussSeidelIteration(u, q, kappa, dx):
+    """Perform one Gauss-Seidel smoothing step
+
+    Parameters
+    ----------
+    u : jax.numpy.ndarray
+        Current state vector
+    q : jax.numpy.ndarray
+        Source term vector
+    kappa : float
+        Thermal conductivity
+    dx : float
+        Grid spacing
+
+    Returns
+    -------
+    jax.numpy.ndarray
+        Updated state vector
+    """
+    dx2k = dx**2 / kappa
+    uNew = u.copy()
+    for ii in range(1, len(x) - 1):
+        uNew[ii] = 0.5 * (uNew[ii - 1] + uNew[ii + 1] + q[ii] * dx2k)
+    return uNew
+
+
+# In[261]:
+
+
+def iterativeSolve(u, q, kappa, dx, smootherFunc, tol=1e-4, maxIter=5000):
+    """Iteratively solve the 1D heat equation
+
+    Parameters
+    ----------
+    u : jax.numpy.ndarray
+        Initial guess
+    q : jax.numpy.ndarray
+        Source term vector
+    kappa : float
+        Thermal conductivity
+    dx : float
+        Grid spacing
+    tol : float, optional
+        Tolerance for the residual, by default 1e-10
+    maxIter : int, optional
+        Maximum number of iterations, by default 400
+
+    Returns
+    -------
+    jax.numpy.ndarray
+        Solution vector
+    """
+    resNormHistory = []
+    iterationTimes = []
+    startTime = time.time()
+    for ii in range(maxIter):
+        r = computeResidual(u, q, kappa, dx)
+        resNorm = computeNorm(r)
+        print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
+        resNormHistory.append(resNorm)
+        iterationTimes.append(time.time() - startTime)
+        if resNorm < tol:
+            break
+        u = smootherFunc(u, q, kappa, dx)
+
+    return u, resNormHistory, iterationTimes
+
+
+# Solve the system using Jacobi
+tol = 2e-4
+uJacobi, resNormHistoryJacobi, iterationTimesJacobi = iterativeSolve(u, qVec, kappa, dx, jacobiIteration, tol=tol)
+
+# Solve the system using Gauss-Seidel
+uJacobi, resNormHistoryGS, iterationTimesGS = iterativeSolve(u, qVec, kappa, dx, gaussSeidelIteration, tol=tol)
+
+
+# In[263]:
+
+
+fig, ax = plt.subplots()
+ax.set_xlabel("Iteration")
+ax.set_ylabel("Residual norm")
+ax.set_yscale("log")
+ax.plot(resNormHistoryJacobi, color=niceColors[0], clip_on=False, label="Jacobi")
+ax.plot(resNormHistoryGS, color=niceColors[1], clip_on=False, label="Gauss-Seidel")
+ax.axhline(tol, color="gray", linestyle="--", clip_on=False, alpha=0.7)
+ax.legend(labelcolor="linecolor")
+niceplots.adjust_spines(ax)
+
+
+# Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
+# In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.
+
+# In[264]:
+
+
+fig, ax = plt.subplots()
+ax.set_xlabel("Time (s)")
+ax.set_ylabel("Residual norm")
+ax.set_yscale("log")
+ax.plot(iterationTimesJacobi, resNormHistoryJacobi, color=niceColors[0], clip_on=False, label="Jacobi")
+ax.plot(iterationTimesGS, resNormHistoryGS, color=niceColors[1], clip_on=False, label="Gauss-Seidel")
+ax.axhline(tol, color="gray", linestyle="--", clip_on=False, alpha=0.7)
+ax.legend(labelcolor="linecolor")
+niceplots.adjust_spines(ax)
+
+
+# We can improve performance with under or over relaxation, where we update the nodes with a weighted average of the old and new values:
+#
+# $$T_{i,new} = (1-\omega)T_{i,old} + \omega T_{i,new}$$
+#
+# With Jacobi's method, we often use under-relaxation, where $\omega < 1$, to stabilize the iterative method as for some problems and initial conditions it has a tendency to diverge.
+# With Gauss-Seidel, we can use over-relaxation, where $\omega > 1$, to accelerate convergence.
+#
+# Below is a new version of the iterative solver that allows us to specify the relaxation factor $\omega$.
+
+# In[265]:
+
+
+def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5000):
+    """Iteratively solve the 1D heat equation
+
+    Parameters
+    ----------
+    u : jax.numpy.ndarray
+        Initial guess
+    q : jax.numpy.ndarray
+        Source term vector
+    kappa : float
+        Thermal conductivity
+    dx : float
+        Grid spacing
+    tol : float, optional
+        Tolerance for the residual, by default 1e-10
+    maxIter : int, optional
+        Maximum number of iterations, by default 400
+
+    Returns
+    -------
+    jax.numpy.ndarray
+        Solution vector
+    """
+    resNormHistory = []
+    iterationTimes = []
+    startTime = time.time()
+    for ii in range(maxIter):
+        r = computeResidual(u, q, kappa, dx)
+        resNorm = computeNorm(r)
+        print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
+        resNormHistory.append(resNorm)
+        iterationTimes.append(time.time() - startTime)
+        if resNorm < tol:
+            break
+        u = omega * smootherFunc(u, q, kappa, dx) + (1 - omega) * u
+
+    return u, resNormHistory, iterationTimes
+
+
+# Now let's compare the number of iterations and time required to solve the problem with Jacobi and Gauss-Seidel, where Gauss-Seidel uses over-relaxation with $\omega=1.5$.
+
+# In[266]:
+
+
+uJacobi, resNormHistoryJacobi, iterationTimesJacobi = iterativeSolve(
+    u, qVec, kappa, dx, jacobiIteration, tol=tol, omega=1.0
+)
+uGS, resNormHistoryGS, iterationTimesGS = iterativeSolve(u, qVec, kappa, dx, gaussSeidelIteration, tol=tol, omega=1.4)
+
+fig, axes = plt.subplots(nrows=1, ncols=2, sharey=True, figsize=(8, 4))
+axes[0].set_xlabel("Iterations")
+axes[1].set_xlabel("Time (s)")
+axes[0].set_ylabel("Residual norm")
+for ax in axes:
+    ax.set_yscale("log")
+    ax.axhline(tol, color="gray", linestyle="--", clip_on=False, alpha=0.7)
+    niceplots.adjust_spines(ax)
+
+axes[0].plot(resNormHistoryJacobi, color=niceColors[0], clip_on=False, label="Jacobi")
+axes[0].plot(resNormHistoryGS, color=niceColors[1], clip_on=False, label="Gauss-Seidel")
+
+axes[1].plot(iterationTimesJacobi, resNormHistoryJacobi, color=niceColors[0], clip_on=False, label="Jacobi")
+axes[1].plot(iterationTimesGS, resNormHistoryGS, color=niceColors[1], clip_on=False, label="Gauss-Seidel")
+axes[0].legend(labelcolor="linecolor")
+
+
+# In[ ]:
