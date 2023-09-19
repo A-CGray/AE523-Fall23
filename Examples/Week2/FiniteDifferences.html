@@ -184,7 +184,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week3/HW1_solutions.html">Homework 1 example code solutions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../Week4/Week4.html">Week 4</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week4/Week4.html">Week 4</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/IterativeSolvers.html">Iterative linear solvers</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -559,10 +562,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1695092512.321432    1970 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
+No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
-<img alt="../../_images/d982e6fc540ffc142901fc9f18226bacd9c2f56c293120afa1d5a6fa05765fb0.svg" src="../../_images/d982e6fc540ffc142901fc9f18226bacd9c2f56c293120afa1d5a6fa05765fb0.svg" /></div>
+<img alt="../../_images/5325d6adf4bb58fc89cb29f08a1ba13f82d0430bffe768c700a6b5d756ea94f7.svg" src="../../_images/5325d6adf4bb58fc89cb29f08a1ba13f82d0430bffe768c700a6b5d756ea94f7.svg" /></div>
 </div>
 <p>From this plot we can draw a few observations:</p>
 <ul class="simple">
@@ -643,7 +648,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/86242dd9cb494852366d922f91c0dcb13ab37c97354976d2116e1fcdafef8d36.svg" src="../../_images/86242dd9cb494852366d922f91c0dcb13ab37c97354976d2116e1fcdafef8d36.svg" /></div>
+<img alt="../../_images/7a0e6cd4098b96b848679fdb461eb9c5ca5102f575e6e25827e188426af3cf70.svg" src="../../_images/7a0e6cd4098b96b848679fdb461eb9c5ca5102f575e6e25827e188426af3cf70.svg" /></div>
 </div>
 <p>We can take advantage of this special property to construct a polynomial function that passes through a set of points.
 Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} = [x_0, x_1, ..., x_{N-1}]\)</span> and a set of function values <span class="math notranslate nohighlight">\(\mathbf{f} = [f_0, f_1, ..., f_{N-1}]\)</span> at those points, we can construct a polynomial function <span class="math notranslate nohighlight">\(p(x)\)</span> that passes through all of the points by summing the Lagrange polynomials multiplied by the function values:</p>
@@ -724,7 +729,7 @@ Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f1f5bc226180bede3904b2227c8f45a709e975c135249b2a4d07c725ea6558be.svg" src="../../_images/f1f5bc226180bede3904b2227c8f45a709e975c135249b2a4d07c725ea6558be.svg" /></div>
+<img alt="../../_images/afca660c9f4ff820a5bf204fe46fa0a0be6c49e74d80ad67cd07d809f75f44bc.svg" src="../../_images/afca660c9f4ff820a5bf204fe46fa0a0be6c49e74d80ad67cd07d809f75f44bc.svg" /></div>
 </div>
 <p>Try playing around with the number of datapoints (<code class="docutils literal notranslate"><span class="pre">numDataPoints</span></code>) and the random seed to see in which scenarios the interpolation works well and in which it doesn’t.</p>
 <p>To obtain a finite difference scheme from the interpolating polynomial, we can simply take the derivative of the polynomial and evaluate it at the point of interest. e.g. for the first derivative:</p>

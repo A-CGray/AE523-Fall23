@@ -184,7 +184,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week3/HW1_solutions.html">Homework 1 example code solutions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../Week4/Week4.html">Week 4</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week4/Week4.html">Week 4</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/IterativeSolvers.html">Iterative linear solvers</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -528,7 +531,9 @@ We start the bisection method by setting <span class="math notranslate nohighlig
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1695092508.182586    1940 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
+No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 00: x =  5.000e-01, f(x) =  6.487e-01
@@ -640,7 +645,7 @@ Root found: 1.2233215659894107e-12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6a275a414a8a6c3ee093285a301d70fd2316e91051ec8acf549a2180008f0b2c.svg" src="../../_images/6a275a414a8a6c3ee093285a301d70fd2316e91051ec8acf549a2180008f0b2c.svg" /></div>
+<img alt="../../_images/2a93cfe59021441c6c00cdb0845b0814278d25e8ac405cecb5e03a8fca7c414e.svg" src="../../_images/2a93cfe59021441c6c00cdb0845b0814278d25e8ac405cecb5e03a8fca7c414e.svg" /></div>
 </div>
 <p>The Newton-Raphson method found the root in far fewer iterations than the Bisection method, even though it’s first guess was further from the root. Additionally, we didn’t have to find the initial bounds for the search space, which can be difficult in general. Some of the disadvantages of the Newton-Raphson method are</p>
 <ul class="simple">
