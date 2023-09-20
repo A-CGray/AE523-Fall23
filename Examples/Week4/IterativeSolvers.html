@@ -507,9 +507,9 @@ Note that this is a different kind of error than we have discussed previously, i
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    u : jax.numpy.ndarray</span>
+<span class="sd">    u : numpy.ndarray</span>
 <span class="sd">        Current state vector</span>
-<span class="sd">    q : jax.numpy.ndarray</span>
+<span class="sd">    q : numpy.ndarray</span>
 <span class="sd">        Source term vector</span>
 <span class="sd">    kappa : float</span>
 <span class="sd">        Thermal conductivity</span>
@@ -518,7 +518,7 @@ Note that this is a different kind of error than we have discussed previously, i
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    jax.numpy.ndarray</span>
+<span class="sd">    numpy.ndarray</span>
 <span class="sd">        Residual vector</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dx2</span> <span class="o">=</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
@@ -533,7 +533,7 @@ Note that this is a different kind of error than we have discussed previously, i
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    r : jax.numpy.ndarray</span>
+<span class="sd">    r : numpy.ndarray</span>
 <span class="sd">        Vector to compute the norm of</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
@@ -574,9 +574,9 @@ Note that this is a different kind of error than we have discussed previously, i
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    u : jax.numpy.ndarray</span>
+<span class="sd">    u : numpy.ndarray</span>
 <span class="sd">        Current state vector</span>
-<span class="sd">    q : jax.numpy.ndarray</span>
+<span class="sd">    q : numpy.ndarray</span>
 <span class="sd">        Source term vector</span>
 <span class="sd">    kappa : float</span>
 <span class="sd">        Thermal conductivity</span>
@@ -585,7 +585,7 @@ Note that this is a different kind of error than we have discussed previously, i
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    jax.numpy.ndarray</span>
+<span class="sd">    numpy.ndarray</span>
 <span class="sd">        Updated state vector</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dx2k</span> <span class="o">=</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">kappa</span>
@@ -608,9 +608,9 @@ Depending on the order that we iterate through the nodes, we can get different c
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    u : jax.numpy.ndarray</span>
+<span class="sd">    u : numpy.ndarray</span>
 <span class="sd">        Current state vector</span>
-<span class="sd">    q : jax.numpy.ndarray</span>
+<span class="sd">    q : numpy.ndarray</span>
 <span class="sd">        Source term vector</span>
 <span class="sd">    kappa : float</span>
 <span class="sd">        Thermal conductivity</span>
@@ -619,7 +619,7 @@ Depending on the order that we iterate through the nodes, we can get different c
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    jax.numpy.ndarray</span>
+<span class="sd">    numpy.ndarray</span>
 <span class="sd">        Updated state vector</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dx2k</span> <span class="o">=</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">kappa</span>
@@ -638,9 +638,9 @@ Depending on the order that we iterate through the nodes, we can get different c
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    u : jax.numpy.ndarray</span>
+<span class="sd">    u : numpy.ndarray</span>
 <span class="sd">        Initial guess</span>
-<span class="sd">    q : jax.numpy.ndarray</span>
+<span class="sd">    q : numpy.ndarray</span>
 <span class="sd">        Source term vector</span>
 <span class="sd">    kappa : float</span>
 <span class="sd">        Thermal conductivity</span>
@@ -653,7 +653,7 @@ Depending on the order that we iterate through the nodes, we can get different c
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    jax.numpy.ndarray</span>
+<span class="sd">    numpy.ndarray</span>
 <span class="sd">        Solution vector</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">resNormHistory</span> <span class="o">=</span> <span class="p">[]</span>
@@ -5590,7 +5590,9 @@ Iteration 481: Res norm = 8.94e-04
 Iteration 482: Res norm = 8.93e-04
 Iteration 483: Res norm = 8.92e-04
 Iteration 484: Res norm = 8.91e-04
-Iteration 485: Res norm = 8.90e-04
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 485: Res norm = 8.90e-04
 Iteration 486: Res norm = 8.89e-04
 Iteration 487: Res norm = 8.88e-04
 Iteration 488: Res norm = 8.87e-04
@@ -5853,9 +5855,7 @@ Iteration 744: Res norm = 6.75e-04
 Iteration 745: Res norm = 6.74e-04
 Iteration 746: Res norm = 6.74e-04
 Iteration 747: Res norm = 6.73e-04
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 748: Res norm = 6.72e-04
+Iteration 748: Res norm = 6.72e-04
 Iteration 749: Res norm = 6.72e-04
 Iteration 750: Res norm = 6.71e-04
 Iteration 751: Res norm = 6.70e-04
@@ -6329,7 +6329,9 @@ Iteration 1218: Res norm = 4.22e-04
 Iteration 1219: Res norm = 4.21e-04
 Iteration 1220: Res norm = 4.21e-04
 Iteration 1221: Res norm = 4.20e-04
-Iteration 1222: Res norm = 4.20e-04
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1222: Res norm = 4.20e-04
 Iteration 1223: Res norm = 4.20e-04
 Iteration 1224: Res norm = 4.19e-04
 Iteration 1225: Res norm = 4.19e-04
@@ -7102,7 +7104,7 @@ Iteration 1975: Res norm = 2.00e-04
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/191b2b448ef49455aba682c66016ca470c875f756850cbe44c20f63cf366989f.svg" src="../../_images/191b2b448ef49455aba682c66016ca470c875f756850cbe44c20f63cf366989f.svg" /></div>
+<img alt="../../_images/92977113f73b3c717939134029abae98c689779ec4db4a3e05e57014a3e14db6.svg" src="../../_images/92977113f73b3c717939134029abae98c689779ec4db4a3e05e57014a3e14db6.svg" /></div>
 </div>
 <p>Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
 In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.</p>
@@ -7121,7 +7123,7 @@ In this case, the Jacobi solver actually takes less time to solve the system tha
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ab2133779c4d7bbbee0c4dc8891d977e8d375bd3205119b2e8fecdce91eb37d6.svg" src="../../_images/ab2133779c4d7bbbee0c4dc8891d977e8d375bd3205119b2e8fecdce91eb37d6.svg" /></div>
+<img alt="../../_images/386d37a861b7df0307caa31950a4b4b2c489a837e76ad55297eba046ecdde2b5.svg" src="../../_images/386d37a861b7df0307caa31950a4b4b2c489a837e76ad55297eba046ecdde2b5.svg" /></div>
 </div>
 <p>We can improve performance with under or over relaxation, where we update the nodes with a weighted average of the old and new values:</p>
 <div class="math notranslate nohighlight">
@@ -7136,9 +7138,9 @@ With Gauss-Seidel, we can use over-relaxation, where <span class="math notransla
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    u : jax.numpy.ndarray</span>
+<span class="sd">    u : numpy.ndarray</span>
 <span class="sd">        Initial guess</span>
-<span class="sd">    q : jax.numpy.ndarray</span>
+<span class="sd">    q : numpy.ndarray</span>
 <span class="sd">        Source term vector</span>
 <span class="sd">    kappa : float</span>
 <span class="sd">        Thermal conductivity</span>
@@ -7151,7 +7153,7 @@ With Gauss-Seidel, we can use over-relaxation, where <span class="math notransla
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    jax.numpy.ndarray</span>
+<span class="sd">    numpy.ndarray</span>
 <span class="sd">        Solution vector</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">resNormHistory</span> <span class="o">=</span> <span class="p">[]</span>
@@ -12662,7 +12664,9 @@ Iteration 1052: Res norm = 3.28e-04
 Iteration 1053: Res norm = 3.27e-04
 Iteration 1054: Res norm = 3.27e-04
 Iteration 1055: Res norm = 3.27e-04
-Iteration 1056: Res norm = 3.26e-04
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1056: Res norm = 3.26e-04
 Iteration 1057: Res norm = 3.26e-04
 Iteration 1058: Res norm = 3.25e-04
 Iteration 1059: Res norm = 3.25e-04
@@ -13043,7 +13047,7 @@ Iteration 1410: Res norm = 2.00e-04
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9057ccdb9ac710b60ec93d805e18aece9c5a1143790749a1e9e31f28637570ea.svg" src="../../_images/9057ccdb9ac710b60ec93d805e18aece9c5a1143790749a1e9e31f28637570ea.svg" /></div>
+<img alt="../../_images/b71ca947e87f33dc8f730612e339af96eab3bf58ced0634d8504aa2299926b6d.svg" src="../../_images/b71ca947e87f33dc8f730612e339af96eab3bf58ced0634d8504aa2299926b6d.svg" /></div>
 </div>
 </section>
 </section>
