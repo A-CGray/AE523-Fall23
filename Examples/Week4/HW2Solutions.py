@@ -3,7 +3,7 @@
 
 # # Homework 2 Solutions
 
-# In[4]:
+# In[25]:
 
 
 import numpy as np
@@ -32,7 +32,7 @@ colors = niceplots.get_colors_list()
 #
 # ### Using the method of undetermined coefficients
 
-# In[5]:
+# In[26]:
 
 
 # Define symbolic variables
@@ -60,7 +60,7 @@ sp.pprint(solution)
 
 # ### Using Lagrange polynomials
 
-# In[6]:
+# In[27]:
 
 
 def get_lagrange_func(xPoints, i):
@@ -108,7 +108,7 @@ for i in range(len(xPoints)):
 
 # ## Problem 2: Lagrange interpolation with Jax
 
-# In[7]:
+# In[28]:
 
 
 import jax
@@ -135,7 +135,7 @@ for i in range(len(x_data)):
 #
 # ### Part a)
 
-# In[8]:
+# In[29]:
 
 
 def solve(N):
@@ -200,7 +200,7 @@ def solve(N):
     return X, Y, U, A
 
 
-# In[17]:
+# In[30]:
 
 
 def plotSolution(X, Y, U):
@@ -216,24 +216,26 @@ def plotSolution(X, Y, U):
 X, Y, U, A = solve(4)
 fig, ax = plt.subplots()
 ax.spy(A)
+ax.set_title("Sparsity pattern of A matrix")
 plotSolution(X, Y, U)
 
 X, Y, U, A = solve(16)
 fig, ax = plt.subplots()
 ax.spy(A, markersize=0.5, markeredgecolor="auto")
+ax.set_title("Sparsity pattern of A matrix")
 plotSolution(X, Y, U)
 
 
 # ### Part b)
 
-# In[10]:
+# In[31]:
 
 
 # convergence study
 def convergenceStudy(vN):
     E = np.zeros(len(vN))
     for i, N in enumerate(vN):
-        X, Y, U = solve(N)
+        X, Y, U, _ = solve(N)
         E[i] = np.sqrt(np.sum((np.exp(X * Y) - U) ** 2) / (N + 1) ** 2)
     print(E)
 
@@ -253,17 +255,12 @@ def convergenceStudy(vN):
 
 vN = [4, 8, 16, 32]
 convergenceStudy(vN)
-plt.savefig("HW2-Convergence.pdf")
 
 
 # From this result, it seems we have not quite reached the asymptotic region of convergence where the rate of convergence = 2. We can get there by increasing the number of grid points in each direction further.
 
-# In[ ]:
+# In[32]:
 
 
 vN = [4, 8, 16, 32, 64, 128, 256]
 convergenceStudy(vN)
-plt.savefig("HW2-ConvergenceContinued.pdf")
-
-
-# In[ ]:
