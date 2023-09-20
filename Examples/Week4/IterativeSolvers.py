@@ -70,9 +70,9 @@ def computeResidual(u, q, kappa, dx):
 
     Parameters
     ----------
-    u : jax.numpy.ndarray
+    u : numpy.ndarray
         Current state vector
-    q : jax.numpy.ndarray
+    q : numpy.ndarray
         Source term vector
     kappa : float
         Thermal conductivity
@@ -81,7 +81,7 @@ def computeResidual(u, q, kappa, dx):
 
     Returns
     -------
-    jax.numpy.ndarray
+    numpy.ndarray
         Residual vector
     """
     dx2 = dx**2
@@ -96,7 +96,7 @@ def computeNorm(r):
 
     Parameters
     ----------
-    r : jax.numpy.ndarray
+    r : numpy.ndarray
         Vector to compute the norm of
     """
     return np.linalg.norm(r) / np.sqrt(len(r))
@@ -133,9 +133,9 @@ def jacobiIteration(u, q, kappa, dx):
 
     Parameters
     ----------
-    u : jax.numpy.ndarray
+    u : numpy.ndarray
         Current state vector
-    q : jax.numpy.ndarray
+    q : numpy.ndarray
         Source term vector
     kappa : float
         Thermal conductivity
@@ -144,7 +144,7 @@ def jacobiIteration(u, q, kappa, dx):
 
     Returns
     -------
-    jax.numpy.ndarray
+    numpy.ndarray
         Updated state vector
     """
     dx2k = dx**2 / kappa
@@ -168,9 +168,9 @@ def gaussSeidelIteration(u, q, kappa, dx):
 
     Parameters
     ----------
-    u : jax.numpy.ndarray
+    u : numpy.ndarray
         Current state vector
-    q : jax.numpy.ndarray
+    q : numpy.ndarray
         Source term vector
     kappa : float
         Thermal conductivity
@@ -179,7 +179,7 @@ def gaussSeidelIteration(u, q, kappa, dx):
 
     Returns
     -------
-    jax.numpy.ndarray
+    numpy.ndarray
         Updated state vector
     """
     dx2k = dx**2 / kappa
@@ -197,9 +197,9 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, tol=1e-4, maxIter=5000):
 
     Parameters
     ----------
-    u : jax.numpy.ndarray
+    u : numpy.ndarray
         Initial guess
-    q : jax.numpy.ndarray
+    q : numpy.ndarray
         Source term vector
     kappa : float
         Thermal conductivity
@@ -212,7 +212,7 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, tol=1e-4, maxIter=5000):
 
     Returns
     -------
-    jax.numpy.ndarray
+    numpy.ndarray
         Solution vector
     """
     resNormHistory = []
@@ -287,9 +287,9 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5
 
     Parameters
     ----------
-    u : jax.numpy.ndarray
+    u : numpy.ndarray
         Initial guess
-    q : jax.numpy.ndarray
+    q : numpy.ndarray
         Source term vector
     kappa : float
         Thermal conductivity
@@ -302,7 +302,7 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5
 
     Returns
     -------
-    jax.numpy.ndarray
+    numpy.ndarray
         Solution vector
     """
     resNormHistory = []
