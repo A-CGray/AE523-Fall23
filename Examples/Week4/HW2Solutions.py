@@ -200,7 +200,7 @@ def solve(N):
     return X, Y, U, A
 
 
-# In[30]:
+# In[33]:
 
 
 def plotSolution(X, Y, U):
@@ -216,13 +216,13 @@ def plotSolution(X, Y, U):
 X, Y, U, A = solve(4)
 fig, ax = plt.subplots()
 ax.spy(A)
-ax.set_title("Sparsity pattern of A matrix")
+ax.set_title("Sparsity pattern of A matrix for N=4")
 plotSolution(X, Y, U)
 
 X, Y, U, A = solve(16)
 fig, ax = plt.subplots()
 ax.spy(A, markersize=0.5, markeredgecolor="auto")
-ax.set_title("Sparsity pattern of A matrix")
+ax.set_title("Sparsity pattern of A matrix for N=4")
 plotSolution(X, Y, U)
 
 
