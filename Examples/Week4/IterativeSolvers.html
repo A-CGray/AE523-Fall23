@@ -67,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week4/IterativeSolvers';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Homework 2 Solutions" href="HW2Solutions.html" />
     <link rel="prev" title="Week 4" href="Week4.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -185,6 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Week4.html">Week 4</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Iterative linear solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HW2Solutions.html">Homework 2 Solutions</a></li>
 </ul>
 </li>
 </ul>
@@ -463,15 +465,6 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the symbolic function q(x)</span>
-<span class="k">def</span> <span class="nf">q</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <section id="problem-definition">
 <h2>Problem definition<a class="headerlink" href="#problem-definition" title="Permalink to this heading">#</a></h2>
 <p>In this example we’ll be solving the same 1D heat transfer equation as <a class="reference internal" href="../Week3/FiniteDifferenceScheme.html"><span class="doc std std-doc">last week’s example</span></a></p>
@@ -485,6 +478,10 @@ document.write(`
 <span class="n">Nx</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Number of intervals</span>
 <span class="n">T0</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Left boundary condition</span>
 <span class="n">TN</span> <span class="o">=</span> <span class="mf">4.0</span>  <span class="c1"># Right boundary condition</span>
+
+<span class="c1"># Define the symbolic function q(x)</span>
+<span class="k">def</span> <span class="nf">q</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -636,7 +633,7 @@ Depending on the order that we iterate through the nodes, we can get different c
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">iterativeSolve</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">smootherFunc</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">maxIter</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Iteratively solve the 1D heat equation</span>
@@ -4740,7 +4737,9 @@ Iteration 4049: Res norm = 2.40e-04
 Iteration 4050: Res norm = 2.40e-04
 Iteration 4051: Res norm = 2.40e-04
 Iteration 4052: Res norm = 2.40e-04
-Iteration 4053: Res norm = 2.40e-04
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 4053: Res norm = 2.40e-04
 Iteration 4054: Res norm = 2.40e-04
 Iteration 4055: Res norm = 2.40e-04
 Iteration 4056: Res norm = 2.39e-04
@@ -5113,7 +5112,9 @@ Iteration 4422: Res norm = 2.00e-04
 Iteration 0: Res norm = 2.05e-01
 Iteration 1: Res norm = 1.01e-01
 Iteration 2: Res norm = 5.63e-02
-Iteration 3: Res norm = 3.79e-02
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 3: Res norm = 3.79e-02
 Iteration 4: Res norm = 2.89e-02
 Iteration 5: Res norm = 2.36e-02
 Iteration 6: Res norm = 2.01e-02
@@ -5834,9 +5835,7 @@ Iteration 720: Res norm = 6.92e-04
 Iteration 721: Res norm = 6.91e-04
 Iteration 722: Res norm = 6.90e-04
 Iteration 723: Res norm = 6.90e-04
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 724: Res norm = 6.89e-04
+Iteration 724: Res norm = 6.89e-04
 Iteration 725: Res norm = 6.88e-04
 Iteration 726: Res norm = 6.88e-04
 Iteration 727: Res norm = 6.87e-04
@@ -6650,7 +6649,9 @@ Iteration 1534: Res norm = 3.09e-04
 Iteration 1535: Res norm = 3.08e-04
 Iteration 1536: Res norm = 3.08e-04
 Iteration 1537: Res norm = 3.08e-04
-Iteration 1538: Res norm = 3.08e-04
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1538: Res norm = 3.08e-04
 Iteration 1539: Res norm = 3.07e-04
 Iteration 1540: Res norm = 3.07e-04
 Iteration 1541: Res norm = 3.07e-04
@@ -6847,7 +6848,9 @@ Iteration 1731: Res norm = 2.54e-04
 Iteration 1732: Res norm = 2.54e-04
 Iteration 1733: Res norm = 2.54e-04
 Iteration 1734: Res norm = 2.54e-04
-Iteration 1735: Res norm = 2.53e-04
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1735: Res norm = 2.53e-04
 Iteration 1736: Res norm = 2.53e-04
 Iteration 1737: Res norm = 2.53e-04
 Iteration 1738: Res norm = 2.53e-04
@@ -7107,7 +7110,7 @@ Iteration 1975: Res norm = 2.00e-04
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bd5946502eadcd75c0c1aceffc8e655744a4b2b55201482aaba03fc85c81a3e8.svg" src="../../_images/bd5946502eadcd75c0c1aceffc8e655744a4b2b55201482aaba03fc85c81a3e8.svg" /></div>
+<img alt="../../_images/9e2df5d0a2034f9f30d8afd7de5bcb0a30b45fc73af73c958f62291de842648a.svg" src="../../_images/9e2df5d0a2034f9f30d8afd7de5bcb0a30b45fc73af73c958f62291de842648a.svg" /></div>
 </div>
 <p>Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
 In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.</p>
@@ -7126,7 +7129,7 @@ In this case, the Jacobi solver actually takes less time to solve the system tha
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8c59344b3a22cfa7fda19ce7fa660f931d93148f335a808b94586db59433e879.svg" src="../../_images/8c59344b3a22cfa7fda19ce7fa660f931d93148f335a808b94586db59433e879.svg" /></div>
+<img alt="../../_images/4e99f37dcd59722c885b494d4ee104a3bf07b18f42a66fbc0084ae9ae3782d3d.svg" src="../../_images/4e99f37dcd59722c885b494d4ee104a3bf07b18f42a66fbc0084ae9ae3782d3d.svg" /></div>
 </div>
 <p>We can improve performance with under or over relaxation, where we update the nodes with a weighted average of the old and new values:</p>
 <div class="math notranslate nohighlight">
@@ -7178,28 +7181,12 @@ With Gauss-Seidel, we can use over-relaxation, where <span class="math notransla
 </div>
 </div>
 <p>Now let’s compare the number of iterations and time required to solve the problem with Jacobi and Gauss-Seidel, where Gauss-Seidel uses over-relaxation with <span class="math notranslate nohighlight">\(\omega=1.5\)</span>.</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uJacobi</span><span class="p">,</span> <span class="n">resNormHistoryJacobi</span><span class="p">,</span> <span class="n">iterationTimesJacobi</span> <span class="o">=</span> <span class="n">iterativeSolve</span><span class="p">(</span>
     <span class="n">u</span><span class="p">,</span> <span class="n">qVec</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">jacobiIteration</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">1.0</span>
 <span class="p">)</span>
 <span class="n">uGS</span><span class="p">,</span> <span class="n">resNormHistoryGS</span><span class="p">,</span> <span class="n">iterationTimesGS</span> <span class="o">=</span> <span class="n">iterativeSolve</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">qVec</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">gaussSeidelIteration</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Iterations&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Residual norm&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">tol</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
-    <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
-
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">resNormHistoryJacobi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Jacobi&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">resNormHistoryGS</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gauss-Seidel&quot;</span><span class="p">)</span>
-
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iterationTimesJacobi</span><span class="p">,</span> <span class="n">resNormHistoryJacobi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Jacobi&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iterationTimesGS</span><span class="p">,</span> <span class="n">resNormHistoryGS</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gauss-Seidel&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -11122,7 +11109,9 @@ Iteration 3914: Res norm = 2.57e-04
 Iteration 3915: Res norm = 2.57e-04
 Iteration 3916: Res norm = 2.57e-04
 Iteration 3917: Res norm = 2.56e-04
-Iteration 3918: Res norm = 2.56e-04
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 3918: Res norm = 2.56e-04
 Iteration 3919: Res norm = 2.56e-04
 Iteration 3920: Res norm = 2.56e-04
 Iteration 3921: Res norm = 2.56e-04
@@ -12384,9 +12373,7 @@ Iteration 753: Res norm = 4.95e-04
 Iteration 754: Res norm = 4.95e-04
 Iteration 755: Res norm = 4.94e-04
 Iteration 756: Res norm = 4.93e-04
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 757: Res norm = 4.93e-04
+Iteration 757: Res norm = 4.93e-04
 Iteration 758: Res norm = 4.92e-04
 Iteration 759: Res norm = 4.91e-04
 Iteration 760: Res norm = 4.91e-04
@@ -12947,7 +12934,9 @@ Iteration 1314: Res norm = 2.28e-04
 Iteration 1315: Res norm = 2.28e-04
 Iteration 1316: Res norm = 2.28e-04
 Iteration 1317: Res norm = 2.27e-04
-Iteration 1318: Res norm = 2.27e-04
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1318: Res norm = 2.27e-04
 Iteration 1319: Res norm = 2.27e-04
 Iteration 1320: Res norm = 2.26e-04
 Iteration 1321: Res norm = 2.26e-04
@@ -13042,10 +13031,31 @@ Iteration 1409: Res norm = 2.00e-04
 Iteration 1410: Res norm = 2.00e-04
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fc1882afcd0&gt;
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Iterations&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Residual norm&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">tol</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">resNormHistoryJacobi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Jacobi&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">resNormHistoryGS</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gauss-Seidel&quot;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iterationTimesJacobi</span><span class="p">,</span> <span class="n">resNormHistoryJacobi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Jacobi&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iterationTimesGS</span><span class="p">,</span> <span class="n">resNormHistoryGS</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gauss-Seidel&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/f441a96acb1a0bd6b38fa61ad1a0f73d107faf4f330314bb7ab0caf0a01785a1.svg" src="../../_images/f441a96acb1a0bd6b38fa61ad1a0f73d107faf4f330314bb7ab0caf0a01785a1.svg" /></div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b7fbdf5eb5e8290e582f26c475b814e2c204d51cc628be2b1dd84f647ec5b312.svg" src="../../_images/b7fbdf5eb5e8290e582f26c475b814e2c204d51cc628be2b1dd84f647ec5b312.svg" /></div>
 </div>
 </section>
 </section>
@@ -13088,6 +13098,15 @@ Iteration 1410: Res norm = 2.00e-04
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Week 4</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="HW2Solutions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Homework 2 Solutions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

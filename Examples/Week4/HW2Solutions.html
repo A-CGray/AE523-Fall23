@@ -1,0 +1,982 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Homework 2 Solutions &#8212; AEROSP 523 Computational Fluid Dynamics: Code Examples</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week4/HW2Solutions';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Iterative linear solvers" href="IterativeSolvers.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/scramjet.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/scramjet.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    AEROSP 523 Computational Fluid Dynamics: Code Examples
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Content/PythonSetup.html">Getting Started with Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week1/Week1.html">Week 1</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/RootFinding.html">Root finding methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week2/Week2.html">Week 2</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/FiniteDifferences.html">Finite Difference Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/OfficeHours.html">Examples from office hours: Week 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week3/Week3.html">Week 3</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/FiniteDifferenceScheme.html">The Finite Difference Method: 1D steady state heat transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/HW1_solutions.html">Homework 1 example code solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Week4.html">Week 4</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="IterativeSolvers.html">Iterative linear solvers</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Homework 2 Solutions</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/A-CGray/AE523-Fall23/main?urlpath=lab/tree/Examples/Week4/HW2Solutions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/A-CGray/AE523-Fall23" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/A-CGray/AE523-Fall23/issues/new?title=Issue%20on%20page%20%2FExamples/Week4/HW2Solutions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Examples/Week4/HW2Solutions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Homework 2 Solutions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-finite-difference-stencil">Problem 1: Finite difference stencil</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-method-of-undetermined-coefficients">Using the method of undetermined coefficients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-lagrange-polynomials">Using Lagrange polynomials</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-lagrange-interpolation-with-jax">Problem 2: Lagrange interpolation with Jax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-2d-finite-difference-method">Problem 3: 2D finite difference method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a">Part a)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b">Part b)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-2-solutions">
+<h1>Homework 2 Solutions<a class="headerlink" href="#homework-2-solutions" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">config</span>
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">linalg</span>
+
+<span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_enable_x64&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib_inline</span>
+
+<span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s2">&quot;pdf&quot;</span><span class="p">,</span> <span class="s2">&quot;svg&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">niceplots</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">niceplots</span><span class="o">.</span><span class="n">get_style</span><span class="p">())</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">niceplots</span><span class="o">.</span><span class="n">get_colors_list</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">jax</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;sympy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="problem-1-finite-difference-stencil">
+<h2>Problem 1: Finite difference stencil<a class="headerlink" href="#problem-1-finite-difference-stencil" title="Permalink to this heading">#</a></h2>
+<section id="using-the-method-of-undetermined-coefficients">
+<h3>Using the method of undetermined coefficients<a class="headerlink" href="#using-the-method-of-undetermined-coefficients" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define symbolic variables</span>
+<span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">,</span> <span class="n">a4</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a0, a1, a2, a3, a4, h&#39;</span><span class="p">)</span>
+
+<span class="c1"># Define the matrix A and vector b symbolically</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="o">/</span><span class="mi">3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">24</span><span class="p">,</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">27</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span> <span class="mi">32</span><span class="o">/</span><span class="mi">3</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Solve for x symbolically</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># Print the symbolic solution</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>⎡-2.08333333333333 ⎤
+⎢──────────────────⎥
+⎢        h         ⎥
+⎢                  ⎥
+⎢       4.0        ⎥
+⎢       ───        ⎥
+⎢        h         ⎥
+⎢                  ⎥
+⎢      -3.0        ⎥
+⎢      ─────       ⎥
+⎢        h         ⎥
+⎢                  ⎥
+⎢ 1.33333333333333 ⎥
+⎢ ──────────────── ⎥
+⎢        h         ⎥
+⎢                  ⎥
+⎢      -0.25       ⎥
+⎢      ──────      ⎥
+⎣        h         ⎦
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-lagrange-polynomials">
+<h3>Using Lagrange polynomials<a class="headerlink" href="#using-lagrange-polynomials" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_lagrange_func</span><span class="p">(</span><span class="n">xPoints</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a function that computes the ith Lagrange polynomial for a given set of points.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xPoints : list/array of floats</span>
+<span class="sd">        X coordinate values of the points to be interpolated</span>
+<span class="sd">    i : int</span>
+<span class="sd">        The index of the lagrange polynomial to create (must be between 0 and len(x)-1)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    function</span>
+<span class="sd">        A function that computes the ith Lagrange polynomial for a given x value, e.g. L_i(x)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">lagrange_poly</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xPoints</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">*=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xPoints</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">xPoints</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">xPoints</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">return</span> <span class="n">lagrange_poly</span>
+
+<span class="n">xPoints</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">h</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xPoints</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">(x) = </span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">get_lagrange_func</span><span class="p">(</span><span class="n">xPoints</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)(</span><span class="n">x</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Coefficients for first derivative:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xPoints</span><span class="p">)):</span>
+    <span class="n">dLdx</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">get_lagrange_func</span><span class="p">(</span><span class="n">xPoints</span><span class="p">,</span> <span class="n">i</span><span class="p">)(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> = dL_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/dx | x=0 = </span><span class="si">{</span><span class="n">dLdx</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Coefficients for 2nd derivative:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xPoints</span><span class="p">)):</span>
+    <span class="n">d2Ldx2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">get_lagrange_func</span><span class="p">(</span><span class="n">xPoints</span><span class="p">,</span> <span class="n">i</span><span class="p">)(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> = d^2L_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/dx^2 | x=0 = </span><span class="si">{</span><span class="n">d2Ldx2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_0(x) = 0.0416666666666667*(h - x)*(2*h - x)*(3*h - x)*(4*h - x)/h**4
+L_1(x) = 0.166666666666667*x*(2*h - x)*(3*h - x)*(4*h - x)/h**4
+L_2(x) = -0.25*x*(h - x)*(3*h - x)*(4*h - x)/h**4
+L_3(x) = 0.166666666666667*x*(h - x)*(2*h - x)*(4*h - x)/h**4
+L_4(x) = -0.0416666666666667*x*(h - x)*(2*h - x)*(3*h - x)/h**4
+
+
+Coefficients for first derivative:
+a_0 = dL_0/dx | x=0 = -2.08333333333333/h
+a_1 = dL_1/dx | x=0 = 4.0/h
+a_2 = dL_2/dx | x=0 = -3.0/h
+a_3 = dL_3/dx | x=0 = 1.33333333333333/h
+a_4 = dL_4/dx | x=0 = -0.25/h
+
+
+Coefficients for 2nd derivative:
+a_0 = d^2L_0/dx^2 | x=0 = 2.91666666666667/h**2
+a_1 = d^2L_1/dx^2 | x=0 = -8.66666666666667/h**2
+a_2 = d^2L_2/dx^2 | x=0 = 9.5/h**2
+a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
+a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="problem-2-lagrange-interpolation-with-jax">
+<h2>Problem 2: Lagrange interpolation with Jax<a class="headerlink" href="#problem-2-lagrange-interpolation-with-jax" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="n">x_data</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients for first derivative:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_data</span><span class="p">)):</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">get_lagrange_func</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">dLdx</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="n">coeff</span> <span class="o">=</span> <span class="n">dLdx</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> = dL_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/dx | x=0 = </span><span class="si">{</span><span class="n">coeff</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Coefficients for second derivative:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_data</span><span class="p">)):</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">get_lagrange_func</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">d2Ldx2</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">L</span><span class="p">))</span>
+    <span class="n">coeff</span> <span class="o">=</span> <span class="n">d2Ldx2</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> = d^2L_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/dx^2 | x=0 = </span><span class="si">{</span><span class="n">coeff</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients for first derivative:
+a_0 = dL_0/dx | x=0 = -2.083333333333333
+a_1 = dL_1/dx | x=0 = 4.0
+a_2 = dL_2/dx | x=0 = -3.0
+a_3 = dL_3/dx | x=0 = 1.3333333333333333
+a_4 = dL_4/dx | x=0 = -0.25
+
+
+Coefficients for second derivative:
+a_0 = d^2L_0/dx^2 | x=0 = 2.9166666666666665
+a_1 = d^2L_1/dx^2 | x=0 = -8.666666666666666
+a_2 = d^2L_2/dx^2 | x=0 = 9.5
+a_3 = d^2L_3/dx^2 | x=0 = -4.666666666666667
+a_4 = d^2L_4/dx^2 | x=0 = 0.9166666666666666
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-3-2d-finite-difference-method">
+<h2>Problem 3: 2D finite difference method<a class="headerlink" href="#problem-3-2d-finite-difference-method" title="Permalink to this heading">#</a></h2>
+<section id="part-a">
+<h3>Part a)<a class="headerlink" href="#part-a" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="n">L</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="n">h</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">N</span>
+  <span class="n">h2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="n">h</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># x nodes</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># y nodes</span>
+  <span class="n">Y</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="c1"># matrices of all nodes</span>
+  <span class="n">Nu</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># total number of unknowns</span>
+  <span class="n">nnz</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span> <span class="c1"># number of nonzeros</span>
+  <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nnz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+  <span class="n">irow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nnz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+  <span class="n">icol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nnz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Nu</span><span class="p">)</span> <span class="c1"># empty rhs vector</span>
+
+  <span class="c1"># fill in interior contributions</span>
+  <span class="n">inz</span><span class="o">=</span><span class="mi">0</span>
+  <span class="k">for</span> <span class="n">iy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">ix</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+      <span class="n">i</span> <span class="o">=</span> <span class="n">iy</span><span class="o">*</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">ix</span>
+      <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">iLD</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+      <span class="n">iRD</span> <span class="o">=</span> <span class="n">iLD</span><span class="o">+</span><span class="mi">2</span>
+      <span class="n">iLU</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+      <span class="n">iRU</span> <span class="o">=</span> <span class="n">iLU</span><span class="o">+</span><span class="mi">2</span>
+      <span class="n">I</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">inz</span><span class="o">+</span><span class="mi">0</span><span class="p">,</span><span class="n">inz</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span>
+      <span class="n">irow</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+      <span class="n">icol</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">iLD</span><span class="p">,</span> <span class="n">iRU</span><span class="p">,</span> <span class="n">iLU</span><span class="p">,</span> <span class="n">iRD</span><span class="p">]</span>
+      <span class="n">data</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">X</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span><span class="n">iy</span><span class="p">]</span><span class="o">*</span><span class="n">Y</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span><span class="n">iy</span><span class="p">]),</span> <span class="mf">0.25</span><span class="o">/</span><span class="n">h2</span><span class="p">,</span> <span class="mf">0.25</span><span class="o">/</span><span class="n">h2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.25</span><span class="o">/</span><span class="n">h2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.25</span><span class="o">/</span><span class="n">h2</span><span class="p">]</span>
+      <span class="n">inz</span> <span class="o">+=</span> <span class="mi">5</span>
+
+  <span class="c1"># enforce Dirichlet boundary conditions</span>
+  <span class="k">for</span> <span class="n">ix</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">irow</span><span class="p">[</span><span class="n">inz</span><span class="p">]</span> <span class="o">=</span> <span class="n">icol</span><span class="p">[</span><span class="n">inz</span><span class="p">]</span> <span class="o">=</span> <span class="n">ix</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">inz</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">q</span><span class="p">[</span><span class="n">irow</span><span class="p">[</span><span class="n">inz</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">Y</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">inz</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="n">irow</span><span class="p">[</span><span class="n">inz</span><span class="p">]</span> <span class="o">=</span> <span class="n">icol</span><span class="p">[</span><span class="n">inz</span><span class="p">]</span> <span class="o">=</span> <span class="n">N</span><span class="o">*</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">ix</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">inz</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">q</span><span class="p">[</span><span class="n">irow</span><span class="p">[</span><span class="n">inz</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span><span class="n">N</span><span class="p">]</span><span class="o">*</span><span class="n">Y</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span><span class="n">N</span><span class="p">])</span>
+    <span class="n">inz</span><span class="o">+=</span><span class="mi">1</span>
+  <span class="k">for</span> <span class="n">iy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">irow</span><span class="p">[</span><span class="n">inz</span><span class="p">]</span> <span class="o">=</span> <span class="n">icol</span><span class="p">[</span><span class="n">inz</span><span class="p">]</span> <span class="o">=</span> <span class="n">iy</span><span class="o">*</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">inz</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">q</span><span class="p">[</span><span class="n">irow</span><span class="p">[</span><span class="n">inz</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">iy</span><span class="p">]</span><span class="o">*</span><span class="n">Y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">iy</span><span class="p">])</span>
+    <span class="n">inz</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="n">irow</span><span class="p">[</span><span class="n">inz</span><span class="p">]</span> <span class="o">=</span> <span class="n">icol</span><span class="p">[</span><span class="n">inz</span><span class="p">]</span> <span class="o">=</span> <span class="n">iy</span><span class="o">*</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">N</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">inz</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">q</span><span class="p">[</span><span class="n">irow</span><span class="p">[</span><span class="n">inz</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">N</span><span class="p">,</span><span class="n">iy</span><span class="p">]</span><span class="o">*</span><span class="n">Y</span><span class="p">[</span><span class="n">N</span><span class="p">,</span><span class="n">iy</span><span class="p">])</span>
+    <span class="n">inz</span><span class="o">+=</span><span class="mi">1</span>
+
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nnz=</span><span class="si">%d</span><span class="s1">, inz=</span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">nnz</span><span class="p">,</span><span class="n">inz</span><span class="p">))</span>
+
+  <span class="c1"># build sparse matrix</span>
+  <span class="n">A</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">irow</span><span class="p">,</span> <span class="n">icol</span> <span class="p">)),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Nu</span><span class="p">,</span><span class="n">Nu</span><span class="p">))</span>
+
+  <span class="c1"># solve system</span>
+  <span class="n">Uv</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">spsolve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">q</span><span class="p">)</span> <span class="c1"># solution at all points</span>
+  <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Uv</span><span class="p">,</span> <span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span> <span class="c1"># reshape into matrix</span>
+
+  <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">A</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plotSolution</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">contour</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">niceplots</span><span class="o">.</span><span class="n">parula_map</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">contour</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">plotSolution</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+<span class="n">plotSolution</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=61, inz=61
+
+nnz=1189, inz=1189
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 2 Axes&gt;, &lt;Axes: xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;)
+</pre></div>
+</div>
+<img alt="../../_images/52c92db3fa0088e10a8c988e6e49d76e400cc30bd70e338026cab03b62e0bdde.svg" src="../../_images/52c92db3fa0088e10a8c988e6e49d76e400cc30bd70e338026cab03b62e0bdde.svg" /><img alt="../../_images/79942a7eefcaa1247ef421824f48ce79928164f3fb34de638e960b1526bd5e13.svg" src="../../_images/79942a7eefcaa1247ef421824f48ce79928164f3fb34de638e960b1526bd5e13.svg" /><img alt="../../_images/99d6efe352aaf51cfc193586e66a4c1205d672ef75ae1487b365bee445e75eeb.svg" src="../../_images/99d6efe352aaf51cfc193586e66a4c1205d672ef75ae1487b365bee445e75eeb.svg" /><img alt="../../_images/c2e0a0883461d1f28a15626bb83fdd312a20c7666ab86aaff2eb8f2a92697650.svg" src="../../_images/c2e0a0883461d1f28a15626bb83fdd312a20c7666ab86aaff2eb8f2a92697650.svg" /></div>
+</div>
+</section>
+<section id="part-b">
+<h3>Part b)<a class="headerlink" href="#part-b" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># convergence study</span>
+<span class="k">def</span> <span class="nf">convergenceStudy</span><span class="p">(</span><span class="n">vN</span><span class="p">):</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vN</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">N</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vN</span><span class="p">):</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+        <span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">X</span><span class="o">*</span><span class="n">Y</span><span class="p">)</span><span class="o">-</span><span class="n">U</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">E</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">E</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vN</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;rate = </span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$N$ = number of intervals&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$L 2$ error&#39;</span><span class="p">)</span>
+    <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">m</span>
+
+<span class="n">vN</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">]</span>
+<span class="n">convergenceStudy</span><span class="p">(</span><span class="n">vN</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;HW2-Convergence.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=61, inz=61
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">ali</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">AE523</span><span class="o">-</span><span class="n">Fall23</span><span class="o">/</span><span class="n">Examples</span><span class="o">/</span><span class="n">Week4</span><span class="o">/</span><span class="n">HW2Solutions</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">Cell</span> <span class="mi">13</span> <span class="n">line</span> <span class="mi">2</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/ali/repos/AE523-Fall23/Examples/Week4/HW2Solutions.ipynb#X15sZmlsZQ%3D%3D?line=19&#39;</span><span class="o">&gt;</span><span class="mi">20</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>     <span class="k">return</span> <span class="n">m</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/ali/repos/AE523-Fall23/Examples/Week4/HW2Solutions.ipynb#X15sZmlsZQ%3D%3D?line=21&#39;</span><span class="o">&gt;</span><span class="mi">22</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">vN</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">]</span>
+<span class="o">---&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/ali/repos/AE523-Fall23/Examples/Week4/HW2Solutions.ipynb#X15sZmlsZQ%3D%3D?line=22&#39;</span><span class="o">&gt;</span><span class="mi">23</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">convergenceStudy</span><span class="p">(</span><span class="n">vN</span><span class="p">)</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/ali/repos/AE523-Fall23/Examples/Week4/HW2Solutions.ipynb#X15sZmlsZQ%3D%3D?line=23&#39;</span><span class="o">&gt;</span><span class="mi">24</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;HW2-Convergence.pdf&quot;</span><span class="p">)</span>
+
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">ali</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">AE523</span><span class="o">-</span><span class="n">Fall23</span><span class="o">/</span><span class="n">Examples</span><span class="o">/</span><span class="n">Week4</span><span class="o">/</span><span class="n">HW2Solutions</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">Cell</span> <span class="mi">13</span> <span class="n">line</span> <span class="mi">5</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/ali/repos/AE523-Fall23/Examples/Week4/HW2Solutions.ipynb#X15sZmlsZQ%3D%3D?line=2&#39;</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vN</span><span class="p">))</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/ali/repos/AE523-Fall23/Examples/Week4/HW2Solutions.ipynb#X15sZmlsZQ%3D%3D?line=3&#39;</span><span class="o">&gt;</span><span class="mi">4</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">N</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vN</span><span class="p">):</span>
+<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/ali/repos/AE523-Fall23/Examples/Week4/HW2Solutions.ipynb#X15sZmlsZQ%3D%3D?line=4&#39;</span><span class="o">&gt;</span><span class="mi">5</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>     <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/ali/repos/AE523-Fall23/Examples/Week4/HW2Solutions.ipynb#X15sZmlsZQ%3D%3D?line=5&#39;</span><span class="o">&gt;</span><span class="mi">6</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>     <span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">X</span><span class="o">*</span><span class="n">Y</span><span class="p">)</span><span class="o">-</span><span class="n">U</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/ali/repos/AE523-Fall23/Examples/Week4/HW2Solutions.ipynb#X15sZmlsZQ%3D%3D?line=6&#39;</span><span class="o">&gt;</span><span class="mi">7</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: too many values to unpack (expected 3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>From this result, it seems we have not quite reached the asymptotic region of convergence where the rate of convergence = 2. We can get there by increasing the number of grid points in each direction further.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vN</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">]</span>
+<span class="n">convergenceStudy</span><span class="p">(</span><span class="n">vN</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;HW2-ConvergenceContinued.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=61, inz=61
+
+nnz=277, inz=277
+
+nnz=1189, inz=1189
+
+nnz=4933, inz=4933
+
+nnz=20101, inz=20101
+
+nnz=81157, inz=81157
+
+nnz=326149, inz=326149
+
+[1.49059875e-02 5.06700792e-03 1.46965488e-03 3.95347795e-04
+ 1.02503087e-04 2.60954129e-05 6.58328493e-06]
+</pre></div>
+</div>
+<img alt="../../_images/3db645ab079e3fbfcbadbf9eaa2f4d9ced01ec5e4aa61665043bca141a7c987f.svg" src="../../_images/3db645ab079e3fbfcbadbf9eaa2f4d9ced01ec5e4aa61665043bca141a7c987f.svg" /></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "A-CGray/AE523-Fall23",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Examples/Week4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="IterativeSolvers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Iterative linear solvers</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-finite-difference-stencil">Problem 1: Finite difference stencil</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-method-of-undetermined-coefficients">Using the method of undetermined coefficients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-lagrange-polynomials">Using Lagrange polynomials</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-lagrange-interpolation-with-jax">Problem 2: Lagrange interpolation with Jax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-2d-finite-difference-method">Problem 3: 2D finite difference method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a">Part a)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b">Part b)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alasdair Christison Gray
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
