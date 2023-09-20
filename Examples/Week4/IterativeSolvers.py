@@ -3,7 +3,7 @@
 
 # # Iterative linear solvers
 
-# In[255]:
+# In[1]:
 
 
 import time
@@ -21,14 +21,6 @@ import matplotlib_inline
 matplotlib_inline.backend_inline.set_matplotlib_formats("pdf", "svg")
 
 
-# In[256]:
-
-
-# Define the symbolic function q(x)
-def q(x, L):
-    return np.sin(np.pi * x / L)
-
-
 # ## Problem definition
 #
 # In this example we'll be solving the same 1D heat transfer equation as [last week's example](../Week3/FiniteDifferenceScheme.ipynb)
@@ -37,7 +29,7 @@ def q(x, L):
 #
 # ![The finite-difference grid](../../images/FDDomain.svg)
 
-# In[257]:
+# In[3]:
 
 
 # Define the parameters
@@ -46,6 +38,11 @@ kappa = 0.5  # Thermal conductivity
 Nx = 100  # Number of intervals
 T0 = 1.0  # Left boundary condition
 TN = 4.0  # Right boundary condition
+
+
+# Define the symbolic function q(x)
+def q(x, L):
+    return np.sin(np.pi * x / L)
 
 
 # Using the central difference approximation for the second derivative, we wrote the finite difference equation at each node as:
@@ -65,7 +62,7 @@ TN = 4.0  # Right boundary condition
 #
 # $$ ||r||_2 = \sqrt{\sum_{i=1}^{N-1} \frac{1}{N+1}r_i^2} $$
 
-# In[258]:
+# In[4]:
 
 
 def computeResidual(u, q, kappa, dx):
@@ -109,7 +106,7 @@ def computeNorm(r):
 
 # Let's compute the residual for an initial guess at the solution, we'll generate a really bad initial guess by just setting all the non-boundary nodes' temperatures to zero:
 
-# In[259]:
+# In[5]:
 
 
 u = np.zeros(Nx + 1)  # Initial guess
@@ -130,7 +127,7 @@ print(f"Residual norm: {np.linalg.norm(r):.2e}")
 #
 # $$T_{i,new} = \frac{1}{2}\left(T_{i-1} + T_{i+1} + q(x_i) \frac{dx^2}{\kappa}\right)$$
 
-# In[260]:
+# In[6]:
 
 
 def jacobiIteration(u, q, kappa, dx):
@@ -165,7 +162,7 @@ def jacobiIteration(u, q, kappa, dx):
 # Note how we no longer need to keep track of the old state values, we can just overwrite them with the new values as we go along.
 # Depending on the order that we iterate through the nodes, we can get different convergence properties because different states in the update equation will have been updated, this is called the *ordering* of the Gauss-Seidel iteration.
 
-# In[262]:
+# In[7]:
 
 
 def gaussSeidelIteration(u, q, kappa, dx):
@@ -194,7 +191,7 @@ def gaussSeidelIteration(u, q, kappa, dx):
     return uNew
 
 
-# In[261]:
+# In[8]:
 
 
 def iterativeSolve(u, q, kappa, dx, smootherFunc, tol=1e-4, maxIter=5000):
@@ -244,7 +241,7 @@ uJacobi, resNormHistoryJacobi, iterationTimesJacobi = iterativeSolve(u, qVec, ka
 uJacobi, resNormHistoryGS, iterationTimesGS = iterativeSolve(u, qVec, kappa, dx, gaussSeidelIteration, tol=tol)
 
 
-# In[263]:
+# In[9]:
 
 
 fig, ax = plt.subplots()
@@ -261,7 +258,7 @@ niceplots.adjust_spines(ax)
 # Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
 # In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.
 
-# In[264]:
+# In[10]:
 
 
 fig, ax = plt.subplots()
@@ -284,7 +281,7 @@ niceplots.adjust_spines(ax)
 #
 # Below is a new version of the iterative solver that allows us to specify the relaxation factor $\omega$.
 
-# In[265]:
+# In[11]:
 
 
 def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5000):
@@ -328,13 +325,17 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5
 
 # Now let's compare the number of iterations and time required to solve the problem with Jacobi and Gauss-Seidel, where Gauss-Seidel uses over-relaxation with $\omega=1.5$.
 
-# In[266]:
+# In[12]:
 
 
 uJacobi, resNormHistoryJacobi, iterationTimesJacobi = iterativeSolve(
     u, qVec, kappa, dx, jacobiIteration, tol=tol, omega=1.0
 )
 uGS, resNormHistoryGS, iterationTimesGS = iterativeSolve(u, qVec, kappa, dx, gaussSeidelIteration, tol=tol, omega=1.4)
+
+
+# In[13]:
+
 
 fig, axes = plt.subplots(nrows=1, ncols=2, sharey=True, figsize=(8, 4))
 axes[0].set_xlabel("Iterations")
@@ -351,6 +352,7 @@ axes[0].plot(resNormHistoryGS, color=niceColors[1], clip_on=False, label="Gauss-
 axes[1].plot(iterationTimesJacobi, resNormHistoryJacobi, color=niceColors[0], clip_on=False, label="Jacobi")
 axes[1].plot(iterationTimesGS, resNormHistoryGS, color=niceColors[1], clip_on=False, label="Gauss-Seidel")
 axes[0].legend(labelcolor="linecolor")
+plt.show()
 
 
 # In[ ]:

@@ -19,3 +19,4 @@ chapters:
 - file: Examples/Week4/Week4
   sections:
   - file: Examples/Week4/IterativeSolvers.ipynb
+  - file: Examples/Week4/HW2Solutions.ipynb
