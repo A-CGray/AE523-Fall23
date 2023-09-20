@@ -68,8 +68,6 @@ def q(x, L):
 def computeResidual(u, q, kappa, dx):
     """Compute the residual of the 1D heat equation
 
-    _extended_summary_
-
     Parameters
     ----------
     u : jax.numpy.ndarray
