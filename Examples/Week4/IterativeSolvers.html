@@ -505,8 +505,6 @@ Note that this is a different kind of error than we have discussed previously, i
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">computeResidual</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the residual of the 1D heat equation</span>
 
-<span class="sd">    _extended_summary_</span>
-
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    u : jax.numpy.ndarray</span>
@@ -4737,9 +4735,7 @@ Iteration 4049: Res norm = 2.40e-04
 Iteration 4050: Res norm = 2.40e-04
 Iteration 4051: Res norm = 2.40e-04
 Iteration 4052: Res norm = 2.40e-04
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 4053: Res norm = 2.40e-04
+Iteration 4053: Res norm = 2.40e-04
 Iteration 4054: Res norm = 2.40e-04
 Iteration 4055: Res norm = 2.40e-04
 Iteration 4056: Res norm = 2.39e-04
@@ -5112,9 +5108,7 @@ Iteration 4422: Res norm = 2.00e-04
 Iteration 0: Res norm = 2.05e-01
 Iteration 1: Res norm = 1.01e-01
 Iteration 2: Res norm = 5.63e-02
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 3: Res norm = 3.79e-02
+Iteration 3: Res norm = 3.79e-02
 Iteration 4: Res norm = 2.89e-02
 Iteration 5: Res norm = 2.36e-02
 Iteration 6: Res norm = 2.01e-02
@@ -5859,7 +5853,9 @@ Iteration 744: Res norm = 6.75e-04
 Iteration 745: Res norm = 6.74e-04
 Iteration 746: Res norm = 6.74e-04
 Iteration 747: Res norm = 6.73e-04
-Iteration 748: Res norm = 6.72e-04
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 748: Res norm = 6.72e-04
 Iteration 749: Res norm = 6.72e-04
 Iteration 750: Res norm = 6.71e-04
 Iteration 751: Res norm = 6.70e-04
@@ -6649,9 +6645,7 @@ Iteration 1534: Res norm = 3.09e-04
 Iteration 1535: Res norm = 3.08e-04
 Iteration 1536: Res norm = 3.08e-04
 Iteration 1537: Res norm = 3.08e-04
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1538: Res norm = 3.08e-04
+Iteration 1538: Res norm = 3.08e-04
 Iteration 1539: Res norm = 3.07e-04
 Iteration 1540: Res norm = 3.07e-04
 Iteration 1541: Res norm = 3.07e-04
@@ -6848,9 +6842,7 @@ Iteration 1731: Res norm = 2.54e-04
 Iteration 1732: Res norm = 2.54e-04
 Iteration 1733: Res norm = 2.54e-04
 Iteration 1734: Res norm = 2.54e-04
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1735: Res norm = 2.53e-04
+Iteration 1735: Res norm = 2.53e-04
 Iteration 1736: Res norm = 2.53e-04
 Iteration 1737: Res norm = 2.53e-04
 Iteration 1738: Res norm = 2.53e-04
@@ -7110,7 +7102,7 @@ Iteration 1975: Res norm = 2.00e-04
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9e2df5d0a2034f9f30d8afd7de5bcb0a30b45fc73af73c958f62291de842648a.svg" src="../../_images/9e2df5d0a2034f9f30d8afd7de5bcb0a30b45fc73af73c958f62291de842648a.svg" /></div>
+<img alt="../../_images/191b2b448ef49455aba682c66016ca470c875f756850cbe44c20f63cf366989f.svg" src="../../_images/191b2b448ef49455aba682c66016ca470c875f756850cbe44c20f63cf366989f.svg" /></div>
 </div>
 <p>Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
 In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.</p>
@@ -7129,7 +7121,7 @@ In this case, the Jacobi solver actually takes less time to solve the system tha
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4e99f37dcd59722c885b494d4ee104a3bf07b18f42a66fbc0084ae9ae3782d3d.svg" src="../../_images/4e99f37dcd59722c885b494d4ee104a3bf07b18f42a66fbc0084ae9ae3782d3d.svg" /></div>
+<img alt="../../_images/ab2133779c4d7bbbee0c4dc8891d977e8d375bd3205119b2e8fecdce91eb37d6.svg" src="../../_images/ab2133779c4d7bbbee0c4dc8891d977e8d375bd3205119b2e8fecdce91eb37d6.svg" /></div>
 </div>
 <p>We can improve performance with under or over relaxation, where we update the nodes with a weighted average of the old and new values:</p>
 <div class="math notranslate nohighlight">
@@ -11109,9 +11101,7 @@ Iteration 3914: Res norm = 2.57e-04
 Iteration 3915: Res norm = 2.57e-04
 Iteration 3916: Res norm = 2.57e-04
 Iteration 3917: Res norm = 2.56e-04
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 3918: Res norm = 2.56e-04
+Iteration 3918: Res norm = 2.56e-04
 Iteration 3919: Res norm = 2.56e-04
 Iteration 3920: Res norm = 2.56e-04
 Iteration 3921: Res norm = 2.56e-04
@@ -12934,9 +12924,7 @@ Iteration 1314: Res norm = 2.28e-04
 Iteration 1315: Res norm = 2.28e-04
 Iteration 1316: Res norm = 2.28e-04
 Iteration 1317: Res norm = 2.27e-04
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1318: Res norm = 2.27e-04
+Iteration 1318: Res norm = 2.27e-04
 Iteration 1319: Res norm = 2.27e-04
 Iteration 1320: Res norm = 2.26e-04
 Iteration 1321: Res norm = 2.26e-04
@@ -13055,7 +13043,7 @@ Iteration 1410: Res norm = 2.00e-04
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b7fbdf5eb5e8290e582f26c475b814e2c204d51cc628be2b1dd84f647ec5b312.svg" src="../../_images/b7fbdf5eb5e8290e582f26c475b814e2c204d51cc628be2b1dd84f647ec5b312.svg" /></div>
+<img alt="../../_images/9057ccdb9ac710b60ec93d805e18aece9c5a1143790749a1e9e31f28637570ea.svg" src="../../_images/9057ccdb9ac710b60ec93d805e18aece9c5a1143790749a1e9e31f28637570ea.svg" /></div>
 </div>
 </section>
 </section>
