@@ -29,7 +29,7 @@ matplotlib_inline.backend_inline.set_matplotlib_formats("pdf", "svg")
 #
 # ![The finite-difference grid](../../images/FDDomain.svg)
 
-# In[3]:
+# In[2]:
 
 
 # Define the parameters
@@ -62,7 +62,7 @@ def q(x, L):
 #
 # $$ ||r||_2 = \sqrt{\sum_{i=1}^{N-1} \frac{1}{N+1}r_i^2} $$
 
-# In[4]:
+# In[3]:
 
 
 def computeResidual(u, q, kappa, dx):
@@ -104,7 +104,7 @@ def computeNorm(r):
 
 # Let's compute the residual for an initial guess at the solution, we'll generate a really bad initial guess by just setting all the non-boundary nodes' temperatures to zero:
 
-# In[5]:
+# In[4]:
 
 
 u = np.zeros(Nx + 1)  # Initial guess
@@ -120,12 +120,65 @@ print(f"Residual norm: {np.linalg.norm(r):.2e}")
 
 
 # Surprisingly enough, it's not zero, so we need to solve the equations.
+# In this example we're going to to that with an iterative smoother.
+# Below is a general algorithm for solving a system of equation with an iterative smoother.
+# In each iteration we check the residual norm at the current state, if it is too high we apply one iteration of a smoother and repeat.
+
+# In[ ]:
+
+
+def iterativeSolve(u, q, kappa, dx, smootherFunc, tol=1e-4, maxIter=5000):
+    """Iteratively solve the 1D heat equation
+
+    Parameters
+    ----------
+    u : numpy.ndarray
+        Initial guess
+    q : numpy.ndarray
+        Source term vector
+    kappa : float
+        Thermal conductivity
+    dx : float
+        Grid spacing
+    tol : float, optional
+        Tolerance for the residual, by default 1e-10
+    maxIter : int, optional
+        Maximum number of iterations, by default 400
+
+    Returns
+    -------
+    numpy.ndarray
+        Solution vector
+    """
+    resNormHistory = []
+    iterationTimes = []
+    startTime = time.time()
+    for ii in range(maxIter):
+        # Compute the residual and it's norm at the current state
+        r = computeResidual(u, q, kappa, dx)
+        resNorm = computeNorm(r)
+
+        # Print some information and save the residual norm and the current time
+        print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
+        resNormHistory.append(resNorm)
+        iterationTimes.append(time.time() - startTime)
+
+        # Check for convergence or divergence
+        if resNorm < tol or resNorm > 1e10 or np.isnan(resNorm):
+            break
+
+        # If we haven't converged, apply the smoother
+        u = smootherFunc(u, q, kappa, dx)
+
+    return u, resNormHistory, iterationTimes
+
+
 #
 # The first method we will use is the Jacobi iteration. In a Jacobi iteration, we update each node in the grid by rearranging the finite difference equation to solve for $T_i$:
 #
 # $$T_{i,new} = \frac{1}{2}\left(T_{i-1} + T_{i+1} + q(x_i) \frac{dx^2}{\kappa}\right)$$
 
-# In[6]:
+# In[5]:
 
 
 def jacobiIteration(u, q, kappa, dx):
@@ -160,7 +213,7 @@ def jacobiIteration(u, q, kappa, dx):
 # Note how we no longer need to keep track of the old state values, we can just overwrite them with the new values as we go along.
 # Depending on the order that we iterate through the nodes, we can get different convergence properties because different states in the update equation will have been updated, this is called the *ordering* of the Gauss-Seidel iteration.
 
-# In[7]:
+# In[6]:
 
 
 def gaussSeidelIteration(u, q, kappa, dx):
@@ -189,46 +242,7 @@ def gaussSeidelIteration(u, q, kappa, dx):
     return uNew
 
 
-# In[8]:
-
-
-def iterativeSolve(u, q, kappa, dx, smootherFunc, tol=1e-4, maxIter=5000):
-    """Iteratively solve the 1D heat equation
-
-    Parameters
-    ----------
-    u : numpy.ndarray
-        Initial guess
-    q : numpy.ndarray
-        Source term vector
-    kappa : float
-        Thermal conductivity
-    dx : float
-        Grid spacing
-    tol : float, optional
-        Tolerance for the residual, by default 1e-10
-    maxIter : int, optional
-        Maximum number of iterations, by default 400
-
-    Returns
-    -------
-    numpy.ndarray
-        Solution vector
-    """
-    resNormHistory = []
-    iterationTimes = []
-    startTime = time.time()
-    for ii in range(maxIter):
-        r = computeResidual(u, q, kappa, dx)
-        resNorm = computeNorm(r)
-        print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
-        resNormHistory.append(resNorm)
-        iterationTimes.append(time.time() - startTime)
-        if resNorm < tol:
-            break
-        u = smootherFunc(u, q, kappa, dx)
-
-    return u, resNormHistory, iterationTimes
+# In[7]:
 
 
 # Solve the system using Jacobi
@@ -239,7 +253,7 @@ uJacobi, resNormHistoryJacobi, iterationTimesJacobi = iterativeSolve(u, qVec, ka
 uJacobi, resNormHistoryGS, iterationTimesGS = iterativeSolve(u, qVec, kappa, dx, gaussSeidelIteration, tol=tol)
 
 
-# In[9]:
+# In[8]:
 
 
 fig, ax = plt.subplots()
@@ -256,7 +270,7 @@ niceplots.adjust_spines(ax)
 # Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
 # In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.
 
-# In[10]:
+# In[9]:
 
 
 fig, ax = plt.subplots()
@@ -279,7 +293,7 @@ niceplots.adjust_spines(ax)
 #
 # Below is a new version of the iterative solver that allows us to specify the relaxation factor $\omega$.
 
-# In[11]:
+# In[26]:
 
 
 def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5000):
@@ -314,7 +328,7 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5
         print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
         resNormHistory.append(resNorm)
         iterationTimes.append(time.time() - startTime)
-        if resNorm < tol:
+        if resNorm < tol or resNorm > 1e10 or np.isnan(resNorm):
             break
         u = omega * smootherFunc(u, q, kappa, dx) + (1 - omega) * u
 
@@ -323,19 +337,28 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5
 
 # Now let's compare the number of iterations and time required to solve the problem with Jacobi and Gauss-Seidel, where Gauss-Seidel uses over-relaxation with $\omega=1.5$.
 
-# In[12]:
+# In[35]:
 
 
 uJacobi, resNormHistoryJacobi, iterationTimesJacobi = iterativeSolve(
     u, qVec, kappa, dx, jacobiIteration, tol=tol, omega=1.0
 )
-uGS, resNormHistoryGS, iterationTimesGS = iterativeSolve(u, qVec, kappa, dx, gaussSeidelIteration, tol=tol, omega=1.4)
+
+resNormHistories = []
+iterationTimes = []
+omegas = [1.0, 1.4, 1.6, 1.8]
+for omega in omegas:
+    uGS, resNormHistoryGS, iterationTimesGS = iterativeSolve(
+        u, qVec, kappa, dx, gaussSeidelIteration, tol=tol, omega=omega
+    )
+    resNormHistories.append(resNormHistoryGS)
+    iterationTimes.append(iterationTimesGS)
 
 
-# In[13]:
+# In[36]:
 
 
-fig, axes = plt.subplots(nrows=1, ncols=2, sharey=True, figsize=(8, 4))
+fig, axes = plt.subplots(nrows=1, ncols=2, sharey=True, figsize=(12, 6))
 axes[0].set_xlabel("Iterations")
 axes[1].set_xlabel("Time (s)")
 axes[0].set_ylabel("Residual norm")
@@ -345,11 +368,21 @@ for ax in axes:
     niceplots.adjust_spines(ax)
 
 axes[0].plot(resNormHistoryJacobi, color=niceColors[0], clip_on=False, label="Jacobi")
-axes[0].plot(resNormHistoryGS, color=niceColors[1], clip_on=False, label="Gauss-Seidel")
-
 axes[1].plot(iterationTimesJacobi, resNormHistoryJacobi, color=niceColors[0], clip_on=False, label="Jacobi")
-axes[1].plot(iterationTimesGS, resNormHistoryGS, color=niceColors[1], clip_on=False, label="Gauss-Seidel")
+
+omegaColours = plt.get_cmap("viridis")(np.linspace(0.2, 0.8, len(omegas)))
+for ii in range(len(omegas)):
+    axes[0].plot(resNormHistories[ii], color=omegaColours[ii], clip_on=False, label=f"GS, $\\omega$ = {omegas[ii]:.2f}")
+    axes[1].plot(
+        iterationTimes[ii],
+        resNormHistories[ii],
+        color=omegaColours[ii],
+        clip_on=False,
+        label=f"GS, $\\omega$ = {omegas[ii]:.2f}",
+    )
+
 axes[0].legend(labelcolor="linecolor")
+axes[0].set_ylim(top=1e8)
 plt.show()
 
 
