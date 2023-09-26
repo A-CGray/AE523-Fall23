@@ -477,19 +477,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">jax</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;sympy&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <section id="problem-1-finite-difference-stencil">
 <h2>Problem 1: Finite difference stencil<a class="headerlink" href="#problem-1-finite-difference-stencil" title="Permalink to this heading">#</a></h2>
@@ -595,12 +582,16 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_0(x) = 0.0416666666666667*(h - x)*(2*h - x)*(3*h - x)*(4*h - x)/h**4
 L_1(x) = 0.166666666666667*x*(2*h - x)*(3*h - x)*(4*h - x)/h**4
 L_2(x) = -0.25*x*(h - x)*(3*h - x)*(4*h - x)/h**4
-L_3(x) = 0.166666666666667*x*(h - x)*(2*h - x)*(4*h - x)/h**4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_3(x) = 0.166666666666667*x*(h - x)*(2*h - x)*(4*h - x)/h**4
 L_4(x) = -0.0416666666666667*x*(h - x)*(2*h - x)*(3*h - x)/h**4
 
 
 Coefficients for first derivative:
-a_0 = dL_0/dx | x=0 = -2.08333333333333/h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = dL_0/dx | x=0 = -2.08333333333333/h
 a_1 = dL_1/dx | x=0 = 4.0/h
 a_2 = dL_2/dx | x=0 = -3.0/h
 a_3 = dL_3/dx | x=0 = 1.33333333333333/h
@@ -612,7 +603,9 @@ a_0 = d^2L_0/dx^2 | x=0 = 2.91666666666667/h**2
 a_1 = d^2L_1/dx^2 | x=0 = -8.66666666666667/h**2
 a_2 = d^2L_2/dx^2 | x=0 = 9.5/h**2
 a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
-a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
 </pre></div>
 </div>
 </div>
@@ -645,12 +638,23 @@ a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1695743381.220815    2329 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
+No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients for first derivative:
-a_0 = dL_0/dx | x=0 = -2.083333333333333
-a_1 = dL_1/dx | x=0 = 4.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = dL_0/dx | x=0 = -2.083333333333333
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = dL_1/dx | x=0 = 4.0
 a_2 = dL_2/dx | x=0 = -3.0
 a_3 = dL_3/dx | x=0 = 1.3333333333333333
-a_4 = dL_4/dx | x=0 = -0.25
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_4 = dL_4/dx | x=0 = -0.25
 
 
 Coefficients for second derivative:
@@ -770,7 +774,7 @@ nnz=1189, inz=1189
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 2 Axes&gt;, &lt;Axes: xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../../_images/6445988f5464997c290d48dcbeb3528cb3f999f31d4e193ed9b10a01d5b55961.svg" src="../../_images/6445988f5464997c290d48dcbeb3528cb3f999f31d4e193ed9b10a01d5b55961.svg" /><img alt="../../_images/bf8aa7e6c19f416ca7f9c8b38b849af53859e243c5f9207771381fc740a0890f.svg" src="../../_images/bf8aa7e6c19f416ca7f9c8b38b849af53859e243c5f9207771381fc740a0890f.svg" /><img alt="../../_images/96dec03f7d4830c18df9fc833fec0676e5d67581e25fdcbffdc88326c7c1e2b9.svg" src="../../_images/96dec03f7d4830c18df9fc833fec0676e5d67581e25fdcbffdc88326c7c1e2b9.svg" /><img alt="../../_images/0578e7208130f8ffdc2ca436bf9e69dbb6393d1c0c37f842b00e8b6db6261f8e.svg" src="../../_images/0578e7208130f8ffdc2ca436bf9e69dbb6393d1c0c37f842b00e8b6db6261f8e.svg" /></div>
+<img alt="../../_images/616e535cb4f968ad6fdcd426ba9efaf36b747323f0f3bea1341c17a679dc5fbd.svg" src="../../_images/616e535cb4f968ad6fdcd426ba9efaf36b747323f0f3bea1341c17a679dc5fbd.svg" /><img alt="../../_images/dea3c7f0e3e37ecf1a2e782fa5e3c1c806e1fe62b4805f1c6d750cf1dc217da4.svg" src="../../_images/dea3c7f0e3e37ecf1a2e782fa5e3c1c806e1fe62b4805f1c6d750cf1dc217da4.svg" /><img alt="../../_images/4a9c196fdc68b8df9f955ee401d87e097c7b08ca1e2094dbe89e54a48ecc57de.svg" src="../../_images/4a9c196fdc68b8df9f955ee401d87e097c7b08ca1e2094dbe89e54a48ecc57de.svg" /><img alt="../../_images/3fd86a733504b54347a18a761171f04774f28c9f2bdd0c2c200093dcdde8d3e4.svg" src="../../_images/3fd86a733504b54347a18a761171f04774f28c9f2bdd0c2c200093dcdde8d3e4.svg" /></div>
 </div>
 </section>
 <section id="part-b">
@@ -815,7 +819,10 @@ nnz=4933, inz=4933
 [0.01490599 0.00506701 0.00146965 0.00039535]
 </pre></div>
 </div>
-<img alt="../../_images/4ab4543ab1b944049c41312a25e2689174c7e32a49bd546934d1b7abad036af6.svg" src="../../_images/4ab4543ab1b944049c41312a25e2689174c7e32a49bd546934d1b7abad036af6.svg" /></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283491888
+</pre></div>
+</div>
+<img alt="../../_images/8afeb3018cda3b2382015aa716966b3fe908d921946bb7522758173d8f9df324.svg" src="../../_images/8afeb3018cda3b2382015aa716966b3fe908d921946bb7522758173d8f9df324.svg" /></div>
 </div>
 <p>From this result, it seems we have not quite reached the asymptotic region of convergence where the rate of convergence = 2. We can get there by increasing the number of grid points in each direction further.</p>
 <div class="cell docutils container">
@@ -835,16 +842,22 @@ nnz=1189, inz=1189
 nnz=4933, inz=4933
 
 nnz=20101, inz=20101
-
-nnz=81157, inz=81157
-
-nnz=326149, inz=326149
-
-[1.49059875e-02 5.06700792e-03 1.46965488e-03 3.95347795e-04
- 1.02503087e-04 2.60954129e-05 6.58328493e-06]
 </pre></div>
 </div>
-<img alt="../../_images/bda175b2c43bd047264dc4e7578b3a0604833327856d45b15145d1478c1cd7d3.svg" src="../../_images/bda175b2c43bd047264dc4e7578b3a0604833327856d45b15145d1478c1cd7d3.svg" /></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=81157, inz=81157
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=326149, inz=326149
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.49059875e-02 5.06700792e-03 1.46965488e-03 3.95347795e-04
+ 1.02503087e-04 2.60954129e-05 6.58328496e-06]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9869166809982022
+</pre></div>
+</div>
+<img alt="../../_images/4659f5eb30bdecada2ae8ea40ffa07d889f5afcbbe139db826e8f4efa63a680a.svg" src="../../_images/4659f5eb30bdecada2ae8ea40ffa07d889f5afcbbe139db826e8f4efa63a680a.svg" /></div>
 </div>
 </section>
 </section>
