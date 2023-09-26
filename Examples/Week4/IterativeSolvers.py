@@ -237,7 +237,7 @@ def gaussSeidelIteration(u, q, kappa, dx):
     """
     dx2k = dx**2 / kappa
     uNew = u.copy()
-    for ii in range(1, len(x) - 1):
+    for ii in range(1, len(u) - 1):
         uNew[ii] = 0.5 * (uNew[ii - 1] + uNew[ii + 1] + q[ii] * dx2k)
     return uNew
 
