@@ -6,4 +6,5 @@ niceplots>=2.0.0
 numpy
 jaxlib
 jax[cpu]
+sympy
 ghp-import
