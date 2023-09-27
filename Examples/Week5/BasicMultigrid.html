@@ -448,7 +448,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="multigrid">
 <h1>Multigrid<a class="headerlink" href="#multigrid" title="Permalink to this heading">#</a></h1>
-<p>These examples are based on code originally written by Krzysztof Fidkowski and adapted by Venkat Viswanathan.</p>
+<p>These examples are based on code originally written by Krzysztof Fidkowski and adapted by Venkat Viswanathan.
+This page also contains figures from Krzysztof Fidkowski’s CFD course notes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
@@ -2290,7 +2291,9 @@ Iteration 1665: Res norm = 3.06e-04
 Iteration 1666: Res norm = 3.04e-04
 Iteration 1667: Res norm = 3.03e-04
 Iteration 1668: Res norm = 3.01e-04
-Iteration 1669: Res norm = 2.99e-04
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1669: Res norm = 2.99e-04
 Iteration 1670: Res norm = 2.97e-04
 Iteration 1671: Res norm = 2.96e-04
 Iteration 1672: Res norm = 2.94e-04
@@ -3004,9 +3007,7 @@ Iteration 2379: Res norm = 5.46e-06
 Iteration 2380: Res norm = 5.42e-06
 Iteration 2381: Res norm = 5.39e-06
 Iteration 2382: Res norm = 5.36e-06
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2383: Res norm = 5.33e-06
+Iteration 2383: Res norm = 5.33e-06
 Iteration 2384: Res norm = 5.30e-06
 Iteration 2385: Res norm = 5.27e-06
 Iteration 2386: Res norm = 5.24e-06
@@ -3964,7 +3965,9 @@ Iteration 656: Res norm = 1.76e-02
 Iteration 657: Res norm = 1.75e-02
 Iteration 658: Res norm = 1.74e-02
 Iteration 659: Res norm = 1.73e-02
-Iteration 660: Res norm = 1.72e-02
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 660: Res norm = 1.72e-02
 Iteration 661: Res norm = 1.71e-02
 Iteration 662: Res norm = 1.70e-02
 Iteration 663: Res norm = 1.69e-02
@@ -5714,7 +5717,7 @@ Iteration 2390: Res norm = 9.97e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/baa46dceb6f3ecc2dd0dea2bc17993e80d502ba2a4b2f4e7279ab4578a1b2a81.svg" src="../../_images/baa46dceb6f3ecc2dd0dea2bc17993e80d502ba2a4b2f4e7279ab4578a1b2a81.svg" /></div>
+<img alt="../../_images/9bd205ec49ab23d79ff99ea98d5c87baea831000545e7ca326f7f548d01c9d39.svg" src="../../_images/9bd205ec49ab23d79ff99ea98d5c87baea831000545e7ca326f7f548d01c9d39.svg" /></div>
 </div>
 <p>To demonstrate how different frequencies of error are reduced at different rates, we’ll run 10 iterations starting from the true solution plus a high frequency error and then starting from the true solution plus a low frequency error.</p>
 <div class="cell docutils container">
@@ -5764,7 +5767,7 @@ Iteration 8: Res norm = 1.34e-01
 Iteration 9: Res norm = 1.12e-01
 </pre></div>
 </div>
-<img alt="../../_images/d6656d5a04cbba870ba2837d625699ae5a6b7d5056caa6f30ef294c0a2a4d27b.svg" src="../../_images/d6656d5a04cbba870ba2837d625699ae5a6b7d5056caa6f30ef294c0a2a4d27b.svg" /></div>
+<img alt="../../_images/bc61cfa2d0b4f1efd92c6060d0701de9c7569d15d19e4fdba13688917a062974.svg" src="../../_images/bc61cfa2d0b4f1efd92c6060d0701de9c7569d15d19e4fdba13688917a062974.svg" /></div>
 </div>
 <section id="implementing-a-basic-2-level-multigrid-solver">
 <h2>Implementing a basic 2-level multigrid solver<a class="headerlink" href="#implementing-a-basic-2-level-multigrid-solver" title="Permalink to this heading">#</a></h2>
@@ -5778,6 +5781,20 @@ Iteration 9: Res norm = 1.12e-01
 <li><p>Adding the fine grid correction to the solution</p></li>
 <li><p>Running <span class="math notranslate nohighlight">\(n_\text{post}\)</span> iterations of a smoother on the fine grid</p></li>
 </ul>
+<p><img alt="Full weighting restriction" src="../../_images/MultigridCycle.png" /></p>
+<p>It’s important to recognise that the system of equations we are solving on the coarse grid is slightly different from the system we are solving on the fine grid. On the fine grid we are solving:</p>
+<div class="math notranslate nohighlight">
+\[A_h T = q\]</div>
+<p>Once we solve the system on the coarse grid, one thing we could do is just to interpolate the coarse grid solution back to the fine grid, overwriting whatever we had on the fine grid. However, this would not be a good idea as we would be throwing away information we had on the fine grid. Instead, we want to use the coarse grid to compute a <strong>correction</strong> to our fine grid solution.</p>
+<p>To help think about how to compute this correction, let’s define the solution error:</p>
+<div class="math notranslate nohighlight">
+\[e = T^* - T\]</div>
+<p>where <span class="math notranslate nohighlight">\(T^*\)</span> is the true solution and <span class="math notranslate nohighlight">\(T\)</span> is our current approximation to the solution. Notice that if we knew what <span class="math notranslate nohighlight">\(e\)</span> was, we could just add it to <span class="math notranslate nohighlight">\(T\)</span> to get the true solution.</p>
+<div class="math notranslate nohighlight">
+\[T + e = T + (T^* - T) = T^*\]</div>
+<p>If we multiply the error by our finite difference matrix <span class="math notranslate nohighlight">\(A\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[Ae = A(T^* - T) = AT^* - AT = q - AT = r\]</div>
 <p>In this implementation, our coarse grid is exactly a factor of 2 coarser that the fine grid, the stencils for the restriction and prolongation operators are therefore pretty simple, as shown below.
 In more complex codes, it may not be possible generate such an ideal coarse grid and the restriction and prolongation operators may be more complex averaging/interpolation operators.</p>
 <p><img alt="Full weighting restriction" src="../../_images/MultigridRestriction.png" /></p>
@@ -5886,7 +5903,7 @@ Iteration 2: Res norm = 1.10e-01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d8afa1768f2e4f7179d1ed34fd5fae1401f30867c253927bcfb3e2af6117da55.svg" src="../../_images/d8afa1768f2e4f7179d1ed34fd5fae1401f30867c253927bcfb3e2af6117da55.svg" /></div>
+<img alt="../../_images/8e3d113ad176484e78f51b86cf7f9f02d7d67713fa24b0e04e48fad3112fbdf7.svg" src="../../_images/8e3d113ad176484e78f51b86cf7f9f02d7d67713fa24b0e04e48fad3112fbdf7.svg" /></div>
 </div>
 <p>Now let’s see how fast multigrid converges from the bad initial guess compared to plain Gauss-Seidel.</p>
 <p>When comparing the number of iterations required for convergence, we need to account for the fact that each multigrid iteration is more expensive than a Gauss-Seidel iteration.</p>
@@ -8069,7 +8086,9 @@ Iteration 2163: Res norm = 1.84e-05
 Iteration 2164: Res norm = 1.83e-05
 Iteration 2165: Res norm = 1.82e-05
 Iteration 2166: Res norm = 1.81e-05
-Iteration 2167: Res norm = 1.80e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2167: Res norm = 1.80e-05
 Iteration 2168: Res norm = 1.79e-05
 Iteration 2169: Res norm = 1.78e-05
 Iteration 2170: Res norm = 1.77e-05
@@ -8586,9 +8605,7 @@ Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 2.62e+02
 Iteration 1: Res norm = 9.19e+01
 Iteration 2: Res norm = 3.67e+01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 3: Res norm = 1.61e+01
+Iteration 3: Res norm = 1.61e+01
 Iteration 4: Res norm = 7.76e+00
 Iteration 5: Res norm = 4.47e+00
 Iteration 6: Res norm = 3.30e+00
@@ -8877,7 +8894,7 @@ Iteration 269: Res norm = 9.45e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d0629a204a957d15f2797569f12ceeb9b965de755f5fd97237ce651aa70cfbde.svg" src="../../_images/d0629a204a957d15f2797569f12ceeb9b965de755f5fd97237ce651aa70cfbde.svg" /></div>
+<img alt="../../_images/6f1bf62b1eae212cbb87804d3fc0b3229f1a1854a08aa3f8bf894f60900fffee.svg" src="../../_images/6f1bf62b1eae212cbb87804d3fc0b3229f1a1854a08aa3f8bf894f60900fffee.svg" /></div>
 </div>
 </section>
 </section>
