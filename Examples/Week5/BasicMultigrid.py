@@ -4,6 +4,7 @@
 # # Multigrid
 #
 # These examples are based on code originally written by Krzysztof Fidkowski and adapted by Venkat Viswanathan.
+# This page also contains figures from Krzysztof Fidkowski's CFD course notes.
 
 # In[1]:
 
@@ -228,6 +229,26 @@ niceplots.adjust_spines(ax)
 # - Adding the fine grid correction to the solution
 # - Running $n_\text{post}$ iterations of a smoother on the fine grid
 #
+# ![Full weighting restriction](../../images/MultigridCycle.png)
+
+# It's important to recognise that the system of equations we are solving on the coarse grid is slightly different from the system we are solving on the fine grid. On the fine grid we are solving:
+#
+# $$A_h T = q$$
+#
+# Once we solve the system on the coarse grid, one thing we could do is just to interpolate the coarse grid solution back to the fine grid, overwriting whatever we had on the fine grid. However, this would not be a good idea as we would be throwing away information we had on the fine grid. Instead, we want to use the coarse grid to compute a **correction** to our fine grid solution.
+#
+# To help think about how to compute this correction, let's define the solution error:
+#
+# $$e = T^* - T$$
+#
+# where $T^*$ is the true solution and $T$ is our current approximation to the solution. Notice that if we knew what $e$ was, we could just add it to $T$ to get the true solution.
+#
+# $$T + e = T + (T^* - T) = T^*$$
+#
+# If we multiply the error by our finite difference matrix $A$, we get:
+#
+# $$Ae = A(T^* - T) = AT^* - AT = q - AT = r$$
+#
 # In this implementation, our coarse grid is exactly a factor of 2 coarser that the fine grid, the stencils for the restriction and prolongation operators are therefore pretty simple, as shown below.
 # In more complex codes, it may not be possible generate such an ideal coarse grid and the restriction and prolongation operators may be more complex averaging/interpolation operators.
 
@@ -258,8 +279,6 @@ def prolongate_to_fine(u_coarse):
     u_fine[1:-1:2] = 0.5 * (u_coarse[:-1] + u_coarse[1:])
     return u_fine
 
-
-#
 
 # In[8]:
 
