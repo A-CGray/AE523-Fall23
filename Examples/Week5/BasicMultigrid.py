@@ -253,8 +253,10 @@ niceplots.adjust_spines(ax)
 #
 # $$Ae = A(T^* - T) = AT^* - AT = q - AT = r$$
 #
+# So on the coarse grid, we solve $Ae = r$ approximately. to find a correction $e$ that should take us closer to the true solution, $T^*$ on the coarse grid. Once we have this correction, we can interpolate it back to the fine grid and add it to our current approximation to the solution there.
+#
 # In this implementation, our coarse grid is exactly a factor of 2 coarser that the fine grid, the stencils for the restriction and prolongation operators are therefore pretty simple, as shown below.
-# In more complex codes, it may not be possible generate such an ideal coarse grid and the restriction and prolongation operators may be more complex averaging/interpolation operators.
+# In more complex codes, it may not be possible generate such an ideal coarse grid and the restriction and prolongation may be more complex averaging/interpolation operations.
 
 # ![Full weighting restriction](../../images/MultigridRestriction.png)
 
