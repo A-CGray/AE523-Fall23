@@ -152,6 +152,7 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, tol=1e-4, maxIter=5000):
     """
     resNormHistory = []
     iterationTimes = []
+    printFrequency = max(1, maxIter // 10)
     startTime = time.time()
     for ii in range(maxIter):
         # Compute the residual and it's norm at the current state
@@ -159,7 +160,8 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, tol=1e-4, maxIter=5000):
         resNorm = computeNorm(r)
 
         # Print some information and save the residual norm and the current time
-        print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
+        if ii % printFrequency == 0:
+            print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
         resNormHistory.append(resNorm)
         iterationTimes.append(time.time() - startTime)
 
@@ -170,6 +172,8 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, tol=1e-4, maxIter=5000):
         # If we haven't converged, apply the smoother
         u = smootherFunc(u, q, kappa, dx)
 
+    if ii % printFrequency != 0:
+        print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
     return u, resNormHistory, iterationTimes
 
 
@@ -321,16 +325,21 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5
     """
     resNormHistory = []
     iterationTimes = []
+    printFrequency = max(1, maxIter // 10)
     startTime = time.time()
     for ii in range(maxIter):
         r = computeResidual(u, q, kappa, dx)
         resNorm = computeNorm(r)
-        print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
+        if ii % printFrequency == 0:
+            print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
         resNormHistory.append(resNorm)
         iterationTimes.append(time.time() - startTime)
         if resNorm < tol or resNorm > 1e14 or np.isnan(resNorm):
             break
         u = omega * smootherFunc(u, q, kappa, dx) + (1 - omega) * u
+
+    if ii % printFrequency != 0:
+        print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
 
     return u, resNormHistory, iterationTimes
 

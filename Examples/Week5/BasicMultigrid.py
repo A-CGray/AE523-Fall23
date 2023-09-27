@@ -6,7 +6,7 @@
 # These examples are based on code originally written by Krzysztof Fidkowski and adapted by Venkat Viswanathan.
 # This page also contains figures from Krzysztof Fidkowski's CFD course notes.
 
-# In[1]:
+# In[22]:
 
 
 import time
@@ -28,7 +28,7 @@ matplotlib_inline.backend_inline.set_matplotlib_formats("pdf", "svg")
 #
 # First let's redefine the problem and some of the functions we used to iteratively solve it
 
-# In[2]:
+# In[23]:
 
 
 # Define the parameters
@@ -111,17 +111,21 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5
     """
     resNormHistory = []
     iterationTimes = []
+    printFrequency = max(1, maxIter // 10)
     startTime = time.time()
     for ii in range(maxIter):
         r = computeResidual(u, q, kappa, dx)
         resNorm = computeNorm(r)
-        print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
+        if ii % printFrequency == 0:
+            print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
         resNormHistory.append(resNorm)
         iterationTimes.append(time.time() - startTime)
         if resNorm < tol or resNorm > 1e10 or np.isnan(resNorm):
             break
         u = smootherFunc(u, q, kappa, dx, omega=omega)
 
+    if ii % printFrequency != 0:
+        print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
     return u, resNormHistory, iterationTimes
 
 
@@ -159,7 +163,7 @@ def gaussSeidelIteration(u, q, kappa, dx, omega=1.0):
 #
 # Let's demonstrate these 2 points, first by solving the problem starting from a bad initial guess ($T=0$ everywhere) and then by solving the problem starting from a good initial guess ($T$ varying linearly between the boundaries).
 
-# In[3]:
+# In[24]:
 
 
 T_init_good = np.linspace(T0, TN, Nx + 1)
@@ -177,7 +181,7 @@ T_sol_good, res_history_good, iter_times_good = iterativeSolve(
 )
 
 
-# In[4]:
+# In[25]:
 
 
 fig, ax = plt.subplots()
@@ -193,7 +197,7 @@ niceplots.adjust_spines(ax)
 
 # To demonstrate how different frequencies of error are reduced at different rates, we'll run 10 iterations starting from the true solution plus a high frequency error and then starting from the true solution plus a low frequency error.
 
-# In[5]:
+# In[26]:
 
 
 T_init_highfreq = T_sol_good + 0.01 * np.sin(8 * np.pi * x / L)
@@ -254,7 +258,7 @@ niceplots.adjust_spines(ax)
 
 # ![Full weighting restriction](../../images/MultigridRestriction.png)
 
-# In[6]:
+# In[27]:
 
 
 # Define residual restriction operator from fine grid to coarse grid using full-weighting
@@ -267,7 +271,7 @@ def restrict_to_coarse(r_fine):
 
 # ![Prolongation](../../images/MultigridProlongation.png)
 
-# In[7]:
+# In[28]:
 
 
 # Define prolongation operator from coarse grid to fine grid
@@ -280,7 +284,7 @@ def prolongate_to_fine(u_coarse):
     return u_fine
 
 
-# In[8]:
+# In[29]:
 
 
 def multigridIteration(u, q, kappa, dx, omega=1.0, num_pre=1, num_post=1, num_coarse=2):
@@ -313,7 +317,7 @@ def multigridIteration(u, q, kappa, dx, omega=1.0, num_pre=1, num_post=1, num_co
 
 #
 
-# In[9]:
+# In[30]:
 
 
 num_pre = 1
@@ -333,7 +337,7 @@ T_sol_highfreq, res_history_highfreq, iter_times_highfreq = iterativeSolve(
 )
 
 
-# In[10]:
+# In[31]:
 
 
 fig, ax = plt.subplots()
@@ -351,7 +355,7 @@ niceplots.adjust_spines(ax)
 #
 # When comparing the number of iterations required for convergence, we need to account for the fact that each multigrid iteration is more expensive than a Gauss-Seidel iteration.
 
-# In[11]:
+# In[32]:
 
 
 T_sol_bad_gs, res_history_bad_gs, iter_times_bad_gs = iterativeSolve(
@@ -362,7 +366,7 @@ T_sol_bad_mg, res_history_bad_mg, iter_times_bad_mg = iterativeSolve(
 )
 
 
-# In[12]:
+# In[33]:
 
 
 # Scale the multigrid iteration count by the amount of work each iteration takes
