@@ -586,18 +586,18 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_0(x) = 0.0416666666666667*(h - x)*(2*h - x)*(3*h - x)*(4*h - x)/h**4
 L_1(x) = 0.166666666666667*x*(2*h - x)*(3*h - x)*(4*h - x)/h**4
+L_2(x) = -0.25*x*(h - x)*(3*h - x)*(4*h - x)/h**4
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_2(x) = -0.25*x*(h - x)*(3*h - x)*(4*h - x)/h**4
-L_3(x) = 0.166666666666667*x*(h - x)*(2*h - x)*(4*h - x)/h**4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_4(x) = -0.0416666666666667*x*(h - x)*(2*h - x)*(3*h - x)/h**4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_3(x) = 0.166666666666667*x*(h - x)*(2*h - x)*(4*h - x)/h**4
+L_4(x) = -0.0416666666666667*x*(h - x)*(2*h - x)*(3*h - x)/h**4
 
 
 Coefficients for first derivative:
 a_0 = dL_0/dx | x=0 = -2.08333333333333/h
-a_1 = dL_1/dx | x=0 = 4.0/h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = dL_1/dx | x=0 = 4.0/h
 a_2 = dL_2/dx | x=0 = -3.0/h
 a_3 = dL_3/dx | x=0 = 1.33333333333333/h
 a_4 = dL_4/dx | x=0 = -0.25/h
@@ -607,10 +607,10 @@ Coefficients for 2nd derivative:
 a_0 = d^2L_0/dx^2 | x=0 = 2.91666666666667/h**2
 a_1 = d^2L_1/dx^2 | x=0 = -8.66666666666667/h**2
 a_2 = d^2L_2/dx^2 | x=0 = 9.5/h**2
+a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
-a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
 </pre></div>
 </div>
 </div>
@@ -644,7 +644,7 @@ a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1695828800.748487    2311 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
+I0000 00:00:1695839831.290577    2370 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
 No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
@@ -652,14 +652,12 @@ No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = dL_0/dx | x=0 = -2.083333333333333
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = dL_1/dx | x=0 = 4.0
+a_1 = dL_1/dx | x=0 = 4.0
 a_2 = dL_2/dx | x=0 = -3.0
-a_3 = dL_3/dx | x=0 = 1.3333333333333333
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_4 = dL_4/dx | x=0 = -0.25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_3 = dL_3/dx | x=0 = 1.3333333333333333
+a_4 = dL_4/dx | x=0 = -0.25
 
 
 Coefficients for second derivative:
@@ -779,7 +777,7 @@ nnz=1189, inz=1189
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 2 Axes&gt;, &lt;Axes: xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../../_images/93b8db59a09b2214bf9a48718c6fb261b6090a856804d39b22a47c1a0efc5163.svg" src="../../_images/93b8db59a09b2214bf9a48718c6fb261b6090a856804d39b22a47c1a0efc5163.svg" /><img alt="../../_images/272bea19926b25fd6d0ca60f5842bcb4a967515c427235b5c717b4031c9f65e0.svg" src="../../_images/272bea19926b25fd6d0ca60f5842bcb4a967515c427235b5c717b4031c9f65e0.svg" /><img alt="../../_images/d002693457071d00923c2f2c0acbad0bf25656bd7ba4dd55d4a6d0fad2c4b65b.svg" src="../../_images/d002693457071d00923c2f2c0acbad0bf25656bd7ba4dd55d4a6d0fad2c4b65b.svg" /><img alt="../../_images/41c46edc52a76544fd44dacd3e4b15806f71aa65d8cf90fa4f1294489d420df9.svg" src="../../_images/41c46edc52a76544fd44dacd3e4b15806f71aa65d8cf90fa4f1294489d420df9.svg" /></div>
+<img alt="../../_images/6ff081aa809ceb2422ce4d124b42fb2f4649ed54b36f4ded0e9586dfdc6869db.svg" src="../../_images/6ff081aa809ceb2422ce4d124b42fb2f4649ed54b36f4ded0e9586dfdc6869db.svg" /><img alt="../../_images/6b592a9ae072aa366241938e6f4f96b3cb0eceeaff0dcbc5864230e51d527fa4.svg" src="../../_images/6b592a9ae072aa366241938e6f4f96b3cb0eceeaff0dcbc5864230e51d527fa4.svg" /><img alt="../../_images/86e275fae56f9a9c251e89276690246455dae408b1c62446ffe1c4f86e66a76d.svg" src="../../_images/86e275fae56f9a9c251e89276690246455dae408b1c62446ffe1c4f86e66a76d.svg" /><img alt="../../_images/57fc66abe4d5cc3f6e9f950ca5643995c6c8831886e5b981ecdfebf43a156dd0.svg" src="../../_images/57fc66abe4d5cc3f6e9f950ca5643995c6c8831886e5b981ecdfebf43a156dd0.svg" /></div>
 </div>
 </section>
 <section id="part-b">
@@ -824,10 +822,10 @@ nnz=4933, inz=4933
 [0.01490599 0.00506701 0.00146965 0.00039535]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283485477
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283491888
 </pre></div>
 </div>
-<img alt="../../_images/2b5798974599a0625a7195b244f6623f952afb4943b7ec25de50d2d682c59722.svg" src="../../_images/2b5798974599a0625a7195b244f6623f952afb4943b7ec25de50d2d682c59722.svg" /></div>
+<img alt="../../_images/b84983aca16a07675d9eeaacccd204f814b66d4bfeb4691cfe248a1dc5212cf0.svg" src="../../_images/b84983aca16a07675d9eeaacccd204f814b66d4bfeb4691cfe248a1dc5212cf0.svg" /></div>
 </div>
 <p>From this result, it seems we have not quite reached the asymptotic region of convergence where the rate of convergence = 2. We can get there by increasing the number of grid points in each direction further.</p>
 <div class="cell docutils container">
@@ -856,13 +854,13 @@ nnz=20101, inz=20101
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.49059875e-02 5.06700792e-03 1.46965488e-03 3.95347795e-04
- 1.02503087e-04 2.60954129e-05 6.58328493e-06]
+ 1.02503087e-04 2.60954129e-05 6.58328496e-06]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.986916685561307
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9869166809982022
 </pre></div>
 </div>
-<img alt="../../_images/fcb0f18482e51c68da60350c61bfd387ced17fd6c80c7d13197318fa894a197a.svg" src="../../_images/fcb0f18482e51c68da60350c61bfd387ced17fd6c80c7d13197318fa894a197a.svg" /></div>
+<img alt="../../_images/78a5e35edebd1a0669bb3515354740ba39a1e56aed952f0b26c1d4addf21fcd1.svg" src="../../_images/78a5e35edebd1a0669bb3515354740ba39a1e56aed952f0b26c1d4addf21fcd1.svg" /></div>
 </div>
 </section>
 </section>
