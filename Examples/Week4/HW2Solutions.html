@@ -639,7 +639,7 @@ a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1695743381.220815    2329 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
+I0000 00:00:1695783697.857330    2183 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
 No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
@@ -647,14 +647,12 @@ No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = dL_0/dx | x=0 = -2.083333333333333
+a_1 = dL_1/dx | x=0 = 4.0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = dL_1/dx | x=0 = 4.0
-a_2 = dL_2/dx | x=0 = -3.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_2 = dL_2/dx | x=0 = -3.0
 a_3 = dL_3/dx | x=0 = 1.3333333333333333
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_4 = dL_4/dx | x=0 = -0.25
+a_4 = dL_4/dx | x=0 = -0.25
 
 
 Coefficients for second derivative:
@@ -774,7 +772,7 @@ nnz=1189, inz=1189
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 2 Axes&gt;, &lt;Axes: xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../../_images/616e535cb4f968ad6fdcd426ba9efaf36b747323f0f3bea1341c17a679dc5fbd.svg" src="../../_images/616e535cb4f968ad6fdcd426ba9efaf36b747323f0f3bea1341c17a679dc5fbd.svg" /><img alt="../../_images/dea3c7f0e3e37ecf1a2e782fa5e3c1c806e1fe62b4805f1c6d750cf1dc217da4.svg" src="../../_images/dea3c7f0e3e37ecf1a2e782fa5e3c1c806e1fe62b4805f1c6d750cf1dc217da4.svg" /><img alt="../../_images/4a9c196fdc68b8df9f955ee401d87e097c7b08ca1e2094dbe89e54a48ecc57de.svg" src="../../_images/4a9c196fdc68b8df9f955ee401d87e097c7b08ca1e2094dbe89e54a48ecc57de.svg" /><img alt="../../_images/3fd86a733504b54347a18a761171f04774f28c9f2bdd0c2c200093dcdde8d3e4.svg" src="../../_images/3fd86a733504b54347a18a761171f04774f28c9f2bdd0c2c200093dcdde8d3e4.svg" /></div>
+<img alt="../../_images/208c77ebed1c06cac633072d571b1fc97f62a31dd9110cc49b6dd037228def7b.svg" src="../../_images/208c77ebed1c06cac633072d571b1fc97f62a31dd9110cc49b6dd037228def7b.svg" /><img alt="../../_images/38e943c9ed9499153faef28dfedb93586e755f6942d680ef77a4227c0172fb32.svg" src="../../_images/38e943c9ed9499153faef28dfedb93586e755f6942d680ef77a4227c0172fb32.svg" /><img alt="../../_images/aa29dd86f9c638d73e7403af638c7d1795abf8502a79322dd3010c428650e3e0.svg" src="../../_images/aa29dd86f9c638d73e7403af638c7d1795abf8502a79322dd3010c428650e3e0.svg" /><img alt="../../_images/6c06d38cd8a8be00333d83e448165c502db852f135e252d19388d4cfa2be2322.svg" src="../../_images/6c06d38cd8a8be00333d83e448165c502db852f135e252d19388d4cfa2be2322.svg" /></div>
 </div>
 </section>
 <section id="part-b">
@@ -822,7 +820,7 @@ nnz=4933, inz=4933
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283491888
 </pre></div>
 </div>
-<img alt="../../_images/8afeb3018cda3b2382015aa716966b3fe908d921946bb7522758173d8f9df324.svg" src="../../_images/8afeb3018cda3b2382015aa716966b3fe908d921946bb7522758173d8f9df324.svg" /></div>
+<img alt="../../_images/80e904171065596d0eee4bfe2b72056cfad8ee81b4fe8857722613ec82d03c59.svg" src="../../_images/80e904171065596d0eee4bfe2b72056cfad8ee81b4fe8857722613ec82d03c59.svg" /></div>
 </div>
 <p>From this result, it seems we have not quite reached the asymptotic region of convergence where the rate of convergence = 2. We can get there by increasing the number of grid points in each direction further.</p>
 <div class="cell docutils container">
@@ -857,7 +855,7 @@ nnz=20101, inz=20101
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9869166809982022
 </pre></div>
 </div>
-<img alt="../../_images/4659f5eb30bdecada2ae8ea40ffa07d889f5afcbbe139db826e8f4efa63a680a.svg" src="../../_images/4659f5eb30bdecada2ae8ea40ffa07d889f5afcbbe139db826e8f4efa63a680a.svg" /></div>
+<img alt="../../_images/9027330cbb441fc1b670aa76a769cf7077f47710fbaa3baf505ab22402cbb872.svg" src="../../_images/9027330cbb441fc1b670aa76a769cf7077f47710fbaa3baf505ab22402cbb872.svg" /></div>
 </div>
 </section>
 </section>
