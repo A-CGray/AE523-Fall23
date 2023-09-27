@@ -586,17 +586,17 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_0(x) = 0.0416666666666667*(h - x)*(2*h - x)*(3*h - x)*(4*h - x)/h**4
 L_1(x) = 0.166666666666667*x*(2*h - x)*(3*h - x)*(4*h - x)/h**4
+L_2(x) = -0.25*x*(h - x)*(3*h - x)*(4*h - x)/h**4
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_2(x) = -0.25*x*(h - x)*(3*h - x)*(4*h - x)/h**4
-L_3(x) = 0.166666666666667*x*(h - x)*(2*h - x)*(4*h - x)/h**4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_4(x) = -0.0416666666666667*x*(h - x)*(2*h - x)*(3*h - x)/h**4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_3(x) = 0.166666666666667*x*(h - x)*(2*h - x)*(4*h - x)/h**4
+L_4(x) = -0.0416666666666667*x*(h - x)*(2*h - x)*(3*h - x)/h**4
 
 
 Coefficients for first derivative:
-a_0 = dL_0/dx | x=0 = -2.08333333333333/h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = dL_0/dx | x=0 = -2.08333333333333/h
 a_1 = dL_1/dx | x=0 = 4.0/h
 a_2 = dL_2/dx | x=0 = -3.0/h
 a_3 = dL_3/dx | x=0 = 1.33333333333333/h
@@ -605,9 +605,7 @@ a_4 = dL_4/dx | x=0 = -0.25/h
 
 Coefficients for 2nd derivative:
 a_0 = d^2L_0/dx^2 | x=0 = 2.91666666666667/h**2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = d^2L_1/dx^2 | x=0 = -8.66666666666667/h**2
+a_1 = d^2L_1/dx^2 | x=0 = -8.66666666666667/h**2
 a_2 = d^2L_2/dx^2 | x=0 = 9.5/h**2
 a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
 </pre></div>
@@ -646,7 +644,7 @@ a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1695842133.797033    2288 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
+I0000 00:00:1695842430.114067    2245 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
 No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
@@ -656,7 +654,9 @@ No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = dL_0/dx | x=0 = -2.083333333333333
 a_1 = dL_1/dx | x=0 = 4.0
 a_2 = dL_2/dx | x=0 = -3.0
-a_3 = dL_3/dx | x=0 = 1.3333333333333333
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_3 = dL_3/dx | x=0 = 1.3333333333333333
 a_4 = dL_4/dx | x=0 = -0.25
 
 
@@ -777,7 +777,7 @@ nnz=1189, inz=1189
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 2 Axes&gt;, &lt;Axes: xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../../_images/4ae155e3ff88fbd5994fa9ba63efb6e6acb2e165b34c2e58f5ac116bb4ac5517.svg" src="../../_images/4ae155e3ff88fbd5994fa9ba63efb6e6acb2e165b34c2e58f5ac116bb4ac5517.svg" /><img alt="../../_images/52a450cf03664781bad80b465f14c4ff4dab9ca83ba90e32e381dbec6a227860.svg" src="../../_images/52a450cf03664781bad80b465f14c4ff4dab9ca83ba90e32e381dbec6a227860.svg" /><img alt="../../_images/bb1e6599499d996a90768fc1a6f744b89b6fcd9eecbc1a58ecbaf73ee2cf7fed.svg" src="../../_images/bb1e6599499d996a90768fc1a6f744b89b6fcd9eecbc1a58ecbaf73ee2cf7fed.svg" /><img alt="../../_images/4dc9398086c8f609f4dbd12f3285d839b051fa4b199e5837295fa66dceb2c88d.svg" src="../../_images/4dc9398086c8f609f4dbd12f3285d839b051fa4b199e5837295fa66dceb2c88d.svg" /></div>
+<img alt="../../_images/98cf95950e488628ae4a623d12d92dbcee6df062f127147e11ed18c87902bc66.svg" src="../../_images/98cf95950e488628ae4a623d12d92dbcee6df062f127147e11ed18c87902bc66.svg" /><img alt="../../_images/6f6fff3b099884dd2a609bbb67e65512198787679d4438ff865f07e8bbb1a16e.svg" src="../../_images/6f6fff3b099884dd2a609bbb67e65512198787679d4438ff865f07e8bbb1a16e.svg" /><img alt="../../_images/ff5f8fbf1a258b2fdc027dae01bbcd79541cad88386e41c7114fab5bb3b66c35.svg" src="../../_images/ff5f8fbf1a258b2fdc027dae01bbcd79541cad88386e41c7114fab5bb3b66c35.svg" /><img alt="../../_images/3883e9edd10b311139cf168ba6f9c1095933516c1fe91d85e39bec792d59e13d.svg" src="../../_images/3883e9edd10b311139cf168ba6f9c1095933516c1fe91d85e39bec792d59e13d.svg" /></div>
 </div>
 </section>
 <section id="part-b">
@@ -825,7 +825,7 @@ nnz=4933, inz=4933
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283491888
 </pre></div>
 </div>
-<img alt="../../_images/5d7528d14b9f6107a33ad5f65183e0700d551665cdb8458becad48ab39a3aee5.svg" src="../../_images/5d7528d14b9f6107a33ad5f65183e0700d551665cdb8458becad48ab39a3aee5.svg" /></div>
+<img alt="../../_images/fe0da950c8a909a7fd3a7131b48a5549274007762a87b4a009712db032e37d12.svg" src="../../_images/fe0da950c8a909a7fd3a7131b48a5549274007762a87b4a009712db032e37d12.svg" /></div>
 </div>
 <p>From this result, it seems we have not quite reached the asymptotic region of convergence where the rate of convergence = 2. We can get there by increasing the number of grid points in each direction further.</p>
 <div class="cell docutils container">
@@ -860,7 +860,7 @@ nnz=20101, inz=20101
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9869166809982022
 </pre></div>
 </div>
-<img alt="../../_images/5f2061be03f8f545413fb8d6d6ef71beb5dd233596bba04af8d6cbecf172d719.svg" src="../../_images/5f2061be03f8f545413fb8d6d6ef71beb5dd233596bba04af8d6cbecf172d719.svg" /></div>
+<img alt="../../_images/1c6e2da7e988f482bdba0ecce546700d47abaf3b1032f1b9527117a1c53575a0.svg" src="../../_images/1c6e2da7e988f482bdba0ecce546700d47abaf3b1032f1b9527117a1c53575a0.svg" /></div>
 </div>
 </section>
 </section>

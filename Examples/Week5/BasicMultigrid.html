@@ -631,18 +631,16 @@ Iteration 500: Res norm = 2.18e-01
 Iteration 1000: Res norm = 1.30e-02
 Iteration 1500: Res norm = 7.76e-04
 Iteration 2000: Res norm = 4.63e-05
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2500: Res norm = 2.76e-06
+Iteration 2500: Res norm = 2.76e-06
 Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 7.02e-01
-Iteration 500: Res norm = 4.24e-02
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 500: Res norm = 4.24e-02
 Iteration 1000: Res norm = 2.53e-03
 Iteration 1500: Res norm = 1.51e-04
 Iteration 2000: Res norm = 8.99e-06
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2390: Res norm = 9.97e-07
+Iteration 2390: Res norm = 9.97e-07
 </pre></div>
 </div>
 </div>
@@ -662,7 +660,7 @@ Iteration 2000: Res norm = 8.99e-06
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/aacc456715e177c778b488c0366176847900c32fd1d6fb1ee0ff8b191a176044.svg" src="../../_images/aacc456715e177c778b488c0366176847900c32fd1d6fb1ee0ff8b191a176044.svg" /></div>
+<img alt="../../_images/06024090a738b486363e33b96e2957c7c84a44462daf0d5772b49921a2cbedb6.svg" src="../../_images/06024090a738b486363e33b96e2957c7c84a44462daf0d5772b49921a2cbedb6.svg" /></div>
 </div>
 <p>To demonstrate how different frequencies of error are reduced at different rates, we’ll run 10 iterations starting from the true solution plus a high frequency error and then starting from the true solution plus a low frequency error.</p>
 <div class="cell docutils container">
@@ -712,7 +710,7 @@ Iteration 8: Res norm = 1.34e-01
 Iteration 9: Res norm = 1.12e-01
 </pre></div>
 </div>
-<img alt="../../_images/43168c1c3b76c949bb0a7fd2a585993ae5f056f985a833501ad0c23fd652e3e0.svg" src="../../_images/43168c1c3b76c949bb0a7fd2a585993ae5f056f985a833501ad0c23fd652e3e0.svg" /></div>
+<img alt="../../_images/235d601557db702b7768c5300c2dc6ed9fdd9dc5fe59f850cd5fcccb3c3d1287.svg" src="../../_images/235d601557db702b7768c5300c2dc6ed9fdd9dc5fe59f850cd5fcccb3c3d1287.svg" /></div>
 </div>
 <section id="implementing-a-basic-2-level-multigrid-solver">
 <h2>Implementing a basic 2-level multigrid solver<a class="headerlink" href="#implementing-a-basic-2-level-multigrid-solver" title="Permalink to this heading">#</a></h2>
@@ -740,8 +738,9 @@ Iteration 9: Res norm = 1.12e-01
 <p>If we multiply the error by our finite difference matrix <span class="math notranslate nohighlight">\(A\)</span>, we get:</p>
 <div class="math notranslate nohighlight">
 \[Ae = A(T^* - T) = AT^* - AT = q - AT = r\]</div>
+<p>So on the coarse grid, we solve <span class="math notranslate nohighlight">\(Ae = r\)</span> approximately. to find a correction <span class="math notranslate nohighlight">\(e\)</span> that should take us closer to the true solution, <span class="math notranslate nohighlight">\(T^*\)</span> on the coarse grid. Once we have this correction, we can interpolate it back to the fine grid and add it to our current approximation to the solution there.</p>
 <p>In this implementation, our coarse grid is exactly a factor of 2 coarser that the fine grid, the stencils for the restriction and prolongation operators are therefore pretty simple, as shown below.
-In more complex codes, it may not be possible generate such an ideal coarse grid and the restriction and prolongation operators may be more complex averaging/interpolation operators.</p>
+In more complex codes, it may not be possible generate such an ideal coarse grid and the restriction and prolongation may be more complex averaging/interpolation operations.</p>
 <p><img alt="Full weighting restriction" src="../../_images/MultigridRestriction.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -848,7 +847,7 @@ Iteration 2: Res norm = 1.10e-01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a4287a57df25c0448511f74cf28fa96dc18aad47955f7559c0e05c9153400f98.svg" src="../../_images/a4287a57df25c0448511f74cf28fa96dc18aad47955f7559c0e05c9153400f98.svg" /></div>
+<img alt="../../_images/038d8a12e51eaabcfbe0f442a32c64918300439eb549e8b2f49b44628ca379f1.svg" src="../../_images/038d8a12e51eaabcfbe0f442a32c64918300439eb549e8b2f49b44628ca379f1.svg" /></div>
 </div>
 <p>Now let’s see how fast multigrid converges from the bad initial guess compared to plain Gauss-Seidel.</p>
 <p>When comparing the number of iterations required for convergence, we need to account for the fact that each multigrid iteration is more expensive than a Gauss-Seidel iteration.</p>
@@ -868,11 +867,11 @@ Iteration 2: Res norm = 1.10e-01
 Iteration 500: Res norm = 2.18e-01
 Iteration 1000: Res norm = 1.30e-02
 Iteration 1500: Res norm = 7.76e-04
+Iteration 2000: Res norm = 4.63e-05
+Iteration 2500: Res norm = 2.76e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2000: Res norm = 4.63e-05
-Iteration 2500: Res norm = 2.76e-06
-Iteration 2680: Res norm = 9.99e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 2.62e+02
 Iteration 269: Res norm = 9.45e-07
 </pre></div>
@@ -897,7 +896,7 @@ Iteration 269: Res norm = 9.45e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d51288a23c66de0bccc319c5dbcc406cd01137fed58292c5929ce033f7d37be7.svg" src="../../_images/d51288a23c66de0bccc319c5dbcc406cd01137fed58292c5929ce033f7d37be7.svg" /></div>
+<img alt="../../_images/72b45747be6d289979613b62c181a418b9c0905acc5d479d99d1bedacf109f18.svg" src="../../_images/72b45747be6d289979613b62c181a418b9c0905acc5d479d99d1bedacf109f18.svg" /></div>
 </div>
 </section>
 </section>

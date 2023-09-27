@@ -568,11 +568,11 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1695842087.236267    2084 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
+I0000 00:00:1695842391.402959    2026 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
 No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
-<img alt="../../_images/570c0ac150a211c37d9d31e56e3fb03127dc277f445172484fadf38eafa9b523.svg" src="../../_images/570c0ac150a211c37d9d31e56e3fb03127dc277f445172484fadf38eafa9b523.svg" /></div>
+<img alt="../../_images/abc8d25dd1b434f7503ff8b6f6b035a9650878c8aa007b2d233c192411361630.svg" src="../../_images/abc8d25dd1b434f7503ff8b6f6b035a9650878c8aa007b2d233c192411361630.svg" /></div>
 </div>
 <p>From this plot we can draw a few observations:</p>
 <ul class="simple">
@@ -653,7 +653,7 @@ No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3f36fd02910a7954dfdf886747e44152db049d71045ee81e2f59882ff0e479e6.svg" src="../../_images/3f36fd02910a7954dfdf886747e44152db049d71045ee81e2f59882ff0e479e6.svg" /></div>
+<img alt="../../_images/8f7881cc3671b505ad224334ca41526b6bc4e3f16a00a5a62bc21b10d423b7a7.svg" src="../../_images/8f7881cc3671b505ad224334ca41526b6bc4e3f16a00a5a62bc21b10d423b7a7.svg" /></div>
 </div>
 <p>We can take advantage of this special property to construct a polynomial function that passes through a set of points.
 Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} = [x_0, x_1, ..., x_{N-1}]\)</span> and a set of function values <span class="math notranslate nohighlight">\(\mathbf{f} = [f_0, f_1, ..., f_{N-1}]\)</span> at those points, we can construct a polynomial function <span class="math notranslate nohighlight">\(p(x)\)</span> that passes through all of the points by summing the Lagrange polynomials multiplied by the function values:</p>
@@ -734,7 +734,7 @@ Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f3434f79bc64daa6ced49b80ded691f500f060c7aa7e341a9a0f2fcbc8290730.svg" src="../../_images/f3434f79bc64daa6ced49b80ded691f500f060c7aa7e341a9a0f2fcbc8290730.svg" /></div>
+<img alt="../../_images/8fafecd3520ec7e627f0427059ea370a9442640d212ec072e4f18579a384c67f.svg" src="../../_images/8fafecd3520ec7e627f0427059ea370a9442640d212ec072e4f18579a384c67f.svg" /></div>
 </div>
 <p>Try playing around with the number of datapoints (<code class="docutils literal notranslate"><span class="pre">numDataPoints</span></code>) and the random seed to see in which scenarios the interpolation works well and in which it doesn’t.</p>
 <p>To obtain a finite difference scheme from the interpolating polynomial, we can simply take the derivative of the polynomial and evaluate it at the point of interest. e.g. for the first derivative:</p>
