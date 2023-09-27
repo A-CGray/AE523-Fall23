@@ -5,7 +5,7 @@
 #
 # These examples are based on code originally written by Krzysztof Fidkowski and adapted by Venkat Viswanathan.
 
-# In[78]:
+# In[1]:
 
 
 import time
@@ -27,7 +27,7 @@ matplotlib_inline.backend_inline.set_matplotlib_formats("pdf", "svg")
 #
 # First let's redefine the problem and some of the functions we used to iteratively solve it
 
-# In[79]:
+# In[2]:
 
 
 # Define the parameters
@@ -158,7 +158,7 @@ def gaussSeidelIteration(u, q, kappa, dx, omega=1.0):
 #
 # Let's demonstrate these 2 points, first by solving the problem starting from a bad initial guess ($T=0$ everywhere) and then by solving the problem starting from a good initial guess ($T$ varying linearly between the boundaries).
 
-# In[80]:
+# In[3]:
 
 
 T_init_good = np.linspace(T0, TN, Nx + 1)
@@ -175,6 +175,10 @@ T_sol_good, res_history_good, iter_times_good = iterativeSolve(
     T_init_good, q_array, kappa, L / Nx, gaussSeidelIteration, omega=1.4, tol=tol
 )
 
+
+# In[4]:
+
+
 fig, ax = plt.subplots()
 ax.set_yscale("log")
 ax.set_xlabel("Iteration")
@@ -188,7 +192,7 @@ niceplots.adjust_spines(ax)
 
 # To demonstrate how different frequencies of error are reduced at different rates, we'll run 10 iterations starting from the true solution plus a high frequency error and then starting from the true solution plus a low frequency error.
 
-# In[81]:
+# In[5]:
 
 
 T_init_highfreq = T_sol_good + 0.01 * np.sin(8 * np.pi * x / L)
@@ -229,7 +233,7 @@ niceplots.adjust_spines(ax)
 
 # ![Full weighting restriction](../../images/MultigridRestriction.png)
 
-# In[82]:
+# In[6]:
 
 
 # Define residual restriction operator from fine grid to coarse grid using full-weighting
@@ -242,7 +246,7 @@ def restrict_to_coarse(r_fine):
 
 # ![Prolongation](../../images/MultigridProlongation.png)
 
-# In[83]:
+# In[7]:
 
 
 # Define prolongation operator from coarse grid to fine grid
@@ -257,7 +261,7 @@ def prolongate_to_fine(u_coarse):
 
 #
 
-# In[84]:
+# In[8]:
 
 
 def multigridIteration(u, q, kappa, dx, omega=1.0, num_pre=1, num_post=1, num_coarse=2):
@@ -290,7 +294,7 @@ def multigridIteration(u, q, kappa, dx, omega=1.0, num_pre=1, num_post=1, num_co
 
 #
 
-# In[85]:
+# In[9]:
 
 
 num_pre = 1
@@ -309,6 +313,10 @@ T_sol_highfreq, res_history_highfreq, iter_times_highfreq = iterativeSolve(
     T_init_highfreq, q_array, kappa, L / Nx, multigridIteration, omega=1.2, tol=1e-14, maxIter=num_iters
 )
 
+
+# In[10]:
+
+
 fig, ax = plt.subplots()
 ax.set_xlabel("x")
 ax.set_ylabel(r"$T - T_{sol}$")
@@ -324,7 +332,7 @@ niceplots.adjust_spines(ax)
 #
 # When comparing the number of iterations required for convergence, we need to account for the fact that each multigrid iteration is more expensive than a Gauss-Seidel iteration.
 
-# In[88]:
+# In[11]:
 
 
 T_sol_bad_gs, res_history_bad_gs, iter_times_bad_gs = iterativeSolve(
@@ -333,6 +341,10 @@ T_sol_bad_gs, res_history_bad_gs, iter_times_bad_gs = iterativeSolve(
 T_sol_bad_mg, res_history_bad_mg, iter_times_bad_mg = iterativeSolve(
     T_init_bad, q_array, kappa, L / Nx, multigridIteration, omega=1.4, tol=tol
 )
+
+
+# In[12]:
+
 
 # Scale the multigrid iteration count by the amount of work each iteration takes
 mg_iterations = np.arange(len(res_history_bad_mg)) * multigrid_work
