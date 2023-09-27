@@ -5,7 +5,7 @@
 #
 # These examples are based on code originally written by Krzysztof Fidkowski and adapted by Venkat Viswanathan.
 
-# In[72]:
+# In[78]:
 
 
 import time
@@ -27,7 +27,7 @@ matplotlib_inline.backend_inline.set_matplotlib_formats("pdf", "svg")
 #
 # First let's redefine the problem and some of the functions we used to iteratively solve it
 
-# In[73]:
+# In[79]:
 
 
 # Define the parameters
@@ -36,7 +36,7 @@ kappa = 0.5  # Thermal conductivity
 Nx = 64  # Number of intervals
 T0 = 1.0  # Left boundary condition
 TN = 4.0  # Right boundary condition
-tol = 1e-10  # Tolerance for iterative solver
+tol = 1e-6  # Tolerance for iterative solver
 
 
 # Define the symbolic function q(x)
@@ -65,7 +65,7 @@ def computeResidual(u, q, kappa, dx):
     """
     dx2 = dx**2
     r = np.zeros_like(u)
-    r[1:-1] = -kappa * (u[:-2] - 2 * u[1:-1] + u[2:]) - dx2 * q[1:-1]
+    r[1:-1] = kappa * (u[:-2] - 2 * u[1:-1] + u[2:]) / dx2 + q[1:-1]
 
     return r
 
@@ -158,7 +158,7 @@ def gaussSeidelIteration(u, q, kappa, dx, omega=1.0):
 #
 # Let's demonstrate these 2 points, first by solving the problem starting from a bad initial guess ($T=0$ everywhere) and then by solving the problem starting from a good initial guess ($T$ varying linearly between the boundaries).
 
-# In[74]:
+# In[80]:
 
 
 T_init_good = np.linspace(T0, TN, Nx + 1)
@@ -188,10 +188,10 @@ niceplots.adjust_spines(ax)
 
 # To demonstrate how different frequencies of error are reduced at different rates, we'll run 10 iterations starting from the true solution plus a high frequency error and then starting from the true solution plus a low frequency error.
 
-# In[75]:
+# In[81]:
 
 
-T_init_highfreq = T_sol_good + 0.01 * np.sin(16 * np.pi * x / L)
+T_init_highfreq = T_sol_good + 0.01 * np.sin(8 * np.pi * x / L)
 T_init_lowfreq = T_sol_good + 0.01 * np.sin(1 * np.pi * x / L)
 
 T_sol_lowfreq, res_history_lowfreq, iter_times_lowfreq = iterativeSolve(
@@ -229,17 +229,20 @@ niceplots.adjust_spines(ax)
 
 # ![Full weighting restriction](../../images/MultigridRestriction.png)
 
-# In[76]:
+# In[82]:
 
 
 # Define residual restriction operator from fine grid to coarse grid using full-weighting
 def restrict_to_coarse(r_fine):
-    return 0.25 * r_fine[0:-2:2] + 0.5 * r_fine[1:-1:2] + 0.25 * r_fine[2::2]
+    r_coarse = np.zeros((len(r_fine) - 1) // 2 + 1)  # Create an empty coarse grid
+    for ii in range(1, len(r_coarse) - 1):
+        r_coarse[ii] = 0.25 * r_fine[2 * ii - 1] + 0.5 * r_fine[2 * ii] + 0.25 * r_fine[2 * ii + 1]
+    return r_coarse
 
 
 # ![Prolongation](../../images/MultigridProlongation.png)
 
-# In[77]:
+# In[83]:
 
 
 # Define prolongation operator from coarse grid to fine grid
@@ -250,6 +253,99 @@ def prolongate_to_fine(u_coarse):
     # Use weights 1/2 and 1/2 for odd elements
     u_fine[1:-1:2] = 0.5 * (u_coarse[:-1] + u_coarse[1:])
     return u_fine
+
+
+#
+
+# In[84]:
+
+
+def multigridIteration(u, q, kappa, dx, omega=1.0, num_pre=1, num_post=1, num_coarse=2):
+    u_new = u.copy()
+    # Pre-smoothing iterations
+    for _ in range(num_pre):
+        u_new = gaussSeidelIteration(u_new, q, kappa, dx, omega=omega)
+
+    # Compute the residual
+    r = computeResidual(u_new, q, kappa, dx)
+
+    # Restrict the residual to the coarse grid
+    r_coarse = restrict_to_coarse(r)
+
+    # Smooth the error on the coarse grid
+    du_coarse = np.zeros_like(r_coarse)
+    for _ in range(num_coarse):
+        du_coarse = gaussSeidelIteration(du_coarse, r_coarse, kappa, 2 * dx, omega=omega)
+
+    # Prolongate the state update to the fine grid and add to the current solution
+    du_fine = prolongate_to_fine(du_coarse)
+    u_new += du_fine
+
+    # Post-smoothing iterations
+    for _ in range(num_post):
+        u_new = gaussSeidelIteration(u_new, q, kappa, dx, omega=omega)
+
+    return u_new
+
+
+#
+
+# In[85]:
+
+
+num_pre = 1
+num_post = 1
+num_coarse = 2
+
+# Compute how much work each multigrid iteration takes compared to a single GS iteration on the fine grid
+multigrid_work = 0.5 * num_coarse + num_pre + num_post
+
+num_iters = int(10 / multigrid_work)
+
+T_sol_lowfreq, res_history_lowfreq, iter_times_lowfreq = iterativeSolve(
+    T_init_lowfreq, q_array, kappa, L / Nx, multigridIteration, omega=1.2, tol=1e-14, maxIter=num_iters
+)
+T_sol_highfreq, res_history_highfreq, iter_times_highfreq = iterativeSolve(
+    T_init_highfreq, q_array, kappa, L / Nx, multigridIteration, omega=1.2, tol=1e-14, maxIter=num_iters
+)
+
+fig, ax = plt.subplots()
+ax.set_xlabel("x")
+ax.set_ylabel(r"$T - T_{sol}$")
+ax.plot(x, T_init_highfreq - T_sol_good, "--", c=niceColors[0], label="Initial guess", clip_on=False)
+ax.plot(x, T_init_lowfreq - T_sol_good, "--", c=niceColors[1], clip_on=False)
+ax.plot(x, T_sol_highfreq - T_sol_good, c=niceColors[0], label=f"After {num_iters} iterations", clip_on=False)
+ax.plot(x, T_sol_lowfreq - T_sol_good, c=niceColors[1], clip_on=False)
+ax.legend(ncol=2, loc="lower right", bbox_to_anchor=(1.0, 1.0))
+niceplots.adjust_spines(ax)
+
+
+# Now let's see how fast multigrid converges from the bad initial guess compared to plain Gauss-Seidel.
+#
+# When comparing the number of iterations required for convergence, we need to account for the fact that each multigrid iteration is more expensive than a Gauss-Seidel iteration.
+
+# In[88]:
+
+
+T_sol_bad_gs, res_history_bad_gs, iter_times_bad_gs = iterativeSolve(
+    T_init_bad, q_array, kappa, L / Nx, gaussSeidelIteration, omega=1.4, tol=tol
+)
+T_sol_bad_mg, res_history_bad_mg, iter_times_bad_mg = iterativeSolve(
+    T_init_bad, q_array, kappa, L / Nx, multigridIteration, omega=1.4, tol=tol
+)
+
+# Scale the multigrid iteration count by the amount of work each iteration takes
+mg_iterations = np.arange(len(res_history_bad_mg)) * multigrid_work
+
+fig, ax = plt.subplots()
+ax.set_yscale("log")
+ax.set_xlabel("Equivalent fine-grid iterations")
+ax.set_ylabel("$||r||_2$")
+ax.plot(res_history_bad_gs, clip_on=False, label="Gauss-Seidel")
+ax.plot(mg_iterations, res_history_bad_mg, clip_on=False, label="Multigrid")
+ax.axhline(tol, color="Gray", linestyle="--", label="Tolerance")
+ax.legend(labelcolor="linecolor")
+niceplots.adjust_spines(ax)
 
 
 # In[ ]:

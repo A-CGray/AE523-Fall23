@@ -3,7 +3,7 @@
 
 # # Iterative linear solvers
 
-# In[1]:
+# In[42]:
 
 
 import time
@@ -29,7 +29,7 @@ matplotlib_inline.backend_inline.set_matplotlib_formats("pdf", "svg")
 #
 # ![The finite-difference grid](../../images/FDDomain.svg)
 
-# In[2]:
+# In[43]:
 
 
 # Define the parameters
@@ -47,7 +47,7 @@ def q(x, L):
 
 # Using the central difference approximation for the second derivative, we wrote the finite difference equation at each node as:
 #
-# $$ -\kappa\frac{T_{i-1} - 2T_i + T_{i+1}}{\Delta x^2} = q(x_i) \Rightarrow -T_{i-1} + 2T_i - T_{i+1} = \frac{1}{\kappa} \Delta x^2 q(x_i)$$
+# $$ -\kappa\frac{T_{i-1} - 2T_i + T_{i+1}}{\Delta x^2} = q(x_i)$$
 
 # ## The residual
 #
@@ -56,13 +56,13 @@ def q(x, L):
 #
 # From the above finite difference equation we can derive the residual at each node as:
 #
-# $$ r_i = \kappa\left(-T_{i-1} + 2T_i - T_{i+1}\right) - \Delta x^2 q(x_i)$$
+# $$ r_i = \frac{\kappa\left(-T_{i-1} + 2T_i - T_{i+1}\right)}{\Delta x^2} + q(x_i)$$
 #
 # And the residual norm, that we will use to measure the error in our solution, is:
 #
 # $$ ||r||_2 = \sqrt{\sum_{i=1}^{N-1} \frac{1}{N+1}r_i^2} $$
 
-# In[3]:
+# In[44]:
 
 
 def computeResidual(u, q, kappa, dx):
@@ -86,7 +86,7 @@ def computeResidual(u, q, kappa, dx):
     """
     dx2 = dx**2
     r = np.zeros_like(u)
-    r[1:-1] = -kappa * (u[:-2] - 2 * u[1:-1] + u[2:]) - dx2 * q[1:-1]
+    r[1:-1] = kappa * (u[:-2] - 2 * u[1:-1] + u[2:]) / dx2 + q[1:-1]
 
     return r
 
@@ -104,7 +104,7 @@ def computeNorm(r):
 
 # Let's compute the residual for an initial guess at the solution, we'll generate a really bad initial guess by just setting all the non-boundary nodes' temperatures to zero:
 
-# In[4]:
+# In[45]:
 
 
 u = np.zeros(Nx + 1)  # Initial guess
@@ -124,7 +124,7 @@ print(f"Residual norm: {np.linalg.norm(r):.2e}")
 # Below is a general algorithm for solving a system of equation with an iterative smoother.
 # In each iteration we check the residual norm at the current state, if it is too high we apply one iteration of a smoother and repeat.
 
-# In[ ]:
+# In[46]:
 
 
 def iterativeSolve(u, q, kappa, dx, smootherFunc, tol=1e-4, maxIter=5000):
@@ -178,7 +178,7 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, tol=1e-4, maxIter=5000):
 #
 # $$T_{i,new} = \frac{1}{2}\left(T_{i-1} + T_{i+1} + q(x_i) \frac{dx^2}{\kappa}\right)$$
 
-# In[5]:
+# In[47]:
 
 
 def jacobiIteration(u, q, kappa, dx):
@@ -213,7 +213,7 @@ def jacobiIteration(u, q, kappa, dx):
 # Note how we no longer need to keep track of the old state values, we can just overwrite them with the new values as we go along.
 # Depending on the order that we iterate through the nodes, we can get different convergence properties because different states in the update equation will have been updated, this is called the *ordering* of the Gauss-Seidel iteration.
 
-# In[6]:
+# In[48]:
 
 
 def gaussSeidelIteration(u, q, kappa, dx):
@@ -242,18 +242,18 @@ def gaussSeidelIteration(u, q, kappa, dx):
     return uNew
 
 
-# In[7]:
+# In[49]:
 
 
 # Solve the system using Jacobi
-tol = 2e-4
+tol = 5e-1
 uJacobi, resNormHistoryJacobi, iterationTimesJacobi = iterativeSolve(u, qVec, kappa, dx, jacobiIteration, tol=tol)
 
 # Solve the system using Gauss-Seidel
 uJacobi, resNormHistoryGS, iterationTimesGS = iterativeSolve(u, qVec, kappa, dx, gaussSeidelIteration, tol=tol)
 
 
-# In[8]:
+# In[50]:
 
 
 fig, ax = plt.subplots()
@@ -270,7 +270,7 @@ niceplots.adjust_spines(ax)
 # Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
 # In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.
 
-# In[9]:
+# In[51]:
 
 
 fig, ax = plt.subplots()
@@ -293,7 +293,7 @@ niceplots.adjust_spines(ax)
 #
 # Below is a new version of the iterative solver that allows us to specify the relaxation factor $\omega$.
 
-# In[26]:
+# In[52]:
 
 
 def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5000):
@@ -328,7 +328,7 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5
         print(f"Iteration {ii}: Res norm = {resNorm:.2e}")
         resNormHistory.append(resNorm)
         iterationTimes.append(time.time() - startTime)
-        if resNorm < tol or resNorm > 1e10 or np.isnan(resNorm):
+        if resNorm < tol or resNorm > 1e14 or np.isnan(resNorm):
             break
         u = omega * smootherFunc(u, q, kappa, dx) + (1 - omega) * u
 
@@ -337,7 +337,7 @@ def iterativeSolve(u, q, kappa, dx, smootherFunc, omega=1.0, tol=1e-4, maxIter=5
 
 # Now let's compare the number of iterations and time required to solve the problem with Jacobi and Gauss-Seidel, where Gauss-Seidel uses over-relaxation with $\omega=1.5$.
 
-# In[35]:
+# In[53]:
 
 
 uJacobi, resNormHistoryJacobi, iterationTimesJacobi = iterativeSolve(
@@ -355,7 +355,7 @@ for omega in omegas:
     iterationTimes.append(iterationTimesGS)
 
 
-# In[36]:
+# In[55]:
 
 
 fig, axes = plt.subplots(nrows=1, ncols=2, sharey=True, figsize=(12, 6))
@@ -382,7 +382,7 @@ for ii in range(len(omegas)):
     )
 
 axes[0].legend(labelcolor="linecolor")
-axes[0].set_ylim(top=1e8)
+axes[0].set_ylim(top=1e12)
 plt.show()
 
 
