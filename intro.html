@@ -360,7 +360,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -376,6 +378,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -419,7 +429,12 @@ document.write(`
 </li>
 </ul>
 </div>
+<section id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this heading">#</a></h2>
+<p>Several of the examples on this site are inspired by code originally written by Prof <a class="reference external" href="http://www-personal.umich.edu/~kfid/">Krzysztof Fidkowski</a>, and were adapted in many cases to use JAX with the help of Prof <a class="reference external" href="https://aero.engin.umich.edu/people/viswanathan-venkat/">Venkat Viswanathan</a>.
+Several of the figures used in the examples are taken from Professor Fidkowski’s excellent CFD course notes.</p>
 <p><a class="reference external" href="https://hits.seeyoufarm.com"><img alt="Hits" src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fa-cgray.github.io%2FAE523-Fall23%2Fintro.html&amp;count_bg=%2379C83D&amp;title_bg=%23555555&amp;icon=&amp;icon_color=%23E7E7E7&amp;title=Page+views&amp;edge_flat=true" /></a></p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -467,6 +482,20 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
