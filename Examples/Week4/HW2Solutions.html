@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week4/HW2Solutions';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Week 5" href="../Week5/Week5.html" />
     <link rel="prev" title="Iterative linear solvers" href="IterativeSolvers.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -184,6 +185,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Week4.html">Week 4</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="IterativeSolvers.html">Iterative linear solvers</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Homework 2 Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week5/Week5.html">Week 5</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/BasicMultigrid.html">Multigrid</a></li>
 </ul>
 </li>
 </ul>
@@ -639,7 +644,7 @@ a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1695783697.857330    2183 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
+I0000 00:00:1695827083.049042    2175 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
 No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
@@ -647,12 +652,14 @@ No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = dL_0/dx | x=0 = -2.083333333333333
-a_1 = dL_1/dx | x=0 = 4.0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_2 = dL_2/dx | x=0 = -3.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = dL_1/dx | x=0 = 4.0
+a_2 = dL_2/dx | x=0 = -3.0
 a_3 = dL_3/dx | x=0 = 1.3333333333333333
-a_4 = dL_4/dx | x=0 = -0.25
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_4 = dL_4/dx | x=0 = -0.25
 
 
 Coefficients for second derivative:
@@ -772,7 +779,7 @@ nnz=1189, inz=1189
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 2 Axes&gt;, &lt;Axes: xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../../_images/208c77ebed1c06cac633072d571b1fc97f62a31dd9110cc49b6dd037228def7b.svg" src="../../_images/208c77ebed1c06cac633072d571b1fc97f62a31dd9110cc49b6dd037228def7b.svg" /><img alt="../../_images/38e943c9ed9499153faef28dfedb93586e755f6942d680ef77a4227c0172fb32.svg" src="../../_images/38e943c9ed9499153faef28dfedb93586e755f6942d680ef77a4227c0172fb32.svg" /><img alt="../../_images/aa29dd86f9c638d73e7403af638c7d1795abf8502a79322dd3010c428650e3e0.svg" src="../../_images/aa29dd86f9c638d73e7403af638c7d1795abf8502a79322dd3010c428650e3e0.svg" /><img alt="../../_images/6c06d38cd8a8be00333d83e448165c502db852f135e252d19388d4cfa2be2322.svg" src="../../_images/6c06d38cd8a8be00333d83e448165c502db852f135e252d19388d4cfa2be2322.svg" /></div>
+<img alt="../../_images/8757a00ed8c329733fb582c65c05b8133890095c7038cc3281f56f97e9f8a690.svg" src="../../_images/8757a00ed8c329733fb582c65c05b8133890095c7038cc3281f56f97e9f8a690.svg" /><img alt="../../_images/74ab1b4335c95614553e7b83a9f85a9ae68de99a703e9e7c0af6b10a35dcb95b.svg" src="../../_images/74ab1b4335c95614553e7b83a9f85a9ae68de99a703e9e7c0af6b10a35dcb95b.svg" /><img alt="../../_images/95febddca33a0a6ade9e97053f24bfd1541434c021a4175d0d03d86621fb3fed.svg" src="../../_images/95febddca33a0a6ade9e97053f24bfd1541434c021a4175d0d03d86621fb3fed.svg" /><img alt="../../_images/17a3efe7e3577fdeecbfccf9026c809c4e204d5021e406b792d5da709ef1eb59.svg" src="../../_images/17a3efe7e3577fdeecbfccf9026c809c4e204d5021e406b792d5da709ef1eb59.svg" /></div>
 </div>
 </section>
 <section id="part-b">
@@ -820,7 +827,7 @@ nnz=4933, inz=4933
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283491888
 </pre></div>
 </div>
-<img alt="../../_images/80e904171065596d0eee4bfe2b72056cfad8ee81b4fe8857722613ec82d03c59.svg" src="../../_images/80e904171065596d0eee4bfe2b72056cfad8ee81b4fe8857722613ec82d03c59.svg" /></div>
+<img alt="../../_images/1b147cd9cc230588f5a68e00147b39f7d70dc9a48e1a8d63c2f040cc3d5a518c.svg" src="../../_images/1b147cd9cc230588f5a68e00147b39f7d70dc9a48e1a8d63c2f040cc3d5a518c.svg" /></div>
 </div>
 <p>From this result, it seems we have not quite reached the asymptotic region of convergence where the rate of convergence = 2. We can get there by increasing the number of grid points in each direction further.</p>
 <div class="cell docutils container">
@@ -855,7 +862,7 @@ nnz=20101, inz=20101
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9869166809982022
 </pre></div>
 </div>
-<img alt="../../_images/9027330cbb441fc1b670aa76a769cf7077f47710fbaa3baf505ab22402cbb872.svg" src="../../_images/9027330cbb441fc1b670aa76a769cf7077f47710fbaa3baf505ab22402cbb872.svg" /></div>
+<img alt="../../_images/22cb2d264fa594f23b206295a98c718368914f9bde09a00eacaf0a842846f41d.svg" src="../../_images/22cb2d264fa594f23b206295a98c718368914f9bde09a00eacaf0a842846f41d.svg" /></div>
 </div>
 </section>
 </section>
@@ -899,6 +906,15 @@ nnz=20101, inz=20101
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Iterative linear solvers</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../Week5/Week5.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 5</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

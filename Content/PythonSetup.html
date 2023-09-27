@@ -187,6 +187,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Examples/Week4/HW2Solutions.html">Homework 2 Solutions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Examples/Week5/Week5.html">Week 5</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Week5/BasicMultigrid.html">Multigrid</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -539,17 +543,17 @@ pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.76088667, 0.41586103, 0.08139317, 0.03241957, 0.42079563],
-       [0.4088221 , 0.9319068 , 0.95662837, 0.63229499, 0.27416947],
-       [0.15055173, 0.51608872, 0.51637769, 0.50083378, 0.92787678],
-       [0.28197802, 0.19720623, 0.83280942, 0.39600142, 0.93473724],
-       [0.33038321, 0.83008644, 0.40297287, 0.26190532, 0.95404227]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.0545293 , 0.50431623, 0.2204497 , 0.32039705, 0.51678737],
+       [0.91121308, 0.53948922, 0.39548624, 0.75211875, 0.26506904],
+       [0.54821714, 0.13461104, 0.94774155, 0.15374601, 0.25497299],
+       [0.91045355, 0.4801262 , 0.58176071, 0.45513941, 0.0012635 ],
+       [0.09994798, 0.639052  , 0.86545409, 0.05980292, 0.75121066]])
 
-b=array([0.11481576, 0.54576615, 0.39082033, 0.40203123, 0.52218011])
+b=array([0.24578024, 0.00970964, 0.59173157, 0.37272771, 0.9097637 ])
 
-x=array([-0.20040176,  0.41692048,  0.42399   , -0.33565724,  0.16704019])
+x=array([-0.6440871 ,  0.83593394,  1.07402412, -0.14551782, -0.64014337])
 
-Linear system solution error norm = 1.2719202621569003e-16
+Linear system solution error norm = 1.37076088432403e-16
 </pre></div>
 </div>
 </div>
@@ -589,7 +593,7 @@ If you run into problems, please let us know on Piazza.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1695783652.307022    1918 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
+I0000 00:00:1695827037.583562    1913 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
 No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
@@ -701,7 +705,7 @@ This makes it much clearer in your code which data is being plotted on which fig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0959c3022eb64fff52422e713fe5ba394212453fcc2c7ca2509353bcfa969595.png" src="../_images/0959c3022eb64fff52422e713fe5ba394212453fcc2c7ca2509353bcfa969595.png" />
+<img alt="../_images/2323237dd64f4a0603032acfeda92de6ced1e7fd49f496d4cae11c51bea2d400.png" src="../_images/2323237dd64f4a0603032acfeda92de6ced1e7fd49f496d4cae11c51bea2d400.png" />
 </div>
 </div>
 </section>
@@ -738,7 +742,7 @@ You can also check out some example uses of it <a class="reference external" hre
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a573df6a96e1a57b27fe44af56ab82aee01cd2307cae5ddc9712b1ec23153a40.png" src="../_images/a573df6a96e1a57b27fe44af56ab82aee01cd2307cae5ddc9712b1ec23153a40.png" />
+<img alt="../_images/8e6dbd040e833496bad2ba2934bb52b5083f8d9bdf6bc6782de5f71f8c95ca37.png" src="../_images/8e6dbd040e833496bad2ba2934bb52b5083f8d9bdf6bc6782de5f71f8c95ca37.png" />
 </div>
 </div>
 </section>

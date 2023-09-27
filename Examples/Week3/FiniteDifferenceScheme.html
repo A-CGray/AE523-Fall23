@@ -189,6 +189,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week4/HW2Solutions.html">Homework 2 Solutions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week5/Week5.html">Week 5</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/BasicMultigrid.html">Multigrid</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -629,11 +633,11 @@ T_0 \\ q(x_1)\Delta x^2 / \kappa \\ q(x_2)\Delta x^2 / \kappa \\ \vdots \\ q(x_{
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1695783666.084226    2032 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
+I0000 00:00:1695827051.272055    2028 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
 No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
-<img alt="../../_images/b037b1167e05550c402b1cf0d52d63e0ddc5996b5bcaf94389473decb3ba904f.svg" src="../../_images/b037b1167e05550c402b1cf0d52d63e0ddc5996b5bcaf94389473decb3ba904f.svg" /></div>
+<img alt="../../_images/393470f4d928e79b729d975ace2ff68f939b34283141aa8467c0ec94af14649f.svg" src="../../_images/393470f4d928e79b729d975ace2ff68f939b34283141aa8467c0ec94af14649f.svg" /></div>
 </div>
 <p>Even with only 3 intervals, the solution is already quite close to the exact solution.</p>
 <section id="convergence-study">
@@ -671,7 +675,7 @@ No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f450232d740ab53bc6b2b4b0a413e14c2bd5cc709fa9dd4aa0d558b6f07b83af.svg" src="../../_images/f450232d740ab53bc6b2b4b0a413e14c2bd5cc709fa9dd4aa0d558b6f07b83af.svg" /></div>
+<img alt="../../_images/8ca508da8fb7433633f48301c26e69927a6b91f18649642f54720d00922f1512.svg" src="../../_images/8ca508da8fb7433633f48301c26e69927a6b91f18649642f54720d00922f1512.svg" /></div>
 </div>
 </section>
 <section id="learning-thermal-conductivity-from-measurement-data">
@@ -746,10 +750,10 @@ kappa =  4.9998355e-01, error =  6.0116422e-05
 kappa =  4.9999890e-01, error =  4.0097427e-06
 kappa =  5.0000343e-01, error =  1.2525187e-05
 kappa =  5.0000040e-01, error =  1.4473893e-06
-kappa =  4.9999965e-01, error =  1.2811645e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>kappa =  5.0000000e-01, error =  5.3908355e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>kappa =  4.9999965e-01, error =  1.2811645e-06
+kappa =  5.0000000e-01, error =  5.3908355e-09
 Optimization terminated successfully    (Exit mode 0)
             Current function value: 5.390835456829355e-09
             Iterations: 12

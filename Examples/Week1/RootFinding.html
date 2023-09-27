@@ -189,6 +189,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week4/HW2Solutions.html">Homework 2 Solutions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week5/Week5.html">Week 5</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/BasicMultigrid.html">Multigrid</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -533,7 +537,7 @@ We start the bisection method by setting <span class="math notranslate nohighlig
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1695783656.620242    1951 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
+I0000 00:00:1695827041.838750    1949 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
 No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
@@ -646,7 +650,7 @@ Root found: 1.2233215659894107e-12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/afca7177359ec82abd3222dcee998110c38c317741908408567ad5cb7e668b86.svg" src="../../_images/afca7177359ec82abd3222dcee998110c38c317741908408567ad5cb7e668b86.svg" /></div>
+<img alt="../../_images/65ccfb37b55242de7a008d891fd98f0ed17d2296ae2f7a55f09706a1ce5a87f9.svg" src="../../_images/65ccfb37b55242de7a008d891fd98f0ed17d2296ae2f7a55f09706a1ce5a87f9.svg" /></div>
 </div>
 <p>The Newton-Raphson method found the root in far fewer iterations than the Bisection method, even though it’s first guess was further from the root. Additionally, we didn’t have to find the initial bounds for the search space, which can be difficult in general. Some of the disadvantages of the Newton-Raphson method are</p>
 <ul class="simple">

@@ -67,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week5/BasicMultigrid';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Week 5" href="Week5.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -166,7 +167,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../Content/PythonSetup.html">Getting Started with Python</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week1/Week1.html">Week 1</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week1/RootFinding.html">Root finding methods</a></li>
@@ -185,6 +186,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week4/Week4.html">Week 4</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week4/IterativeSolvers.html">Iterative linear solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week4/HW2Solutions.html">Homework 2 Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Week5.html">Week 5</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Multigrid</a></li>
 </ul>
 </li>
 </ul>
@@ -597,7 +602,7 @@ document.write(`
 <li><p>Iterative smoothers reduce high frequency errors faster than low frequency errors</p></li>
 </ul>
 <p>Let’s demonstrate these 2 points, first by solving the problem starting from a bad initial guess (<span class="math notranslate nohighlight">\(T=0\)</span> everywhere) and then by solving the problem starting from a good initial guess (<span class="math notranslate nohighlight">\(T\)</span> varying linearly between the boundaries).</p>
-<div class="cell tag_scroll_output docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_init_good</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">T0</span><span class="p">,</span> <span class="n">TN</span><span class="p">,</span> <span class="n">Nx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">T_init_bad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">T_init_good</span><span class="p">)</span>
@@ -612,16 +617,6 @@ document.write(`
 <span class="n">T_sol_good</span><span class="p">,</span> <span class="n">res_history_good</span><span class="p">,</span> <span class="n">iter_times_good</span> <span class="o">=</span> <span class="n">iterativeSolve</span><span class="p">(</span>
     <span class="n">T_init_good</span><span class="p">,</span> <span class="n">q_array</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">L</span> <span class="o">/</span> <span class="n">Nx</span><span class="p">,</span> <span class="n">gaussSeidelIteration</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span>
 <span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Iteration&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$||r||_2$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_history_bad</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Bad initial guess&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_history_good</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Good initial guess&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">tol</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tolerance&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
-<span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3009,7 +3004,9 @@ Iteration 2379: Res norm = 5.46e-06
 Iteration 2380: Res norm = 5.42e-06
 Iteration 2381: Res norm = 5.39e-06
 Iteration 2382: Res norm = 5.36e-06
-Iteration 2383: Res norm = 5.33e-06
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2383: Res norm = 5.33e-06
 Iteration 2384: Res norm = 5.30e-06
 Iteration 2385: Res norm = 5.27e-06
 Iteration 2386: Res norm = 5.24e-06
@@ -3112,9 +3109,7 @@ Iteration 2482: Res norm = 3.05e-06
 Iteration 2483: Res norm = 3.03e-06
 Iteration 2484: Res norm = 3.02e-06
 Iteration 2485: Res norm = 3.00e-06
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2486: Res norm = 2.98e-06
+Iteration 2486: Res norm = 2.98e-06
 Iteration 2487: Res norm = 2.97e-06
 Iteration 2488: Res norm = 2.95e-06
 Iteration 2489: Res norm = 2.93e-06
@@ -5702,7 +5697,24 @@ Iteration 2389: Res norm = 1.00e-06
 Iteration 2390: Res norm = 9.97e-07
 </pre></div>
 </div>
-<img alt="../../_images/82bf40430f5bf4d3316051254b84ad61e85ce97399936ffa8507ffeeeb72c240.svg" src="../../_images/82bf40430f5bf4d3316051254b84ad61e85ce97399936ffa8507ffeeeb72c240.svg" /></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Iteration&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$||r||_2$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_history_bad</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Bad initial guess&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_history_good</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Good initial guess&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">tol</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tolerance&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
+<span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/baa46dceb6f3ecc2dd0dea2bc17993e80d502ba2a4b2f4e7279ab4578a1b2a81.svg" src="../../_images/baa46dceb6f3ecc2dd0dea2bc17993e80d502ba2a4b2f4e7279ab4578a1b2a81.svg" /></div>
 </div>
 <p>To demonstrate how different frequencies of error are reduced at different rates, we’ll run 10 iterations starting from the true solution plus a high frequency error and then starting from the true solution plus a low frequency error.</p>
 <div class="cell docutils container">
@@ -5752,7 +5764,7 @@ Iteration 8: Res norm = 1.34e-01
 Iteration 9: Res norm = 1.12e-01
 </pre></div>
 </div>
-<img alt="../../_images/eb1b9b58ab0fe0b3cda42c7baac0cbca12738449d3a28fea7d5053414d71ea5f.svg" src="../../_images/eb1b9b58ab0fe0b3cda42c7baac0cbca12738449d3a28fea7d5053414d71ea5f.svg" /></div>
+<img alt="../../_images/d6656d5a04cbba870ba2837d625699ae5a6b7d5056caa6f30ef294c0a2a4d27b.svg" src="../../_images/d6656d5a04cbba870ba2837d625699ae5a6b7d5056caa6f30ef294c0a2a4d27b.svg" /></div>
 </div>
 <section id="implementing-a-basic-2-level-multigrid-solver">
 <h2>Implementing a basic 2-level multigrid solver<a class="headerlink" href="#implementing-a-basic-2-level-multigrid-solver" title="Permalink to this heading">#</a></h2>
@@ -5845,16 +5857,6 @@ In more complex codes, it may not be possible generate such an ideal coarse grid
 <span class="n">T_sol_highfreq</span><span class="p">,</span> <span class="n">res_history_highfreq</span><span class="p">,</span> <span class="n">iter_times_highfreq</span> <span class="o">=</span> <span class="n">iterativeSolve</span><span class="p">(</span>
     <span class="n">T_init_highfreq</span><span class="p">,</span> <span class="n">q_array</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">L</span> <span class="o">/</span> <span class="n">Nx</span><span class="p">,</span> <span class="n">multigridIteration</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxIter</span><span class="o">=</span><span class="n">num_iters</span>
 <span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$T - T_</span><span class="si">{sol}</span><span class="s2">$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_init_highfreq</span> <span class="o">-</span> <span class="n">T_sol_good</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Initial guess&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_init_lowfreq</span> <span class="o">-</span> <span class="n">T_sol_good</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_sol_highfreq</span> <span class="o">-</span> <span class="n">T_sol_good</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;After </span><span class="si">{</span><span class="n">num_iters</span><span class="si">}</span><span class="s2"> iterations&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_sol_lowfreq</span> <span class="o">-</span> <span class="n">T_sol_good</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
-<span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -5867,11 +5869,28 @@ Iteration 1: Res norm = 2.47e-01
 Iteration 2: Res norm = 1.10e-01
 </pre></div>
 </div>
-<img alt="../../_images/6bc55f50ea413fb115ea4e4a1d7a1f993d939ebb8a3f139f67577d2d2aa37fc7.svg" src="../../_images/6bc55f50ea413fb115ea4e4a1d7a1f993d939ebb8a3f139f67577d2d2aa37fc7.svg" /></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$T - T_</span><span class="si">{sol}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_init_highfreq</span> <span class="o">-</span> <span class="n">T_sol_good</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Initial guess&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_init_lowfreq</span> <span class="o">-</span> <span class="n">T_sol_good</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_sol_highfreq</span> <span class="o">-</span> <span class="n">T_sol_good</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;After </span><span class="si">{</span><span class="n">num_iters</span><span class="si">}</span><span class="s2"> iterations&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_sol_lowfreq</span> <span class="o">-</span> <span class="n">T_sol_good</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">niceColors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+<span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d8afa1768f2e4f7179d1ed34fd5fae1401f30867c253927bcfb3e2af6117da55.svg" src="../../_images/d8afa1768f2e4f7179d1ed34fd5fae1401f30867c253927bcfb3e2af6117da55.svg" /></div>
 </div>
 <p>Now let’s see how fast multigrid converges from the bad initial guess compared to plain Gauss-Seidel.</p>
 <p>When comparing the number of iterations required for convergence, we need to account for the fact that each multigrid iteration is more expensive than a Gauss-Seidel iteration.</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_sol_bad_gs</span><span class="p">,</span> <span class="n">res_history_bad_gs</span><span class="p">,</span> <span class="n">iter_times_bad_gs</span> <span class="o">=</span> <span class="n">iterativeSolve</span><span class="p">(</span>
     <span class="n">T_init_bad</span><span class="p">,</span> <span class="n">q_array</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">L</span> <span class="o">/</span> <span class="n">Nx</span><span class="p">,</span> <span class="n">gaussSeidelIteration</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span>
@@ -5879,19 +5898,6 @@ Iteration 2: Res norm = 1.10e-01
 <span class="n">T_sol_bad_mg</span><span class="p">,</span> <span class="n">res_history_bad_mg</span><span class="p">,</span> <span class="n">iter_times_bad_mg</span> <span class="o">=</span> <span class="n">iterativeSolve</span><span class="p">(</span>
     <span class="n">T_init_bad</span><span class="p">,</span> <span class="n">q_array</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">L</span> <span class="o">/</span> <span class="n">Nx</span><span class="p">,</span> <span class="n">multigridIteration</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span>
 <span class="p">)</span>
-
-<span class="c1"># Scale the multigrid iteration count by the amount of work each iteration takes</span>
-<span class="n">mg_iterations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">res_history_bad_mg</span><span class="p">))</span> <span class="o">*</span> <span class="n">multigrid_work</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Equivalent fine-grid iterations&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$||r||_2$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_history_bad_gs</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gauss-Seidel&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mg_iterations</span><span class="p">,</span> <span class="n">res_history_bad_mg</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Multigrid&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">tol</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tolerance&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
-<span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8369,9 +8375,7 @@ Iteration 2469: Res norm = 3.28e-06
 Iteration 2470: Res norm = 3.27e-06
 Iteration 2471: Res norm = 3.25e-06
 Iteration 2472: Res norm = 3.23e-06
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2473: Res norm = 3.21e-06
+Iteration 2473: Res norm = 3.21e-06
 Iteration 2474: Res norm = 3.19e-06
 Iteration 2475: Res norm = 3.17e-06
 Iteration 2476: Res norm = 3.16e-06
@@ -8582,7 +8586,9 @@ Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 2.62e+02
 Iteration 1: Res norm = 9.19e+01
 Iteration 2: Res norm = 3.67e+01
-Iteration 3: Res norm = 1.61e+01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 3: Res norm = 1.61e+01
 Iteration 4: Res norm = 7.76e+00
 Iteration 5: Res norm = 4.47e+00
 Iteration 6: Res norm = 3.30e+00
@@ -8851,7 +8857,27 @@ Iteration 268: Res norm = 1.00e-06
 Iteration 269: Res norm = 9.45e-07
 </pre></div>
 </div>
-<img alt="../../_images/f73b4a145a8e42493652c6d2ecbb0a987440cbf5f9617f39198c512858c55fa5.svg" src="../../_images/f73b4a145a8e42493652c6d2ecbb0a987440cbf5f9617f39198c512858c55fa5.svg" /></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scale the multigrid iteration count by the amount of work each iteration takes</span>
+<span class="n">mg_iterations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">res_history_bad_mg</span><span class="p">))</span> <span class="o">*</span> <span class="n">multigrid_work</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Equivalent fine-grid iterations&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$||r||_2$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_history_bad_gs</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gauss-Seidel&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mg_iterations</span><span class="p">,</span> <span class="n">res_history_bad_mg</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Multigrid&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">tol</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tolerance&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
+<span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d0629a204a957d15f2797569f12ceeb9b965de755f5fd97237ce651aa70cfbde.svg" src="../../_images/d0629a204a957d15f2797569f12ceeb9b965de755f5fd97237ce651aa70cfbde.svg" /></div>
 </div>
 </section>
 </section>
@@ -8886,6 +8912,15 @@ Iteration 269: Res norm = 9.45e-07
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Week5.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 5</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
