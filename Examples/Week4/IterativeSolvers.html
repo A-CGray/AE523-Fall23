@@ -500,7 +500,7 @@ document.write(`
 Note that this is a different kind of error than we have discussed previously, it is not the error relative to the true solution of the PDE, but the error relative to the solution of the discretized system of equations we have created with our finite difference approximation.</p>
 <p>From the above finite difference equation we can derive the residual at each node as:</p>
 <div class="math notranslate nohighlight">
-\[ r_i = \frac{\kappa\left(-T_{i-1} + 2T_i - T_{i+1}\right)}{\Delta x^2} + q(x_i)\]</div>
+\[ r_i = \frac{\kappa\left(T_{i-1} - 2T_i + T_{i+1}\right)}{\Delta x^2} + q(x_i)\]</div>
 <p>And the residual norm, that we will use to measure the error in our solution, is:</p>
 <div class="math notranslate nohighlight">
 \[ ||r||_2 = \sqrt{\sum_{i=1}^{N-1} \frac{1}{N+1}r_i^2} \]</div>
@@ -714,14 +714,18 @@ Iteration 2500: Res norm = 1.29e+00
 Iteration 3000: Res norm = 1.01e+00
 Iteration 3500: Res norm = 7.88e-01
 Iteration 4000: Res norm = 6.16e-01
-Iteration 4422: Res norm = 5.00e-01
-Iteration 0: Res norm = 5.13e+02
-Iteration 500: Res norm = 2.19e+00
-Iteration 1000: Res norm = 1.31e+00
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500: Res norm = 7.98e-01
-Iteration 1975: Res norm = 5.00e-01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 4422: Res norm = 5.00e-01
+Iteration 0: Res norm = 5.13e+02
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 500: Res norm = 2.19e+00
+Iteration 1000: Res norm = 1.31e+00
+Iteration 1500: Res norm = 7.98e-01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1975: Res norm = 5.00e-01
 </pre></div>
 </div>
 </div>
@@ -741,7 +745,7 @@ Iteration 1975: Res norm = 5.00e-01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0b9f795e6551f2f8a9817de4d89b7674c5100a38fbe6b21c4c1056d1bf17ca5b.svg" src="../../_images/0b9f795e6551f2f8a9817de4d89b7674c5100a38fbe6b21c4c1056d1bf17ca5b.svg" /></div>
+<img alt="../../_images/30cdbb6e27c3880ec3bc3ae90f18838e4129164f8d1be690ecf320edfbb2be4b.svg" src="../../_images/30cdbb6e27c3880ec3bc3ae90f18838e4129164f8d1be690ecf320edfbb2be4b.svg" /></div>
 </div>
 <p>Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
 In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.</p>
@@ -760,7 +764,7 @@ In this case, the Jacobi solver actually takes less time to solve the system tha
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bbba028fd41f1f70ffff754b580afbe22f24be6b47c91f2850ad1b96c9194c17.svg" src="../../_images/bbba028fd41f1f70ffff754b580afbe22f24be6b47c91f2850ad1b96c9194c17.svg" /></div>
+<img alt="../../_images/c65cacaf8674b8feeb9dc0953cf66163bb79efc19f2d6c9546319c2be6893aad.svg" src="../../_images/c65cacaf8674b8feeb9dc0953cf66163bb79efc19f2d6c9546319c2be6893aad.svg" /></div>
 </div>
 <p>We can improve performance with under or over relaxation, where we update the nodes with a weighted average of the old and new values:</p>
 <div class="math notranslate nohighlight">
@@ -845,14 +849,16 @@ Iteration 3500: Res norm = 7.88e-01
 Iteration 4000: Res norm = 6.16e-01
 Iteration 4422: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
-Iteration 500: Res norm = 2.19e+00
-Iteration 1000: Res norm = 1.31e+00
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500: Res norm = 7.98e-01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 500: Res norm = 2.19e+00
+Iteration 1000: Res norm = 1.31e+00
+Iteration 1500: Res norm = 7.98e-01
 Iteration 1975: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
-Iteration 500: Res norm = 1.77e+00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 500: Res norm = 1.77e+00
 Iteration 1000: Res norm = 8.81e-01
 Iteration 1410: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
@@ -893,7 +899,7 @@ Iteration 81: Res norm = 1.05e+14
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/454c756bd43f871b1a0080dc0498c6695ab0ef53a52a07d228475aa9b9343efe.svg" src="../../_images/454c756bd43f871b1a0080dc0498c6695ab0ef53a52a07d228475aa9b9343efe.svg" /></div>
+<img alt="../../_images/439d555803575042c63d5779025f9b1c3d275986a23f4923a5e33d64e61e9e6a.svg" src="../../_images/439d555803575042c63d5779025f9b1c3d275986a23f4923a5e33d64e61e9e6a.svg" /></div>
 </div>
 </section>
 </section>
