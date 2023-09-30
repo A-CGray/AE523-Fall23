@@ -56,7 +56,7 @@ def q(x, L):
 #
 # From the above finite difference equation we can derive the residual at each node as:
 #
-# $$ r_i = \frac{\kappa\left(-T_{i-1} + 2T_i - T_{i+1}\right)}{\Delta x^2} + q(x_i)$$
+# $$ r_i = \frac{\kappa\left(T_{i-1} - 2T_i + T_{i+1}\right)}{\Delta x^2} + q(x_i)$$
 #
 # And the residual norm, that we will use to measure the error in our solution, is:
 #
