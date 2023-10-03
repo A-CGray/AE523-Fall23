@@ -630,16 +630,14 @@ This page also contains figures from Krzysztof Fidkowski’s CFD course notes.</
 Iteration 500: Res norm = 2.18e-01
 Iteration 1000: Res norm = 1.30e-02
 Iteration 1500: Res norm = 7.76e-04
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2000: Res norm = 4.63e-05
+Iteration 2000: Res norm = 4.63e-05
 Iteration 2500: Res norm = 2.76e-06
 Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 7.02e-01
-Iteration 500: Res norm = 4.24e-02
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1000: Res norm = 2.53e-03
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 500: Res norm = 4.24e-02
+Iteration 1000: Res norm = 2.53e-03
 Iteration 1500: Res norm = 1.51e-04
 Iteration 2000: Res norm = 8.99e-06
 Iteration 2390: Res norm = 9.97e-07
@@ -662,7 +660,7 @@ Iteration 2390: Res norm = 9.97e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/18d1f7d6d8570e84f5df6d4f9ec3f9fc271d0c8bcea823dcc4c9809a2ed4fed1.svg" src="../../_images/18d1f7d6d8570e84f5df6d4f9ec3f9fc271d0c8bcea823dcc4c9809a2ed4fed1.svg" /></div>
+<img alt="../../_images/3e908c7dd3c32baaf7f85f19d3078b0e110d8e0636a9d55da1e942e4882dbb5c.svg" src="../../_images/3e908c7dd3c32baaf7f85f19d3078b0e110d8e0636a9d55da1e942e4882dbb5c.svg" /></div>
 </div>
 <p>To demonstrate how different frequencies of error are reduced at different rates, we’ll run 10 iterations starting from the true solution plus a high frequency error and then starting from the true solution plus a low frequency error.</p>
 <div class="cell docutils container">
@@ -712,7 +710,7 @@ Iteration 8: Res norm = 1.34e-01
 Iteration 9: Res norm = 1.12e-01
 </pre></div>
 </div>
-<img alt="../../_images/e2ab773bf3df160c07965b800c7e18984b481a7a50caf40c8863ac332b5e33cc.svg" src="../../_images/e2ab773bf3df160c07965b800c7e18984b481a7a50caf40c8863ac332b5e33cc.svg" /></div>
+<img alt="../../_images/e3bf7665c7d6cfda9ea6d832a7ea2205702e9bf4539bbeb85c834abbaed5f3d5.svg" src="../../_images/e3bf7665c7d6cfda9ea6d832a7ea2205702e9bf4539bbeb85c834abbaed5f3d5.svg" /></div>
 </div>
 <section id="implementing-a-basic-2-level-multigrid-solver">
 <h2>Implementing a basic 2-level multigrid solver<a class="headerlink" href="#implementing-a-basic-2-level-multigrid-solver" title="Permalink to this heading">#</a></h2>
@@ -849,7 +847,7 @@ Iteration 2: Res norm = 1.10e-01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c292cd68ffb39ea63726dad3ba01241129f02ee139248327dd76bfe9ac6c8b67.svg" src="../../_images/c292cd68ffb39ea63726dad3ba01241129f02ee139248327dd76bfe9ac6c8b67.svg" /></div>
+<img alt="../../_images/70e8cdc1e1e770bf856f9c1c119bc6b8bd67a648fa13f0d32b080b1bc051d96b.svg" src="../../_images/70e8cdc1e1e770bf856f9c1c119bc6b8bd67a648fa13f0d32b080b1bc051d96b.svg" /></div>
 </div>
 <p>Now let’s see how fast multigrid converges from the bad initial guess compared to plain Gauss-Seidel.</p>
 <p>When comparing the number of iterations required for convergence, we need to account for the fact that each multigrid iteration is more expensive than a Gauss-Seidel iteration.</p>
@@ -869,13 +867,13 @@ Iteration 2: Res norm = 1.10e-01
 Iteration 500: Res norm = 2.18e-01
 Iteration 1000: Res norm = 1.30e-02
 Iteration 1500: Res norm = 7.76e-04
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2000: Res norm = 4.63e-05
+Iteration 2000: Res norm = 4.63e-05
 Iteration 2500: Res norm = 2.76e-06
 Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 2.62e+02
-Iteration 269: Res norm = 9.45e-07
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 269: Res norm = 9.45e-07
 </pre></div>
 </div>
 </div>
@@ -898,7 +896,7 @@ Iteration 269: Res norm = 9.45e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/909bdcd650f23fd275f782e71c03020a47ae38422cd3ce05dcda454fcf6a4c81.svg" src="../../_images/909bdcd650f23fd275f782e71c03020a47ae38422cd3ce05dcda454fcf6a4c81.svg" /></div>
+<img alt="../../_images/2b434098a7bb30d1d593602013a8bb027fdd1ba50a19de88306a50d6088a46d5.svg" src="../../_images/2b434098a7bb30d1d593602013a8bb027fdd1ba50a19de88306a50d6088a46d5.svg" /></div>
 </div>
 </section>
 </section>
