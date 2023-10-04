@@ -3,7 +3,7 @@
 
 # # How to write fast (or slow) Python code
 
-# In[16]:
+# In[26]:
 
 
 import jax.numpy as jnp
@@ -14,9 +14,9 @@ config.update("jax_enable_x64", True)
 import numpy as np
 
 
-# # Avoid large python loops
+# ## Avoid large python loops
 
-# In[17]:
+# In[27]:
 
 
 def matMult(A, B):
@@ -40,7 +40,7 @@ get_ipython().run_line_magic("timeit", "matMult(A,B)")
 
 # Now let's compare that to NumPy's matrix-matrix multiplication with the same matrices:
 
-# In[18]:
+# In[28]:
 
 
 get_ipython().run_line_magic("timeit", "A @ B")
@@ -50,7 +50,7 @@ get_ipython().run_line_magic("timeit", "A @ B")
 
 # ## When using JAX, avoid modifying array values in place
 
-# In[25]:
+# In[29]:
 
 
 # Define the symbolic function q(x)
@@ -120,7 +120,7 @@ def heat_conduction_2D_slow(Lx=2.0, Ly=1.0, Nx=10, Ny=5, kappa=0.5, coeff=1.0, T
 get_ipython().run_line_magic("timeit", "heat_conduction_2D_slow(Nx=20, Ny=10)")
 
 
-# In[24]:
+# In[30]:
 
 
 def heat_conduction_2D_fast(Lx=2.0, Ly=1.0, Nx=40, Ny=20, kappa=0.5, coeff=1.0, T0=0.0):
