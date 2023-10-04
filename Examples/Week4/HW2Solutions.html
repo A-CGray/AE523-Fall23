@@ -643,11 +643,6 @@ a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1696373930.427139    2209 tfrt_cpu_pjrt_client.cc:349] TfrtCpuClient created.
-No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients for first derivative:
 </pre></div>
 </div>
@@ -656,9 +651,7 @@ No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = dL_1/dx | x=0 = 4.0
 a_2 = dL_2/dx | x=0 = -3.0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_3 = dL_3/dx | x=0 = 1.3333333333333333
+a_3 = dL_3/dx | x=0 = 1.3333333333333333
 a_4 = dL_4/dx | x=0 = -0.25
 
 
@@ -779,7 +772,7 @@ nnz=1189, inz=1189
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 2 Axes&gt;, &lt;Axes: xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../../_images/4610bcafa5075d4417cd4d2d16e07cc9fcd6172bd597daf315be4f016bb4852b.svg" src="../../_images/4610bcafa5075d4417cd4d2d16e07cc9fcd6172bd597daf315be4f016bb4852b.svg" /><img alt="../../_images/c013672e274a6b43328b523dba39299c92018ede1c9cc6552b742826f20b2e3d.svg" src="../../_images/c013672e274a6b43328b523dba39299c92018ede1c9cc6552b742826f20b2e3d.svg" /><img alt="../../_images/d32dd426c42d578faa864472cff666e87093feddea8e1ae5aa112ff1a4bc1203.svg" src="../../_images/d32dd426c42d578faa864472cff666e87093feddea8e1ae5aa112ff1a4bc1203.svg" /><img alt="../../_images/857d78c9545c6c131e6c069c5472a7e675eaa47ca6b1e26111e81b7539350875.svg" src="../../_images/857d78c9545c6c131e6c069c5472a7e675eaa47ca6b1e26111e81b7539350875.svg" /></div>
+<img alt="../../_images/237c3164c8e632b8aee5ab4ab1b73d43c4aa9033f53f32ab3d4148a932ac0cbd.svg" src="../../_images/237c3164c8e632b8aee5ab4ab1b73d43c4aa9033f53f32ab3d4148a932ac0cbd.svg" /><img alt="../../_images/724a2c9033ec3d9419dc74b0676e7cd884abb419d6969557cde1e753a53007ef.svg" src="../../_images/724a2c9033ec3d9419dc74b0676e7cd884abb419d6969557cde1e753a53007ef.svg" /><img alt="../../_images/94feb31e1113743a6c0b92049dabeb94e66a032ebc090610cb657c8acba715bf.svg" src="../../_images/94feb31e1113743a6c0b92049dabeb94e66a032ebc090610cb657c8acba715bf.svg" /><img alt="../../_images/845a791e64e927693dec5f5e9853235a5cea4de51cb9b2cc7dbeb669229fb138.svg" src="../../_images/845a791e64e927693dec5f5e9853235a5cea4de51cb9b2cc7dbeb669229fb138.svg" /></div>
 </div>
 </section>
 <section id="part-b">
@@ -827,7 +820,7 @@ nnz=4933, inz=4933
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283491888
 </pre></div>
 </div>
-<img alt="../../_images/61407b9331dd7755b3d02b6485bdbd12dd9a99d96a000a76d7f590b027caa59d.svg" src="../../_images/61407b9331dd7755b3d02b6485bdbd12dd9a99d96a000a76d7f590b027caa59d.svg" /></div>
+<img alt="../../_images/03dbc0faa1ba242e46d8d5d123714f3eb944d963332bf9b1afee6883264d500d.svg" src="../../_images/03dbc0faa1ba242e46d8d5d123714f3eb944d963332bf9b1afee6883264d500d.svg" /></div>
 </div>
 <p>From this result, it seems we have not quite reached the asymptotic region of convergence where the rate of convergence = 2. We can get there by increasing the number of grid points in each direction further.</p>
 <div class="cell docutils container">
@@ -862,7 +855,7 @@ nnz=20101, inz=20101
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9869166809982022
 </pre></div>
 </div>
-<img alt="../../_images/ac57f1bc0a501d11ba043d827c28afdcb867bda08fc8bfd535352ee04d944fd9.svg" src="../../_images/ac57f1bc0a501d11ba043d827c28afdcb867bda08fc8bfd535352ee04d944fd9.svg" /></div>
+<img alt="../../_images/03005a081d026e1474e40fdb788b10d52564f167032c22b8a1d0f8cfa43efd25.svg" src="../../_images/03005a081d026e1474e40fdb788b10d52564f167032c22b8a1d0f8cfa43efd25.svg" /></div>
 </div>
 </section>
 </section>
