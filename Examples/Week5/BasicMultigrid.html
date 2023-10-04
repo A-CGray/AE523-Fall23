@@ -195,7 +195,6 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week6/Week6.html">Week 6</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/FasterPython.html">How to write fast (or slow) Python code</a></li>
-
 </ul>
 </li>
 </ul>
@@ -636,19 +635,19 @@ This page also contains figures from Krzysztof Fidkowski’s CFD course notes.</
 Iteration 500: Res norm = 2.18e-01
 Iteration 1000: Res norm = 1.30e-02
 Iteration 1500: Res norm = 7.76e-04
+Iteration 2000: Res norm = 4.63e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2000: Res norm = 4.63e-05
-Iteration 2500: Res norm = 2.76e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2500: Res norm = 2.76e-06
 Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 7.02e-01
 Iteration 500: Res norm = 4.24e-02
 Iteration 1000: Res norm = 2.53e-03
+Iteration 1500: Res norm = 1.51e-04
+Iteration 2000: Res norm = 8.99e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500: Res norm = 1.51e-04
-Iteration 2000: Res norm = 8.99e-06
-Iteration 2390: Res norm = 9.97e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2390: Res norm = 9.97e-07
 </pre></div>
 </div>
 </div>
@@ -668,7 +667,7 @@ Iteration 2390: Res norm = 9.97e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b4c21b15c9a23ff1d4331c65cf2c797e608bf6c9f532a171aaf800c837c15b3e.svg" src="../../_images/b4c21b15c9a23ff1d4331c65cf2c797e608bf6c9f532a171aaf800c837c15b3e.svg" /></div>
+<img alt="../../_images/fa05c4c530a260b9a93b67d12bd1c7c805fbe9d0efd3d2635b58fe9a5d3bc638.svg" src="../../_images/fa05c4c530a260b9a93b67d12bd1c7c805fbe9d0efd3d2635b58fe9a5d3bc638.svg" /></div>
 </div>
 <p>To demonstrate how different frequencies of error are reduced at different rates, we’ll run 10 iterations starting from the true solution plus a high frequency error and then starting from the true solution plus a low frequency error.</p>
 <div class="cell docutils container">
@@ -718,7 +717,7 @@ Iteration 8: Res norm = 1.34e-01
 Iteration 9: Res norm = 1.12e-01
 </pre></div>
 </div>
-<img alt="../../_images/4037d66dbc503026183180fad5ea6dcc3a61d670cfab733c5df7db01dc5c020e.svg" src="../../_images/4037d66dbc503026183180fad5ea6dcc3a61d670cfab733c5df7db01dc5c020e.svg" /></div>
+<img alt="../../_images/ac2d5ee3d6abd81431e4fe74242df2ee9e968823333c32a650620cd667ab1616.svg" src="../../_images/ac2d5ee3d6abd81431e4fe74242df2ee9e968823333c32a650620cd667ab1616.svg" /></div>
 </div>
 <section id="implementing-a-basic-2-level-multigrid-solver">
 <h2>Implementing a basic 2-level multigrid solver<a class="headerlink" href="#implementing-a-basic-2-level-multigrid-solver" title="Permalink to this heading">#</a></h2>
@@ -855,7 +854,7 @@ Iteration 2: Res norm = 1.10e-01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5dabe946a84bac1d07563ab11961b99e8e4d5e313e0db3dd87eb6a625f09708c.svg" src="../../_images/5dabe946a84bac1d07563ab11961b99e8e4d5e313e0db3dd87eb6a625f09708c.svg" /></div>
+<img alt="../../_images/42aa48644893f782698cc01fe7a3eaa075cda23f6d2192704864d8cb14e5b565.svg" src="../../_images/42aa48644893f782698cc01fe7a3eaa075cda23f6d2192704864d8cb14e5b565.svg" /></div>
 </div>
 <p>Now let’s see how fast multigrid converges from the bad initial guess compared to plain Gauss-Seidel.</p>
 <p>When comparing the number of iterations required for convergence, we need to account for the fact that each multigrid iteration is more expensive than a Gauss-Seidel iteration.</p>
@@ -875,10 +874,10 @@ Iteration 2: Res norm = 1.10e-01
 Iteration 500: Res norm = 2.18e-01
 Iteration 1000: Res norm = 1.30e-02
 Iteration 1500: Res norm = 7.76e-04
+Iteration 2000: Res norm = 4.63e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2000: Res norm = 4.63e-05
-Iteration 2500: Res norm = 2.76e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2500: Res norm = 2.76e-06
 Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 2.62e+02
 Iteration 269: Res norm = 9.45e-07
@@ -904,7 +903,7 @@ Iteration 269: Res norm = 9.45e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/de5f831c12348c509e8d3b2d0d127a79e9eb0d71e020fdb43156bdada1e03121.svg" src="../../_images/de5f831c12348c509e8d3b2d0d127a79e9eb0d71e020fdb43156bdada1e03121.svg" /></div>
+<img alt="../../_images/a79f8bb4fe5747c92921eddae4d5073479a925385915934313305c61bf412946.svg" src="../../_images/a79f8bb4fe5747c92921eddae4d5073479a925385915934313305c61bf412946.svg" /></div>
 </div>
 </section>
 </section>
