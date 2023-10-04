@@ -23,3 +23,7 @@ chapters:
 - file: Examples/Week5/Week5
   sections:
   - file: Examples/Week5/BasicMultigrid.ipynb
+- file: Examples/Week6/Week6
+  sections:
+  - file: Examples/Week6/InitialValueProblem.ipynb
+  - file: Examples/Week6/FasterPython.ipynb
