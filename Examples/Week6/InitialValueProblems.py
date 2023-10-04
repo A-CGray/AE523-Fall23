@@ -5,7 +5,7 @@
 #
 # These examples are based on code originally written by Krzysztof Fidkowski and adapted by Venkat Viswanathan.
 
-# In[41]:
+# In[7]:
 
 
 import jax.numpy as jnp
@@ -42,9 +42,10 @@ colors = niceplots.get_colors_list()
 #
 # $$u_j^{n+1} = u_j^{n} + \frac{\nu \Delta t}{\Delta x^2}\left(u_{j-1}^{n} - 2u_{j}^{n} + u_{j+1}^{n}\right)$$
 
-# In this example we'll solve the diffusion equation on a 1D domain with a length of 2
+# In this example we'll solve the diffusion equation on a 1D domain with a length of 2.
+# We'll treat the problem as periodic, which means that the left and right boundaries are connected.
 
-# In[42]:
+# In[8]:
 
 
 def getInitialCondition(N, L):
@@ -66,14 +67,15 @@ ax.set_ylabel(r"$u$", rotation="horizontal", ha="right")
 ax.plot(x, u0, "-o", color="gray", alpha=0.5, clip_on=False)
 niceplots.adjust_spines(ax)
 ax.set_title("Initial condition")
+plt.show()
 
 
-# In[43]:
+# In[9]:
 
 
 def FTCS_solver(u0, nu, dx, dt, T):
-    # Initialize the solution array
-    u = u0.copy()
+    # Initialize the solution array (ignore the final node since it's a duplicate of the first)
+    u = u0.copy()[:-1]
 
     # Define the number of time steps
     num_steps = int(T / dt)
@@ -82,10 +84,12 @@ def FTCS_solver(u0, nu, dx, dt, T):
     for _ in range(num_steps):
         # Compute the spatial derivative (centered in space)
         uxx = (jnp.roll(u, 1) - 2 * u + jnp.roll(u, -1)) / (dx**2)
-        uxx = uxx.at[jnp.array([0, -1])].set((u[1] - 2 * u[0] + u[-2]) / (dx**2))
 
         # Update the solution using forward time-stepping
         u += nu * uxx * dt
+
+    # Add the final node back in to the state
+    u = jnp.append(u, u[0])
     return u
 
 
@@ -97,28 +101,53 @@ def plotSolution(ax, x, u0, u, tFinal):
     ax.set_xlabel(r"$x$")
     ax.set_ylabel(r"$u$", rotation="horizontal", ha="right")
 
+    if not isinstance(u, list):
+        u = [u]
+    if not isinstance(tFinal, list):
+        tFinal = [tFinal]
+
+    cmap = plt.get_cmap("cool")
+    colors = [cmap(i) for i in jnp.linspace(0, 1, len(u))]
+
     ax.plot(x, u0, "-o", label=r"$t = 0$", color="gray", alpha=0.5, zorder=0, clip_on=False)
-    ax.plot(x, u, "-o", label=f"$t = {tFinal}$", zorder=1, clip_on=False)
+    for ii in range(len(u)):
+        ax.plot(x, u[ii], "-o", label=f"$t = {tFinal[ii]}$", c=colors[ii], zorder=1, clip_on=False)
+
     niceplots.adjust_spines(ax, outward=True)
     niceplots.label_line_ends(ax)
 
 
-# In[46]:
+# In[15]:
 
 
 dt = computeTimestepFromMu(0.25, dx, nu)
 
-uFinal = FTCS_solver(u0, nu, dx, dt, tFinal)
+t = [0.03, 0.06, 0.09, 0.12, 0.2]
+u = []
+for tFinal in t:
+    u.append(FTCS_solver(u0, nu, dx, dt, tFinal))
+
 fig, ax = plt.subplots()
-plotSolution(ax, x, u0, uFinal, tFinal)
+plotSolution(ax, x, u0, u, t)
 
 
-# In[45]:
+# Now let's try running the same problem with different sizes of timestep.
+# Before we do, it's useful to define something called the heat number:
+# $$\mu = \frac{\nu \Delta t}{\Delta x^2}$$
+#
+# Using this definition, our timestepping equation becomes:
+#
+# $$u_j^{n+1} = u_j^{n} + \mu\left(u_{j-1}^{n} - 2u_{j}^{n} + u_{j+1}^{n}\right)$$
+#
+# Using stability analysis methods, that you will learn in this section of the course, we can show that this timestepping scheme is only stable if $\mu \leq \frac{1}{2}$.
+# The code below demonstrates this by running the same problem as above with $\mu$ values ranging from 0.25 to 0.75
+
+# In[21]:
 
 
-muVals = [0.25, 0.5, 0.51, 0.6]
+muVals = [0.25, 0.5, 0.51, 0.75]
 
-fig, axes = plt.subplots(2, 2, sharex=True, figsize=(10, 10))
+fig, axes = plt.subplots(4, 1, sharex=True, figsize=(5, 16))
 
 axes = axes.flatten()
 
@@ -127,6 +156,3 @@ for mu, ax in zip(muVals, axes):
     uFinal = FTCS_solver(u0, nu, dx, dt, tFinal)
     plotSolution(ax, x, u0, uFinal, tFinal)
     ax.set_title(f"$\mu = {mu}$")
-
-
-# In[ ]:
