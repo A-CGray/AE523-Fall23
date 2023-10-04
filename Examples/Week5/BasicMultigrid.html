@@ -636,19 +636,19 @@ This page also contains figures from Krzysztof Fidkowski’s CFD course notes.</
 Iteration 500: Res norm = 2.18e-01
 Iteration 1000: Res norm = 1.30e-02
 Iteration 1500: Res norm = 7.76e-04
-Iteration 2000: Res norm = 4.63e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2500: Res norm = 2.76e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2000: Res norm = 4.63e-05
+Iteration 2500: Res norm = 2.76e-06
 Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 7.02e-01
 Iteration 500: Res norm = 4.24e-02
 Iteration 1000: Res norm = 2.53e-03
-Iteration 1500: Res norm = 1.51e-04
-Iteration 2000: Res norm = 8.99e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2390: Res norm = 9.97e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500: Res norm = 1.51e-04
+Iteration 2000: Res norm = 8.99e-06
+Iteration 2390: Res norm = 9.97e-07
 </pre></div>
 </div>
 </div>
@@ -668,7 +668,7 @@ Iteration 2000: Res norm = 8.99e-06
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/315354b49f8b70ab48d1a4b3c54584d5833f721906e9d55d1f2fcf3b91f46772.svg" src="../../_images/315354b49f8b70ab48d1a4b3c54584d5833f721906e9d55d1f2fcf3b91f46772.svg" /></div>
+<img alt="../../_images/b4c21b15c9a23ff1d4331c65cf2c797e608bf6c9f532a171aaf800c837c15b3e.svg" src="../../_images/b4c21b15c9a23ff1d4331c65cf2c797e608bf6c9f532a171aaf800c837c15b3e.svg" /></div>
 </div>
 <p>To demonstrate how different frequencies of error are reduced at different rates, we’ll run 10 iterations starting from the true solution plus a high frequency error and then starting from the true solution plus a low frequency error.</p>
 <div class="cell docutils container">
@@ -718,7 +718,7 @@ Iteration 8: Res norm = 1.34e-01
 Iteration 9: Res norm = 1.12e-01
 </pre></div>
 </div>
-<img alt="../../_images/cd612bf11e5ab44989f558bffdcabdcc902c9b75fe211a7d1b243afc2e599580.svg" src="../../_images/cd612bf11e5ab44989f558bffdcabdcc902c9b75fe211a7d1b243afc2e599580.svg" /></div>
+<img alt="../../_images/4037d66dbc503026183180fad5ea6dcc3a61d670cfab733c5df7db01dc5c020e.svg" src="../../_images/4037d66dbc503026183180fad5ea6dcc3a61d670cfab733c5df7db01dc5c020e.svg" /></div>
 </div>
 <section id="implementing-a-basic-2-level-multigrid-solver">
 <h2>Implementing a basic 2-level multigrid solver<a class="headerlink" href="#implementing-a-basic-2-level-multigrid-solver" title="Permalink to this heading">#</a></h2>
@@ -855,7 +855,7 @@ Iteration 2: Res norm = 1.10e-01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3125bb7bfc687e0fc65d60c2b7eef6c373d89398eeffd3f0c3c01da8b5eef4c5.svg" src="../../_images/3125bb7bfc687e0fc65d60c2b7eef6c373d89398eeffd3f0c3c01da8b5eef4c5.svg" /></div>
+<img alt="../../_images/5dabe946a84bac1d07563ab11961b99e8e4d5e313e0db3dd87eb6a625f09708c.svg" src="../../_images/5dabe946a84bac1d07563ab11961b99e8e4d5e313e0db3dd87eb6a625f09708c.svg" /></div>
 </div>
 <p>Now let’s see how fast multigrid converges from the bad initial guess compared to plain Gauss-Seidel.</p>
 <p>When comparing the number of iterations required for convergence, we need to account for the fact that each multigrid iteration is more expensive than a Gauss-Seidel iteration.</p>
@@ -875,10 +875,10 @@ Iteration 2: Res norm = 1.10e-01
 Iteration 500: Res norm = 2.18e-01
 Iteration 1000: Res norm = 1.30e-02
 Iteration 1500: Res norm = 7.76e-04
-Iteration 2000: Res norm = 4.63e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2500: Res norm = 2.76e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2000: Res norm = 4.63e-05
+Iteration 2500: Res norm = 2.76e-06
 Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 2.62e+02
 Iteration 269: Res norm = 9.45e-07
@@ -904,7 +904,7 @@ Iteration 269: Res norm = 9.45e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e6432cfcec0aa6f9220a58b1b306750f78bc2062486f6a22373652ba8f3209ff.svg" src="../../_images/e6432cfcec0aa6f9220a58b1b306750f78bc2062486f6a22373652ba8f3209ff.svg" /></div>
+<img alt="../../_images/de5f831c12348c509e8d3b2d0d127a79e9eb0d71e020fdb43156bdada1e03121.svg" src="../../_images/de5f831c12348c509e8d3b2d0d127a79e9eb0d71e020fdb43156bdada1e03121.svg" /></div>
 </div>
 </section>
 </section>
