@@ -67,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week5/BasicMultigrid';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Week 6" href="../Week6/Week6.html" />
     <link rel="prev" title="Week 5" href="Week5.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -190,6 +191,11 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Week5.html">Week 5</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Multigrid</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week6/Week6.html">Week 6</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/FasterPython.html">How to write fast (or slow) Python code</a></li>
+
 </ul>
 </li>
 </ul>
@@ -631,16 +637,18 @@ Iteration 500: Res norm = 2.18e-01
 Iteration 1000: Res norm = 1.30e-02
 Iteration 1500: Res norm = 7.76e-04
 Iteration 2000: Res norm = 4.63e-05
-Iteration 2500: Res norm = 2.76e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2680: Res norm = 9.99e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2500: Res norm = 2.76e-06
+Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 7.02e-01
 Iteration 500: Res norm = 4.24e-02
 Iteration 1000: Res norm = 2.53e-03
 Iteration 1500: Res norm = 1.51e-04
 Iteration 2000: Res norm = 8.99e-06
-Iteration 2390: Res norm = 9.97e-07
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2390: Res norm = 9.97e-07
 </pre></div>
 </div>
 </div>
@@ -660,7 +668,7 @@ Iteration 2390: Res norm = 9.97e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d48ecba6875df87e985da8079435b99c358c55d28c402493554d7ec2c4fccbaa.svg" src="../../_images/d48ecba6875df87e985da8079435b99c358c55d28c402493554d7ec2c4fccbaa.svg" /></div>
+<img alt="../../_images/315354b49f8b70ab48d1a4b3c54584d5833f721906e9d55d1f2fcf3b91f46772.svg" src="../../_images/315354b49f8b70ab48d1a4b3c54584d5833f721906e9d55d1f2fcf3b91f46772.svg" /></div>
 </div>
 <p>To demonstrate how different frequencies of error are reduced at different rates, we’ll run 10 iterations starting from the true solution plus a high frequency error and then starting from the true solution plus a low frequency error.</p>
 <div class="cell docutils container">
@@ -710,7 +718,7 @@ Iteration 8: Res norm = 1.34e-01
 Iteration 9: Res norm = 1.12e-01
 </pre></div>
 </div>
-<img alt="../../_images/66f39111b7f6ac4a9b3f9ec976bfb0202e9afe65dff66a938a2aeefe9ee79f55.svg" src="../../_images/66f39111b7f6ac4a9b3f9ec976bfb0202e9afe65dff66a938a2aeefe9ee79f55.svg" /></div>
+<img alt="../../_images/cd612bf11e5ab44989f558bffdcabdcc902c9b75fe211a7d1b243afc2e599580.svg" src="../../_images/cd612bf11e5ab44989f558bffdcabdcc902c9b75fe211a7d1b243afc2e599580.svg" /></div>
 </div>
 <section id="implementing-a-basic-2-level-multigrid-solver">
 <h2>Implementing a basic 2-level multigrid solver<a class="headerlink" href="#implementing-a-basic-2-level-multigrid-solver" title="Permalink to this heading">#</a></h2>
@@ -847,7 +855,7 @@ Iteration 2: Res norm = 1.10e-01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/49407ae7b3d16ccfec88c9d748d4ff1acb9be69beddb82af4723154498e811ab.svg" src="../../_images/49407ae7b3d16ccfec88c9d748d4ff1acb9be69beddb82af4723154498e811ab.svg" /></div>
+<img alt="../../_images/3125bb7bfc687e0fc65d60c2b7eef6c373d89398eeffd3f0c3c01da8b5eef4c5.svg" src="../../_images/3125bb7bfc687e0fc65d60c2b7eef6c373d89398eeffd3f0c3c01da8b5eef4c5.svg" /></div>
 </div>
 <p>Now let’s see how fast multigrid converges from the bad initial guess compared to plain Gauss-Seidel.</p>
 <p>When comparing the number of iterations required for convergence, we need to account for the fact that each multigrid iteration is more expensive than a Gauss-Seidel iteration.</p>
@@ -868,10 +876,10 @@ Iteration 500: Res norm = 2.18e-01
 Iteration 1000: Res norm = 1.30e-02
 Iteration 1500: Res norm = 7.76e-04
 Iteration 2000: Res norm = 4.63e-05
-Iteration 2500: Res norm = 2.76e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2680: Res norm = 9.99e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2500: Res norm = 2.76e-06
+Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 2.62e+02
 Iteration 269: Res norm = 9.45e-07
 </pre></div>
@@ -896,7 +904,7 @@ Iteration 269: Res norm = 9.45e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2314d7d99020c253a80ebf544fc295e07c92c945060db5ef8f937abacc02ffe3.svg" src="../../_images/2314d7d99020c253a80ebf544fc295e07c92c945060db5ef8f937abacc02ffe3.svg" /></div>
+<img alt="../../_images/e6432cfcec0aa6f9220a58b1b306750f78bc2062486f6a22373652ba8f3209ff.svg" src="../../_images/e6432cfcec0aa6f9220a58b1b306750f78bc2062486f6a22373652ba8f3209ff.svg" /></div>
 </div>
 </section>
 </section>
@@ -939,6 +947,15 @@ Iteration 269: Res norm = 9.45e-07
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Week 5</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../Week6/Week6.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 6</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
