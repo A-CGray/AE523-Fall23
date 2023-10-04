@@ -50,7 +50,7 @@ get_ipython().run_line_magic("timeit", "A @ B")
 
 # ## When using JAX, avoid modifying array values in place
 
-# In[23]:
+# In[25]:
 
 
 # Define the symbolic function q(x)
@@ -117,7 +117,7 @@ def heat_conduction_2D_slow(Lx=2.0, Ly=1.0, Nx=10, Ny=5, kappa=0.5, coeff=1.0, T
     return T_out, X, Y
 
 
-get_ipython().run_line_magic("timeit", "heat_conduction_2D_slow(Nx=40, Ny=20)")
+get_ipython().run_line_magic("timeit", "heat_conduction_2D_slow(Nx=20, Ny=10)")
 
 
 # In[24]:
@@ -195,10 +195,10 @@ def heat_conduction_2D_fast(Lx=2.0, Ly=1.0, Nx=40, Ny=20, kappa=0.5, coeff=1.0, 
     return T_out, X, Y
 
 
-get_ipython().run_line_magic("timeit", "heat_conduction_2D_fast(Nx=40, Ny=20)")
+get_ipython().run_line_magic("timeit", "heat_conduction_2D_fast(Nx=20, Ny=10)")
 
-T_slow = heat_conduction_2D_slow(Nx=40, Ny=20)[0]
-T_fast = heat_conduction_2D_fast(Nx=40, Ny=20)[0]
+T_slow = heat_conduction_2D_slow(Nx=20, Ny=10)[0]
+T_fast = heat_conduction_2D_fast(Nx=20, Ny=10)[0]
 
 results_match = jnp.allclose(T_slow, T_fast)
 if results_match:
