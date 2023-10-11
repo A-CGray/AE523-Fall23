@@ -27,3 +27,6 @@ chapters:
   sections:
   - file: Examples/Week6/InitialValueProblems.ipynb
   - file: Examples/Week6/FasterPython.ipynb
+- file: Examples/Week7/Week7
+  sections:
+  - file: Examples/Week7/HW3Solution.ipynb
