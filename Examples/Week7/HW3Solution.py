@@ -5,7 +5,7 @@
 #
 # This example contains figures from Krzysztof Fidkowski's CFD course notes.
 
-# In[148]:
+# In[89]:
 
 
 import time
@@ -38,7 +38,7 @@ colors = niceplots.get_colors_list()
 
 # ### Part a): Computing the residual
 #
-# When we a PDE, the error we really care about is the difference between out current guess at the solution, $u$, and the true solution, $u^*$:
+# When we a PDE or system of equations, the error we really care about is the difference between out current guess at the solution, $u$, and the true solution, $u^*$:
 #
 # $$e = u^* - u$$
 #
@@ -60,7 +60,7 @@ colors = niceplots.get_colors_list()
 #
 # $$r_{i,j} = 1 + \frac{u_{i-1,j} + u_{i+1,j}}{dx^2} + \frac{u_{i,j-1} + u_{i,j+1}}{dy^2} - 2u_{i,j} \left(\frac{1}{dx^2}+\frac{1}{dy^2}\right)$$
 
-# In[149]:
+# In[90]:
 
 
 def computeResidual(u, dx, dy, rhs, r):
@@ -121,7 +121,7 @@ def plotField(fig, ax, x, y, z, **kwargs):
 #
 # $$\nabla^2 u_\text{test} = -4\pi^2 u_\text{test} \left(\frac{1}{L_x^2} + \frac{1}{L_y^2}\right)$$
 
-# In[150]:
+# In[91]:
 
 
 def computeUTest(X, Y, Lx, Ly):
@@ -162,7 +162,7 @@ def computeUTestLaplacian(X, Y, Lx, Ly):
     )
 
 
-# In[151]:
+# In[92]:
 
 
 # --- Define constants ---
@@ -181,7 +181,7 @@ dy = LY / N
 
 # To compute the discrete residual we set the $u_{i,j}$ values at the mesh nodes using $u_\text{test}$, and then use the discrete form of the residual, to compute the residual at each mesh node $r_{i,j}$.
 
-# In[152]:
+# In[93]:
 
 
 x = np.linspace(0, LX, N + 1)
@@ -195,7 +195,7 @@ computeResidual(U, dx, dy, RHS, r)
 
 # For the continuous residual, we simply substitute $u_\text{test}$ into the continuous residual equation, $r = 1+\nabla^2 u_\text{test}$, and compute this function at each of the mesh nodes:
 
-# In[153]:
+# In[94]:
 
 
 rExact = np.ones_like(U) + computeUTestLaplacian(XX, YY, LX, LY)
@@ -203,7 +203,7 @@ rExact = np.ones_like(U) + computeUTestLaplacian(XX, YY, LX, LY)
 
 # When we compare the two forms of the residual, they should look very similar, provided our mesh is refined enough. If the mesh is not refined enough, then the discrete residual will not be a good approximation to the continuous residual.
 
-# In[154]:
+# In[95]:
 
 
 fig, axes = plt.subplots(ncols=2, figsize=(10, 5))
@@ -227,7 +227,7 @@ for ax in axes:
 
 # ![2D restriction](../../images/Restriction2D.png)
 
-# In[155]:
+# In[96]:
 
 
 def restrict2D(rFine, rCoarse):
@@ -259,7 +259,7 @@ def restrict2D(rFine, rCoarse):
     return
 
 
-# In[156]:
+# In[97]:
 
 
 # --- Part b) ---
@@ -291,7 +291,7 @@ for ax in axes:
 
 # In multigrid, we will always be adding the prolongated correction to an existing state, so the function I implemented below performs the prolongation and addition in one step.
 
-# In[157]:
+# In[98]:
 
 
 def addProlongedCorrection2D(duCoarse, uFine):
@@ -327,7 +327,7 @@ def addProlongedCorrection2D(duCoarse, uFine):
     return
 
 
-# In[158]:
+# In[99]:
 
 
 # --- Part c) ---
@@ -351,7 +351,7 @@ for ax in axes:
 
 # ## Problem 2
 
-# In[159]:
+# In[100]:
 
 
 from functools import lru_cache
@@ -442,7 +442,7 @@ def iterativeSolve(u, dx, dy, smootherFunc, omega=1.0, tol=1e-4, maxIter=100):
     return uSol, np.array(resNormHistory), np.array(iterationTimes)
 
 
-# In[160]:
+# In[101]:
 
 
 # ==============================================================================
@@ -483,7 +483,7 @@ for ax in axes:
 
 # As we expect, increasing $\omega$ increases the convergence rate. However, at $\omega=1.9$ we see some oscillations in the error, which suggests we are approaching the stability limit of the solver.
 
-# In[161]:
+# In[102]:
 
 
 # --- Trying different grid sizes ---
@@ -515,27 +515,24 @@ plt.show()
 
 # ![Full V Cycle](../../images/MultigridVCycle.png)
 
-# On the left side of the V:
+# The V-cycle should go something like:
 #
-# 1. Smooth $A_h u_h = f_h$ on the fine mesh
-# 2. Compute the residual $r_h = f_h - A_h u_h$
-# 3. Restrict the residual to the coarse mesh $f_{2h} = \text{restrict}(r_h)$
-# 4. Smooth $A_{2h} u_{2h} = f_{2h}$ on the coarse mesh, starting from $u_{2h}=0$
-# 5. Compute the residual $r_{2h} = f_{2h} - A_{2h} u_{2h}$
-# 6. Restrict the residual to the next coarse mesh $f_{4h} = \text{restrict}(r_{2h})$
-#
-# And so on until we reach the coarsest mesh.
-#
-# On the right side of the V:
-#
-# 1. Prolongate the correction from the coarsest level to the next coarsest level $u_{4h} = u_{4h} + \text{prolongate}(u_{8h})$
-# 2. Continue smoothing $A_{4h} u_{4h} = f_{4h}$
-# 3. Prolongate the correction to the next coarsest level $u_{2h} = u_{2h} + \text{prolongate}(u_{4h})$
-# 4. Continue smoothing $A_{2h} u_{2h} = f_{2h}$
-# 5. Prolongate the correction to the fine mesh $u_{h} = u_{h} + \text{prolongate}(u_{2h})$
-# 6. Continue smoothing $A_{h} u_{h} = f_{h}$
+# - Descend down the V:
+#   - Smooth $A_h u_h = f_h$ on the fine mesh $v_1$ times, starting from the supplied $u_h$
+#   - Compute the residual $r_h = f_h - A_h u_h$
+#   - Restrict the residual to the coarse mesh $f_{2h} = \text{restrict}(r_h)$
+#   - Smooth $A_{2h} u_{2h} = f_{2h}$ on the coarse mesh $v_1$ times, starting from $u_{2h}=0$
+#   - Compute the residual $r_{2h} = f_{2h} - A_{2h} u_{2h}$
+#   - Restrict the residual to the next coarse mesh $f_{4h} = \text{restrict}(r_{2h})$
+#   - Repeat until we reach the coarsest mesh.
+# - Perform 1 smoothing iteration on the coarsest mesh $A_{nh} u_{nh} = f_{nh}$
+# - Ascend back up the V
+#   - Prolongate the correction from the coarsest level to the next coarsest level $u_{4h} = u_{4h} + \text{prolongate}(u_{8h})$
+#   - Continue smoothing $A_{4h} u_{4h} = f_{4h}$
+#   - Prolongate the correction to the next coarsest level $u_{2h} = u_{2h} + \text{prolongate}(u_{4h})$
+#   - Continue this cycle until we reach the fine mesh and finish
 
-# In[162]:
+# In[103]:
 
 
 def multigridIteration(u, dx, dy, RHS, Nx, Ny, omega, numPreIter=2, numPostIter=2, numCoarseIter=1):
@@ -591,7 +588,7 @@ def multigridIteration(u, dx, dy, RHS, Nx, Ny, omega, numPreIter=2, numPostIter=
     return
 
 
-# In[163]:
+# In[104]:
 
 
 # ==============================================================================
@@ -621,7 +618,7 @@ for N in Ns:
     dy = LY / N
     U = np.zeros((N + 1, N + 1))
     numLevels = int(np.log2(N))
-    workPerIteration = numCoarseIter / (2**numLevels)
+    workPerIteration = numCoarseIter / (2 ** (numLevels - 1))
     for level in range(numLevels - 1):
         workPerIteration += (numPreIter + numPostIter) / (2**level)
     USol, resHistory, iterTimes = iterativeSolve(U, dx, dy, multigridSmoother, omega=omega, tol=1e-16, maxIter=maxIter)
@@ -630,7 +627,6 @@ for N in Ns:
 
 niceplots.adjust_spines(multigridAx)
 multigridAx.legend(labelcolor="linecolor")
-
 plt.show()
 
 
