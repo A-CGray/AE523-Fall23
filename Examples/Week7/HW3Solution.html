@@ -495,7 +495,7 @@ document.write(`
 \[-\frac{u_{i-1,j} + u_{i+1,j}}{dx^2} - \frac{u_{i,j-1} + u_{i,j+1}}{dy^2} + 2u_{i,j} \left(\frac{1}{dx^2}+\frac{1}{dy^2}\right) = 1\]</div>
 <section id="part-a-computing-the-residual">
 <h3>Part a): Computing the residual<a class="headerlink" href="#part-a-computing-the-residual" title="Permalink to this heading">#</a></h3>
-<p>When we a PDE, the error we really care about is the difference between out current guess at the solution, <span class="math notranslate nohighlight">\(u\)</span>, and the true solution, <span class="math notranslate nohighlight">\(u^*\)</span>:</p>
+<p>When we a PDE or system of equations, the error we really care about is the difference between out current guess at the solution, <span class="math notranslate nohighlight">\(u\)</span>, and the true solution, <span class="math notranslate nohighlight">\(u^*\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[e = u^* - u\]</div>
 <p>However, you don’t know <span class="math notranslate nohighlight">\(u^*\)</span>, so cannot compute <span class="math notranslate nohighlight">\(e\)</span>, so we need another way to measure the error that we can compute using only our current guess at the solution.</p>
@@ -676,7 +676,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b4bb259569a5ec80d7c894d178834c4a8f944290b3306bfc8e6b050fda5e2182.svg" src="../../_images/b4bb259569a5ec80d7c894d178834c4a8f944290b3306bfc8e6b050fda5e2182.svg" /></div>
+<img alt="../../_images/bd7c3e5f04b4be40110f8ec3fcd2fabde994a11c8f4cba6c8896bc4b854bd90b.svg" src="../../_images/bd7c3e5f04b4be40110f8ec3fcd2fabde994a11c8f4cba6c8896bc4b854bd90b.svg" /></div>
 </div>
 </section>
 <section id="part-b">
@@ -739,7 +739,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/75bd8c2e9e9ad4b8b46e1cfe53ea7f289165d6665a168faf811a79d87f3a3397.svg" src="../../_images/75bd8c2e9e9ad4b8b46e1cfe53ea7f289165d6665a168faf811a79d87f3a3397.svg" /></div>
+<img alt="../../_images/70f5e06db610bd397c928e0b7ca089ea6d52a6242bb2911ca65d04a1e67ddb8a.svg" src="../../_images/70f5e06db610bd397c928e0b7ca089ea6d52a6242bb2911ca65d04a1e67ddb8a.svg" /></div>
 </div>
 <p>As we might have expected, the restricted residual looks like a lower resolution version of the original residual.</p>
 </section>
@@ -806,7 +806,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/750184bd90d97f9c68213602066cf92ec28f464b6ced199330b32514ff2a44f5.svg" src="../../_images/750184bd90d97f9c68213602066cf92ec28f464b6ced199330b32514ff2a44f5.svg" /></div>
+<img alt="../../_images/d8bca2813e897b9dd7404ab007cbc383f3a59996ab1fc42998082c7c8314ce0f.svg" src="../../_images/d8bca2813e897b9dd7404ab007cbc383f3a59996ab1fc42998082c7c8314ce0f.svg" /></div>
 </div>
 <p>The prolongated state should look almost exactly the same as the coarse mesh state because the prolongation is a simple linear interpolation.</p>
 </section>
@@ -988,7 +988,7 @@ Iteration 180: Res norm = 8.70e-08
 Iteration 199: Res norm = 1.15e-08
 </pre></div>
 </div>
-<img alt="../../_images/09685558c9c068ea5af1d2bdbd0b58439433df6eae0648fcbd41615e6fd2bf3e.svg" src="../../_images/09685558c9c068ea5af1d2bdbd0b58439433df6eae0648fcbd41615e6fd2bf3e.svg" /><img alt="../../_images/7f959d0401368d372fb9ccf912ef674052c87a5b3267c25f0bd1dcaaf2b8cf37.svg" src="../../_images/7f959d0401368d372fb9ccf912ef674052c87a5b3267c25f0bd1dcaaf2b8cf37.svg" /></div>
+<img alt="../../_images/c17fa633d765a398aa5cdaea95834efba9247d0a26f9692c9e41e02f97f28a13.svg" src="../../_images/c17fa633d765a398aa5cdaea95834efba9247d0a26f9692c9e41e02f97f28a13.svg" /><img alt="../../_images/6b50b03872790cbca62276b71cb7fcad420747627bc76e406b79821ed200a796.svg" src="../../_images/6b50b03872790cbca62276b71cb7fcad420747627bc76e406b79821ed200a796.svg" /></div>
 </div>
 <p>As we expect, increasing <span class="math notranslate nohighlight">\(\omega\)</span> increases the convergence rate. However, at <span class="math notranslate nohighlight">\(\omega=1.9\)</span> we see some oscillations in the error, which suggests we are approaching the stability limit of the solver.</p>
 <div class="cell docutils container">
@@ -1055,47 +1055,49 @@ Iteration 180: Res norm = 3.06e-01
 Iteration 199: Res norm = 2.35e-01
 Iteration 0: Res norm = 1.97e+01
 Iteration 20: Res norm = 8.79e+01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 40: Res norm = 6.66e+01
+Iteration 40: Res norm = 6.66e+01
 Iteration 60: Res norm = 5.04e+01
 Iteration 80: Res norm = 3.82e+01
 Iteration 100: Res norm = 2.90e+01
-Iteration 120: Res norm = 2.20e+01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 120: Res norm = 2.20e+01
 Iteration 140: Res norm = 1.67e+01
 Iteration 160: Res norm = 1.27e+01
 Iteration 180: Res norm = 9.67e+00
+Iteration 199: Res norm = 7.50e+00
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 199: Res norm = 7.50e+00
-</pre></div>
-</div>
-<img alt="../../_images/a6a7573d5fd9f5070fe63b78579e40a55c8c7c6c9d34c68762948bd25fd4eb50.svg" src="../../_images/a6a7573d5fd9f5070fe63b78579e40a55c8c7c6c9d34c68762948bd25fd4eb50.svg" /></div>
+<img alt="../../_images/b68d9565071532d9198486ec9397112127eb6d04ee85d125bd973e6de1650b23.svg" src="../../_images/b68d9565071532d9198486ec9397112127eb6d04ee85d125bd973e6de1650b23.svg" /></div>
 </div>
 <p>The main takeaway here is that the rate of convergence decreases dramatically as we make the mesh finer. So not only is each iteration more expensive, but we need to do more iterations to converge to the same tolerance.</p>
 </section>
 <section id="problem-3">
 <h2>Problem 3<a class="headerlink" href="#problem-3" title="Permalink to this heading">#</a></h2>
 <p><img alt="Full V Cycle" src="../../_images/MultigridVCycle.png" /></p>
-<p>On the left side of the V:</p>
-<ol class="arabic simple">
-<li><p>Smooth <span class="math notranslate nohighlight">\(A_h u_h = f_h\)</span> on the fine mesh</p></li>
+<p>The V-cycle should go something like:</p>
+<ul class="simple">
+<li><p>Descend down the V:</p>
+<ul>
+<li><p>Smooth <span class="math notranslate nohighlight">\(A_h u_h = f_h\)</span> on the fine mesh <span class="math notranslate nohighlight">\(v_1\)</span> times, starting from the supplied <span class="math notranslate nohighlight">\(u_h\)</span></p></li>
 <li><p>Compute the residual <span class="math notranslate nohighlight">\(r_h = f_h - A_h u_h\)</span></p></li>
 <li><p>Restrict the residual to the coarse mesh <span class="math notranslate nohighlight">\(f_{2h} = \text{restrict}(r_h)\)</span></p></li>
-<li><p>Smooth <span class="math notranslate nohighlight">\(A_{2h} u_{2h} = f_{2h}\)</span> on the coarse mesh, starting from <span class="math notranslate nohighlight">\(u_{2h}=0\)</span></p></li>
+<li><p>Smooth <span class="math notranslate nohighlight">\(A_{2h} u_{2h} = f_{2h}\)</span> on the coarse mesh <span class="math notranslate nohighlight">\(v_1\)</span> times, starting from <span class="math notranslate nohighlight">\(u_{2h}=0\)</span></p></li>
 <li><p>Compute the residual <span class="math notranslate nohighlight">\(r_{2h} = f_{2h} - A_{2h} u_{2h}\)</span></p></li>
 <li><p>Restrict the residual to the next coarse mesh <span class="math notranslate nohighlight">\(f_{4h} = \text{restrict}(r_{2h})\)</span></p></li>
-</ol>
-<p>And so on until we reach the coarsest mesh.</p>
-<p>On the right side of the V:</p>
-<ol class="arabic simple">
+<li><p>Repeat until we reach the coarsest mesh.</p></li>
+</ul>
+</li>
+<li><p>Perform 1 smoothing iteration on the coarsest mesh <span class="math notranslate nohighlight">\(A_{nh} u_{nh} = f_{nh}\)</span></p></li>
+<li><p>Ascend back up the V</p>
+<ul>
 <li><p>Prolongate the correction from the coarsest level to the next coarsest level <span class="math notranslate nohighlight">\(u_{4h} = u_{4h} + \text{prolongate}(u_{8h})\)</span></p></li>
 <li><p>Continue smoothing <span class="math notranslate nohighlight">\(A_{4h} u_{4h} = f_{4h}\)</span></p></li>
 <li><p>Prolongate the correction to the next coarsest level <span class="math notranslate nohighlight">\(u_{2h} = u_{2h} + \text{prolongate}(u_{4h})\)</span></p></li>
-<li><p>Continue smoothing <span class="math notranslate nohighlight">\(A_{2h} u_{2h} = f_{2h}\)</span></p></li>
-<li><p>Prolongate the correction to the fine mesh <span class="math notranslate nohighlight">\(u_{h} = u_{h} + \text{prolongate}(u_{2h})\)</span></p></li>
-<li><p>Continue smoothing <span class="math notranslate nohighlight">\(A_{h} u_{h} = f_{h}\)</span></p></li>
-</ol>
+<li><p>Continue this cycle until we reach the fine mesh and finish</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">multigridIteration</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">RHS</span><span class="p">,</span> <span class="n">Nx</span><span class="p">,</span> <span class="n">Ny</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">numPreIter</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">numPostIter</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">numCoarseIter</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -1184,7 +1186,7 @@ Iteration 180: Res norm = 9.67e+00
     <span class="n">dy</span> <span class="o">=</span> <span class="n">LY</span> <span class="o">/</span> <span class="n">N</span>
     <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
     <span class="n">numLevels</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
-    <span class="n">workPerIteration</span> <span class="o">=</span> <span class="n">numCoarseIter</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">numLevels</span><span class="p">)</span>
+    <span class="n">workPerIteration</span> <span class="o">=</span> <span class="n">numCoarseIter</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">numLevels</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numLevels</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">workPerIteration</span> <span class="o">+=</span> <span class="p">(</span><span class="n">numPreIter</span> <span class="o">+</span> <span class="n">numPostIter</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">level</span><span class="p">)</span>
     <span class="n">USol</span><span class="p">,</span> <span class="n">resHistory</span><span class="p">,</span> <span class="n">iterTimes</span> <span class="o">=</span> <span class="n">iterativeSolve</span><span class="p">(</span>
@@ -1195,7 +1197,6 @@ Iteration 180: Res norm = 9.67e+00
 
 <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">multigridAx</span><span class="p">)</span>
 <span class="n">multigridAx</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
-
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1238,18 +1239,18 @@ Iteration 0: Res norm = 9.69e-01
 Iteration 2: Res norm = 8.74e-03
 Iteration 4: Res norm = 2.73e-04
 Iteration 6: Res norm = 9.73e-06
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 8: Res norm = 3.59e-07
+Iteration 8: Res norm = 3.59e-07
 Iteration 10: Res norm = 1.33e-08
 Iteration 12: Res norm = 4.97e-10
 Iteration 14: Res norm = 1.88e-11
 Iteration 16: Res norm = 8.15e-13
-Iteration 18: Res norm = 1.87e-13
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 18: Res norm = 1.87e-13
 Iteration 19: Res norm = 1.75e-13
 </pre></div>
 </div>
-<img alt="../../_images/5989038f0238d543a70ad51d9f4b88ba9be80a2ae2f7cc93ead4d144dd0378e3.svg" src="../../_images/5989038f0238d543a70ad51d9f4b88ba9be80a2ae2f7cc93ead4d144dd0378e3.svg" /></div>
+<img alt="../../_images/3a22e42bacbe2f6d7ea71f99865ceb31f67c2e9a43cd265aee37672d55ea2fd8.svg" src="../../_images/3a22e42bacbe2f6d7ea71f99865ceb31f67c2e9a43cd265aee37672d55ea2fd8.svg" /></div>
 </div>
 <p>Clearly, multigrid is much faster to converge than the Gauss-Seidel smoother.</p>
 <p>The most important to note however, is that the number of iterations required to converge is independent of the mesh size.
