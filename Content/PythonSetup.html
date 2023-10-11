@@ -196,6 +196,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Examples/Week6/FasterPython.html">How to write fast (or slow) Python code</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Examples/Week7/Week7.html">Week 7</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Week7/HW3Solution.html">Homework 3 Solutions</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -548,18 +552,22 @@ pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.42573303, 0.55330512, 0.09369267, 0.54726996, 0.18373443],
-       [0.68661495, 0.83495368, 0.52601044, 0.99241923, 0.8890936 ],
-       [0.20674386, 0.23254216, 0.02827292, 0.03619061, 0.13354657],
-       [0.52861307, 0.13499154, 0.59466563, 0.25981361, 0.17163865],
-       [0.18277931, 0.18234025, 0.51856714, 0.96129416, 0.17703571]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[4.47797382e-01, 2.93046007e-01, 6.34313256e-01, 4.25409897e-01,
+        2.11427619e-01],
+       [1.29719870e-01, 8.15325481e-01, 9.58489466e-01, 5.29357076e-01,
+        8.72362922e-01],
+       [8.08160410e-01, 2.43729042e-01, 4.91387642e-01, 3.23950781e-01,
+        8.94799967e-01],
+       [2.27846603e-02, 1.15298578e-01, 2.94015529e-02, 4.12191404e-04,
+        8.01630266e-01],
+       [4.32538611e-01, 6.60486317e-01, 6.99182091e-01, 1.02407387e-01,
+        5.13202493e-01]])
 
-b=array([0.06252158, 0.56683474, 0.56864283, 0.63318967, 0.77400842])
+b=array([0.33318573, 0.37128358, 0.27337383, 0.44977937, 0.24819048])
 
-x=array([-19.69865001,  23.32707475,  19.35800841,  -8.92727986,
-        -7.54444163])
+x=array([-1.72007062, -5.84927206,  6.61992569, -3.84921615,  1.21045063])
 
-Linear system solution error norm = 7.447602459741819e-16
+Linear system solution error norm = 1.5255470313292658e-15
 </pre></div>
 </div>
 </div>
@@ -635,21 +643,21 @@ x=4.0, f(x) = 53.598150033144236
 x=1.0, f(x) = 1.718281828459045
 x=-0.5, f(x) = -0.3934693402873666
 x=0.25, f(x) = 0.2840254166877414
-x=-0.125, f(x) = -0.11750309741540466
+x=-0.125, f(x) = -0.11750309741540454
 x=0.0625, f(x) = 0.06449445891785932
 x=-0.03125, f(x) = -0.03076676552365587
 x=0.015625, f(x) = 0.015747708586685727
-x=-0.0078125, f(x) = -0.007782061739756374
-x=0.00390625, f(x) = 0.003913889338347687
+x=-0.0078125, f(x) = -0.007782061739756485
+x=0.00390625, f(x) = 0.003913889338347465
 x=-0.001953125, f(x) = -0.0019512188925244756
 x=0.0009765625, f(x) = 0.0009770394924164538
 x=-0.00048828125, f(x) = -0.0004881620601105974
 x=0.000244140625, f(x) = 0.0002441704297477809
-x=-0.0001220703125, f(x) = -0.00012206286222249396
+x=-0.0001220703125, f(x) = -0.00012206286222260498
 x=6.103515625e-05, f(x) = 6.103701893311886e-05
-x=-3.0517578125e-05, f(x) = -3.051711246837563e-05
+x=-3.0517578125e-05, f(x) = -3.051711246848665e-05
 x=1.52587890625e-05, f(x) = 1.525890547848796e-05
-x=-7.62939453125e-06, f(x) = -7.629365427419543e-06
+x=-7.62939453125e-06, f(x) = -7.6293654275305656e-06
 x=3.814697265625e-06, f(x) = 3.814704541582614e-06
 x=-1.9073486328125e-06, f(x) = -1.9073468138230965e-06
 x=9.5367431640625e-07, f(x) = 9.536747711536009e-07
@@ -706,7 +714,7 @@ This makes it much clearer in your code which data is being plotted on which fig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/dd57764929b4548ccd3cc83585dca54608d3ef596629200fb526563c83f1b32e.png" src="../_images/dd57764929b4548ccd3cc83585dca54608d3ef596629200fb526563c83f1b32e.png" />
+<img alt="../_images/e20d83bb287e89e6f0b2688191cf9c868d3de7734a63c4892e868cb3fac55312.png" src="../_images/e20d83bb287e89e6f0b2688191cf9c868d3de7734a63c4892e868cb3fac55312.png" />
 </div>
 </div>
 </section>
@@ -743,7 +751,7 @@ You can also check out some example uses of it <a class="reference external" hre
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/94a024fa6bd3ccc6d6f4a210eb7033049528a59aa9effca3f49bd06fe7721315.png" src="../_images/94a024fa6bd3ccc6d6f4a210eb7033049528a59aa9effca3f49bd06fe7721315.png" />
+<img alt="../_images/f573e2c1b1d6138a93b7f42bfcea9cd8778d9b8df49e6de47fd98e377f9a8f99.png" src="../_images/f573e2c1b1d6138a93b7f42bfcea9cd8778d9b8df49e6de47fd98e377f9a8f99.png" />
 </div>
 </div>
 </section>

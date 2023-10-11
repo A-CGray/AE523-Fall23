@@ -196,6 +196,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week6/FasterPython.html">How to write fast (or slow) Python code</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week7/Week7.html">Week 7</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/HW3Solution.html">Homework 3 Solutions</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -599,10 +603,10 @@ L_4(x) = -0.0416666666666667*x*(h - x)*(2*h - x)*(3*h - x)/h**4
 
 
 Coefficients for first derivative:
-a_0 = dL_0/dx | x=0 = -2.08333333333333/h
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = dL_1/dx | x=0 = 4.0/h
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = dL_0/dx | x=0 = -2.08333333333333/h
+a_1 = dL_1/dx | x=0 = 4.0/h
 a_2 = dL_2/dx | x=0 = -3.0/h
 a_3 = dL_3/dx | x=0 = 1.33333333333333/h
 a_4 = dL_4/dx | x=0 = -0.25/h
@@ -652,11 +656,11 @@ a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = dL_0/dx | x=0 = -2.083333333333333
+a_1 = dL_1/dx | x=0 = 4.0
+a_2 = dL_2/dx | x=0 = -3.0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = dL_1/dx | x=0 = 4.0
-a_2 = dL_2/dx | x=0 = -3.0
-a_3 = dL_3/dx | x=0 = 1.3333333333333333
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_3 = dL_3/dx | x=0 = 1.3333333333333333
 a_4 = dL_4/dx | x=0 = -0.25
 
 
@@ -770,14 +774,15 @@ a_4 = d^2L_4/dx^2 | x=0 = 0.9166666666666666
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=61, inz=61
-
-nnz=1189, inz=1189
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=1189, inz=1189
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 2 Axes&gt;, &lt;Axes: xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../../_images/353f27624c96dba4b3e4aae26dba9bd54d46462d6a297788ef652bb5c6f0878e.svg" src="../../_images/353f27624c96dba4b3e4aae26dba9bd54d46462d6a297788ef652bb5c6f0878e.svg" /><img alt="../../_images/aa12b5d86d67e31d6b0211161ef9bab22b5e37d89fc77242054cd48798f9434f.svg" src="../../_images/aa12b5d86d67e31d6b0211161ef9bab22b5e37d89fc77242054cd48798f9434f.svg" /><img alt="../../_images/0caddc694acfdd642165696c9b77ccec51d5ca0698845cbb34c020eae7f2a792.svg" src="../../_images/0caddc694acfdd642165696c9b77ccec51d5ca0698845cbb34c020eae7f2a792.svg" /><img alt="../../_images/f03d325dba3a10d966a7804068f600972a60d37edcf8d073019fbdca5c1e0b34.svg" src="../../_images/f03d325dba3a10d966a7804068f600972a60d37edcf8d073019fbdca5c1e0b34.svg" /></div>
+<img alt="../../_images/c61dbb3c2b77ebf73205877d92b349ec0e25d28fb1b28f808f0ca9ad2c7f3fbf.svg" src="../../_images/c61dbb3c2b77ebf73205877d92b349ec0e25d28fb1b28f808f0ca9ad2c7f3fbf.svg" /><img alt="../../_images/cc6c82ee2549b7c5fe99ae73d34ecb8d92e6a9f22c870d517104d8ae2828845a.svg" src="../../_images/cc6c82ee2549b7c5fe99ae73d34ecb8d92e6a9f22c870d517104d8ae2828845a.svg" /><img alt="../../_images/124f81823c6e2b96b6c02075c1e2c5cd69ea64b9fefcf211453f350d5adb6aab.svg" src="../../_images/124f81823c6e2b96b6c02075c1e2c5cd69ea64b9fefcf211453f350d5adb6aab.svg" /><img alt="../../_images/f1e1259884e860ace9b046455a779b0031f8c5a9ae35b21402f50c8e2f392dfd.svg" src="../../_images/f1e1259884e860ace9b046455a779b0031f8c5a9ae35b21402f50c8e2f392dfd.svg" /></div>
 </div>
 </section>
 <section id="part-b">
@@ -822,10 +827,10 @@ nnz=4933, inz=4933
 [0.01490599 0.00506701 0.00146965 0.00039535]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283491888
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283485477
 </pre></div>
 </div>
-<img alt="../../_images/2b03cadb396f4b6840bc20cc46748abf6d9a510797e836d00888347834e17816.svg" src="../../_images/2b03cadb396f4b6840bc20cc46748abf6d9a510797e836d00888347834e17816.svg" /></div>
+<img alt="../../_images/396bc447f5e54f18088214e946208150e9581466377006cda10c62b425ff629c.svg" src="../../_images/396bc447f5e54f18088214e946208150e9581466377006cda10c62b425ff629c.svg" /></div>
 </div>
 <p>From this result, it seems we have not quite reached the asymptotic region of convergence where the rate of convergence = 2. We can get there by increasing the number of grid points in each direction further.</p>
 <div class="cell docutils container">
@@ -854,13 +859,13 @@ nnz=20101, inz=20101
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.49059875e-02 5.06700792e-03 1.46965488e-03 3.95347795e-04
- 1.02503087e-04 2.60954129e-05 6.58328496e-06]
+ 1.02503087e-04 2.60954129e-05 6.58328493e-06]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9869166809982022
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.986916685561307
 </pre></div>
 </div>
-<img alt="../../_images/eaa6caca021cfdb73d428a614c48837acedf1a151a7c08fff4d369faa5f724b4.svg" src="../../_images/eaa6caca021cfdb73d428a614c48837acedf1a151a7c08fff4d369faa5f724b4.svg" /></div>
+<img alt="../../_images/941dbb1af1d2c6f02f069ec7d88e85f1be12c0b519c97dcb37bfbecf684797bd.svg" src="../../_images/941dbb1af1d2c6f02f069ec7d88e85f1be12c0b519c97dcb37bfbecf684797bd.svg" /></div>
 </div>
 </section>
 </section>
