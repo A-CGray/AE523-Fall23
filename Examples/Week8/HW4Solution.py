@@ -246,6 +246,14 @@ ax.legend(labelcolor="linecolor", fontsize=14)
 niceplots.adjust_spines(ax)
 
 
+# The P\'eclet number represents the ratio of advection and diffusion.
+# In this problem, you are asked to simulate up to $T = 2L/a$, which is the time it takes for the initial wave to move exactly 2 domain lengths.
+# The higher the P\'eclet number, the more advection dominates over diffusion, and the less the initial wave will have diffused by this time.
+# Because of this we see that the solution for $Pe=100$ is much closer to the initial condition than the solution for $Pe=10$, which is almost completely flattened out.
+#
+# The FE and RK4 schemes appear to give identical solutions for the $Pe=10$ case, but for the $Pe=100$ case, they give significantly different solutions, this is because the stable timestep is much larger in this case and larger timesteps lead to larger errors.
+# Since RK4 is a higher-order multi-stage scheme, we can predict that the RK4 solution is closer to the true solution than the FE solution.
+
 # ## Problem 3
 
 # In[48]:
@@ -301,4 +309,7 @@ for ii, pecletNum in enumerate(pecletNums):
     niceplots.adjust_spines(ax)
 
 
-# In[ ]:
+# To show that AM2 is stable for all timesteps, we show results with $\Delta t$ ranging from $T/N$ up to the largest possible value, $\Delta t = T$.
+#
+# The AM2 solutions for the 2 largest timestep sizes are clearly highly inaccurate, but they are still stable.
+# The AM2 solution for $\Delta t = T/N$ is similar to the RK4 solution, there remains a slight difference though since the largest stable timestep for RK4 is lower than $T/N$.
