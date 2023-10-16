@@ -30,3 +30,6 @@ chapters:
 - file: Examples/Week7/Week7
   sections:
   - file: Examples/Week7/HW3Solution.ipynb
+- file: Examples/Week8/Week8
+  sections:
+  - file: Examples/Week8/HW4Solution.ipynb

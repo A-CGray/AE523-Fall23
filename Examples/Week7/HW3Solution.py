@@ -5,7 +5,7 @@
 #
 # This example contains figures from Krzysztof Fidkowski's CFD course notes.
 
-# In[89]:
+# In[17]:
 
 
 import time
@@ -60,7 +60,7 @@ colors = niceplots.get_colors_list()
 #
 # $$r_{i,j} = 1 + \frac{u_{i-1,j} + u_{i+1,j}}{dx^2} + \frac{u_{i,j-1} + u_{i,j+1}}{dy^2} - 2u_{i,j} \left(\frac{1}{dx^2}+\frac{1}{dy^2}\right)$$
 
-# In[90]:
+# In[18]:
 
 
 def computeResidual(u, dx, dy, rhs, r):
@@ -121,7 +121,7 @@ def plotField(fig, ax, x, y, z, **kwargs):
 #
 # $$\nabla^2 u_\text{test} = -4\pi^2 u_\text{test} \left(\frac{1}{L_x^2} + \frac{1}{L_y^2}\right)$$
 
-# In[91]:
+# In[19]:
 
 
 def computeUTest(X, Y, Lx, Ly):
@@ -162,7 +162,7 @@ def computeUTestLaplacian(X, Y, Lx, Ly):
     )
 
 
-# In[92]:
+# In[20]:
 
 
 # --- Define constants ---
@@ -181,7 +181,7 @@ dy = LY / N
 
 # To compute the discrete residual we set the $u_{i,j}$ values at the mesh nodes using $u_\text{test}$, and then use the discrete form of the residual, to compute the residual at each mesh node $r_{i,j}$.
 
-# In[93]:
+# In[21]:
 
 
 x = np.linspace(0, LX, N + 1)
@@ -195,7 +195,7 @@ computeResidual(U, dx, dy, RHS, r)
 
 # For the continuous residual, we simply substitute $u_\text{test}$ into the continuous residual equation, $r = 1+\nabla^2 u_\text{test}$, and compute this function at each of the mesh nodes:
 
-# In[94]:
+# In[22]:
 
 
 rExact = np.ones_like(U) + computeUTestLaplacian(XX, YY, LX, LY)
@@ -203,7 +203,7 @@ rExact = np.ones_like(U) + computeUTestLaplacian(XX, YY, LX, LY)
 
 # When we compare the two forms of the residual, they should look very similar, provided our mesh is refined enough. If the mesh is not refined enough, then the discrete residual will not be a good approximation to the continuous residual.
 
-# In[95]:
+# In[23]:
 
 
 fig, axes = plt.subplots(ncols=2, figsize=(10, 5))
@@ -227,7 +227,7 @@ for ax in axes:
 
 # ![2D restriction](../../images/Restriction2D.png)
 
-# In[96]:
+# In[24]:
 
 
 def restrict2D(rFine, rCoarse):
@@ -259,7 +259,7 @@ def restrict2D(rFine, rCoarse):
     return
 
 
-# In[97]:
+# In[25]:
 
 
 # --- Part b) ---
@@ -291,7 +291,7 @@ for ax in axes:
 
 # In multigrid, we will always be adding the prolongated correction to an existing state, so the function I implemented below performs the prolongation and addition in one step.
 
-# In[98]:
+# In[26]:
 
 
 def addProlongedCorrection2D(duCoarse, uFine):
@@ -327,7 +327,7 @@ def addProlongedCorrection2D(duCoarse, uFine):
     return
 
 
-# In[99]:
+# In[27]:
 
 
 # --- Part c) ---
@@ -351,7 +351,7 @@ for ax in axes:
 
 # ## Problem 2
 
-# In[100]:
+# In[28]:
 
 
 from functools import lru_cache
@@ -442,7 +442,7 @@ def iterativeSolve(u, dx, dy, smootherFunc, omega=1.0, tol=1e-4, maxIter=100):
     return uSol, np.array(resNormHistory), np.array(iterationTimes)
 
 
-# In[101]:
+# In[29]:
 
 
 # ==============================================================================
@@ -483,7 +483,7 @@ for ax in axes:
 
 # As we expect, increasing $\omega$ increases the convergence rate. However, at $\omega=1.9$ we see some oscillations in the error, which suggests we are approaching the stability limit of the solver.
 
-# In[102]:
+# In[30]:
 
 
 # --- Trying different grid sizes ---
@@ -532,7 +532,7 @@ plt.show()
 #   - Prolongate the correction to the next coarsest level $u_{2h} = u_{2h} + \text{prolongate}(u_{4h})$
 #   - Continue this cycle until we reach the fine mesh and finish
 
-# In[103]:
+# In[31]:
 
 
 def multigridIteration(u, dx, dy, RHS, Nx, Ny, omega, numPreIter=2, numPostIter=2, numCoarseIter=1):
@@ -588,7 +588,7 @@ def multigridIteration(u, dx, dy, RHS, Nx, Ny, omega, numPreIter=2, numPostIter=
     return
 
 
-# In[104]:
+# In[32]:
 
 
 # ==============================================================================
@@ -618,15 +618,16 @@ for N in Ns:
     dy = LY / N
     U = np.zeros((N + 1, N + 1))
     numLevels = int(np.log2(N))
-    workPerIteration = numCoarseIter / (2 ** (numLevels - 1))
+    workPerIteration = numCoarseIter / (4 ** (numLevels - 1))
     for level in range(numLevels - 1):
-        workPerIteration += (numPreIter + numPostIter) / (2**level)
+        workPerIteration += (numPreIter + numPostIter) / (4**level)
     USol, resHistory, iterTimes = iterativeSolve(U, dx, dy, multigridSmoother, omega=omega, tol=1e-16, maxIter=maxIter)
     work = np.arange(len(resHistory)) * workPerIteration
     multigridAx.plot(work, resHistory, label=f"$N={N}$", clip_on=False)
 
 niceplots.adjust_spines(multigridAx)
 multigridAx.legend(labelcolor="linecolor")
+plt.savefig("HW3-3.pdf")
 plt.show()
 
 
