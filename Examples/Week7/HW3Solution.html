@@ -67,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week7/HW3Solution';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Week 7" href="../Week8/Week8.html" />
     <link rel="prev" title="Week 7" href="Week7.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -199,6 +200,12 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Week7.html">Week 7</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Homework 3 Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week8/Week8.html">Week 7</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/HW4Solution.html">Problem 1</a></li>
+
+
 </ul>
 </li>
 </ul>
@@ -676,7 +683,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bd7c3e5f04b4be40110f8ec3fcd2fabde994a11c8f4cba6c8896bc4b854bd90b.svg" src="../../_images/bd7c3e5f04b4be40110f8ec3fcd2fabde994a11c8f4cba6c8896bc4b854bd90b.svg" /></div>
+<img alt="../../_images/5a1c9af120e2a56a4337c109c32f1cbb612ea0094328e777f846f34c5c6301cd.svg" src="../../_images/5a1c9af120e2a56a4337c109c32f1cbb612ea0094328e777f846f34c5c6301cd.svg" /></div>
 </div>
 </section>
 <section id="part-b">
@@ -739,7 +746,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/70f5e06db610bd397c928e0b7ca089ea6d52a6242bb2911ca65d04a1e67ddb8a.svg" src="../../_images/70f5e06db610bd397c928e0b7ca089ea6d52a6242bb2911ca65d04a1e67ddb8a.svg" /></div>
+<img alt="../../_images/773dfe5827a7f8b1e71411675cd1baccd1a2b9a3fff69cb0a587329286ad6613.svg" src="../../_images/773dfe5827a7f8b1e71411675cd1baccd1a2b9a3fff69cb0a587329286ad6613.svg" /></div>
 </div>
 <p>As we might have expected, the restricted residual looks like a lower resolution version of the original residual.</p>
 </section>
@@ -806,7 +813,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d8bca2813e897b9dd7404ab007cbc383f3a59996ab1fc42998082c7c8314ce0f.svg" src="../../_images/d8bca2813e897b9dd7404ab007cbc383f3a59996ab1fc42998082c7c8314ce0f.svg" /></div>
+<img alt="../../_images/f49c92a3302e47393feb1c9281b8092a58d3105d4c723b4718b0b0cb8b2c065d.svg" src="../../_images/f49c92a3302e47393feb1c9281b8092a58d3105d4c723b4718b0b0cb8b2c065d.svg" /></div>
 </div>
 <p>The prolongated state should look almost exactly the same as the coarse mesh state because the prolongation is a simple linear interpolation.</p>
 </section>
@@ -988,7 +995,7 @@ Iteration 180: Res norm = 8.70e-08
 Iteration 199: Res norm = 1.15e-08
 </pre></div>
 </div>
-<img alt="../../_images/c17fa633d765a398aa5cdaea95834efba9247d0a26f9692c9e41e02f97f28a13.svg" src="../../_images/c17fa633d765a398aa5cdaea95834efba9247d0a26f9692c9e41e02f97f28a13.svg" /><img alt="../../_images/6b50b03872790cbca62276b71cb7fcad420747627bc76e406b79821ed200a796.svg" src="../../_images/6b50b03872790cbca62276b71cb7fcad420747627bc76e406b79821ed200a796.svg" /></div>
+<img alt="../../_images/b3952debeac07a062ad650a4b5c71767b2931f1ea2f7ce373b41d674982d13f1.svg" src="../../_images/b3952debeac07a062ad650a4b5c71767b2931f1ea2f7ce373b41d674982d13f1.svg" /><img alt="../../_images/c6468e58ff4a15911f7c8623927ca18f1b74fed7e22cc5a4f5ec5df02528cea3.svg" src="../../_images/c6468e58ff4a15911f7c8623927ca18f1b74fed7e22cc5a4f5ec5df02528cea3.svg" /></div>
 </div>
 <p>As we expect, increasing <span class="math notranslate nohighlight">\(\omega\)</span> increases the convergence rate. However, at <span class="math notranslate nohighlight">\(\omega=1.9\)</span> we see some oscillations in the error, which suggests we are approaching the stability limit of the solver.</p>
 <div class="cell docutils container">
@@ -1055,20 +1062,22 @@ Iteration 180: Res norm = 3.06e-01
 Iteration 199: Res norm = 2.35e-01
 Iteration 0: Res norm = 1.97e+01
 Iteration 20: Res norm = 8.79e+01
-Iteration 40: Res norm = 6.66e+01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 40: Res norm = 6.66e+01
 Iteration 60: Res norm = 5.04e+01
 Iteration 80: Res norm = 3.82e+01
 Iteration 100: Res norm = 2.90e+01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 120: Res norm = 2.20e+01
+Iteration 120: Res norm = 2.20e+01
 Iteration 140: Res norm = 1.67e+01
 Iteration 160: Res norm = 1.27e+01
 Iteration 180: Res norm = 9.67e+00
-Iteration 199: Res norm = 7.50e+00
 </pre></div>
 </div>
-<img alt="../../_images/b68d9565071532d9198486ec9397112127eb6d04ee85d125bd973e6de1650b23.svg" src="../../_images/b68d9565071532d9198486ec9397112127eb6d04ee85d125bd973e6de1650b23.svg" /></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 199: Res norm = 7.50e+00
+</pre></div>
+</div>
+<img alt="../../_images/b909b69bf3e5edc469667db085a35f57748b823da6f4a9f5def61c54e9f874f9.svg" src="../../_images/b909b69bf3e5edc469667db085a35f57748b823da6f4a9f5def61c54e9f874f9.svg" /></div>
 </div>
 <p>The main takeaway here is that the rate of convergence decreases dramatically as we make the mesh finer. So not only is each iteration more expensive, but we need to do more iterations to converge to the same tolerance.</p>
 </section>
@@ -1186,9 +1195,9 @@ Iteration 199: Res norm = 7.50e+00
     <span class="n">dy</span> <span class="o">=</span> <span class="n">LY</span> <span class="o">/</span> <span class="n">N</span>
     <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
     <span class="n">numLevels</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
-    <span class="n">workPerIteration</span> <span class="o">=</span> <span class="n">numCoarseIter</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">numLevels</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">workPerIteration</span> <span class="o">=</span> <span class="n">numCoarseIter</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span><span class="o">**</span><span class="p">(</span><span class="n">numLevels</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numLevels</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">workPerIteration</span> <span class="o">+=</span> <span class="p">(</span><span class="n">numPreIter</span> <span class="o">+</span> <span class="n">numPostIter</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">level</span><span class="p">)</span>
+        <span class="n">workPerIteration</span> <span class="o">+=</span> <span class="p">(</span><span class="n">numPreIter</span> <span class="o">+</span> <span class="n">numPostIter</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span><span class="o">**</span><span class="n">level</span><span class="p">)</span>
     <span class="n">USol</span><span class="p">,</span> <span class="n">resHistory</span><span class="p">,</span> <span class="n">iterTimes</span> <span class="o">=</span> <span class="n">iterativeSolve</span><span class="p">(</span>
         <span class="n">U</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">multigridSmoother</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-16</span><span class="p">,</span> <span class="n">maxIter</span><span class="o">=</span><span class="n">maxIter</span>
     <span class="p">)</span>
@@ -1197,6 +1206,7 @@ Iteration 199: Res norm = 7.50e+00
 
 <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">multigridAx</span><span class="p">)</span>
 <span class="n">multigridAx</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;HW3-3.pdf&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1239,18 +1249,18 @@ Iteration 0: Res norm = 9.69e-01
 Iteration 2: Res norm = 8.74e-03
 Iteration 4: Res norm = 2.73e-04
 Iteration 6: Res norm = 9.73e-06
-Iteration 8: Res norm = 3.59e-07
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 8: Res norm = 3.59e-07
 Iteration 10: Res norm = 1.33e-08
 Iteration 12: Res norm = 4.97e-10
 Iteration 14: Res norm = 1.88e-11
 Iteration 16: Res norm = 8.15e-13
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 18: Res norm = 1.87e-13
+Iteration 18: Res norm = 1.87e-13
 Iteration 19: Res norm = 1.75e-13
 </pre></div>
 </div>
-<img alt="../../_images/3a22e42bacbe2f6d7ea71f99865ceb31f67c2e9a43cd265aee37672d55ea2fd8.svg" src="../../_images/3a22e42bacbe2f6d7ea71f99865ceb31f67c2e9a43cd265aee37672d55ea2fd8.svg" /></div>
+<img alt="../../_images/9ba253b10049bf9beb21ee8d645008be7fef7e3b636635cc9b694580fc5c9842.svg" src="../../_images/9ba253b10049bf9beb21ee8d645008be7fef7e3b636635cc9b694580fc5c9842.svg" /></div>
 </div>
 <p>Clearly, multigrid is much faster to converge than the Gauss-Seidel smoother.</p>
 <p>The most important to note however, is that the number of iterations required to converge is independent of the mesh size.
@@ -1296,6 +1306,15 @@ Clearly in this case, the number of iterations is not completely independent, bu
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Week 7</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../Week8/Week8.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 7</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
