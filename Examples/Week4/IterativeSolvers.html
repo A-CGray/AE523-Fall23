@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -148,13 +148,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="../../_static/scramjet.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../_static/scramjet.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../_static/scramjet.png" class="logo__image only-light" alt="AEROSP 523 Computational Fluid Dynamics: Code Examples - Home"/>
+    <script>document.write(`<img src="../../_static/scramjet.png" class="logo__image only-dark" alt="AEROSP 523 Computational Fluid Dynamics: Code Examples - Home"/>`);</script>
   
   
 </a></div>
@@ -202,7 +203,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week7/HW3Solution.html">Homework 3 Solutions</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Week8/Week8.html">Week 7</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week8/Week8.html">Week 8</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/HW4Solution.html">Homework 4 Solutions</a></li>
 </ul>
 </li>
@@ -496,6 +497,7 @@ document.write(`
 <span class="n">T0</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Left boundary condition</span>
 <span class="n">TN</span> <span class="o">=</span> <span class="mf">4.0</span>  <span class="c1"># Right boundary condition</span>
 
+
 <span class="c1"># Define the symbolic function q(x)</span>
 <span class="k">def</span> <span class="nf">q</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
@@ -540,7 +542,7 @@ Note that this is a different kind of error than we have discussed previously, i
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dx2</span> <span class="o">=</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-    <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">kappa</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span><span class="o">/</span><span class="n">dx2</span> <span class="o">+</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">kappa</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="o">/</span> <span class="n">dx2</span> <span class="o">+</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">r</span>
 
@@ -611,10 +613,9 @@ In each iteration we check the residual norm at the current state, if it is too 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">resNormHistory</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">iterationTimes</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">printFrequency</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxIter</span><span class="o">//</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">printFrequency</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxIter</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span>
     <span class="n">startTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxIter</span><span class="p">):</span>
-
         <span class="c1"># Compute the residual and it&#39;s norm at the current state</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">computeResidual</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span>
         <span class="n">resNorm</span> <span class="o">=</span> <span class="n">computeNorm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
@@ -729,12 +730,14 @@ Iteration 3500: Res norm = 7.88e-01
 Iteration 4000: Res norm = 6.16e-01
 Iteration 4422: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
-Iteration 500: Res norm = 2.19e+00
-Iteration 1000: Res norm = 1.31e+00
-Iteration 1500: Res norm = 7.98e-01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1975: Res norm = 5.00e-01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 500: Res norm = 2.19e+00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1000: Res norm = 1.31e+00
+Iteration 1500: Res norm = 7.98e-01
+Iteration 1975: Res norm = 5.00e-01
 </pre></div>
 </div>
 </div>
@@ -754,7 +757,7 @@ Iteration 1500: Res norm = 7.98e-01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e194c6b4c947d7b5cbafdf706fd09097f4e9146fb29c661eeb225f3d8ca84fec.svg" src="../../_images/e194c6b4c947d7b5cbafdf706fd09097f4e9146fb29c661eeb225f3d8ca84fec.svg" /></div>
+<img alt="../../_images/c73e9be5b2f08aeff1b80fa7624d9c4e77e69aa1a731738039ebf00f366a2b59.svg" src="../../_images/c73e9be5b2f08aeff1b80fa7624d9c4e77e69aa1a731738039ebf00f366a2b59.svg" /></div>
 </div>
 <p>Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
 In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.</p>
@@ -773,7 +776,7 @@ In this case, the Jacobi solver actually takes less time to solve the system tha
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8e59979cc904bcf404d163edb48ea1f1550416645e2bd94736ec55cb8c50cf7c.svg" src="../../_images/8e59979cc904bcf404d163edb48ea1f1550416645e2bd94736ec55cb8c50cf7c.svg" /></div>
+<img alt="../../_images/e1467fa43cb024a67eb183981f988a451b12a26c2042ed6718ac477de57b3386.svg" src="../../_images/e1467fa43cb024a67eb183981f988a451b12a26c2042ed6718ac477de57b3386.svg" /></div>
 </div>
 <p>We can improve performance with under or over relaxation, where we update the nodes with a weighted average of the old and new values:</p>
 <div class="math notranslate nohighlight">
@@ -808,7 +811,7 @@ With Gauss-Seidel, we can use over-relaxation, where <span class="math notransla
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">resNormHistory</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">iterationTimes</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">printFrequency</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxIter</span><span class="o">//</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">printFrequency</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxIter</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span>
     <span class="n">startTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxIter</span><span class="p">):</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">computeResidual</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span>
@@ -840,7 +843,9 @@ With Gauss-Seidel, we can use over-relaxation, where <span class="math notransla
 <span class="n">iterationTimes</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">omegas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">omega</span> <span class="ow">in</span> <span class="n">omegas</span><span class="p">:</span>
-    <span class="n">uGS</span><span class="p">,</span> <span class="n">resNormHistoryGS</span><span class="p">,</span> <span class="n">iterationTimesGS</span> <span class="o">=</span> <span class="n">iterativeSolve</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">qVec</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">gaussSeidelIteration</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
+    <span class="n">uGS</span><span class="p">,</span> <span class="n">resNormHistoryGS</span><span class="p">,</span> <span class="n">iterationTimesGS</span> <span class="o">=</span> <span class="n">iterativeSolve</span><span class="p">(</span>
+        <span class="n">u</span><span class="p">,</span> <span class="n">qVec</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">gaussSeidelIteration</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span>
+    <span class="p">)</span>
     <span class="n">resNormHistories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resNormHistoryGS</span><span class="p">)</span>
     <span class="n">iterationTimes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">iterationTimesGS</span><span class="p">)</span>
 </pre></div>
@@ -858,22 +863,22 @@ Iteration 3500: Res norm = 7.88e-01
 Iteration 4000: Res norm = 6.16e-01
 Iteration 4422: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
-Iteration 500: Res norm = 2.19e+00
-Iteration 1000: Res norm = 1.31e+00
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500: Res norm = 7.98e-01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 500: Res norm = 2.19e+00
+Iteration 1000: Res norm = 1.31e+00
+Iteration 1500: Res norm = 7.98e-01
 Iteration 1975: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 1.77e+00
-Iteration 1000: Res norm = 8.81e-01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1000: Res norm = 8.81e-01
 Iteration 1410: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 1.59e+00
 Iteration 1000: Res norm = 7.23e-01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1234: Res norm = 5.00e-01
+Iteration 1234: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 81: Res norm = 1.05e+14
 </pre></div>
@@ -897,7 +902,13 @@ Iteration 81: Res norm = 1.05e+14
 <span class="n">omegaColours</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;viridis&quot;</span><span class="p">)(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">omegas</span><span class="p">)))</span>
 <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">omegas</span><span class="p">)):</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">resNormHistories</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">omegaColours</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;GS, $</span><span class="se">\\</span><span class="s2">omega$ = </span><span class="si">{</span><span class="n">omegas</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iterationTimes</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">resNormHistories</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">omegaColours</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;GS, $</span><span class="se">\\</span><span class="s2">omega$ = </span><span class="si">{</span><span class="n">omegas</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">iterationTimes</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span>
+        <span class="n">resNormHistories</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">omegaColours</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span>
+        <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;GS, $</span><span class="se">\\</span><span class="s2">omega$ = </span><span class="si">{</span><span class="n">omegas</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">1e12</span><span class="p">)</span>
@@ -906,7 +917,7 @@ Iteration 81: Res norm = 1.05e+14
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/69e327d7f91deac4b489b2c89bd8a5874b539cd9668dd70233c84cae50a955d0.svg" src="../../_images/69e327d7f91deac4b489b2c89bd8a5874b539cd9668dd70233c84cae50a955d0.svg" /></div>
+<img alt="../../_images/d087c4535f6853d998f5e3949f64baf226ffffed7ee7061bc5c43d0be9383dd5.svg" src="../../_images/d087c4535f6853d998f5e3949f64baf226ffffed7ee7061bc5c43d0be9383dd5.svg" /></div>
 </div>
 </section>
 </section>
@@ -1023,8 +1034,8 @@ By Alasdair Christison Gray
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
 
   <footer class="bd-footer">
   </footer>

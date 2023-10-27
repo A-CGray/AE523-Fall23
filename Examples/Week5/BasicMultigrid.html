@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -148,13 +148,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="../../_static/scramjet.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../_static/scramjet.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../_static/scramjet.png" class="logo__image only-light" alt="AEROSP 523 Computational Fluid Dynamics: Code Examples - Home"/>
+    <script>document.write(`<img src="../../_static/scramjet.png" class="logo__image only-dark" alt="AEROSP 523 Computational Fluid Dynamics: Code Examples - Home"/>`);</script>
   
   
 </a></div>
@@ -202,7 +203,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week7/HW3Solution.html">Homework 3 Solutions</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Week8/Week8.html">Week 7</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week8/Week8.html">Week 8</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/HW4Solution.html">Homework 4 Solutions</a></li>
 </ul>
 </li>
@@ -567,7 +568,7 @@ This page also contains figures from Krzysztof Fidkowski’s CFD course notes.</
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">resNormHistory</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">iterationTimes</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">printFrequency</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxIter</span><span class="o">//</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">printFrequency</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxIter</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span>
     <span class="n">startTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxIter</span><span class="p">):</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">computeResidual</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span>
@@ -645,15 +646,17 @@ Iteration 500: Res norm = 2.18e-01
 Iteration 1000: Res norm = 1.30e-02
 Iteration 1500: Res norm = 7.76e-04
 Iteration 2000: Res norm = 4.63e-05
-Iteration 2500: Res norm = 2.76e-06
-Iteration 2680: Res norm = 9.99e-07
-Iteration 0: Res norm = 7.02e-01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 500: Res norm = 4.24e-02
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2500: Res norm = 2.76e-06
+Iteration 2680: Res norm = 9.99e-07
+Iteration 0: Res norm = 7.02e-01
+Iteration 500: Res norm = 4.24e-02
 Iteration 1000: Res norm = 2.53e-03
 Iteration 1500: Res norm = 1.51e-04
-Iteration 2000: Res norm = 8.99e-06
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2000: Res norm = 8.99e-06
 Iteration 2390: Res norm = 9.97e-07
 </pre></div>
 </div>
@@ -674,7 +677,7 @@ Iteration 2390: Res norm = 9.97e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8cc3a3343c38ee1dde9e9d99295a029da9a86aebfdfd9e849d3202e456926521.svg" src="../../_images/8cc3a3343c38ee1dde9e9d99295a029da9a86aebfdfd9e849d3202e456926521.svg" /></div>
+<img alt="../../_images/b40cc7664ba29628fe31e481c7c24b9cc9f7f7f2f15748508b9e663165b2eff1.svg" src="../../_images/b40cc7664ba29628fe31e481c7c24b9cc9f7f7f2f15748508b9e663165b2eff1.svg" /></div>
 </div>
 <p>To demonstrate how different frequencies of error are reduced at different rates, we’ll run 10 iterations starting from the true solution plus a high frequency error and then starting from the true solution plus a low frequency error.</p>
 <div class="cell docutils container">
@@ -724,7 +727,7 @@ Iteration 8: Res norm = 1.34e-01
 Iteration 9: Res norm = 1.12e-01
 </pre></div>
 </div>
-<img alt="../../_images/02a3c5461ba3eead3092eb6ef8de69b443c7faa052510f693412ee09a0bde976.svg" src="../../_images/02a3c5461ba3eead3092eb6ef8de69b443c7faa052510f693412ee09a0bde976.svg" /></div>
+<img alt="../../_images/f47194643d3c8f2faca6305b0083f3a4553756a80da0021d5b8d4d50dc526606.svg" src="../../_images/f47194643d3c8f2faca6305b0083f3a4553756a80da0021d5b8d4d50dc526606.svg" /></div>
 </div>
 <section id="implementing-a-basic-2-level-multigrid-solver">
 <h2>Implementing a basic 2-level multigrid solver<a class="headerlink" href="#implementing-a-basic-2-level-multigrid-solver" title="Permalink to this heading">#</a></h2>
@@ -861,7 +864,7 @@ Iteration 2: Res norm = 1.10e-01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/88de539f053a18145165b2bbce44abea3f3778b3063252441a44d5e7e87273cd.svg" src="../../_images/88de539f053a18145165b2bbce44abea3f3778b3063252441a44d5e7e87273cd.svg" /></div>
+<img alt="../../_images/b9345904c2419214f12f214c139dbda9acb2a98749b407895709734c9cbf6fdf.svg" src="../../_images/b9345904c2419214f12f214c139dbda9acb2a98749b407895709734c9cbf6fdf.svg" /></div>
 </div>
 <p>Now let’s see how fast multigrid converges from the bad initial guess compared to plain Gauss-Seidel.</p>
 <p>When comparing the number of iterations required for convergence, we need to account for the fact that each multigrid iteration is more expensive than a Gauss-Seidel iteration.</p>
@@ -882,7 +885,9 @@ Iteration 500: Res norm = 2.18e-01
 Iteration 1000: Res norm = 1.30e-02
 Iteration 1500: Res norm = 7.76e-04
 Iteration 2000: Res norm = 4.63e-05
-Iteration 2500: Res norm = 2.76e-06
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2500: Res norm = 2.76e-06
 Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 2.62e+02
 Iteration 269: Res norm = 9.45e-07
@@ -908,7 +913,7 @@ Iteration 269: Res norm = 9.45e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/106338968c7a071ed568e6f650671bae6bca54e00afdea3911b042d2c1244746.svg" src="../../_images/106338968c7a071ed568e6f650671bae6bca54e00afdea3911b042d2c1244746.svg" /></div>
+<img alt="../../_images/c60cf4219441a343e1fcd503ec7b42875f046f3f2ed7532e7b5ea6e317382ac9.svg" src="../../_images/c60cf4219441a343e1fcd503ec7b42875f046f3f2ed7532e7b5ea6e317382ac9.svg" /></div>
 </div>
 </section>
 </section>
@@ -1024,8 +1029,8 @@ By Alasdair Christison Gray
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
 
   <footer class="bd-footer">
   </footer>

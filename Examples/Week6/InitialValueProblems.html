@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -148,13 +148,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="../../_static/scramjet.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../_static/scramjet.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../_static/scramjet.png" class="logo__image only-light" alt="AEROSP 523 Computational Fluid Dynamics: Code Examples - Home"/>
+    <script>document.write(`<img src="../../_static/scramjet.png" class="logo__image only-dark" alt="AEROSP 523 Computational Fluid Dynamics: Code Examples - Home"/>`);</script>
   
   
 </a></div>
@@ -202,7 +203,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week7/HW3Solution.html">Homework 3 Solutions</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Week8/Week8.html">Week 7</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week8/Week8.html">Week 8</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/HW4Solution.html">Homework 4 Solutions</a></li>
 </ul>
 </li>
@@ -457,6 +458,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">config</span>
+
 <span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_enable_x64&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -491,12 +493,13 @@ We’ll treat the problem as periodic, which means that the left and right bound
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getInitialCondition</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
 
 <span class="n">Nx</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">L</span> <span class="o">=</span> <span class="mf">2.0</span>
-<span class="n">dx</span> <span class="o">=</span> <span class="n">L</span><span class="o">/</span><span class="n">Nx</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">Nx</span>
 <span class="n">tFinal</span> <span class="o">=</span> <span class="mf">0.12</span>
 <span class="n">nu</span> <span class="o">=</span> <span class="mf">1.0</span>
 
@@ -513,7 +516,7 @@ We’ll treat the problem as periodic, which means that the left and right bound
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6d79d95f882e3438f0334ab4eff452a97e27004b37c20f066fabfd16e1f36151.svg" src="../../_images/6d79d95f882e3438f0334ab4eff452a97e27004b37c20f066fabfd16e1f36151.svg" /></div>
+<img alt="../../_images/5e368f6e387a927022e9e27ac1ea47eb85cd4b33389b95bfb1d0b0298ff39e7f.svg" src="../../_images/5e368f6e387a927022e9e27ac1ea47eb85cd4b33389b95bfb1d0b0298ff39e7f.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -527,7 +530,7 @@ We’ll treat the problem as periodic, which means that the left and right bound
     <span class="c1"># Main time-stepping loop</span>
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
         <span class="c1"># Compute the spatial derivative (centered in space)</span>
-        <span class="n">uxx</span> <span class="o">=</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">u</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">uxx</span> <span class="o">=</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">u</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
         <span class="c1"># Update the solution using forward time-stepping</span>
         <span class="n">u</span> <span class="o">+=</span> <span class="n">nu</span> <span class="o">*</span> <span class="n">uxx</span> <span class="o">*</span> <span class="n">dt</span>
@@ -536,8 +539,10 @@ We’ll treat the problem as periodic, which means that the left and right bound
     <span class="n">u</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">u</span>
 
+
 <span class="k">def</span> <span class="nf">computeTimestepFromMu</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">nu</span>
+
 
 <span class="k">def</span> <span class="nf">plotSolution</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">tFinal</span><span class="p">):</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
@@ -554,7 +559,7 @@ We’ll treat the problem as periodic, which means that the left and right bound
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$t = 0$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="p">)):</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$t = </span><span class="si">{</span><span class="n">tFinal</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        
+
     <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">outward</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">niceplots</span><span class="o">.</span><span class="n">label_line_ends</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
@@ -576,7 +581,7 @@ We’ll treat the problem as periodic, which means that the left and right bound
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/14171bfdbc4a3b8637596f7f44e0a269f50e5f9662df8f6dee7c6bb926e1d22b.svg" src="../../_images/14171bfdbc4a3b8637596f7f44e0a269f50e5f9662df8f6dee7c6bb926e1d22b.svg" /></div>
+<img alt="../../_images/4fb6b0557564b05e4b2f5822472cce65f7a8b76a6a254b405c6897120ece8239.svg" src="../../_images/4fb6b0557564b05e4b2f5822472cce65f7a8b76a6a254b405c6897120ece8239.svg" /></div>
 </div>
 <p>Now let’s try running the same problem with different sizes of timestep.
 Before we do, it’s useful to define something called the heat number:
@@ -590,7 +595,7 @@ The code below demonstrates this by running the same problem as above with <span
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">muVals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.51</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 
 <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 
@@ -603,7 +608,7 @@ The code below demonstrates this by running the same problem as above with <span
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6ac151d884b5d9f6f53303300289dbedcbcc4295cad965fedfc10e5020c7e3a6.svg" src="../../_images/6ac151d884b5d9f6f53303300289dbedcbcc4295cad965fedfc10e5020c7e3a6.svg" /></div>
+<img alt="../../_images/596b3286cc61b2fdace6bf8c6a7c77a5662886e6be936748f0aeab5fe3a7b82b.svg" src="../../_images/596b3286cc61b2fdace6bf8c6a7c77a5662886e6be936748f0aeab5fe3a7b82b.svg" /></div>
 </div>
 </section>
 
@@ -704,8 +709,8 @@ By Alasdair Christison Gray
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
 
   <footer class="bd-footer">
   </footer>
