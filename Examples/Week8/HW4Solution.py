@@ -3,7 +3,7 @@
 
 # # Homework 4 Solutions
 
-# In[40]:
+# In[1]:
 
 
 import jax
@@ -25,7 +25,7 @@ colors = niceplots.get_colors_list()
 
 # ## Problem 1
 
-# In[41]:
+# In[2]:
 
 
 def FTCS_solver_grad(u0, nu, dx, dt, N, T):
@@ -58,6 +58,7 @@ dx = L / N
 # Choose a time step that satisfies the stability condition for the initial nu value
 mu0 = 0.4
 dt = mu0 * dx**2 / nu0
+print(f"{dt=}")
 x = jnp.linspace(0, L, N + 1)
 u_init = 1 - jnp.abs(x - 1)
 
@@ -98,7 +99,7 @@ nu_true, loss, history = gradient_descent(loss, jax.grad(loss), nu0, max_iter=50
 print(f"Final nu = {nu_true: 11.7e}, loss = {loss: 11.7e}")
 
 
-# In[42]:
+# In[3]:
 
 
 fig, axes = plt.subplots(nrows=2, sharex=True)
@@ -111,7 +112,7 @@ niceplots.adjust_spines(axes[0])
 niceplots.adjust_spines(axes[1])
 
 
-# In[43]:
+# In[4]:
 
 
 fig, ax = plt.subplots()
@@ -128,7 +129,7 @@ ax.set_ylabel(r"$u$")
 
 # ## Problem 2
 
-# In[44]:
+# In[5]:
 
 
 import numpy as np
@@ -258,7 +259,7 @@ niceplots.adjust_spines(ax)
 
 # ## Problem 3
 
-# In[48]:
+# In[6]:
 
 
 def solvePeriodicIVPAM2(u0, dt, T, A):
