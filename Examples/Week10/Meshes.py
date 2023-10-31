@@ -157,3 +157,4 @@ for ii in range(10):
             neighborCentroid = cellCentroids[neighborIndex]
             ax.plot([thisCentroid[0], neighborCentroid[0]], [thisCentroid[1], neighborCentroid[1]], "r-o")
 fig
+plt.show()
