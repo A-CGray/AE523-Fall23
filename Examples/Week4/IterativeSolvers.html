@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -730,14 +730,14 @@ Iteration 3500: Res norm = 7.88e-01
 Iteration 4000: Res norm = 6.16e-01
 Iteration 4422: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
+Iteration 500: Res norm = 2.19e+00
+Iteration 1000: Res norm = 1.31e+00
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 500: Res norm = 2.19e+00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500: Res norm = 7.98e-01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1000: Res norm = 1.31e+00
-Iteration 1500: Res norm = 7.98e-01
-Iteration 1975: Res norm = 5.00e-01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1975: Res norm = 5.00e-01
 </pre></div>
 </div>
 </div>
@@ -757,7 +757,7 @@ Iteration 1975: Res norm = 5.00e-01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c73e9be5b2f08aeff1b80fa7624d9c4e77e69aa1a731738039ebf00f366a2b59.svg" src="../../_images/c73e9be5b2f08aeff1b80fa7624d9c4e77e69aa1a731738039ebf00f366a2b59.svg" /></div>
+<img alt="../../_images/de14cde68ea3edb54335f712f1978a1b8b8d8306ca9d960877c6cc5651e36134.svg" src="../../_images/de14cde68ea3edb54335f712f1978a1b8b8d8306ca9d960877c6cc5651e36134.svg" /></div>
 </div>
 <p>Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
 In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.</p>
@@ -776,7 +776,7 @@ In this case, the Jacobi solver actually takes less time to solve the system tha
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e1467fa43cb024a67eb183981f988a451b12a26c2042ed6718ac477de57b3386.svg" src="../../_images/e1467fa43cb024a67eb183981f988a451b12a26c2042ed6718ac477de57b3386.svg" /></div>
+<img alt="../../_images/d1a01a2a593cbaa170e3f3cb46c27daa4e097aefd8b26b97474980ee9136d93b.svg" src="../../_images/d1a01a2a593cbaa170e3f3cb46c27daa4e097aefd8b26b97474980ee9136d93b.svg" /></div>
 </div>
 <p>We can improve performance with under or over relaxation, where we update the nodes with a weighted average of the old and new values:</p>
 <div class="math notranslate nohighlight">
@@ -863,22 +863,22 @@ Iteration 3500: Res norm = 7.88e-01
 Iteration 4000: Res norm = 6.16e-01
 Iteration 4422: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
+Iteration 500: Res norm = 2.19e+00
+Iteration 1000: Res norm = 1.31e+00
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 500: Res norm = 2.19e+00
-Iteration 1000: Res norm = 1.31e+00
-Iteration 1500: Res norm = 7.98e-01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500: Res norm = 7.98e-01
 Iteration 1975: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 1.77e+00
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1000: Res norm = 8.81e-01
+Iteration 1000: Res norm = 8.81e-01
 Iteration 1410: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 1.59e+00
 Iteration 1000: Res norm = 7.23e-01
-Iteration 1234: Res norm = 5.00e-01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1234: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 81: Res norm = 1.05e+14
 </pre></div>
@@ -917,7 +917,7 @@ Iteration 81: Res norm = 1.05e+14
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d087c4535f6853d998f5e3949f64baf226ffffed7ee7061bc5c43d0be9383dd5.svg" src="../../_images/d087c4535f6853d998f5e3949f64baf226ffffed7ee7061bc5c43d0be9383dd5.svg" /></div>
+<img alt="../../_images/7fce5d2e07f3d0f66f34fecfa56c4000b92cf19765ebae62c01cfcc682dca758.svg" src="../../_images/7fce5d2e07f3d0f66f34fecfa56c4000b92cf19765ebae62c01cfcc682dca758.svg" /></div>
 </div>
 </section>
 </section>
@@ -1034,8 +1034,8 @@ By Alasdair Christison Gray
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
   <footer class="bd-footer">
   </footer>
