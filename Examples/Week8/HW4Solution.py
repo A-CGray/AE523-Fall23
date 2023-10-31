@@ -58,7 +58,6 @@ dx = L / N
 # Choose a time step that satisfies the stability condition for the initial nu value
 mu0 = 0.4
 dt = mu0 * dx**2 / nu0
-print(f"{dt=}")
 x = jnp.linspace(0, L, N + 1)
 u_init = 1 - jnp.abs(x - 1)
 
