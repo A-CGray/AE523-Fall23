@@ -205,6 +205,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week8/HW4Solution.html">Homework 4 Solutions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week10/Week10.html">Week 10</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week10/Meshes.html">2D Triangular Meshes</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -603,17 +607,17 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_0(x) = 0.0416666666666667*(h - x)*(2*h - x)*(3*h - x)*(4*h - x)/h**4
 L_1(x) = 0.166666666666667*x*(2*h - x)*(3*h - x)*(4*h - x)/h**4
-L_2(x) = -0.25*x*(h - x)*(3*h - x)*(4*h - x)/h**4
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_3(x) = 0.166666666666667*x*(h - x)*(2*h - x)*(4*h - x)/h**4
-L_4(x) = -0.0416666666666667*x*(h - x)*(2*h - x)*(3*h - x)/h**4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_2(x) = -0.25*x*(h - x)*(3*h - x)*(4*h - x)/h**4
+L_3(x) = 0.166666666666667*x*(h - x)*(2*h - x)*(4*h - x)/h**4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_4(x) = -0.0416666666666667*x*(h - x)*(2*h - x)*(3*h - x)/h**4
 
 
 Coefficients for first derivative:
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = dL_0/dx | x=0 = -2.08333333333333/h
+a_0 = dL_0/dx | x=0 = -2.08333333333333/h
 a_1 = dL_1/dx | x=0 = 4.0/h
 a_2 = dL_2/dx | x=0 = -3.0/h
 a_3 = dL_3/dx | x=0 = 1.33333333333333/h
@@ -622,12 +626,12 @@ a_4 = dL_4/dx | x=0 = -0.25/h
 
 Coefficients for 2nd derivative:
 a_0 = d^2L_0/dx^2 | x=0 = 2.91666666666667/h**2
-a_1 = d^2L_1/dx^2 | x=0 = -8.66666666666667/h**2
-a_2 = d^2L_2/dx^2 | x=0 = 9.5/h**2
-a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = d^2L_1/dx^2 | x=0 = -8.66666666666667/h**2
+a_2 = d^2L_2/dx^2 | x=0 = 9.5/h**2
+a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
+a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
 </pre></div>
 </div>
 </div>
@@ -790,7 +794,7 @@ nnz=1189, inz=1189
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 2 Axes&gt;, &lt;Axes: xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../../_images/adbd1588bdf635f0e8217ce83330d17c61760365c4e68496561ea84cce6cb723.svg" src="../../_images/adbd1588bdf635f0e8217ce83330d17c61760365c4e68496561ea84cce6cb723.svg" /><img alt="../../_images/25724c4ef3d114d21b7ecec7c4d513a3320657012a6459b73beeadfba52068b2.svg" src="../../_images/25724c4ef3d114d21b7ecec7c4d513a3320657012a6459b73beeadfba52068b2.svg" /><img alt="../../_images/a285d66a9252e6f1c905d18042a00ee11503f31c731d7711f809d38d5367795c.svg" src="../../_images/a285d66a9252e6f1c905d18042a00ee11503f31c731d7711f809d38d5367795c.svg" /><img alt="../../_images/65ab1ce13e52ba62949038e2f9a8c01d880093e73cd7ce660b02aa87a8033ad9.svg" src="../../_images/65ab1ce13e52ba62949038e2f9a8c01d880093e73cd7ce660b02aa87a8033ad9.svg" /></div>
+<img alt="../../_images/4e838430b8831dae9e8e080a78b112a7d7c89ed72c4b2be30224c1426e042927.svg" src="../../_images/4e838430b8831dae9e8e080a78b112a7d7c89ed72c4b2be30224c1426e042927.svg" /><img alt="../../_images/2cd2636ffe6eb6a991e30def9147b1a48420e496548b5deb4c30b5dc2c53e3d4.svg" src="../../_images/2cd2636ffe6eb6a991e30def9147b1a48420e496548b5deb4c30b5dc2c53e3d4.svg" /><img alt="../../_images/91468c7f16fdef4654eac4c4376a2346fcc7b3f05fa99cee5c6e65dadf6dbde3.svg" src="../../_images/91468c7f16fdef4654eac4c4376a2346fcc7b3f05fa99cee5c6e65dadf6dbde3.svg" /><img alt="../../_images/5630cacd6e0b1d836e621d05ffb984451c1f029dba310175c95a3b04058e0da7.svg" src="../../_images/5630cacd6e0b1d836e621d05ffb984451c1f029dba310175c95a3b04058e0da7.svg" /></div>
 </div>
 </section>
 <section id="part-b">
@@ -839,7 +843,7 @@ nnz=4933, inz=4933
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283491888
 </pre></div>
 </div>
-<img alt="../../_images/63422035303fd6a88e1566ba18b8ec6dad91e4fedcab7cfcd7a6be7c51dcdac6.svg" src="../../_images/63422035303fd6a88e1566ba18b8ec6dad91e4fedcab7cfcd7a6be7c51dcdac6.svg" /></div>
+<img alt="../../_images/a6301c32b76833920a1da87a46ad7057fd0e5178f88a9c99495928cf5658554a.svg" src="../../_images/a6301c32b76833920a1da87a46ad7057fd0e5178f88a9c99495928cf5658554a.svg" /></div>
 </div>
 <p>From this result, it seems we have not quite reached the asymptotic region of convergence where the rate of convergence = 2. We can get there by increasing the number of grid points in each direction further.</p>
 <div class="cell docutils container">
@@ -874,7 +878,7 @@ nnz=20101, inz=20101
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9869166809982022
 </pre></div>
 </div>
-<img alt="../../_images/edeba71ad470332963c48cdd5803dfa5e23253e85c65165144b7d7efaa6edc81.svg" src="../../_images/edeba71ad470332963c48cdd5803dfa5e23253e85c65165144b7d7efaa6edc81.svg" /></div>
+<img alt="../../_images/884354d9ad19e6645cc2f38b6c8522d32eafa4a50da3ebe49e7ef8e2135db22f.svg" src="../../_images/884354d9ad19e6645cc2f38b6c8522d32eafa4a50da3ebe49e7ef8e2135db22f.svg" /></div>
 </div>
 </section>
 </section>

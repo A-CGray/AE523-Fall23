@@ -207,6 +207,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week8/HW4Solution.html">Homework 4 Solutions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week10/Week10.html">Week 10</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week10/Meshes.html">2D Triangular Meshes</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -731,13 +735,13 @@ Iteration 4000: Res norm = 6.16e-01
 Iteration 4422: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 2.19e+00
-Iteration 1000: Res norm = 1.31e+00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1000: Res norm = 1.31e+00
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500: Res norm = 7.98e-01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1975: Res norm = 5.00e-01
+Iteration 1975: Res norm = 5.00e-01
 </pre></div>
 </div>
 </div>
@@ -757,7 +761,7 @@ Iteration 1000: Res norm = 1.31e+00
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/de14cde68ea3edb54335f712f1978a1b8b8d8306ca9d960877c6cc5651e36134.svg" src="../../_images/de14cde68ea3edb54335f712f1978a1b8b8d8306ca9d960877c6cc5651e36134.svg" /></div>
+<img alt="../../_images/81dc31c6f977d3f721770f5ee550045607e9acf55e40121ebe31898188c2bc47.svg" src="../../_images/81dc31c6f977d3f721770f5ee550045607e9acf55e40121ebe31898188c2bc47.svg" /></div>
 </div>
 <p>Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
 In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.</p>
@@ -776,7 +780,7 @@ In this case, the Jacobi solver actually takes less time to solve the system tha
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d1a01a2a593cbaa170e3f3cb46c27daa4e097aefd8b26b97474980ee9136d93b.svg" src="../../_images/d1a01a2a593cbaa170e3f3cb46c27daa4e097aefd8b26b97474980ee9136d93b.svg" /></div>
+<img alt="../../_images/03a88b4042a445986b3a01ce63001cbf1a0ee53ac8a1017c6c4e8e91912df03b.svg" src="../../_images/03a88b4042a445986b3a01ce63001cbf1a0ee53ac8a1017c6c4e8e91912df03b.svg" /></div>
 </div>
 <p>We can improve performance with under or over relaxation, where we update the nodes with a weighted average of the old and new values:</p>
 <div class="math notranslate nohighlight">
@@ -864,21 +868,21 @@ Iteration 4000: Res norm = 6.16e-01
 Iteration 4422: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 2.19e+00
-Iteration 1000: Res norm = 1.31e+00
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500: Res norm = 7.98e-01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1000: Res norm = 1.31e+00
+Iteration 1500: Res norm = 7.98e-01
 Iteration 1975: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 1.77e+00
 Iteration 1000: Res norm = 8.81e-01
-Iteration 1410: Res norm = 5.00e-01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1410: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 1.59e+00
 Iteration 1000: Res norm = 7.23e-01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1234: Res norm = 5.00e-01
+Iteration 1234: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 81: Res norm = 1.05e+14
 </pre></div>
@@ -917,7 +921,7 @@ Iteration 81: Res norm = 1.05e+14
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7fce5d2e07f3d0f66f34fecfa56c4000b92cf19765ebae62c01cfcc682dca758.svg" src="../../_images/7fce5d2e07f3d0f66f34fecfa56c4000b92cf19765ebae62c01cfcc682dca758.svg" /></div>
+<img alt="../../_images/03d5b34c5cba4ae27beae8696e235546fd91ae49110b0eeb23f0e02f14f005e0.svg" src="../../_images/03d5b34c5cba4ae27beae8696e235546fd91ae49110b0eeb23f0e02f14f005e0.svg" /></div>
 </div>
 </section>
 </section>

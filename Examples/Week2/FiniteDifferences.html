@@ -207,6 +207,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week8/HW4Solution.html">Homework 4 Solutions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week10/Week10.html">Week 10</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week10/Meshes.html">2D Triangular Meshes</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -581,7 +585,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4faea301ac72c9e14fd667e6c4681587c391e2ba4e34bc4783ddb2e222b84a19.svg" src="../../_images/4faea301ac72c9e14fd667e6c4681587c391e2ba4e34bc4783ddb2e222b84a19.svg" /></div>
+<img alt="../../_images/202329c753d863dbc0d3519cb6a095be5bc3d877276698157ba138d984a7a5c1.svg" src="../../_images/202329c753d863dbc0d3519cb6a095be5bc3d877276698157ba138d984a7a5c1.svg" /></div>
 </div>
 <p>From this plot we can draw a few observations:</p>
 <ul class="simple">
@@ -662,7 +666,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/17fa7c54228492a3bfdb1fc6380bc315c28f4423d61bb22804a4a8e24383b669.svg" src="../../_images/17fa7c54228492a3bfdb1fc6380bc315c28f4423d61bb22804a4a8e24383b669.svg" /></div>
+<img alt="../../_images/015cf741acc58271a838cb53764f6b9d33722c165072116a01d5fbb708ced817.svg" src="../../_images/015cf741acc58271a838cb53764f6b9d33722c165072116a01d5fbb708ced817.svg" /></div>
 </div>
 <p>We can take advantage of this special property to construct a polynomial function that passes through a set of points.
 Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} = [x_0, x_1, ..., x_{N-1}]\)</span> and a set of function values <span class="math notranslate nohighlight">\(\mathbf{f} = [f_0, f_1, ..., f_{N-1}]\)</span> at those points, we can construct a polynomial function <span class="math notranslate nohighlight">\(p(x)\)</span> that passes through all of the points by summing the Lagrange polynomials multiplied by the function values:</p>
@@ -743,7 +747,7 @@ Given our set of points <span class="math notranslate nohighlight">\(\mathbf{x} 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5c6aa75f494341716019144d56aafd18b34a271bc2f1159cbcfafec15a2d7c0e.svg" src="../../_images/5c6aa75f494341716019144d56aafd18b34a271bc2f1159cbcfafec15a2d7c0e.svg" /></div>
+<img alt="../../_images/eaa6157d25e04fc0725358e6e7c271f437ae91973ca1194c983ed03e59da20b2.svg" src="../../_images/eaa6157d25e04fc0725358e6e7c271f437ae91973ca1194c983ed03e59da20b2.svg" /></div>
 </div>
 <p>Try playing around with the number of datapoints (<code class="docutils literal notranslate"><span class="pre">numDataPoints</span></code>) and the random seed to see in which scenarios the interpolation works well and in which it doesn’t.</p>
 <p>To obtain a finite difference scheme from the interpolating polynomial, we can simply take the derivative of the polynomial and evaluate it at the point of interest. e.g. for the first derivative:</p>
