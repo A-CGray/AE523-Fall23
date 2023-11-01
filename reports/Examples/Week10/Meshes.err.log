@@ -27,6 +27,7 @@ gamma = 1.4
 
 R, _ = computeTestCaseResidual(U0, U1, freeStreamState, gamma)
 print(R)
+
 ------------------
 
 
