@@ -208,7 +208,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week10/Week10.html">Week 10</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Week10/Meshes.html">2D Triangular Meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week10/Meshes.html">2D Finite Volume Meshes</a></li>
 </ul>
 </li>
 </ul>
@@ -736,9 +736,7 @@ Iteration 4422: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 2.19e+00
 Iteration 1000: Res norm = 1.31e+00
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500: Res norm = 7.98e-01
+Iteration 1500: Res norm = 7.98e-01
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1975: Res norm = 5.00e-01
@@ -761,7 +759,7 @@ Iteration 1000: Res norm = 1.31e+00
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3c7c74ea78324a0ff22640fcc755b45ddf8dc1951645b202237f140a9b70248b.svg" src="../../_images/3c7c74ea78324a0ff22640fcc755b45ddf8dc1951645b202237f140a9b70248b.svg" /></div>
+<img alt="../../_images/19ab098c1f425d714e6724f010a45c77a736583602dad6c1639f026ca5a9a5cc.svg" src="../../_images/19ab098c1f425d714e6724f010a45c77a736583602dad6c1639f026ca5a9a5cc.svg" /></div>
 </div>
 <p>Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
 In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.</p>
@@ -780,7 +778,7 @@ In this case, the Jacobi solver actually takes less time to solve the system tha
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/84b137c92a83315b239330a35b1210ea0ef7cb073e3ab22a87ae3f087a517ad1.svg" src="../../_images/84b137c92a83315b239330a35b1210ea0ef7cb073e3ab22a87ae3f087a517ad1.svg" /></div>
+<img alt="../../_images/86dcdcea9c2f7ef3ce9f1a8ba696e10083782288726b9fc452b3a8dc3ee34b5c.svg" src="../../_images/86dcdcea9c2f7ef3ce9f1a8ba696e10083782288726b9fc452b3a8dc3ee34b5c.svg" /></div>
 </div>
 <p>We can improve performance with under or over relaxation, where we update the nodes with a weighted average of the old and new values:</p>
 <div class="math notranslate nohighlight">
@@ -869,10 +867,10 @@ Iteration 4422: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 2.19e+00
 Iteration 1000: Res norm = 1.31e+00
+Iteration 1500: Res norm = 7.98e-01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500: Res norm = 7.98e-01
-Iteration 1975: Res norm = 5.00e-01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1975: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 1.77e+00
 Iteration 1000: Res norm = 8.81e-01
@@ -919,7 +917,7 @@ Iteration 81: Res norm = 1.05e+14
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/21c925e9dbd7a937d536f061f5ab7b69e18856dbf9d1b5fff71a88d82643c0e2.svg" src="../../_images/21c925e9dbd7a937d536f061f5ab7b69e18856dbf9d1b5fff71a88d82643c0e2.svg" /></div>
+<img alt="../../_images/df73b81d3119d76390b281aa59ba721c85fb490d9a30e92bf55e7c35db87f882.svg" src="../../_images/df73b81d3119d76390b281aa59ba721c85fb490d9a30e92bf55e7c35db87f882.svg" /></div>
 </div>
 </section>
 </section>

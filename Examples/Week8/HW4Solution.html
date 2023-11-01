@@ -208,7 +208,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week10/Week10.html">Week 10</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Week10/Meshes.html">2D Triangular Meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week10/Meshes.html">2D Finite Volume Meshes</a></li>
 </ul>
 </li>
 </ul>
@@ -570,13 +570,11 @@ document.write(`
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 000: x =  7.0000000e-01, f(x) =  1.6792444e-01, dfdx =  5.5601598e-01
+Iteration 001: x =  6.4439840e-01, f(x) =  1.3752939e-01, dfdx =  5.3587073e-01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 001: x =  6.4439840e-01, f(x) =  1.3752939e-01, dfdx =  5.3587073e-01
-Iteration 002: x =  5.9081133e-01, f(x) =  1.0952801e-01, dfdx =  5.0764924e-01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 003: x =  5.4004640e-01, f(x) =  8.4630895e-02, dfdx =  4.7160390e-01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 002: x =  5.9081133e-01, f(x) =  1.0952801e-01, dfdx =  5.0764924e-01
+Iteration 003: x =  5.4004640e-01, f(x) =  8.4630895e-02, dfdx =  4.7160390e-01
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 004: x =  4.9288601e-01, f(x) =  6.3362298e-02, dfdx =  4.2875653e-01
@@ -624,51 +622,53 @@ Iteration 025: x =  2.4681026e-01, f(x) =  2.2212143e-03, dfdx =  1.8889629e-03
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 026: x =  2.4662137e-01, f(x) =  2.2209048e-03, dfdx =  1.3877328e-03
-Iteration 027: x =  2.4648259e-01, f(x) =  2.2207378e-03, dfdx =  1.0192804e-03
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 028: x =  2.4638067e-01, f(x) =  2.2206477e-03, dfdx =  7.4853478e-04
-Iteration 029: x =  2.4630581e-01, f(x) =  2.2205991e-03, dfdx =  5.4964106e-04
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 027: x =  2.4648259e-01, f(x) =  2.2207378e-03, dfdx =  1.0192804e-03
+Iteration 028: x =  2.4638067e-01, f(x) =  2.2206477e-03, dfdx =  7.4853478e-04
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 030: x =  2.4625085e-01, f(x) =  2.2205729e-03, dfdx =  4.0356064e-04
-Iteration 031: x =  2.4621049e-01, f(x) =  2.2205588e-03, dfdx =  2.9628581e-04
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 029: x =  2.4630581e-01, f(x) =  2.2205991e-03, dfdx =  5.4964106e-04
+Iteration 030: x =  2.4625085e-01, f(x) =  2.2205729e-03, dfdx =  4.0356064e-04
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 032: x =  2.4618086e-01, f(x) =  2.2205512e-03, dfdx =  2.1751673e-04
-Iteration 033: x =  2.4615911e-01, f(x) =  2.2205471e-03, dfdx =  1.5968333e-04
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 031: x =  2.4621049e-01, f(x) =  2.2205588e-03, dfdx =  2.9628581e-04
+Iteration 032: x =  2.4618086e-01, f(x) =  2.2205512e-03, dfdx =  2.1751673e-04
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 034: x =  2.4614314e-01, f(x) =  2.2205449e-03, dfdx =  1.1722374e-04
-Iteration 035: x =  2.4613142e-01, f(x) =  2.2205437e-03, dfdx =  8.6052518e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 033: x =  2.4615911e-01, f(x) =  2.2205471e-03, dfdx =  1.5968333e-04
+Iteration 034: x =  2.4614314e-01, f(x) =  2.2205449e-03, dfdx =  1.1722374e-04
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 036: x =  2.4612282e-01, f(x) =  2.2205431e-03, dfdx =  6.3169245e-05
-Iteration 037: x =  2.4611650e-01, f(x) =  2.2205427e-03, dfdx =  4.6370680e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 035: x =  2.4613142e-01, f(x) =  2.2205437e-03, dfdx =  8.6052518e-05
+Iteration 036: x =  2.4612282e-01, f(x) =  2.2205431e-03, dfdx =  6.3169245e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 038: x =  2.4611186e-01, f(x) =  2.2205425e-03, dfdx =  3.4039100e-05
-Iteration 039: x =  2.4610846e-01, f(x) =  2.2205424e-03, dfdx =  2.4986784e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 037: x =  2.4611650e-01, f(x) =  2.2205427e-03, dfdx =  4.6370680e-05
+Iteration 038: x =  2.4611186e-01, f(x) =  2.2205425e-03, dfdx =  3.4039100e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 040: x =  2.4610596e-01, f(x) =  2.2205424e-03, dfdx =  1.8341757e-05
-Iteration 041: x =  2.4610412e-01, f(x) =  2.2205423e-03, dfdx =  1.3463880e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 039: x =  2.4610846e-01, f(x) =  2.2205424e-03, dfdx =  2.4986784e-05
+Iteration 040: x =  2.4610596e-01, f(x) =  2.2205424e-03, dfdx =  1.8341757e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 042: x =  2.4610278e-01, f(x) =  2.2205423e-03, dfdx =  9.8832240e-06
-Iteration 043: x =  2.4610179e-01, f(x) =  2.2205423e-03, dfdx =  7.2548152e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 041: x =  2.4610412e-01, f(x) =  2.2205423e-03, dfdx =  1.3463880e-05
+Iteration 042: x =  2.4610278e-01, f(x) =  2.2205423e-03, dfdx =  9.8832240e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 044: x =  2.4610106e-01, f(x) =  2.2205423e-03, dfdx =  5.3254165e-06
-Iteration 045: x =  2.4610053e-01, f(x) =  2.2205423e-03, dfdx =  3.9091329e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 043: x =  2.4610179e-01, f(x) =  2.2205423e-03, dfdx =  7.2548152e-06
+Iteration 044: x =  2.4610106e-01, f(x) =  2.2205423e-03, dfdx =  5.3254165e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 046: x =  2.4610014e-01, f(x) =  2.2205423e-03, dfdx =  2.8695053e-06
-Iteration 047: x =  2.4609985e-01, f(x) =  2.2205423e-03, dfdx =  2.1063640e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 045: x =  2.4610053e-01, f(x) =  2.2205423e-03, dfdx =  3.9091329e-06
+Iteration 046: x =  2.4610014e-01, f(x) =  2.2205423e-03, dfdx =  2.8695053e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 048: x =  2.4609964e-01, f(x) =  2.2205423e-03, dfdx =  1.5461787e-06
-Iteration 049: x =  2.4609949e-01, f(x) =  2.2205423e-03, dfdx =  1.1349738e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 047: x =  2.4609985e-01, f(x) =  2.2205423e-03, dfdx =  2.1063640e-06
+Iteration 048: x =  2.4609964e-01, f(x) =  2.2205423e-03, dfdx =  1.5461787e-06
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 049: x =  2.4609949e-01, f(x) =  2.2205423e-03, dfdx =  1.1349738e-06
 Did not converge after 50 iterations
 Final nu =  2.4609938e-01, loss =  2.2205423e-03
 </pre></div>
@@ -689,7 +689,7 @@ Final nu =  2.4609938e-01, loss =  2.2205423e-03
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9f140709bed071fa0d95d9d56ebaf740697a10bdec8094d4d21cadd11de22a49.svg" src="../../_images/9f140709bed071fa0d95d9d56ebaf740697a10bdec8094d4d21cadd11de22a49.svg" /></div>
+<img alt="../../_images/7d1940db314b1789a5dfe40e136d2b2ef543a09e98f3dc3a4e9dbb8af559ef8d.svg" src="../../_images/7d1940db314b1789a5dfe40e136d2b2ef543a09e98f3dc3a4e9dbb8af559ef8d.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -710,7 +710,7 @@ Final nu =  2.4609938e-01, loss =  2.2205423e-03
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$u$&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/8a66b1bcee9df6d9469debe7dbcf1e6898e7c3f4675892d2b5a3a0e41ad32ff7.svg" src="../../_images/8a66b1bcee9df6d9469debe7dbcf1e6898e7c3f4675892d2b5a3a0e41ad32ff7.svg" /></div>
+<img alt="../../_images/0d0144b8ef8ef267a18f910a60efb369678df5230896061fb1cb9548da38908e.svg" src="../../_images/0d0144b8ef8ef267a18f910a60efb369678df5230896061fb1cb9548da38908e.svg" /></div>
 </div>
 </section>
 <section id="problem-2">
@@ -860,7 +860,7 @@ Using heat number condition, max dt = 1.221e-02
 Used dt = 1.724e-02 for Pe = 100
 </pre></div>
 </div>
-<img alt="../../_images/8d234cf6481e554adc6ff0db325ed215834f28733fcc28984d8c1f1d550f79f2.svg" src="../../_images/8d234cf6481e554adc6ff0db325ed215834f28733fcc28984d8c1f1d550f79f2.svg" /></div>
+<img alt="../../_images/1ad88d90f4feae89e3530a77849030b1a3921b71e7bc03afbb8dfee048d2df71.svg" src="../../_images/1ad88d90f4feae89e3530a77849030b1a3921b71e7bc03afbb8dfee048d2df71.svg" /></div>
 </div>
 <p>The P’eclet number represents the ratio of advection and diffusion.
 In this problem, you are asked to simulate up to <span class="math notranslate nohighlight">\(T = 2L/a\)</span>, which is the time it takes for the initial wave to move exactly 2 domain lengths.
@@ -953,7 +953,7 @@ Used dt = 3.125e-02
   warn(&#39;splu converted its input to CSC format&#39;, SparseEfficiencyWarning)
 </pre></div>
 </div>
-<img alt="../../_images/8a5b840dcd0516e36fa85e60fc8babf16120a28ea791d614da14f3c14387b6e7.svg" src="../../_images/8a5b840dcd0516e36fa85e60fc8babf16120a28ea791d614da14f3c14387b6e7.svg" /><img alt="../../_images/fda38e56a6f361e3c212c80848f976d3342263fc8a1f2a0421315dc67fdcfa79.svg" src="../../_images/fda38e56a6f361e3c212c80848f976d3342263fc8a1f2a0421315dc67fdcfa79.svg" /></div>
+<img alt="../../_images/e186f115a2917667bf08da61d9317ba3cf856fb04009fffb735c1e285cbd6b4c.svg" src="../../_images/e186f115a2917667bf08da61d9317ba3cf856fb04009fffb735c1e285cbd6b4c.svg" /><img alt="../../_images/97d6205a3e55c1a399351dd8e4443bfa79804f5279160ee4b2cf0c5870480705.svg" src="../../_images/97d6205a3e55c1a399351dd8e4443bfa79804f5279160ee4b2cf0c5870480705.svg" /></div>
 </div>
 <p>To show that AM2 is stable for all timesteps, we show results with <span class="math notranslate nohighlight">\(\Delta t\)</span> ranging from <span class="math notranslate nohighlight">\(T/N\)</span> up to the largest possible value, <span class="math notranslate nohighlight">\(\Delta t = T\)</span>.</p>
 <p>The AM2 solutions for the 2 largest timestep sizes are clearly highly inaccurate, but they are still stable.

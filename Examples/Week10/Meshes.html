@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2D Triangular Meshes &#8212; AEROSP 523 Computational Fluid Dynamics: Code Examples</title>
+    <title>2D Finite Volume Meshes &#8212; AEROSP 523 Computational Fluid Dynamics: Code Examples</title>
   
   
   
@@ -205,7 +205,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Week10.html">Week 10</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">2D Triangular Meshes</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2D Finite Volume Meshes</a></li>
 </ul>
 </li>
 </ul>
@@ -440,7 +440,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>2D Triangular Meshes</h1>
+    <h1>2D Finite Volume Meshes</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -456,7 +456,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-connectivity">Cell connectivity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flux-computation-test-case">Flux computation test case</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-mesh-test-case">Simple mesh test case</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#freestream-preservation-test">Freestream preservation test</a></li>
 </ul>
 </li>
@@ -471,8 +471,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="d-triangular-meshes">
-<h1>2D Triangular Meshes<a class="headerlink" href="#d-triangular-meshes" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="d-finite-volume-meshes">
+<h1>2D Finite Volume Meshes<a class="headerlink" href="#d-finite-volume-meshes" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -492,6 +492,7 @@ document.write(`
 </div>
 <section id="part-1-node-coordinates">
 <h2>Part 1: Node coordinates<a class="headerlink" href="#part-1-node-coordinates" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">.node</span></code> files are very simple. Each line contains the x and y coordinate of a node.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodeCoordinates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;meshes/blade0.node&quot;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -514,6 +515,8 @@ document.write(`
 </div>
 </div>
 </div>
+<p>These nodes be plotted very simply using the standard <code class="docutils literal notranslate"><span class="pre">plot</span></code> function from matplotlib.
+Just be sure to turn off the line connecting the points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -523,7 +526,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/cdcd36c195ce4e3cde7cd68fba86ee666081aa6036edbaca2ade08ea11f5c9d7.svg" src="../../_images/cdcd36c195ce4e3cde7cd68fba86ee666081aa6036edbaca2ade08ea11f5c9d7.svg" /></div>
+<img alt="../../_images/df836653eef4b5fb2ca81817865f8922e799d8015a2f8f6a8d179145a58c9b11.svg" src="../../_images/df836653eef4b5fb2ca81817865f8922e799d8015a2f8f6a8d179145a58c9b11.svg" /></div>
 </div>
 </section>
 <section id="part-2-node-connectivity">
@@ -553,6 +556,8 @@ Each row in the file contains the indices of the three nodes that form a triangl
 </div>
 </div>
 </div>
+<p>We can use this information to plot the mesh cells.</p>
+<p>The naive way to do this would be to loop through each cell, then loop through each node in the cell and plot a line from that node to the next node in the cell.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Naive plotting method</span>
@@ -573,8 +578,10 @@ Each row in the file contains the indices of the three nodes that form a triangl
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4d4b89bafe24a3cf3c2eeb60b4507a30247ada9c61ddf2d175e987cf89d204e9.svg" src="../../_images/4d4b89bafe24a3cf3c2eeb60b4507a30247ada9c61ddf2d175e987cf89d204e9.svg" /></div>
+<img alt="../../_images/6aea01ce11dc9f87267de9b36dc859be3f9973853a361491a2ee3966fa2acd78.svg" src="../../_images/6aea01ce11dc9f87267de9b36dc859be3f9973853a361491a2ee3966fa2acd78.svg" /></div>
 </div>
+<p>Fortunately, matplotlib has a function that automates this process: <code class="docutils literal notranslate"><span class="pre">triplot</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">triplot</span></code> takes in arrays of x and y coordinates, followed by another argument that describes the node connectivity, such as our node connectivity array.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Smarter plotting method</span>
@@ -585,10 +592,14 @@ Each row in the file contains the indices of the three nodes that form a triangl
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d4423302fe5f719156aa4ff54254f122feb03129e440f2b5bf06d8f7a7dd79b2.svg" src="../../_images/d4423302fe5f719156aa4ff54254f122feb03129e440f2b5bf06d8f7a7dd79b2.svg" /></div>
+<img alt="../../_images/3214fc28a9baa71859ff798b811768b81c759944af6f0c755cc7cab1931eaad8.svg" src="../../_images/3214fc28a9baa71859ff798b811768b81c759944af6f0c755cc7cab1931eaad8.svg" /></div>
 </div>
 <section id="computing-cell-quantities">
 <h3>Computing cell quantities<a class="headerlink" href="#computing-cell-quantities" title="Permalink to this heading">#</a></h3>
+<p>Often, we want to plot some quantity that is defined on the cells, such as the Mach number or density.
+Matplotlib has another function called <code class="docutils literal notranslate"><span class="pre">tripcolor</span></code> that can be used to plot such quantities.
+<code class="docutils literal notranslate"><span class="pre">tripcolor</span></code> takes in the same arguments as <code class="docutils literal notranslate"><span class="pre">triplot</span></code>, but also takes in an array of values that are defined on the cells or nodes.</p>
+<p>The code below demonstrates <code class="docutils literal notranslate"><span class="pre">tripcolor</span></code> by plotting the cell areas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">computeCellAreas</span><span class="p">(</span><span class="n">nodeCoordinates</span><span class="p">,</span> <span class="n">nodeConnectivity</span><span class="p">):</span>
@@ -609,7 +620,55 @@ Each row in the file contains the indices of the three nodes that form a triangl
     <span class="k">return</span> <span class="n">cellAreas</span>
 
 
-<span class="k">def</span> <span class="nf">computeCellCentroids</span><span class="p">(</span><span class="n">nodeCoordinates</span><span class="p">,</span> <span class="n">nodeConnectivity</span><span class="p">):</span>
+<span class="n">cellAreas</span> <span class="o">=</span> <span class="n">computeCellAreas</span><span class="p">(</span><span class="n">nodeCoordinates</span><span class="p">,</span> <span class="n">nodeConnectivity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tripcolor</span><span class="p">(</span><span class="n">nodeCoordinates</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">nodeCoordinates</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">nodeConnectivity</span><span class="p">,</span> <span class="n">cellAreas</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+<span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dae683b1d574df8adcf8f79916c22ccfb2237360df140aa903f7c9766be87eb5.svg" src="../../_images/dae683b1d574df8adcf8f79916c22ccfb2237360df140aa903f7c9766be87eb5.svg" /></div>
+</div>
+<p>We can then call other plotting methods to plot other things on top of the mesh, such as the cell edges.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">triplot</span><span class="p">(</span><span class="n">nodeCoordinates</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">nodeCoordinates</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">nodeConnectivity</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/75dc7745ddf25a3928fdc3299555bb318169992e95301d071e53d4e5c4d71dba.svg" src="../../_images/75dc7745ddf25a3928fdc3299555bb318169992e95301d071e53d4e5c4d71dba.svg" /></div>
+</div>
+</section>
+</section>
+<section id="cell-connectivity">
+<h2>Cell connectivity<a class="headerlink" href="#cell-connectivity" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">.connect</span></code> file describes how the cells in the mesh are connected to each other.
+Each row in the file contains the 3 indices of the neighbouring cells.
+A negative index indicates that an edge is on the boundary of the domain, and the value of the negative number denotes the type of boundary condition.</p>
+<p>The ordering of the neighbouring cell indices is linked to the ordering of the nodes in each cell.
+The first neighbouring cell index corresponds to the neighbour on the edge of the triangle opposite the first node in the cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cellConnectivity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;meshes/blade0.connect&quot;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="c1"># Subtract 1 from the cell connectivity because Python is 0 indexed, but not for the negative values that represent the boundary conditions</span>
+<span class="n">cellConnectivity</span><span class="p">[</span><span class="n">cellConnectivity</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s use the cell connectivity information to plot lines between a few of the cells and their neighbours.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">computeCellCentroids</span><span class="p">(</span><span class="n">nodeCoordinates</span><span class="p">,</span> <span class="n">nodeConnectivity</span><span class="p">):</span>
     <span class="n">numCells</span> <span class="o">=</span> <span class="n">nodeConnectivity</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">cellCentroids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">numCells</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
     <span class="n">node1</span> <span class="o">=</span> <span class="n">nodeConnectivity</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
@@ -626,8 +685,6 @@ Each row in the file contains the indices of the three nodes that form a triangl
     <span class="n">cellCentroids</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">y1</span> <span class="o">+</span> <span class="n">y2</span> <span class="o">+</span> <span class="n">y3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>
     <span class="k">return</span> <span class="n">cellCentroids</span>
 
-
-<span class="n">cellAreas</span> <span class="o">=</span> <span class="n">computeCellAreas</span><span class="p">(</span><span class="n">nodeCoordinates</span><span class="p">,</span> <span class="n">nodeConnectivity</span><span class="p">)</span>
 <span class="n">cellCentroids</span> <span class="o">=</span> <span class="n">computeCellCentroids</span><span class="p">(</span><span class="n">nodeCoordinates</span><span class="p">,</span> <span class="n">nodeConnectivity</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -635,46 +692,13 @@ Each row in the file contains the indices of the three nodes that form a triangl
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">tripcolor</span><span class="p">(</span><span class="n">nodeCoordinates</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">nodeCoordinates</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">nodeConnectivity</span><span class="p">,</span> <span class="n">cellAreas</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
-<span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/86b0696d9a0f1998e26400d49599ee3f37be6f7a71912c63b33fc9c641ffd6ab.svg" src="../../_images/86b0696d9a0f1998e26400d49599ee3f37be6f7a71912c63b33fc9c641ffd6ab.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">triplot</span><span class="p">(</span><span class="n">nodeCoordinates</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">nodeCoordinates</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">nodeConnectivity</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">fig</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/f072fa61f6c070d03b96734a8eedb9307c138e15c25bd16461f98e292fa383cb.svg" src="../../_images/f072fa61f6c070d03b96734a8eedb9307c138e15c25bd16461f98e292fa383cb.svg" /></div>
-</div>
-</section>
-</section>
-<section id="cell-connectivity">
-<h2>Cell connectivity<a class="headerlink" href="#cell-connectivity" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cellConnectivity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;meshes/blade0.connect&quot;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-<span class="c1"># Subtract 1 from the cell connectivity because Python is 0 indexed, but not for the negative values that represent the boundary conditions</span>
-<span class="n">cellConnectivity</span><span class="p">[</span><span class="n">cellConnectivity</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Let’s use the cell connectivity information to plot lines between a few of the cells and their neighbours.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1"># Choose a random cell index and get that cell&#39;s centroid</span>
     <span class="n">cellIndex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">cellConnectivity</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">centroid</span> <span class="o">=</span> <span class="n">cellCentroids</span><span class="p">[</span><span class="n">cellIndex</span><span class="p">]</span>
+    <span class="c1"># Plot a line between the centroid of this cell and the centroid of each of its neighbors, excluding boundaries.</span>
     <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
         <span class="n">neighborIndex</span> <span class="o">=</span> <span class="n">cellConnectivity</span><span class="p">[</span><span class="n">cellIndex</span><span class="p">,</span> <span class="n">jj</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">neighborIndex</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
@@ -685,11 +709,13 @@ Each row in the file contains the indices of the three nodes that form a triangl
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3d6f54d66b7f7f464661abe651df0c2e53611cb1836f00522099a5a021a5527a.svg" src="../../_images/3d6f54d66b7f7f464661abe651df0c2e53611cb1836f00522099a5a021a5527a.svg" /></div>
+<img alt="../../_images/be7fa52eb48c61df5a4525da3b203c66640973f1b953cf15c7d5cece07a61a66.svg" src="../../_images/be7fa52eb48c61df5a4525da3b203c66640973f1b953cf15c7d5cece07a61a66.svg" /></div>
 </div>
 </section>
-<section id="flux-computation-test-case">
-<h2>Flux computation test case<a class="headerlink" href="#flux-computation-test-case" title="Permalink to this heading">#</a></h2>
+<section id="simple-mesh-test-case">
+<h2>Simple mesh test case<a class="headerlink" href="#simple-mesh-test-case" title="Permalink to this heading">#</a></h2>
+<p>When you write your mesh processing code, it’s a good idea to come up with a simple test case that you can use to verify that your code is working correctly.</p>
+<p>Here we construct such a case using 4 nodes and 2 triangles.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodeCoordinates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
@@ -716,10 +742,10 @@ Each row in the file contains the indices of the three nodes that form a triangl
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7af4d34a0dd2364a1f622201896feb3089471e1319006437b46d71537b7edf2a.svg" src="../../_images/7af4d34a0dd2364a1f622201896feb3089471e1319006437b46d71537b7edf2a.svg" /></div>
+<img alt="../../_images/bd63dfdef02bd470c4e289fe7cc08f31ad27299c03956fa93ec4c092674d03c1.svg" src="../../_images/bd63dfdef02bd470c4e289fe7cc08f31ad27299c03956fa93ec4c092674d03c1.svg" /></div>
 </div>
 <p>To compute fluxes, we need data about the edges in the mesh.</p>
-<p>It is useful to split the edges into two sets: interior edges and boundary edges.</p>
+<p>It is useful to split the edges into two sets; interior edges and boundary edges.</p>
 <p>Interior edges are those that are shared by two cells, while boundary edges are only part of one cell, because they lie on the boundary of the domain.</p>
 <p>Here I am manually creating the data structures that describe the edges, in your project you will need to write code to do this for any mesh.</p>
 <div class="cell docutils container">
@@ -779,7 +805,7 @@ Each row in the file contains the indices of the three nodes that form a triangl
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7887a12bb8f1551aa45de5e45167fe681ffee2470bfc284883c6d37c5245c884.svg" src="../../_images/7887a12bb8f1551aa45de5e45167fe681ffee2470bfc284883c6d37c5245c884.svg" /></div>
+<img alt="../../_images/cde200f03390c2450f4f0d2685e69edf4c7d7e6c80f32f4ed7f560f93c852684.svg" src="../../_images/cde200f03390c2450f4f0d2685e69edf4c7d7e6c80f32f4ed7f560f93c852684.svg" /></div>
 </div>
 <section id="freestream-preservation-test">
 <h3>Freestream preservation test<a class="headerlink" href="#freestream-preservation-test" title="Permalink to this heading">#</a></h3>
@@ -852,7 +878,7 @@ Each row in the file contains the indices of the three nodes that form a triangl
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">freeStreamState</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">])</span>
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">U0</span> <span class="o">=</span> <span class="n">Uinf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">U1</span> <span class="o">=</span> <span class="n">Uinf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -863,7 +889,7 @@ Each row in the file contains the indices of the three nodes that form a triangl
 </div>
 </div>
 </div>
-<p>And now we will run a simulation for a few thousand timesteps, and check that the residual remains zero and the state doesn’t significant;y change.</p>
+<p>And now we will run a simulation for a few thousand timesteps, and check that the residual remains zero and the state doesn’t significantly change.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numTimeSteps</span> <span class="o">=</span> <span class="mi">2000</span>
@@ -965,7 +991,7 @@ Final Residuals:
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-connectivity">Cell connectivity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flux-computation-test-case">Flux computation test case</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-mesh-test-case">Simple mesh test case</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#freestream-preservation-test">Freestream preservation test</a></li>
 </ul>
 </li>

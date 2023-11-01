@@ -206,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Examples/Week10/Week10.html">Week 10</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Examples/Week10/Meshes.html">2D Triangular Meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Week10/Meshes.html">2D Finite Volume Meshes</a></li>
 </ul>
 </li>
 </ul>
@@ -561,17 +561,17 @@ pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.7502702 , 0.66447739, 0.4808825 , 0.13350475, 0.72829065],
-       [0.39321048, 0.71463007, 0.23194818, 0.83492844, 0.52633835],
-       [0.14275082, 0.57266433, 0.56736202, 0.17466   , 0.36399843],
-       [0.19478932, 0.03891109, 0.87260425, 0.86123991, 0.30441303],
-       [0.22875252, 0.2152395 , 0.75686892, 0.6082203 , 0.7169355 ]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=array([[0.41813353, 0.55020367, 0.71836504, 0.28764786, 0.20728839],
+       [0.09178546, 0.62186396, 0.56551375, 0.37051298, 0.72394874],
+       [0.23623594, 0.89537007, 0.15694706, 0.44430366, 0.97852621],
+       [0.85862297, 0.86640149, 0.6153189 , 0.70367668, 0.98016776],
+       [0.10698174, 0.77495318, 0.21831337, 0.76888848, 0.72601343]])
 
-b=array([0.29031357, 0.21555252, 0.56039709, 0.13223031, 0.17818424])
+b=array([0.56579965, 0.90531363, 0.36752162, 0.76899819, 0.06412878])
 
-x=array([-0.39190296,  0.76901874,  0.50401245, -0.23653069, -0.18871817])
+x=array([-0.14472847, -0.77062715,  1.37094886, -0.62114428,  1.17781052])
 
-Linear system solution error norm = 1.7333351416399796e-16
+Linear system solution error norm = 2.603703785810335e-16
 </pre></div>
 </div>
 </div>
@@ -647,21 +647,21 @@ x=4.0, f(x) = 53.598150033144236
 x=1.0, f(x) = 1.718281828459045
 x=-0.5, f(x) = -0.3934693402873666
 x=0.25, f(x) = 0.2840254166877414
-x=-0.125, f(x) = -0.11750309741540466
+x=-0.125, f(x) = -0.11750309741540454
 x=0.0625, f(x) = 0.06449445891785932
 x=-0.03125, f(x) = -0.03076676552365587
 x=0.015625, f(x) = 0.015747708586685727
-x=-0.0078125, f(x) = -0.007782061739756374
-x=0.00390625, f(x) = 0.003913889338347687
+x=-0.0078125, f(x) = -0.007782061739756485
+x=0.00390625, f(x) = 0.003913889338347465
 x=-0.001953125, f(x) = -0.0019512188925244756
 x=0.0009765625, f(x) = 0.0009770394924164538
 x=-0.00048828125, f(x) = -0.0004881620601105974
 x=0.000244140625, f(x) = 0.0002441704297477809
-x=-0.0001220703125, f(x) = -0.00012206286222249396
+x=-0.0001220703125, f(x) = -0.00012206286222260498
 x=6.103515625e-05, f(x) = 6.103701893311886e-05
-x=-3.0517578125e-05, f(x) = -3.051711246837563e-05
+x=-3.0517578125e-05, f(x) = -3.051711246848665e-05
 x=1.52587890625e-05, f(x) = 1.525890547848796e-05
-x=-7.62939453125e-06, f(x) = -7.629365427419543e-06
+x=-7.62939453125e-06, f(x) = -7.6293654275305656e-06
 x=3.814697265625e-06, f(x) = 3.814704541582614e-06
 x=-1.9073486328125e-06, f(x) = -1.9073468138230965e-06
 x=9.5367431640625e-07, f(x) = 9.536747711536009e-07
@@ -718,7 +718,7 @@ This makes it much clearer in your code which data is being plotted on which fig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5690ade8f9f3001a00effe23f4096226dd551da258da2aa17e9b89670d103d5e.png" src="../_images/5690ade8f9f3001a00effe23f4096226dd551da258da2aa17e9b89670d103d5e.png" />
+<img alt="../_images/fc4764c1aa1e12aca863a5e8ec423beaa5ffc859123ce80ef490217b25aeebb0.png" src="../_images/fc4764c1aa1e12aca863a5e8ec423beaa5ffc859123ce80ef490217b25aeebb0.png" />
 </div>
 </div>
 </section>
@@ -755,7 +755,7 @@ You can also check out some example uses of it <a class="reference external" hre
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/71b1cc154548d39046e0a027fc3cc25e9a451482f061c53a22d99e51bd205449.png" src="../_images/71b1cc154548d39046e0a027fc3cc25e9a451482f061c53a22d99e51bd205449.png" />
+<img alt="../_images/daf78b22d0bb6d78840e8af0d0849870a9ee68ce14e764882ab2889aaceaa4f0.png" src="../_images/daf78b22d0bb6d78840e8af0d0849870a9ee68ce14e764882ab2889aaceaa4f0.png" />
 </div>
 </div>
 </section>
