@@ -3,7 +3,7 @@
 
 # # 2D Finite Volume Meshes
 
-# In[391]:
+# In[71]:
 
 
 import numpy as np
@@ -23,7 +23,7 @@ colors = niceplots.get_colors_list()
 #
 # The `.node` files are very simple. Each line contains the x and y coordinate of a node.
 
-# In[392]:
+# In[72]:
 
 
 nodeCoordinates = np.loadtxt("meshes/blade0.node", skiprows=1)
@@ -33,7 +33,7 @@ print(nodeCoordinates[:10])
 # These nodes be plotted very simply using the standard `plot` function from matplotlib.
 # Just be sure to turn off the line connecting the points.
 
-# In[393]:
+# In[73]:
 
 
 fig, ax = plt.subplots()
@@ -46,7 +46,7 @@ niceplots.adjust_spines(ax)
 # The `.elem` file describes how the nodes are connected to form the triangular cells.
 # Each row in the file contains the indices of the three nodes that form a triangle.
 
-# In[394]:
+# In[74]:
 
 
 # MAKE SURE TO SUBTRACT 1 FROM THE ELEMENT CONNECTIVITY BECAUSE PYTHON IS 0 INDEXED
@@ -58,7 +58,7 @@ print(nodeConnectivity[:10])
 #
 # The naive way to do this would be to loop through each cell, then loop through each node in the cell and plot a line from that node to the next node in the cell.
 
-# In[395]:
+# In[75]:
 
 
 # Naive plotting method
@@ -81,7 +81,7 @@ niceplots.adjust_spines(ax)
 #
 # `triplot` takes in arrays of x and y coordinates, followed by another argument that describes the node connectivity, such as our node connectivity array.
 
-# In[396]:
+# In[76]:
 
 
 # Smarter plotting method
@@ -98,7 +98,7 @@ niceplots.adjust_spines(ax)
 #
 # The code below demonstrates `tripcolor` by plotting the cell areas.
 
-# In[397]:
+# In[77]:
 
 
 def computeCellAreas(nodeCoordinates, nodeConnectivity):
@@ -122,7 +122,7 @@ def computeCellAreas(nodeCoordinates, nodeConnectivity):
 cellAreas = computeCellAreas(nodeCoordinates, nodeConnectivity)
 
 
-# In[398]:
+# In[78]:
 
 
 fig, ax = plt.subplots()
@@ -132,7 +132,7 @@ niceplots.adjust_spines(ax)
 
 # We can then call other plotting methods to plot other things on top of the mesh, such as the cell edges.
 
-# In[399]:
+# In[79]:
 
 
 ax.triplot(nodeCoordinates[:, 0], nodeCoordinates[:, 1], nodeConnectivity, color="k", clip_on=False)
@@ -149,7 +149,7 @@ fig
 # The first neighbouring cell index corresponds to the neighbour on the edge of the triangle opposite the first node in the cell.
 #
 
-# In[400]:
+# In[80]:
 
 
 cellConnectivity = np.loadtxt("meshes/blade0.connect", skiprows=8, dtype=int)
@@ -159,7 +159,7 @@ cellConnectivity[cellConnectivity >= 0] -= 1
 
 # Let's use the cell connectivity information to plot lines between a few of the cells and their neighbours.
 
-# In[401]:
+# In[81]:
 
 
 def computeCellCentroids(nodeCoordinates, nodeConnectivity):
@@ -183,7 +183,7 @@ def computeCellCentroids(nodeCoordinates, nodeConnectivity):
 cellCentroids = computeCellCentroids(nodeCoordinates, nodeConnectivity)
 
 
-# In[402]:
+# In[82]:
 
 
 np.random.seed(0)
@@ -207,7 +207,7 @@ fig
 #
 # Here we construct such a case using 4 nodes and 2 triangles.
 
-# In[403]:
+# In[83]:
 
 
 nodeCoordinates = np.array([[0, 0], [1, 0], [1, 1], [0, 1]])
@@ -240,7 +240,7 @@ ax.set_aspect("equal")
 #
 # Here I am manually creating the data structures that describe the edges, in your project you will need to write code to do this for any mesh.
 
-# In[404]:
+# In[84]:
 
 
 # each row in this array contains, the indices of the nodes that make up the edge, followed by the index of the left cell and the index of the right cell
@@ -252,7 +252,7 @@ interiorEdges = np.array([[1, 3, 0, 1]])
 boundaryEdges = np.array([[3, 0, 0, -1], [0, 1, 0, -1], [2, 3, 1, -2], [1, 2, 1, -2]])
 
 
-# In[405]:
+# In[85]:
 
 
 for ii, edge in enumerate(interiorEdges):
@@ -305,38 +305,45 @@ fig
 #
 # Here we perform these tests in a very hardcoded way, your project code will be able to do the same thing in a much more general way.
 
-# In[406]:
+# In[86]:
 
 
 from flux import FluxFunction
 
+cellPerimeter = 2 + np.sqrt(2)
+
 
 def computeTestCaseResidual(U0, U1, UBoundary, gamma):
     R = np.zeros((2, 4))
+    waveSpeeds = np.zeros(2)
 
     # Left Boundary
     edgeLength = 1
     normal = np.array([-1, 0])
-    F, smag = FluxFunction(U0, Uinf, gamma, normal)
+    F, smag = FluxFunction(U0, UBoundary, gamma, normal)
     R[0] += F * edgeLength
+    waveSpeeds[0] += smag * edgeLength / cellPerimeter
 
     # Bottom Boundary
     edgeLength = 1
     normal = np.array([0, -1])
-    F, smag = FluxFunction(U0, Uinf, gamma, normal)
+    F, smag = FluxFunction(U0, UBoundary, gamma, normal)
     R[0] += F * edgeLength
+    waveSpeeds[0] += smag * edgeLength / cellPerimeter
 
     # Right Boundary
     edgeLength = 1
     normal = np.array([1, 0])
-    F, smag = FluxFunction(U1, Uinf, gamma, normal)
+    F, smag = FluxFunction(U1, UBoundary, gamma, normal)
     R[1] += F * edgeLength
+    waveSpeeds[1] += smag * edgeLength / cellPerimeter
 
     # Top Boundary
     edgeLength = 1
     normal = np.array([0, 1])
-    F, smag = FluxFunction(U1, Uinf, gamma, normal)
+    F, smag = FluxFunction(U1, UBoundary, gamma, normal)
     R[1] += F * edgeLength
+    waveSpeeds[1] += smag * edgeLength / cellPerimeter
 
     # Interior edge
     edgeLength = np.sqrt(2)
@@ -344,19 +351,21 @@ def computeTestCaseResidual(U0, U1, UBoundary, gamma):
     F, smag = FluxFunction(U0, U1, gamma, ndiag)
     R[0] += F * edgeLength
     R[1] -= F * edgeLength
+    waveSpeeds[0] += smag * edgeLength / cellPerimeter
+    waveSpeeds[1] += smag * edgeLength / cellPerimeter
 
-    return R, smag
+    return R, waveSpeeds
 
 
 # For the first freestream preservation test, we make up a freestream state, set it in both cells, and then check that the residual is zero.
 
-# In[407]:
+# In[87]:
 
 
 freeStreamState = np.array([0.5, 0.4, 0.8, 2.6])
 
-U0 = Uinf.copy()
-U1 = Uinf.copy()
+U0 = freeStreamState.copy()
+U1 = freeStreamState.copy()
 
 gamma = 1.4
 
@@ -366,7 +375,7 @@ print(R)
 
 # And now we will run a simulation for a few thousand timesteps, and check that the residual remains zero and the state doesn't significantly change.
 
-# In[408]:
+# In[88]:
 
 
 numTimeSteps = 2000
@@ -376,11 +385,11 @@ cellDiameter = 0.3
 cellAreas = computeCellAreas(nodeCoordinates, nodeConnectivity)
 
 for _ in range(numTimeSteps):
-    R, smag = computeTestCaseResidual(U0, U1, freeStreamState, gamma)
-    dt = CFL * cellDiameter / smag
+    R, waveSpeeds = computeTestCaseResidual(U0, U1, freeStreamState, gamma)
+    dt = CFL * cellDiameter / waveSpeeds
 
-    U0 -= dt * R[0] / cellAreas[0]
-    U1 -= dt * R[1] / cellAreas[1]
+    U0 -= dt[0] * R[0] / cellAreas[0]
+    U1 -= dt[1] * R[1] / cellAreas[1]
 
 print(f"Initial state = {freeStreamState}")
 print("Final states:")
