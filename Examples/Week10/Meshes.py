@@ -3,7 +3,7 @@
 
 # # 2D Triangular Meshes
 
-# In[320]:
+# In[337]:
 
 
 import numpy as np
@@ -21,14 +21,14 @@ colors = niceplots.get_colors_list()
 
 # ## Part 1: Node coordinates
 
-# In[321]:
+# In[338]:
 
 
 nodeCoordinates = np.loadtxt("meshes/blade0.node", skiprows=1)
 print(nodeCoordinates[:10])
 
 
-# In[322]:
+# In[339]:
 
 
 fig, ax = plt.subplots()
@@ -41,7 +41,7 @@ niceplots.adjust_spines(ax)
 # The `.elem` file describes how the nodes are connected to form the triangular cells.
 # Each row in the file contains the indices of the three nodes that form a triangle.
 
-# In[323]:
+# In[340]:
 
 
 # MAKE SURE TO SUBTRACT 1 FROM THE ELEMENT CONNECTIVITY BECAUSE PYTHON IS 0 INDEXED
@@ -49,7 +49,7 @@ nodeConnectivity = np.loadtxt("meshes/blade0.elem", skiprows=1, dtype=int) - 1
 print(nodeConnectivity[:10])
 
 
-# In[324]:
+# In[341]:
 
 
 # Naive plotting method
@@ -65,9 +65,10 @@ for cellNum in range(10):
             color="k",
             clip_on=False,
         )
+niceplots.adjust_spines(ax)
 
 
-# In[325]:
+# In[342]:
 
 
 # Smarter plotting method
@@ -78,7 +79,7 @@ niceplots.adjust_spines(ax)
 
 # ### Computing cell quantities
 
-# In[326]:
+# In[343]:
 
 
 def computeCellAreas(nodeCoordinates, nodeConnectivity):
@@ -121,7 +122,7 @@ cellAreas = computeCellAreas(nodeCoordinates, nodeConnectivity)
 cellCentroids = computeCellCentroids(nodeCoordinates, nodeConnectivity)
 
 
-# In[327]:
+# In[344]:
 
 
 fig, ax = plt.subplots()
@@ -129,7 +130,7 @@ ax.tripcolor(nodeCoordinates[:, 0], nodeCoordinates[:, 1], nodeConnectivity, cel
 niceplots.adjust_spines(ax)
 
 
-# In[328]:
+# In[345]:
 
 
 ax.triplot(nodeCoordinates[:, 0], nodeCoordinates[:, 1], nodeConnectivity, color="k", clip_on=False)
@@ -140,7 +141,7 @@ fig
 #
 #
 
-# In[329]:
+# In[346]:
 
 
 cellConnectivity = np.loadtxt("meshes/blade0.connect", skiprows=8, dtype=int)
@@ -150,7 +151,7 @@ cellConnectivity[cellConnectivity >= 0] -= 1
 
 # Let's use the cell connectivity information to plot lines between a few of the cells and their neighbours.
 
-# In[330]:
+# In[347]:
 
 
 np.random.seed(0)
@@ -168,7 +169,7 @@ fig
 
 # ## Flux computation test case
 
-# In[331]:
+# In[348]:
 
 
 nodeCoordinates = np.array([[0, 0], [1, 0], [1, 1], [0, 1]])
@@ -201,7 +202,7 @@ ax.set_aspect("equal")
 #
 # Here I am manually creating the data structures that describe the edges, in your project you will need to write code to do this for any mesh.
 
-# In[332]:
+# In[349]:
 
 
 # each row in this array contains, the indices of the nodes that make up the edge, followed by the index of the left cell and the index of the right cell
@@ -213,7 +214,7 @@ interiorEdges = np.array([[1, 3, 0, 1]])
 boundaryEdges = np.array([[3, 0, 0, -1], [0, 1, 0, -1], [2, 3, 1, -2], [1, 2, 1, -2]])
 
 
-# In[333]:
+# In[350]:
 
 
 for ii, edge in enumerate(interiorEdges):
@@ -266,7 +267,7 @@ fig
 #
 # Here we perform these tests in a very hardcoded way, your project code will be able to do the same thing in a much more general way.
 
-# In[334]:
+# In[351]:
 
 
 from flux import FluxFunction
@@ -300,17 +301,18 @@ def computeTestCaseResidual(U0, U1, UBoundary, gamma):
     R[1] += F * edgeLength
 
     # Interior edge
+    edgeLength = np.sqrt(2)
     ndiag = np.array([1, 1]) / np.sqrt(2)
     F, smag = FluxFunction(U0, U1, gamma, ndiag)
-    R[0] += F * np.sqrt(2)
-    R[1] -= F * np.sqrt(2)
+    R[0] += F * edgeLength
+    R[1] -= F * edgeLength
 
     return R, smag
 
 
 # For the first freestream preservation test, we make up a freestream state, set it in both cells, and then check that the residual is zero.
 
-# In[335]:
+# In[352]:
 
 
 freeStreamState = np.array([0.5, 0.4, 0.8, 2.6])
@@ -326,7 +328,7 @@ print(R)
 
 # And now we will run a simulation for a few thousand timesteps, and check that the residual remains zero and the state doesn't significant;y change.
 
-# In[336]:
+# In[353]:
 
 
 numTimeSteps = 2000
