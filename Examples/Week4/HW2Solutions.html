@@ -607,9 +607,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_0(x) = 0.0416666666666667*(h - x)*(2*h - x)*(3*h - x)*(4*h - x)/h**4
 L_1(x) = 0.166666666666667*x*(2*h - x)*(3*h - x)*(4*h - x)/h**4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_2(x) = -0.25*x*(h - x)*(3*h - x)*(4*h - x)/h**4
+L_2(x) = -0.25*x*(h - x)*(3*h - x)*(4*h - x)/h**4
 L_3(x) = 0.166666666666667*x*(h - x)*(2*h - x)*(4*h - x)/h**4
 </pre></div>
 </div>
@@ -625,10 +623,10 @@ a_4 = dL_4/dx | x=0 = -0.25/h
 
 
 Coefficients for 2nd derivative:
-a_0 = d^2L_0/dx^2 | x=0 = 2.91666666666667/h**2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = d^2L_1/dx^2 | x=0 = -8.66666666666667/h**2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = d^2L_0/dx^2 | x=0 = 2.91666666666667/h**2
+a_1 = d^2L_1/dx^2 | x=0 = -8.66666666666667/h**2
 a_2 = d^2L_2/dx^2 | x=0 = 9.5/h**2
 a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
 a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
@@ -669,9 +667,7 @@ a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = dL_0/dx | x=0 = -2.083333333333333
 a_1 = dL_1/dx | x=0 = 4.0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_2 = dL_2/dx | x=0 = -3.0
+a_2 = dL_2/dx | x=0 = -3.0
 a_3 = dL_3/dx | x=0 = 1.3333333333333333
 a_4 = dL_4/dx | x=0 = -0.25
 
@@ -794,7 +790,7 @@ nnz=1189, inz=1189
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 2 Axes&gt;, &lt;Axes: xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../../_images/7a85db6e98ddff68a9ff1af75d7ea78bf5351c6193058a7fade845f9b3c3b4ee.svg" src="../../_images/7a85db6e98ddff68a9ff1af75d7ea78bf5351c6193058a7fade845f9b3c3b4ee.svg" /><img alt="../../_images/3c74e279dfcab01162943020d017a4779815e8c569f2451bc19948c436c0050f.svg" src="../../_images/3c74e279dfcab01162943020d017a4779815e8c569f2451bc19948c436c0050f.svg" /><img alt="../../_images/5eac4bad666e6413ebc69d324936ff44be5ecfa223deb3716788e8693aa144c7.svg" src="../../_images/5eac4bad666e6413ebc69d324936ff44be5ecfa223deb3716788e8693aa144c7.svg" /><img alt="../../_images/3b951cb4904e3105f09418b9d67d04ef5e6c3354d92a36e5e08890633612eda6.svg" src="../../_images/3b951cb4904e3105f09418b9d67d04ef5e6c3354d92a36e5e08890633612eda6.svg" /></div>
+<img alt="../../_images/df821febb1cccdd9754900918c1b13a9bbeba7a30b19bcdc24fc9f9bcee52b73.svg" src="../../_images/df821febb1cccdd9754900918c1b13a9bbeba7a30b19bcdc24fc9f9bcee52b73.svg" /><img alt="../../_images/e62fdbfda64d10170f8db7f49d47e28f74e3f37576310ad52c8c2922e091f3d5.svg" src="../../_images/e62fdbfda64d10170f8db7f49d47e28f74e3f37576310ad52c8c2922e091f3d5.svg" /><img alt="../../_images/477dfb9ce544b89673fa0a0df9df526adb6b526822a66325cb4e19872602989f.svg" src="../../_images/477dfb9ce544b89673fa0a0df9df526adb6b526822a66325cb4e19872602989f.svg" /><img alt="../../_images/fb5c5d8d632d4c013169ad1058a745f10fb21b64df9a145798fb65f3934d1af3.svg" src="../../_images/fb5c5d8d632d4c013169ad1058a745f10fb21b64df9a145798fb65f3934d1af3.svg" /></div>
 </div>
 </section>
 <section id="part-b">
@@ -840,10 +836,10 @@ nnz=4933, inz=4933
 [0.01490599 0.00506701 0.00146965 0.00039535]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283491888
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283485477
 </pre></div>
 </div>
-<img alt="../../_images/e90a3bc57255f4ec07760afd20535bc96b3944ac4e54c347e765cc3ffd80c796.svg" src="../../_images/e90a3bc57255f4ec07760afd20535bc96b3944ac4e54c347e765cc3ffd80c796.svg" /></div>
+<img alt="../../_images/e68b34b375f1fbc45d8c198bc581077b655701027d892bafc07f7d9ede60b626.svg" src="../../_images/e68b34b375f1fbc45d8c198bc581077b655701027d892bafc07f7d9ede60b626.svg" /></div>
 </div>
 <p>From this result, it seems we have not quite reached the asymptotic region of convergence where the rate of convergence = 2. We can get there by increasing the number of grid points in each direction further.</p>
 <div class="cell docutils container">
@@ -863,22 +859,21 @@ nnz=1189, inz=1189
 nnz=4933, inz=4933
 
 nnz=20101, inz=20101
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=81157, inz=81157
+
+nnz=81157, inz=81157
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=326149, inz=326149
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.49059875e-02 5.06700792e-03 1.46965488e-03 3.95347795e-04
- 1.02503087e-04 2.60954129e-05 6.58328496e-06]
+ 1.02503087e-04 2.60954129e-05 6.58328493e-06]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9869166809982022
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9869166849376632
 </pre></div>
 </div>
-<img alt="../../_images/6b109a4e03298deabea06348489c68d85a811547737a50732a864477ec201ee5.svg" src="../../_images/6b109a4e03298deabea06348489c68d85a811547737a50732a864477ec201ee5.svg" /></div>
+<img alt="../../_images/8089842de2aa2d964951fc4b03274949b389597426450cacea17635ca3570707.svg" src="../../_images/8089842de2aa2d964951fc4b03274949b389597426450cacea17635ca3570707.svg" /></div>
 </div>
 </section>
 </section>
