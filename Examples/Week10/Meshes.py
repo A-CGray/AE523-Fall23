@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # 2D Triangular Meshes
+# # 2D Finite Volume Meshes
 
-# In[337]:
+# In[391]:
 
 
 import numpy as np
@@ -20,15 +20,20 @@ colors = niceplots.get_colors_list()
 
 
 # ## Part 1: Node coordinates
+#
+# The `.node` files are very simple. Each line contains the x and y coordinate of a node.
 
-# In[338]:
+# In[392]:
 
 
 nodeCoordinates = np.loadtxt("meshes/blade0.node", skiprows=1)
 print(nodeCoordinates[:10])
 
 
-# In[339]:
+# These nodes be plotted very simply using the standard `plot` function from matplotlib.
+# Just be sure to turn off the line connecting the points.
+
+# In[393]:
 
 
 fig, ax = plt.subplots()
@@ -41,7 +46,7 @@ niceplots.adjust_spines(ax)
 # The `.elem` file describes how the nodes are connected to form the triangular cells.
 # Each row in the file contains the indices of the three nodes that form a triangle.
 
-# In[340]:
+# In[394]:
 
 
 # MAKE SURE TO SUBTRACT 1 FROM THE ELEMENT CONNECTIVITY BECAUSE PYTHON IS 0 INDEXED
@@ -49,7 +54,11 @@ nodeConnectivity = np.loadtxt("meshes/blade0.elem", skiprows=1, dtype=int) - 1
 print(nodeConnectivity[:10])
 
 
-# In[341]:
+# We can use this information to plot the mesh cells.
+#
+# The naive way to do this would be to loop through each cell, then loop through each node in the cell and plot a line from that node to the next node in the cell.
+
+# In[395]:
 
 
 # Naive plotting method
@@ -68,7 +77,11 @@ for cellNum in range(10):
 niceplots.adjust_spines(ax)
 
 
-# In[342]:
+# Fortunately, matplotlib has a function that automates this process: `triplot`.
+#
+# `triplot` takes in arrays of x and y coordinates, followed by another argument that describes the node connectivity, such as our node connectivity array.
+
+# In[396]:
 
 
 # Smarter plotting method
@@ -78,8 +91,14 @@ niceplots.adjust_spines(ax)
 
 
 # ### Computing cell quantities
+#
+# Often, we want to plot some quantity that is defined on the cells, such as the Mach number or density.
+# Matplotlib has another function called `tripcolor` that can be used to plot such quantities.
+# `tripcolor` takes in the same arguments as `triplot`, but also takes in an array of values that are defined on the cells or nodes.
+#
+# The code below demonstrates `tripcolor` by plotting the cell areas.
 
-# In[343]:
+# In[397]:
 
 
 def computeCellAreas(nodeCoordinates, nodeConnectivity):
@@ -100,6 +119,49 @@ def computeCellAreas(nodeCoordinates, nodeConnectivity):
     return cellAreas
 
 
+cellAreas = computeCellAreas(nodeCoordinates, nodeConnectivity)
+
+
+# In[398]:
+
+
+fig, ax = plt.subplots()
+ax.tripcolor(nodeCoordinates[:, 0], nodeCoordinates[:, 1], nodeConnectivity, cellAreas, cmap="viridis")
+niceplots.adjust_spines(ax)
+
+
+# We can then call other plotting methods to plot other things on top of the mesh, such as the cell edges.
+
+# In[399]:
+
+
+ax.triplot(nodeCoordinates[:, 0], nodeCoordinates[:, 1], nodeConnectivity, color="k", clip_on=False)
+fig
+
+
+# ## Cell connectivity
+#
+# The `.connect` file describes how the cells in the mesh are connected to each other.
+# Each row in the file contains the 3 indices of the neighbouring cells.
+# A negative index indicates that an edge is on the boundary of the domain, and the value of the negative number denotes the type of boundary condition.
+#
+# The ordering of the neighbouring cell indices is linked to the ordering of the nodes in each cell.
+# The first neighbouring cell index corresponds to the neighbour on the edge of the triangle opposite the first node in the cell.
+#
+
+# In[400]:
+
+
+cellConnectivity = np.loadtxt("meshes/blade0.connect", skiprows=8, dtype=int)
+# Subtract 1 from the cell connectivity because Python is 0 indexed, but not for the negative values that represent the boundary conditions
+cellConnectivity[cellConnectivity >= 0] -= 1
+
+
+# Let's use the cell connectivity information to plot lines between a few of the cells and their neighbours.
+
+# In[401]:
+
+
 def computeCellCentroids(nodeCoordinates, nodeConnectivity):
     numCells = nodeConnectivity.shape[0]
     cellCentroids = np.zeros((numCells, 2))
@@ -118,47 +180,19 @@ def computeCellCentroids(nodeCoordinates, nodeConnectivity):
     return cellCentroids
 
 
-cellAreas = computeCellAreas(nodeCoordinates, nodeConnectivity)
 cellCentroids = computeCellCentroids(nodeCoordinates, nodeConnectivity)
 
 
-# In[344]:
-
-
-fig, ax = plt.subplots()
-ax.tripcolor(nodeCoordinates[:, 0], nodeCoordinates[:, 1], nodeConnectivity, cellAreas, cmap="viridis")
-niceplots.adjust_spines(ax)
-
-
-# In[345]:
-
-
-ax.triplot(nodeCoordinates[:, 0], nodeCoordinates[:, 1], nodeConnectivity, color="k", clip_on=False)
-fig
-
-
-# ## Cell connectivity
-#
-#
-
-# In[346]:
-
-
-cellConnectivity = np.loadtxt("meshes/blade0.connect", skiprows=8, dtype=int)
-# Subtract 1 from the cell connectivity because Python is 0 indexed, but not for the negative values that represent the boundary conditions
-cellConnectivity[cellConnectivity >= 0] -= 1
-
-
-# Let's use the cell connectivity information to plot lines between a few of the cells and their neighbours.
-
-# In[347]:
+# In[402]:
 
 
 np.random.seed(0)
 
 for ii in range(10):
+    # Choose a random cell index and get that cell's centroid
     cellIndex = np.random.randint(0, cellConnectivity.shape[0])
     centroid = cellCentroids[cellIndex]
+    # Plot a line between the centroid of this cell and the centroid of each of its neighbors, excluding boundaries.
     for jj in range(3):
         neighborIndex = cellConnectivity[cellIndex, jj]
         if neighborIndex >= 0:
@@ -167,9 +201,13 @@ for ii in range(10):
 fig
 
 
-# ## Flux computation test case
+# ## Simple mesh test case
+#
+# When you write your mesh processing code, it's a good idea to come up with a simple test case that you can use to verify that your code is working correctly.
+#
+# Here we construct such a case using 4 nodes and 2 triangles.
 
-# In[348]:
+# In[403]:
 
 
 nodeCoordinates = np.array([[0, 0], [1, 0], [1, 1], [0, 1]])
@@ -196,13 +234,13 @@ ax.set_aspect("equal")
 
 # To compute fluxes, we need data about the edges in the mesh.
 #
-# It is useful to split the edges into two sets: interior edges and boundary edges.
+# It is useful to split the edges into two sets; interior edges and boundary edges.
 #
 # Interior edges are those that are shared by two cells, while boundary edges are only part of one cell, because they lie on the boundary of the domain.
 #
 # Here I am manually creating the data structures that describe the edges, in your project you will need to write code to do this for any mesh.
 
-# In[349]:
+# In[404]:
 
 
 # each row in this array contains, the indices of the nodes that make up the edge, followed by the index of the left cell and the index of the right cell
@@ -214,7 +252,7 @@ interiorEdges = np.array([[1, 3, 0, 1]])
 boundaryEdges = np.array([[3, 0, 0, -1], [0, 1, 0, -1], [2, 3, 1, -2], [1, 2, 1, -2]])
 
 
-# In[350]:
+# In[405]:
 
 
 for ii, edge in enumerate(interiorEdges):
@@ -267,7 +305,7 @@ fig
 #
 # Here we perform these tests in a very hardcoded way, your project code will be able to do the same thing in a much more general way.
 
-# In[351]:
+# In[406]:
 
 
 from flux import FluxFunction
@@ -312,7 +350,7 @@ def computeTestCaseResidual(U0, U1, UBoundary, gamma):
 
 # For the first freestream preservation test, we make up a freestream state, set it in both cells, and then check that the residual is zero.
 
-# In[352]:
+# In[407]:
 
 
 freeStreamState = np.array([0.5, 0.4, 0.8, 2.6])
@@ -326,9 +364,9 @@ R, _ = computeTestCaseResidual(U0, U1, freeStreamState, gamma)
 print(R)
 
 
-# And now we will run a simulation for a few thousand timesteps, and check that the residual remains zero and the state doesn't significant;y change.
+# And now we will run a simulation for a few thousand timesteps, and check that the residual remains zero and the state doesn't significantly change.
 
-# In[353]:
+# In[408]:
 
 
 numTimeSteps = 2000
