@@ -3,7 +3,7 @@
 
 # # Homework 5 Solutions
 
-# In[95]:
+# In[1]:
 
 
 import numpy as np
@@ -21,7 +21,7 @@ colors = niceplots.get_colors_list()
 
 # ## Problem 1
 
-# In[96]:
+# In[2]:
 
 
 def laxWendroffUpdate(u, sigma):
@@ -54,7 +54,7 @@ def getInitCondition(x, L):
     return np.exp(-50 * (x / L - 0.5) ** 2)
 
 
-# In[97]:
+# In[3]:
 
 
 N = 32
@@ -90,7 +90,7 @@ plt.show()
 
 # ## Problem 2
 
-# In[98]:
+# In[4]:
 
 
 def avgUpdate(u, sigma):
@@ -103,7 +103,7 @@ ax.legend(labelcolor="linecolor")
 fig
 
 
-# In[99]:
+# In[5]:
 
 
 def computeNorm(r, ord=2):
@@ -145,10 +145,43 @@ for ii, (meshSize, numStep) in enumerate(zip(meshSizes, numSteps)):
         errors[name][ii] = computeNorm(uFinal - u0, ord=2)
 
 for name, error in errors.items():
+    if name == "Beam Warming":
+        lineType = "--o"
+    else:
+        lineType = "-o"
     rate = np.log(error[4] / error[3]) / np.log(meshSizes[4] / meshSizes[3])
-    ax.plot(L / meshSizes, error, "-o", label=f"{name}, P = {rate: 2f}", clip_on=False)
+    ax.plot(L / meshSizes, error, lineType, label=f"{name}, P = {rate: 2f}", clip_on=False)
 
 ax.legend(labelcolor="linecolor", fontsize=14)
+niceplots.adjust_spines(ax)
+
+
+# ## Problem 3
+
+# In[14]:
+
+
+x = np.linspace(-3, 1.0, 200)
+y = np.linspace(-3, 3, 200)
+
+XX, YY = np.meshgrid(x, y)
+
+lambdadt = XX + 1j * YY
+
+gRK2 = 1 + lambdadt + 0.5 * lambdadt**2
+gRK3 = 1 + lambdadt + 0.5 * lambdadt**2 + 1 / 6 * lambdadt**3
+gRK4 = 1 + lambdadt + 0.5 * lambdadt**2 + 1 / 6 * lambdadt**3 + 1 / 24 * lambdadt**4
+
+fig, ax = plt.subplots()
+
+for ii, f in enumerate([gRK2, gRK3, gRK4]):
+    ax.contour(XX, YY, np.abs(f), levels=[1], colors=niceplots.get_colors_list()[ii], zorder=ii + 1)
+    ax.annotate(f"RK{ii+2}", xy=(-1.5, 1.0 - ii * 0.5), color=niceplots.get_colors_list()[ii])
+
+
+ax.axvline(0, color="gray", linestyle="--", zorder=0)
+ax.set_xlabel(r"$Re(\lambda \Delta t)$")
+ax.set_ylabel(r"$Im(\lambda \Delta t)$")
 niceplots.adjust_spines(ax)
 
 

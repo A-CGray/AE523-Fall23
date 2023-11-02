@@ -36,3 +36,4 @@ chapters:
 - file: Examples/Week10/Week10
   sections:
   - file: Examples/Week10/Meshes.ipynb
+  - file: Examples/Week10/HW5Solution.ipynb
