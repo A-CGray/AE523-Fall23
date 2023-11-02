@@ -207,6 +207,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week10/Week10.html">Week 10</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week10/Meshes.html">2D Finite Volume Meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week10/HW5Solution.html">Homework 5 Solutions</a></li>
 </ul>
 </li>
 </ul>
@@ -607,7 +608,9 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_0(x) = 0.0416666666666667*(h - x)*(2*h - x)*(3*h - x)*(4*h - x)/h**4
 L_1(x) = 0.166666666666667*x*(2*h - x)*(3*h - x)*(4*h - x)/h**4
-L_2(x) = -0.25*x*(h - x)*(3*h - x)*(4*h - x)/h**4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L_2(x) = -0.25*x*(h - x)*(3*h - x)*(4*h - x)/h**4
 L_3(x) = 0.166666666666667*x*(h - x)*(2*h - x)*(4*h - x)/h**4
 </pre></div>
 </div>
@@ -623,13 +626,15 @@ a_4 = dL_4/dx | x=0 = -0.25/h
 
 
 Coefficients for 2nd derivative:
+a_0 = d^2L_0/dx^2 | x=0 = 2.91666666666667/h**2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = d^2L_0/dx^2 | x=0 = 2.91666666666667/h**2
-a_1 = d^2L_1/dx^2 | x=0 = -8.66666666666667/h**2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = d^2L_1/dx^2 | x=0 = -8.66666666666667/h**2
 a_2 = d^2L_2/dx^2 | x=0 = 9.5/h**2
 a_3 = d^2L_3/dx^2 | x=0 = -4.66666666666667/h**2
-a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
 </pre></div>
 </div>
 </div>
@@ -666,7 +671,9 @@ a_4 = d^2L_4/dx^2 | x=0 = 0.916666666666667/h**2
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_0 = dL_0/dx | x=0 = -2.083333333333333
-a_1 = dL_1/dx | x=0 = 4.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a_1 = dL_1/dx | x=0 = 4.0
 a_2 = dL_2/dx | x=0 = -3.0
 a_3 = dL_3/dx | x=0 = 1.3333333333333333
 a_4 = dL_4/dx | x=0 = -0.25
@@ -783,14 +790,15 @@ a_4 = d^2L_4/dx^2 | x=0 = 0.9166666666666666
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=61, inz=61
-
-nnz=1189, inz=1189
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=1189, inz=1189
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 2 Axes&gt;, &lt;Axes: xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../../_images/df821febb1cccdd9754900918c1b13a9bbeba7a30b19bcdc24fc9f9bcee52b73.svg" src="../../_images/df821febb1cccdd9754900918c1b13a9bbeba7a30b19bcdc24fc9f9bcee52b73.svg" /><img alt="../../_images/e62fdbfda64d10170f8db7f49d47e28f74e3f37576310ad52c8c2922e091f3d5.svg" src="../../_images/e62fdbfda64d10170f8db7f49d47e28f74e3f37576310ad52c8c2922e091f3d5.svg" /><img alt="../../_images/477dfb9ce544b89673fa0a0df9df526adb6b526822a66325cb4e19872602989f.svg" src="../../_images/477dfb9ce544b89673fa0a0df9df526adb6b526822a66325cb4e19872602989f.svg" /><img alt="../../_images/fb5c5d8d632d4c013169ad1058a745f10fb21b64df9a145798fb65f3934d1af3.svg" src="../../_images/fb5c5d8d632d4c013169ad1058a745f10fb21b64df9a145798fb65f3934d1af3.svg" /></div>
+<img alt="../../_images/5f24c1deb2a3979c1390a916ddd02f2f2c35d1bbb4522abc2d10f5f4b32c74e3.svg" src="../../_images/5f24c1deb2a3979c1390a916ddd02f2f2c35d1bbb4522abc2d10f5f4b32c74e3.svg" /><img alt="../../_images/562d6d395f3164756e823cf81203528a937ebd8718394942020eefaa0f818181.svg" src="../../_images/562d6d395f3164756e823cf81203528a937ebd8718394942020eefaa0f818181.svg" /><img alt="../../_images/8d06576bfbc9bb0cbf2e0c3ad4d15cf8bdbb7ee9ee895c9e2a6c99c7bf0c5861.svg" src="../../_images/8d06576bfbc9bb0cbf2e0c3ad4d15cf8bdbb7ee9ee895c9e2a6c99c7bf0c5861.svg" /><img alt="../../_images/5c5eb9d801aec9d7883e2b9774b3cf5446b574d38aa05350ec1a8895669251b4.svg" src="../../_images/5c5eb9d801aec9d7883e2b9774b3cf5446b574d38aa05350ec1a8895669251b4.svg" /></div>
 </div>
 </section>
 <section id="part-b">
@@ -839,7 +847,7 @@ nnz=4933, inz=4933
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8942831283485477
 </pre></div>
 </div>
-<img alt="../../_images/e68b34b375f1fbc45d8c198bc581077b655701027d892bafc07f7d9ede60b626.svg" src="../../_images/e68b34b375f1fbc45d8c198bc581077b655701027d892bafc07f7d9ede60b626.svg" /></div>
+<img alt="../../_images/5526be4024e41db500783f0783bbdee5d95bd0a5872801757801fbf157788647.svg" src="../../_images/5526be4024e41db500783f0783bbdee5d95bd0a5872801757801fbf157788647.svg" /></div>
 </div>
 <p>From this result, it seems we have not quite reached the asymptotic region of convergence where the rate of convergence = 2. We can get there by increasing the number of grid points in each direction further.</p>
 <div class="cell docutils container">
@@ -859,8 +867,9 @@ nnz=1189, inz=1189
 nnz=4933, inz=4933
 
 nnz=20101, inz=20101
-
-nnz=81157, inz=81157
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=81157, inz=81157
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nnz=326149, inz=326149
@@ -870,10 +879,10 @@ nnz=81157, inz=81157
  1.02503087e-04 2.60954129e-05 6.58328493e-06]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9869166849376632
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.986916685561307
 </pre></div>
 </div>
-<img alt="../../_images/8089842de2aa2d964951fc4b03274949b389597426450cacea17635ca3570707.svg" src="../../_images/8089842de2aa2d964951fc4b03274949b389597426450cacea17635ca3570707.svg" /></div>
+<img alt="../../_images/866eedfc204438ecd7cda68297712298feeeceea08f1c75d386bcda9b8a22f87.svg" src="../../_images/866eedfc204438ecd7cda68297712298feeeceea08f1c75d386bcda9b8a22f87.svg" /></div>
 </div>
 </section>
 </section>

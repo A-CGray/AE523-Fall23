@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week10/HW5Solution';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="2D Finite Volume Meshes" href="Meshes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -165,7 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../Content/PythonSetup.html">Getting Started with Python</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week1/Week1.html">Week 1</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week1/RootFinding.html">Root finding methods</a></li>
@@ -203,8 +204,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week8/HW4Solution.html">Homework 4 Solutions</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="Week10.html">Week 10</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Week10.html">Week 10</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Meshes.html">2D Finite Volume Meshes</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Homework 5 Solutions</a></li>
 </ul>
 </li>
 </ul>
@@ -451,6 +453,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1">Problem 1</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2">Problem 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3">Problem 3</a></li>
 </ul>
             </nav>
         </div>
@@ -552,7 +555,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0e1d4d1b9ec0d6b5bcc8559a4163ab0bb8f307d3f15d70e506efb57f93ef99f3.svg" src="../../_images/0e1d4d1b9ec0d6b5bcc8559a4163ab0bb8f307d3f15d70e506efb57f93ef99f3.svg" /></div>
+<img alt="../../_images/5de14f4ab077839df529fdb396ae585719e28052fb99e63b12956b351d51b994.svg" src="../../_images/5de14f4ab077839df529fdb396ae585719e28052fb99e63b12956b351d51b994.svg" /></div>
 </div>
 </section>
 <section id="problem-2">
@@ -571,7 +574,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8af66d5748968bde16dcdf0ee179111b3abfabca5f86c5b04dde21a1a797a40b.svg" src="../../_images/8af66d5748968bde16dcdf0ee179111b3abfabca5f86c5b04dde21a1a797a40b.svg" /></div>
+<img alt="../../_images/26ed9f6223429493e99ee1d46fb41d372349c8bab9e98987566a70b277e25723.svg" src="../../_images/26ed9f6223429493e99ee1d46fb41d372349c8bab9e98987566a70b277e25723.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -614,8 +617,12 @@ document.write(`
         <span class="n">errors</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">ii</span><span class="p">]</span> <span class="o">=</span> <span class="n">computeNorm</span><span class="p">(</span><span class="n">uFinal</span> <span class="o">-</span> <span class="n">u0</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Beam Warming&quot;</span><span class="p">:</span>
+        <span class="n">lineType</span> <span class="o">=</span> <span class="s2">&quot;--o&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">lineType</span> <span class="o">=</span> <span class="s2">&quot;-o&quot;</span>
     <span class="n">rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">error</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">/</span> <span class="n">error</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">meshSizes</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">/</span> <span class="n">meshSizes</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">meshSizes</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">, P = </span><span class="si">{</span><span class="n">rate</span><span class="si">:</span><span class="s2"> 2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">meshSizes</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">lineType</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">, P = </span><span class="si">{</span><span class="n">rate</span><span class="si">:</span><span class="s2"> 2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;linecolor&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
@@ -623,7 +630,40 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/eb6db9666e16c7c29359e7ee5cf7df5806599445edf7b224a7a758fafa44916f.svg" src="../../_images/eb6db9666e16c7c29359e7ee5cf7df5806599445edf7b224a7a758fafa44916f.svg" /></div>
+<img alt="../../_images/ee3ce676260d121a709e3ff5650480403597307bfcadef0d4e7d079d4f065448.svg" src="../../_images/ee3ce676260d121a709e3ff5650480403597307bfcadef0d4e7d079d4f065448.svg" /></div>
+</div>
+</section>
+<section id="problem-3">
+<h2>Problem 3<a class="headerlink" href="#problem-3" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="n">XX</span><span class="p">,</span> <span class="n">YY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">lambdadt</span> <span class="o">=</span> <span class="n">XX</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">YY</span>
+
+<span class="n">gRK2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">lambdadt</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">lambdadt</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">gRK3</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">lambdadt</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">lambdadt</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">lambdadt</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">gRK4</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">lambdadt</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">lambdadt</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">lambdadt</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">24</span> <span class="o">*</span> <span class="n">lambdadt</span><span class="o">**</span><span class="mi">4</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">gRK2</span><span class="p">,</span> <span class="n">gRK3</span><span class="p">,</span> <span class="n">gRK4</span><span class="p">]):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">XX</span><span class="p">,</span> <span class="n">YY</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="n">niceplots</span><span class="o">.</span><span class="n">get_colors_list</span><span class="p">()[</span><span class="n">ii</span><span class="p">],</span> <span class="n">zorder</span><span class="o">=</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RK</span><span class="si">{</span><span class="n">ii</span><span class="o">+</span><span class="mi">2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">ii</span><span class="o">*</span><span class="mf">0.5</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">niceplots</span><span class="o">.</span><span class="n">get_colors_list</span><span class="p">()[</span><span class="n">ii</span><span class="p">])</span>
+
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$Re(\lambda \Delta t)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$Im(\lambda \Delta t)$&quot;</span><span class="p">)</span>
+<span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b738f96a44b88e01f230254ad923fecd94db083f86e8cf044c87bdb57468c672.svg" src="../../_images/b738f96a44b88e01f230254ad923fecd94db083f86e8cf044c87bdb57468c672.svg" /></div>
 </div>
 </section>
 </section>
@@ -658,6 +698,15 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Meshes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2D Finite Volume Meshes</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -675,6 +724,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1">Problem 1</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2">Problem 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3">Problem 3</a></li>
 </ul>
   </nav></div>
 

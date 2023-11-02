@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week10/Meshes';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Homework 5 Solutions" href="HW5Solution.html" />
     <link rel="prev" title="Week 10" href="Week10.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -206,6 +207,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Week10.html">Week 10</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">2D Finite Volume Meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HW5Solution.html">Homework 5 Solutions</a></li>
 </ul>
 </li>
 </ul>
@@ -526,7 +528,7 @@ Just be sure to turn off the line connecting the points.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bab56f8afb8e23d1d6aa73815ecd48361c977974e68e877f3a05bb438d998b3d.svg" src="../../_images/bab56f8afb8e23d1d6aa73815ecd48361c977974e68e877f3a05bb438d998b3d.svg" /></div>
+<img alt="../../_images/98a03b229dd23e3614f955141c8739c372154086f1a760862905f015a49fb8f9.svg" src="../../_images/98a03b229dd23e3614f955141c8739c372154086f1a760862905f015a49fb8f9.svg" /></div>
 </div>
 </section>
 <section id="part-2-node-connectivity">
@@ -578,7 +580,7 @@ Each row in the file contains the indices of the three nodes that form a triangl
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7fde51199a6010495622c86213579097233c71c0c16f6f261df23c49a7587e3b.svg" src="../../_images/7fde51199a6010495622c86213579097233c71c0c16f6f261df23c49a7587e3b.svg" /></div>
+<img alt="../../_images/b640b298206bcef2ccaea0ed8428c44f9c3bf4330c6aed19125aa4ac18eaa142.svg" src="../../_images/b640b298206bcef2ccaea0ed8428c44f9c3bf4330c6aed19125aa4ac18eaa142.svg" /></div>
 </div>
 <p>Fortunately, matplotlib has a function that automates this process: <code class="docutils literal notranslate"><span class="pre">triplot</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">triplot</span></code> takes in arrays of x and y coordinates, followed by another argument that describes the node connectivity, such as our node connectivity array.</p>
@@ -592,7 +594,7 @@ Each row in the file contains the indices of the three nodes that form a triangl
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c8a2e7ac00bed170a1a288756c7c816c0c6c2981437eb2f45f553df8a5484e47.svg" src="../../_images/c8a2e7ac00bed170a1a288756c7c816c0c6c2981437eb2f45f553df8a5484e47.svg" /></div>
+<img alt="../../_images/eee4864a4229a4803ab75c42923989897b05d49014ea4d25980c5db84c6d60e3.svg" src="../../_images/eee4864a4229a4803ab75c42923989897b05d49014ea4d25980c5db84c6d60e3.svg" /></div>
 </div>
 <section id="computing-cell-quantities">
 <h3>Computing cell quantities<a class="headerlink" href="#computing-cell-quantities" title="Permalink to this heading">#</a></h3>
@@ -634,7 +636,7 @@ Matplotlib has another function called <code class="docutils literal notranslate
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0e27499261d6b3dfaa6170c83904d9e5d85b75948bf56ffbc396d5612d1e6449.svg" src="../../_images/0e27499261d6b3dfaa6170c83904d9e5d85b75948bf56ffbc396d5612d1e6449.svg" /></div>
+<img alt="../../_images/4edc29a8a7fc8372e5d80ad1041e237006ecfd1376bdb92413f4fbd13294d65b.svg" src="../../_images/4edc29a8a7fc8372e5d80ad1041e237006ecfd1376bdb92413f4fbd13294d65b.svg" /></div>
 </div>
 <p>We can then call other plotting methods to plot other things on top of the mesh, such as the cell edges.</p>
 <div class="cell docutils container">
@@ -645,7 +647,7 @@ Matplotlib has another function called <code class="docutils literal notranslate
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e33cd0e5b7e4a5931b6179b22319547174ce14a053ecc32380d5a19ff1bab1bf.svg" src="../../_images/e33cd0e5b7e4a5931b6179b22319547174ce14a053ecc32380d5a19ff1bab1bf.svg" /></div>
+<img alt="../../_images/7e54829679abfa23bf27cee1c7153c377c1e4cc5457214c67fdfe13727636020.svg" src="../../_images/7e54829679abfa23bf27cee1c7153c377c1e4cc5457214c67fdfe13727636020.svg" /></div>
 </div>
 </section>
 </section>
@@ -710,7 +712,7 @@ The first neighbouring cell index corresponds to the neighbour on the edge of th
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a6a41557c23a590e4fe9c2b8bca46b34afa11f598b5e2c5e02f7e66704c6c647.svg" src="../../_images/a6a41557c23a590e4fe9c2b8bca46b34afa11f598b5e2c5e02f7e66704c6c647.svg" /></div>
+<img alt="../../_images/3570c071ca927c533d8225fb3d7cefed8dfd8f6126d3cc80410c0f7abf2b4b9e.svg" src="../../_images/3570c071ca927c533d8225fb3d7cefed8dfd8f6126d3cc80410c0f7abf2b4b9e.svg" /></div>
 </div>
 </section>
 <section id="simple-mesh-test-case">
@@ -743,7 +745,7 @@ The first neighbouring cell index corresponds to the neighbour on the edge of th
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a8467a6e2514324152af45622c343554c8dd1556c48c7f2aecdf5540da2d9d28.svg" src="../../_images/a8467a6e2514324152af45622c343554c8dd1556c48c7f2aecdf5540da2d9d28.svg" /></div>
+<img alt="../../_images/ad182021b1d5250b674d19954870716f1f4e457c47dedb51960646b161c157bc.svg" src="../../_images/ad182021b1d5250b674d19954870716f1f4e457c47dedb51960646b161c157bc.svg" /></div>
 </div>
 <p>To compute fluxes, we need data about the edges in the mesh.</p>
 <p>It is useful to split the edges into two sets; interior edges and boundary edges.</p>
@@ -806,7 +808,7 @@ The first neighbouring cell index corresponds to the neighbour on the edge of th
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2e1e74c48ba745ddf3e10a0e4ace2f5c069f9d15b944385204cb68112cb2a09e.svg" src="../../_images/2e1e74c48ba745ddf3e10a0e4ace2f5c069f9d15b944385204cb68112cb2a09e.svg" /></div>
+<img alt="../../_images/cebc64606e1b9d0ad9d050fa426fc686edea690d79113f3b42f597b3edc2eec1.svg" src="../../_images/cebc64606e1b9d0ad9d050fa426fc686edea690d79113f3b42f597b3edc2eec1.svg" /></div>
 </div>
 <section id="freestream-preservation-test">
 <h3>Freestream preservation test<a class="headerlink" href="#freestream-preservation-test" title="Permalink to this heading">#</a></h3>
@@ -972,6 +974,15 @@ Final Residuals:
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Week 10</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="HW5Solution.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Homework 5 Solutions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

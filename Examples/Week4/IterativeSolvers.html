@@ -209,6 +209,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week10/Week10.html">Week 10</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week10/Meshes.html">2D Finite Volume Meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week10/HW5Solution.html">Homework 5 Solutions</a></li>
 </ul>
 </li>
 </ul>
@@ -734,12 +735,14 @@ Iteration 3500: Res norm = 7.88e-01
 Iteration 4000: Res norm = 6.16e-01
 Iteration 4422: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
-Iteration 500: Res norm = 2.19e+00
-Iteration 1000: Res norm = 1.31e+00
-Iteration 1500: Res norm = 7.98e-01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1975: Res norm = 5.00e-01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 500: Res norm = 2.19e+00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1000: Res norm = 1.31e+00
+Iteration 1500: Res norm = 7.98e-01
+Iteration 1975: Res norm = 5.00e-01
 </pre></div>
 </div>
 </div>
@@ -759,7 +762,7 @@ Iteration 1500: Res norm = 7.98e-01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f1a8dda6202839f5f33656d3c7e05582bd96447e6f509f5aee3917c968c2a220.svg" src="../../_images/f1a8dda6202839f5f33656d3c7e05582bd96447e6f509f5aee3917c968c2a220.svg" /></div>
+<img alt="../../_images/9565e955ac0370d2a3058088b8b68fba6998c8c1460c498271b698616203abb9.svg" src="../../_images/9565e955ac0370d2a3058088b8b68fba6998c8c1460c498271b698616203abb9.svg" /></div>
 </div>
 <p>Jacobi may take iterations, but updates for all nodes can be computed simultaneously, so each iteration is much faster than a Gauss-Seidel iteration.
 In this case, the Jacobi solver actually takes less time to solve the system than Gauss-Seidel, despite taking more than twice as many iterations.</p>
@@ -778,7 +781,7 @@ In this case, the Jacobi solver actually takes less time to solve the system tha
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7d3cc06f8d9e263f7018a0480048eb8aa64075593feb76c99fc1c526b9c994b5.svg" src="../../_images/7d3cc06f8d9e263f7018a0480048eb8aa64075593feb76c99fc1c526b9c994b5.svg" /></div>
+<img alt="../../_images/c7c39bd12dd98f0533bdd1946638e1723a8ac547b142661fde99394b8e300f97.svg" src="../../_images/c7c39bd12dd98f0533bdd1946638e1723a8ac547b142661fde99394b8e300f97.svg" /></div>
 </div>
 <p>We can improve performance with under or over relaxation, where we update the nodes with a weighted average of the old and new values:</p>
 <div class="math notranslate nohighlight">
@@ -866,15 +869,17 @@ Iteration 4000: Res norm = 6.16e-01
 Iteration 4422: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 2.19e+00
-Iteration 1000: Res norm = 1.31e+00
-Iteration 1500: Res norm = 7.98e-01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1975: Res norm = 5.00e-01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1000: Res norm = 1.31e+00
+Iteration 1500: Res norm = 7.98e-01
+Iteration 1975: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 1.77e+00
 Iteration 1000: Res norm = 8.81e-01
-Iteration 1410: Res norm = 5.00e-01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1410: Res norm = 5.00e-01
 Iteration 0: Res norm = 5.13e+02
 Iteration 500: Res norm = 1.59e+00
 Iteration 1000: Res norm = 7.23e-01
@@ -917,7 +922,7 @@ Iteration 81: Res norm = 1.05e+14
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/54287e756bd6167c44d7299a46d37e6586629d91a07bcfdb706a9cc770d4fc21.svg" src="../../_images/54287e756bd6167c44d7299a46d37e6586629d91a07bcfdb706a9cc770d4fc21.svg" /></div>
+<img alt="../../_images/d9046db46283c533da12c696d6689695697ea2a1162c51cc45ed4c73caca29d9.svg" src="../../_images/d9046db46283c533da12c696d6689695697ea2a1162c51cc45ed4c73caca29d9.svg" /></div>
 </div>
 </section>
 </section>
