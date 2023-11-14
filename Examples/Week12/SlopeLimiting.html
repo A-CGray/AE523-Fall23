@@ -67,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Examples/Week12/SlopeLimiting';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Week 12" href="Week12.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,7 +168,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../Content/PythonSetup.html">Getting Started with Python</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week1/Week1.html">Week 1</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week1/RootFinding.html">Root finding methods</a></li>
@@ -208,6 +209,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week10/Week10.html">Week 10</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week10/Meshes.html">2D Finite Volume Meshes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week10/HW5Solution.html">Homework 5 Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Week12.html">Week 12</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Slope Limiting</a></li>
 </ul>
 </li>
 </ul>
@@ -429,7 +434,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -445,6 +452,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slope-limiting-demo">Slope-limiting demo</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -504,16 +519,16 @@ Using von-Neumann stability analysis it can be shown that this scheme is only st
 <p>The code below plots the q-<span class="math notranslate nohighlight">\(\sigma\)</span> curves for each of these schemes, along with the unstable and monotonicity preserving regions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\sigma$&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$q$&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
 
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">201</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">201</span><span class="p">)</span>
 <span class="n">FTCS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
 <span class="n">LaxFriedrichs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
 <span class="n">FOU</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
 <span class="n">LaxWendroff</span> <span class="o">=</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">LPE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span>
+<span class="n">LPE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">FTCS</span><span class="p">,</span> <span class="n">LaxWendroff</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="s2">&quot;Red&quot;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Unstable&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">FOU</span><span class="p">,</span> <span class="n">LaxFriedrichs</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="s2">&quot;Blue&quot;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Monotonicity preserving&quot;</span><span class="p">)</span>
@@ -527,7 +542,7 @@ Using von-Neumann stability analysis it can be shown that this scheme is only st
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5d27a813e6c8c2b9fd5c5513e140ce1aeee2c1f433a48de261e3e51a5473dcd1.svg" src="../../_images/5d27a813e6c8c2b9fd5c5513e140ce1aeee2c1f433a48de261e3e51a5473dcd1.svg" /></div>
+<img alt="../../_images/c4fde93fe23c86f003097b76ab44b173bf5e3ef81b09f1be39ac0a72a16dab63.svg" src="../../_images/c4fde93fe23c86f003097b76ab44b173bf5e3ef81b09f1be39ac0a72a16dab63.svg" /></div>
 </div>
 <p>As you can see, none of these schemes are stable, high-order accurate, and monotonicity preserving.
 Gudonov’s theorem (see section 6.3.3 in the course notes) shows that it is impossible for a linear scheme to be all 3.
@@ -558,34 +573,34 @@ We’d therefore like to limit the amount of anti-diffusion, while still retaini
 <p>It can also be shown that the requirements for second-order accuracy are:</p>
 <div class="math notranslate nohighlight">
 \[\phi(r) \geq r \quad \text{for} \quad 0 \leq r \leq 1, \quad \phi(1)=1, \quad \phi(r) \geq 1 \quad \text{for} \quad r \geq 1 \]</div>
-<p>The code below creates a plot which shows the required</p>
+<p>The code below creates a plot which shows the valid regions for <span class="math notranslate nohighlight">\(\phi(r)\)</span> to be TVD and second-order accurate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$r$&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\phi(r)$&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">401</span><span class="p">)</span>
 
 <span class="n">TVDLowerBound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-<span class="n">TVDUpperBound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="p">)</span>
+<span class="n">TVDUpperBound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
 
 <span class="n">highOrderLowerBound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
-<span class="n">highOrderUpperBound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+<span class="n">highOrderUpperBound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">TVDLowerBound</span><span class="p">,</span> <span class="n">TVDUpperBound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="s2">&quot;Blue&quot;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;TVD&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">highOrderLowerBound</span><span class="p">,</span> <span class="n">highOrderUpperBound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="s2">&quot;Green&quot;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;High order&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;TVD&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;Second-order&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">3.9</span><span class="p">,</span><span class="mf">1.9</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;TVD&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;Second-order&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">3.9</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7fa9ee8d5d71fc47ab6ac7d4838bae99198247b9c45c57a467680431052afea1.svg" src="../../_images/7fa9ee8d5d71fc47ab6ac7d4838bae99198247b9c45c57a467680431052afea1.svg" /></div>
+<img alt="../../_images/8b4ed27100b784273f040c503b06be8de46651b9f239e16a226e033c2bbc15f9.svg" src="../../_images/8b4ed27100b784273f040c503b06be8de46651b9f239e16a226e033c2bbc15f9.svg" /></div>
 </div>
 <p>Now we plot three of the most common limiter curves on this plot, the equations for these limiters are given in the course notes:</p>
 <ul class="simple">
@@ -598,17 +613,22 @@ We’d therefore like to limit the amount of anti-diffusion, while still retaini
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">minmod</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
 
+
 <span class="k">def</span> <span class="nf">superbee</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
 
 <span class="k">def</span> <span class="nf">vanLeer</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
 
+
 <span class="k">def</span> <span class="nf">FOU</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
+
 <span class="k">def</span> <span class="nf">LaxWendroff</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
 
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">minmod</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Minmod&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">superbee</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Superbee&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -620,14 +640,18 @@ We’d therefore like to limit the amount of anti-diffusion, while still retaini
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/41e7ebdf62b8eb68fe98f12ce6888658831ab661a4e7c2f536f1b8856aecf0cd.svg" src="../../_images/41e7ebdf62b8eb68fe98f12ce6888658831ab661a4e7c2f536f1b8856aecf0cd.svg" /></div>
+<img alt="../../_images/051c57291849bb9bed869bd08dd0de0860d9370646fe1e92791ccaed7926ba24.svg" src="../../_images/051c57291849bb9bed869bd08dd0de0860d9370646fe1e92791ccaed7926ba24.svg" /></div>
 </div>
+<section id="slope-limiting-demo">
+<h2>Slope-limiting demo<a class="headerlink" href="#slope-limiting-demo" title="Permalink to this heading">#</a></h2>
+<p>The code below tests first-order upwind and non-limited Lax-Wendroff against the Lax-Wendroff limited with the three limiters above.</p>
+<p>The initial condition contains 4 different waves with different levels of smoothness. We test the limiters by simulating the linear advection equation for long enough that the waves should return to their original positions. Any differences between the initial and final states are therefore due to numerical errors in the schemes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mf">1.</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">240</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">dx</span><span class="o">=</span> <span class="n">L</span><span class="o">/</span><span class="n">N</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">N</span>
 <span class="n">u0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 <span class="c1"># Unit step</span>
@@ -637,53 +661,60 @@ We’d therefore like to limit the amount of anti-diffusion, while still retaini
 <span class="n">xStart</span> <span class="o">=</span> <span class="mf">0.3</span>
 <span class="n">xEnd</span> <span class="o">=</span> <span class="mf">0.45</span>
 <span class="n">L</span> <span class="o">=</span> <span class="n">xEnd</span> <span class="o">-</span> <span class="n">xStart</span>
-<span class="n">uCosine</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xStart</span><span class="p">)</span><span class="o">/</span><span class="n">L</span><span class="p">))</span>
+<span class="n">uCosine</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xStart</span><span class="p">)</span> <span class="o">/</span> <span class="n">L</span><span class="p">))</span>
 <span class="n">u0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">xStart</span><span class="p">,</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">xEnd</span><span class="p">),</span> <span class="n">uCosine</span><span class="p">,</span> <span class="n">u0</span><span class="p">)</span>
 
 <span class="c1"># linear spike</span>
 <span class="n">xStart</span> <span class="o">=</span> <span class="mf">0.55</span>
 <span class="n">xEnd</span> <span class="o">=</span> <span class="mf">0.7</span>
-<span class="n">xMid</span> <span class="o">=</span> <span class="p">(</span><span class="n">xStart</span> <span class="o">+</span> <span class="n">xEnd</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">xMid</span> <span class="o">=</span> <span class="p">(</span><span class="n">xStart</span> <span class="o">+</span> <span class="n">xEnd</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
 <span class="n">L</span> <span class="o">=</span> <span class="n">xEnd</span> <span class="o">-</span> <span class="n">xStart</span>
-<span class="n">uSpike</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xMid</span><span class="p">)</span><span class="o">/</span><span class="n">L</span>
+<span class="n">uSpike</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xMid</span><span class="p">)</span> <span class="o">/</span> <span class="n">L</span>
+<span class="c1"># uSpike = np.exp(-50 * (np.abs(x - xMid) / L)**2)</span>
 <span class="n">u0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">xStart</span><span class="p">,</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">xEnd</span><span class="p">),</span> <span class="n">uSpike</span><span class="p">,</span> <span class="n">u0</span><span class="p">)</span>
 
 <span class="c1"># hemisphere</span>
 <span class="n">xStart</span> <span class="o">=</span> <span class="mf">0.8</span>
 <span class="n">xEnd</span> <span class="o">=</span> <span class="mf">0.95</span>
-<span class="n">xMid</span> <span class="o">=</span> <span class="p">(</span><span class="n">xStart</span> <span class="o">+</span> <span class="n">xEnd</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
-<span class="n">uHemi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xMid</span><span class="p">)</span><span class="o">/</span><span class="n">L</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">xMid</span> <span class="o">=</span> <span class="p">(</span><span class="n">xStart</span> <span class="o">+</span> <span class="n">xEnd</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">uHemi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xMid</span><span class="p">)</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">u0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">xStart</span><span class="p">,</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">xEnd</span><span class="p">),</span> <span class="n">uHemi</span><span class="p">,</span> <span class="n">u0</span><span class="p">)</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$u$&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Initial condition&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="s2">&quot;Axis&quot;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Initial condition&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_3193/3866940556.py:29: RuntimeWarning: invalid value encountered in sqrt
-  uHemi = np.sqrt(1 - (2*(x-xMid)/L)**2)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2278/4273324961.py:30: RuntimeWarning: invalid value encountered in sqrt
+  uHemi = np.sqrt(1 - (2 * (x - xMid) / L) ** 2)
 </pre></div>
 </div>
-<img alt="../../_images/5aaee3063cdf68536eb240641b497fa700a0b65f0157cb5069459c2b5bc5a97b.svg" src="../../_images/5aaee3063cdf68536eb240641b497fa700a0b65f0157cb5069459c2b5bc5a97b.svg" /></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Initial condition&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/70c46af050e886bb3956789506b5367712c71748d8326966a6f87a2f19ec496c.svg" src="../../_images/70c46af050e886bb3956789506b5367712c71748d8326966a6f87a2f19ec496c.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">computeR</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">uLeft</span><span class="p">,</span> <span class="n">uRight</span><span class="p">):</span>
     <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">uLeft</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">uRight</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">uLeft</span><span class="p">)</span><span class="o">*</span><span class="mf">1e6</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">uLeft</span><span class="p">)</span><span class="o">*</span><span class="mf">1e6</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">uLeft</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">uLeft</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">r</span>
+
 
 <span class="k">def</span> <span class="nf">advect</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">nPeriods</span><span class="p">,</span> <span class="n">limiterFunc</span><span class="p">):</span>
     <span class="n">u</span> <span class="o">=</span> <span class="n">u0</span><span class="o">.</span><span class="n">copy</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="n">Nx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-    <span class="n">numTimeSteps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">nPeriods</span><span class="o">*</span><span class="n">Nx</span><span class="o">/</span><span class="n">sigma</span><span class="p">))</span>
+    <span class="n">numTimeSteps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">nPeriods</span> <span class="o">*</span> <span class="n">Nx</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">))</span>
 
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numTimeSteps</span><span class="p">):</span>
         <span class="n">uLeftLeft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -692,19 +723,22 @@ We’d therefore like to limit the amount of anti-diffusion, while still retaini
         <span class="n">rPlus</span> <span class="o">=</span> <span class="n">computeR</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">uLeft</span><span class="p">,</span> <span class="n">uRight</span><span class="p">)</span>
         <span class="n">rMinus</span> <span class="o">=</span> <span class="n">computeR</span><span class="p">(</span><span class="n">uLeft</span><span class="p">,</span> <span class="n">uLeftLeft</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
 
-        <span class="n">u</span> <span class="o">+=</span> <span class="o">-</span><span class="n">sigma</span><span class="o">*</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">uLeft</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span> <span class="n">sigma</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sigma</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">limiterFunc</span><span class="p">(</span><span class="n">rPlus</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">uRight</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span> <span class="o">-</span> <span class="n">limiterFunc</span><span class="p">(</span><span class="n">rMinus</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">uLeft</span><span class="p">))</span>
+        <span class="n">u</span> <span class="o">+=</span> <span class="o">-</span><span class="n">sigma</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">uLeft</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="n">limiterFunc</span><span class="p">(</span><span class="n">rPlus</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">uRight</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span> <span class="o">-</span> <span class="n">limiterFunc</span><span class="p">(</span><span class="n">rMinus</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">uLeft</span><span class="p">)</span>
+        <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
+
 <span class="n">schemes</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;FOU&quot;</span><span class="p">:</span> <span class="n">FOU</span><span class="p">,</span>
+    <span class="s2">&quot;Upwind&quot;</span><span class="p">:</span> <span class="n">FOU</span><span class="p">,</span>
     <span class="s2">&quot;Lax-Wendroff&quot;</span><span class="p">:</span> <span class="n">LaxWendroff</span><span class="p">,</span>
     <span class="s2">&quot;Minmod&quot;</span><span class="p">:</span> <span class="n">minmod</span><span class="p">,</span>
     <span class="s2">&quot;Superbee&quot;</span><span class="p">:</span> <span class="n">superbee</span><span class="p">,</span>
     <span class="s2">&quot;Van Leer&quot;</span><span class="p">:</span> <span class="n">vanLeer</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">schemes</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">schemes</span><span class="p">)))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">schemes</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">schemes</span><span class="p">)))</span>
 
 <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">scheme</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">schemes</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
@@ -714,20 +748,30 @@ We’d therefore like to limit the amount of anti-diffusion, while still retaini
     <span class="n">u</span> <span class="o">=</span> <span class="n">advect</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">scheme</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>
 
     <span class="n">niceplots</span><span class="o">.</span><span class="n">adjust_spines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_3193/3427963473.py:2: RuntimeWarning: divide by zero encountered in divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2278/3229122800.py:2: RuntimeWarning: divide by zero encountered in divide
   r = (u - uLeft) / (uRight - u)
-/tmp/ipykernel_3193/3427963473.py:2: RuntimeWarning: invalid value encountered in divide
+/tmp/ipykernel_2278/3229122800.py:2: RuntimeWarning: invalid value encountered in divide
   r = (u - uLeft) / (uRight - u)
 </pre></div>
 </div>
-<img alt="../../_images/82c88a936326b31dd85f0bc9605eeecf6324d603cf8368a861b8df9bb7ccb97b.svg" src="../../_images/82c88a936326b31dd85f0bc9605eeecf6324d603cf8368a861b8df9bb7ccb97b.svg" /></div>
+<img alt="../../_images/3542c78123c03840d9d86b5b2ffe2cba2e7814eda8504be7192ccba24dd863fc.svg" src="../../_images/3542c78123c03840d9d86b5b2ffe2cba2e7814eda8504be7192ccba24dd863fc.svg" /></div>
 </div>
+<p>Some observations from these results:</p>
+<ul class="simple">
+<li><p>First order upwind is overly diffusive, and smears out the waves</p></li>
+<li><p>Lax-Wendroff introduce unphysical oscilations, particularly near shocks</p></li>
+<li><p>Of the three limited schemes, minmod is the most diffusive.</p></li>
+<li><p>Superbee is the least diffusive, maintaining shocks well, but also seems to “over-sharpen” some of the smoother waves</p></li>
+<li><p>The Van Leer limiter is a good compromise between the two, maintaining shocks well, without much over-sharpening.</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -760,12 +804,35 @@ We’d therefore like to limit the amount of anti-diffusion, while still retaini
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Week12.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 12</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slope-limiting-demo">Slope-limiting demo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

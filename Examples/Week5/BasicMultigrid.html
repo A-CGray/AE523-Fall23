@@ -212,6 +212,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Week10/HW5Solution.html">Homework 5 Solutions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week12/Week12.html">Week 12</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week12/SlopeLimiting.html">Slope Limiting</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -655,10 +659,10 @@ Iteration 2500: Res norm = 2.76e-06
 Iteration 2680: Res norm = 9.99e-07
 Iteration 0: Res norm = 7.02e-01
 Iteration 500: Res norm = 4.24e-02
+Iteration 1000: Res norm = 2.53e-03
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1000: Res norm = 2.53e-03
-Iteration 1500: Res norm = 1.51e-04
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500: Res norm = 1.51e-04
 Iteration 2000: Res norm = 8.99e-06
 Iteration 2390: Res norm = 9.97e-07
 </pre></div>
@@ -680,7 +684,7 @@ Iteration 2390: Res norm = 9.97e-07
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2c3f6329dd97fbc198d1d1220bfb5f83d0d70995136c27877c04c2d3a928d2d1.svg" src="../../_images/2c3f6329dd97fbc198d1d1220bfb5f83d0d70995136c27877c04c2d3a928d2d1.svg" /></div>
+<img alt="../../_images/ba3943019e6f705d8c1d41db20b6becb95675b1c4a7066795fa12fa818b3b672.svg" src="../../_images/ba3943019e6f705d8c1d41db20b6becb95675b1c4a7066795fa12fa818b3b672.svg" /></div>
 </div>
 <p>To demonstrate how different frequencies of error are reduced at different rates, we’ll run 10 iterations starting from the true solution plus a high frequency error and then starting from the true solution plus a low frequency error.</p>
 <div class="cell docutils container">
@@ -730,7 +734,7 @@ Iteration 8: Res norm = 1.34e-01
 Iteration 9: Res norm = 1.12e-01
 </pre></div>
 </div>
-<img alt="../../_images/530006a61ab112cb4e1c09d1eacfd31502593bc765b988117e772fafd368dbfa.svg" src="../../_images/530006a61ab112cb4e1c09d1eacfd31502593bc765b988117e772fafd368dbfa.svg" /></div>
+<img alt="../../_images/c2c10c112145a6a39402b0d50cc0886307990b991d8d1e230cbadfbdfca75869.svg" src="../../_images/c2c10c112145a6a39402b0d50cc0886307990b991d8d1e230cbadfbdfca75869.svg" /></div>
 </div>
 <section id="implementing-a-basic-2-level-multigrid-solver">
 <h2>Implementing a basic 2-level multigrid solver<a class="headerlink" href="#implementing-a-basic-2-level-multigrid-solver" title="Permalink to this heading">#</a></h2>
@@ -867,7 +871,7 @@ Iteration 2: Res norm = 1.10e-01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/62dc63b4a14adb4148700099178fa3e724e6bd1faf7e15943aa89e5f07164837.svg" src="../../_images/62dc63b4a14adb4148700099178fa3e724e6bd1faf7e15943aa89e5f07164837.svg" /></div>
+<img alt="../../_images/3ad7266400432c31ca88edfee586a35ca2a0eada53afb6b8eb52d8e74806ee2d.svg" src="../../_images/3ad7266400432c31ca88edfee586a35ca2a0eada53afb6b8eb52d8e74806ee2d.svg" /></div>
 </div>
 <p>Now let’s see how fast multigrid converges from the bad initial guess compared to plain Gauss-Seidel.</p>
 <p>When comparing the number of iterations required for convergence, we need to account for the fact that each multigrid iteration is more expensive than a Gauss-Seidel iteration.</p>
@@ -916,7 +920,7 @@ Iteration 0: Res norm = 2.62e+02
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ec5191f121e7e40f29f13ee7092e41a8fa774a0d4648135d1fa6727ef181df84.svg" src="../../_images/ec5191f121e7e40f29f13ee7092e41a8fa774a0d4648135d1fa6727ef181df84.svg" /></div>
+<img alt="../../_images/2f5dcc6e9c659a123569d3837b5e0e40c787e29e7457d480fcefe922c7a80bc7.svg" src="../../_images/2f5dcc6e9c659a123569d3837b5e0e40c787e29e7457d480fcefe922c7a80bc7.svg" /></div>
 </div>
 </section>
 </section>
