@@ -4,7 +4,7 @@
 # # Slope Limiting
 # This page is based on section 6.3.4 of Krzysztof Fidkowski's CFD course notes.
 
-# In[299]:
+# In[1]:
 
 
 import numpy as np
@@ -53,7 +53,7 @@ colors = niceplots.get_colors()
 #
 # The code below plots the q-$\sigma$ curves for each of these schemes, along with the unstable and monotonicity preserving regions.
 
-# In[300]:
+# In[2]:
 
 
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -117,9 +117,9 @@ niceplots.adjust_spines(ax)
 #
 # $$\phi(r) \geq r \quad \text{for} \quad 0 \leq r \leq 1, \quad \phi(1)=1, \quad \phi(r) \geq 1 \quad \text{for} \quad r \geq 1 $$
 #
-# The code below creates a plot which shows the required
+# The code below creates a plot which shows the valid regions for $\phi(r)$ to be TVD and second-order accurate.
 
-# In[301]:
+# In[3]:
 
 
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -150,7 +150,7 @@ niceplots.adjust_spines(ax)
 # - Superbee: Chooses the least diffusive value of $\phi$ that satisfies the TVD and second-order requirements
 # - Van Leer: A smoothly varying limiter that satisfies the TVD and second-order requirements
 
-# In[302]:
+# In[4]:
 
 
 def minmod(r):
@@ -181,11 +181,17 @@ niceplots.label_line_ends(ax, fontsize=30)
 fig
 
 
-# In[303]:
+# ## Slope-limiting demo
+#
+# The code below tests first-order upwind and non-limited Lax-Wendroff against the Lax-Wendroff limited with the three limiters above.
+#
+# The initial condition contains 4 different waves with different levels of smoothness. We test the limiters by simulating the linear advection equation for long enough that the waves should return to their original positions. Any differences between the initial and final states are therefore due to numerical errors in the schemes.
+
+# In[5]:
 
 
 L = 1.0
-N = 240
+N = 120
 x = np.linspace(0, L, N + 1)
 dx = L / N
 u0 = np.zeros_like(x)
@@ -206,6 +212,7 @@ xEnd = 0.7
 xMid = (xStart + xEnd) / 2
 L = xEnd - xStart
 uSpike = 1 - 2 * np.abs(x - xMid) / L
+# uSpike = np.exp(-50 * (np.abs(x - xMid) / L)**2)
 u0 = np.where(np.logical_and(x >= xStart, x <= xEnd), uSpike, u0)
 
 # hemisphere
@@ -222,8 +229,10 @@ ax.plot(x, u0, label="Initial condition", c=colors["Axis"], alpha=0.7, clip_on=F
 
 niceplots.adjust_spines(ax)
 
+ax.set_title("Initial condition")
 
-# In[304]:
+
+# In[6]:
 
 
 def computeR(u, uLeft, uRight):
@@ -254,14 +263,14 @@ def advect(u0, sigma, nPeriods, limiterFunc):
 
 
 schemes = {
-    "FOU": FOU,
+    "Upwind": FOU,
     "Lax-Wendroff": LaxWendroff,
     "Minmod": minmod,
     "Superbee": superbee,
     "Van Leer": vanLeer,
 }
 
-fig, axes = plt.subplots(nrows=len(schemes), figsize=(10, 4 * len(schemes)))
+fig, axes = plt.subplots(nrows=len(schemes), figsize=(10, 3 * len(schemes)))
 
 for ax, (name, scheme) in zip(axes, schemes.items()):
     ax.set_xlabel(r"$x$")
@@ -271,8 +280,14 @@ for ax, (name, scheme) in zip(axes, schemes.items()):
     u = advect(u0, 0.5, 1, scheme)
     ax.plot(x, u, label=name, clip_on=False)
     ax.set_title(name)
+    ax.set_ylim(-0.1, 1.1)
 
     niceplots.adjust_spines(ax)
 
 
-# In[ ]:
+# Some observations from these results:
+# - First order upwind is overly diffusive, and smears out the waves
+# - Lax-Wendroff introduce unphysical oscilations, particularly near shocks
+# - Of the three limited schemes, minmod is the most diffusive.
+# - Superbee is the least diffusive, maintaining shocks well, but also seems to "over-sharpen" some of the smoother waves
+# - The Van Leer limiter is a good compromise between the two, maintaining shocks well, without much over-sharpening.
