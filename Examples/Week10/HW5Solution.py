@@ -150,7 +150,7 @@ for name, error in errors.items():
     else:
         lineType = "-o"
     rate = np.log(error[4] / error[3]) / np.log(meshSizes[4] / meshSizes[3])
-    ax.plot(L / meshSizes, error, lineType, label=f"{name}, P = {rate: 2f}", clip_on=False)
+    ax.plot(L / meshSizes, error, lineType, label=f"{name}, P = {-rate: .2f}", clip_on=False)
 
 ax.legend(labelcolor="linecolor", fontsize=14)
 niceplots.adjust_spines(ax)
@@ -158,7 +158,7 @@ niceplots.adjust_spines(ax)
 
 # ## Problem 3
 
-# In[14]:
+# In[6]:
 
 
 x = np.linspace(-3, 1.0, 200)
